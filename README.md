@@ -1,0 +1,223 @@
+# Healthcare Topics Toolkits — Policy Synthesis
+
+A maintainable knowledge base and interactive visualization suite covering U.S. healthcare legislation, payment models, CMMI innovation programs, and research datasets. Built to support policy analysis, regulatory assessment, and evidence-based decision making.
+
+---
+
+## Live Tool
+
+Open `index.html` directly in any modern browser — no server required. All data is embedded inline.
+
+> Requires an internet connection to load D3.js v7 from CDN.
+
+---
+
+## What's Inside
+
+### Three Interactive Tabs
+
+| Tab | Visualization | What it shows |
+|-----|--------------|---------------|
+| **Ontology Graph** | D3.js force-directed graph | Relationships between legislation, agencies, programs, and CMMI models |
+| **Reimbursement Roadmap** | Swimlane timeline (2010–2026) | Payment system fee schedules and CMMI model overlays by service type |
+| **Data Taxonomy** | Filterable, sortable table | CMS and public research datasets with linkage variables and metadata |
+
+---
+
+## Repository Structure
+
+```
+healthcare_ref_materials/
+├── index.html                  # Single-page app entry point (open in browser)
+├── css/
+│   └── styles.css              # Theme and component styles
+├── js/
+│   ├── ontology.js             # Force-directed ontology graph (D3 v7)
+│   ├── reimbursement.js        # Swimlane timeline visualization (D3 v7)
+│   ├── taxonomy.js             # Dataset table with filters, sort, CSV export
+│   └── app.js                  # Tab controller and initialization
+├── data/
+│   ├── ontology_nodes.json     # 38 nodes: legislation, agency, program, model, rule
+│   ├── ontology_edges.json     # 51 directed relationships
+│   ├── cmmi_models.json        # 16 CMMI models with start/end dates
+│   ├── service_types.json      # 10 service types with fee schedules
+│   └── datasets.json           # 20 CMS and public research datasets
+├── cli/
+│   └── update.py               # Phased update CLI (see below)
+└── project_specs/              # Original specification documents
+```
+
+---
+
+## Tab 1 — Ontology Graph
+
+**38 nodes across 5 categories:**
+
+| Category | Color | Examples |
+|----------|-------|---------|
+| Legislation | Red | ACA, MACRA, HITECH, IRA 2022 |
+| Agency | Purple | CMS, CMMI, ONC, AHRQ |
+| Program | Teal | Medicare Parts A–D, Medicaid, CHIP, QPP, MSSP |
+| Model | Steel blue | ACO REACH, BPCI Advanced, EOM, MCP, GUIDE, AHEAD |
+| Rule | Orange | IPPS, OPPS, PFS, ESRD Final Rules |
+
+**Interactions:**
+- Pan and zoom the graph canvas
+- Hover a node for name, category, policy type, enactment date, and description
+- Click a node to highlight its 1-hop neighbors (non-neighbors dim to 15% opacity)
+- Click the background to reset
+- Click legend items to toggle category visibility
+
+---
+
+## Tab 2 — Reimbursement Roadmap
+
+**10 service type swimlanes** with a 2010–2026 horizontal time axis:
+
+| Service Type | Fee Schedule | Value-Based Programs |
+|-------------|-------------|---------------------|
+| Inpatient Hospital | IPPS | VBP, HRRP, HAC |
+| Outpatient Hospital | OPPS | ASC Quality Reporting |
+| Physician/Professional | PFS | MIPS, Advanced APMs |
+| Skilled Nursing Facility | SNF PPS (PDPM) | SNFVBP |
+| Home Health | HH PPS (PDGM) | HHVBP |
+| Hospice | Hospice Per Diem | Quality Reporting |
+| Inpatient Rehab Facility | IRF PPS | Quality Reporting |
+| End-Stage Renal Disease | ESRD PPS | QIP |
+| Oncology | PFS | MIPS Oncology Specialty |
+| Behavioral Health | PFS | MIPS BH Specialty |
+
+**CMMI model rectangles** are overlaid on applicable rows, color-coded by model category (ACO, Episode, Primary Care, Specialty, State/Payer, Behavioral Health). Hover for model details.
+
+---
+
+## Tab 3 — Data Taxonomy
+
+**20 datasets** across 5 categories, filterable by name, category, and payer:
+
+| Category | Datasets |
+|----------|---------|
+| Claims | Medicare Carrier, MEDPAR, Outpatient, HH, Hospice, DME, MA Encounter, Part D, HCUP NIS |
+| Enrollment | MBSF, CCW Chronic Condition Flags |
+| Provider | POS File, HCRIS Cost Reports, MIPS Performance, ACO Public Data, ARF |
+| Survey | MCBS, MEPS, NHANES |
+| Synthetic | CMS SynPUF |
+
+Each dataset shows: description, years covered, unit of observation, payer scope, and linkage variable IDs (e.g. `BENE_ID`, `NPI`, `CLM_ID`). Rows expand for full detail. Export to CSV available.
+
+---
+
+## Phased Update CLI
+
+```bash
+# Validate current data against schemas
+python cli/update.py ontology --validate
+
+# Sync ontology from a new source file (dry run)
+python cli/update.py ontology --sync --diff path/to/new_legislation.json --dry-run
+
+# Refresh reimbursement models
+python cli/update.py reimbursement --refresh --validate
+
+# Merge a new dataset into the catalog
+python cli/update.py data-dict --merge path/to/new_dataset.json
+
+# Analyze downstream impact of a model update
+python cli/update.py impact --analyze ACO_REACH
+
+# List registered source corpus entries
+python cli/update.py sources --list
+
+# Add a new source URL
+python cli/update.py sources --add https://www.federalregister.gov/...
+
+# Run all regression tests
+python cli/update.py test --all
+
+# Run tests for a specific tab
+python cli/update.py test --tab ontology
+```
+
+**Requirements:** Python 3.8+. Optional: `colorama` for colored output, `jsonschema` for schema validation.
+
+```bash
+pip install colorama jsonschema
+```
+
+---
+
+## Data Freshness
+
+| Layer | Current as of |
+|-------|--------------|
+| Legislation | IRA 2022 (most recent major law) |
+| CMMI Models | August 2026 |
+| Fee Schedules | CY/FY 2025 Final Rules |
+| Datasets | August 2026 |
+
+**Sources:** CMS.gov, CMMI, Federal Register, ResDAC, AHRQ HCUP, NIH, CDC
+
+---
+
+## Tab Schema Definitions
+
+### Ontology Node
+```json
+{ "id": "string", "name": "string", "category": "legislation|rule|program|model|agency",
+  "ptype": "string", "enacted": "YYYY-MM-DD|null", "description": "string",
+  "links": [{ "label": "string", "url": "string" }] }
+```
+
+### Ontology Edge
+```json
+{ "source": "node_id", "target": "node_id", "label": "string" }
+```
+
+### CMMI Model
+```json
+{ "id": "string", "name": "string", "category": "ACO|Episode|Primary Care|Specialty|State/Payer|Behavioral Health",
+  "startDate": "YYYY-MM-DD", "endDate": "YYYY-MM-DD|null", "description": "string" }
+```
+
+### Service Type
+```json
+{ "name": "string", "description": "string", "feeSchedule": "string",
+  "valueBasedModels": ["string"], "innovationModels": ["string"] }
+```
+
+### Dataset
+```json
+{ "name": "string", "description": "string", "category": "Claims|Enrollment|Provider|Survey|Synthetic",
+  "years": "string", "unit": "string", "payers": ["string"], "states": "All|[...]",
+  "linkageIds": ["string"] }
+```
+
+---
+
+## Adding New Content
+
+1. **Add to the appropriate `data/*.json` file** (nodes, edges, models, service types, datasets)
+2. **Update the matching `window.__XXX__` inline variable in `index.html`** — search for the variable name and replace the array
+3. For new ontology nodes, also add at least one edge connecting them to the graph
+4. Run `python cli/update.py test --all` to check for broken references
+
+---
+
+## Tech Stack
+
+| Layer | Technology |
+|-------|-----------|
+| Visualization | D3.js v7 (CDN) |
+| Frontend | Vanilla HTML/CSS/JS (no build step) |
+| Data | JSON (embedded + standalone files) |
+| CLI | Python 3 + argparse |
+| Styling | CSS custom properties, Flexbox/Grid |
+
+---
+
+## Stakeholders
+
+- Policymakers and federal regulators
+- Healthcare providers and payers navigating value-based programs
+- Health services and policy researchers
+- Value-based care implementation teams

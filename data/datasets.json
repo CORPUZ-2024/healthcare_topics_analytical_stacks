@@ -1,0 +1,202 @@
+[
+  {
+    "name": "Medicare Carrier (Physician/Supplier) Claims",
+    "description": "Line-level claims data for physician and other supplier services billed to Medicare Part B. Contains procedure codes (HCPCS), diagnosis codes (ICD), provider NPI, service dates, allowed amounts, and beneficiary identifiers. Primary source for studying physician utilization patterns and fee schedule payments.",
+    "category": "Claims",
+    "years": "1991-present",
+    "unit": "Claim line",
+    "payers": ["Medicare FFS"],
+    "states": "All",
+    "linkageIds": ["BENE_ID", "CLM_ID", "NPI", "HCPCS_CD"]
+  },
+  {
+    "name": "Medicare MEDPAR (Inpatient) File",
+    "description": "Stay-level records for Medicare inpatient hospital discharges and skilled nursing facility stays. Contains DRG codes, ICD diagnoses/procedures, admission and discharge dates, length of stay, total charges and payments, and facility identifiers. Essential for studying inpatient utilization under IPPS.",
+    "category": "Claims",
+    "years": "1984-present",
+    "unit": "Stay",
+    "payers": ["Medicare FFS"],
+    "states": "All",
+    "linkageIds": ["BENE_ID", "MEDPAR_ID", "DRG_CD"]
+  },
+  {
+    "name": "Medicare Outpatient Claims",
+    "description": "Claim-level data for services provided in hospital outpatient departments, including revenue center codes, HCPCS procedure codes, diagnosis codes, and payment amounts. Used to study OPPS payment patterns, APC utilization, and ambulatory surgery volumes.",
+    "category": "Claims",
+    "years": "1991-present",
+    "unit": "Claim",
+    "payers": ["Medicare FFS"],
+    "states": "All",
+    "linkageIds": ["BENE_ID", "CLM_ID", "REV_CNTR"]
+  },
+  {
+    "name": "Home Health Claims",
+    "description": "Episode-level claims for Medicare home health agency services, including 30-day periods (post-PDGM), HHRG/HIPPS codes, visit counts by discipline, and payment amounts. Used to study post-acute care utilization, home health episode patterns, and PDGM implementation impact.",
+    "category": "Claims",
+    "years": "1991-present",
+    "unit": "Episode",
+    "payers": ["Medicare FFS"],
+    "states": "All",
+    "linkageIds": ["BENE_ID", "CLM_ID", "HHA_ID"]
+  },
+  {
+    "name": "Hospice Claims",
+    "description": "Claim-level records for Medicare hospice services. Contains revenue codes by level of care (routine, continuous, inpatient, respite), diagnosis codes, hospice election dates, and payment amounts. Used to study end-of-life care patterns, hospice length of stay, and spending.",
+    "category": "Claims",
+    "years": "1991-present",
+    "unit": "Claim",
+    "payers": ["Medicare FFS"],
+    "states": "All",
+    "linkageIds": ["BENE_ID", "CLM_ID"]
+  },
+  {
+    "name": "DME Claims",
+    "description": "Claim-level records for durable medical equipment, prosthetics, orthotics, and supplies (DMEPOS) billed to Medicare Part B. Contains HCPCS codes, supplier NPI, beneficiary location, and allowed amounts. Used to study equipment utilization, competitive bidding program impacts, and fraud patterns.",
+    "category": "Claims",
+    "years": "1991-present",
+    "unit": "Claim",
+    "payers": ["Medicare FFS"],
+    "states": "All",
+    "linkageIds": ["BENE_ID", "CLM_ID", "HCPCS_CD"]
+  },
+  {
+    "name": "Medicare Advantage Encounter Data",
+    "description": "Encounter-level records submitted by Medicare Advantage plans to CMS for risk adjustment and oversight purposes. Data quality has improved over time with enhanced validation rules. Enables MA utilization research but requires careful interpretation due to plan submission variation.",
+    "category": "Claims",
+    "years": "2012-present",
+    "unit": "Encounter",
+    "payers": ["Medicare Advantage"],
+    "states": "All",
+    "linkageIds": ["BENE_ID", "CLM_ID", "PLAN_ID"]
+  },
+  {
+    "name": "Medicare Beneficiary Summary File (MBSF)",
+    "description": "Annual beneficiary-level enrollment and demographic file for all Medicare beneficiaries. Contains monthly enrollment by part (A, B, C, D), chronic condition flags (CCW), HMO indicators, county/state FIPS codes, race/ethnicity, and date of death. Essential denominator file for Medicare research.",
+    "category": "Enrollment",
+    "years": "1991-present",
+    "unit": "Beneficiary-year",
+    "payers": ["Medicare FFS", "Medicare Advantage"],
+    "states": "All",
+    "linkageIds": ["BENE_ID", "HICNO"]
+  },
+  {
+    "name": "Part D Prescribing Data",
+    "description": "Prescription Drug Event (PDE) records for Medicare Part D drug claims. Contains drug name (NDC, brand/generic), prescriber NPI, dispensing pharmacy, days supply, quantity, and plan payments. Used to study prescribing patterns, formulary compliance, and drug spending trends.",
+    "category": "Claims",
+    "years": "2006-present",
+    "unit": "Prescription event",
+    "payers": ["Medicare Part D"],
+    "states": "All",
+    "linkageIds": ["BENE_ID", "PRSCRBR_NPI", "PROD_SRVC_ID"]
+  },
+  {
+    "name": "CMS Chronic Conditions Warehouse (CCW) Flags",
+    "description": "Beneficiary-level indicators for 65+ chronic conditions derived from Medicare and Medicaid claims using standardized algorithms. Conditions include diabetes, heart failure, COPD, cancer, Alzheimer's, and depression. Annual flag file linked to MBSF for longitudinal chronic condition research.",
+    "category": "Enrollment",
+    "years": "1999-present",
+    "unit": "Beneficiary-year",
+    "payers": ["Medicare FFS"],
+    "states": "All",
+    "linkageIds": ["BENE_ID"]
+  },
+  {
+    "name": "Provider of Services (POS) File",
+    "description": "Annual cross-sectional file of all Medicare-certified providers and suppliers, including hospitals, nursing homes, home health agencies, hospices, and outpatient facilities. Contains facility type, ownership, bed count, accreditation, and geographic location. Standard source for provider characteristics.",
+    "category": "Provider",
+    "years": "1984-present",
+    "unit": "Provider",
+    "payers": ["All"],
+    "states": "All",
+    "linkageIds": ["PRVDR_NUM", "NPI"]
+  },
+  {
+    "name": "Healthcare Cost Report Information System (HCRIS)",
+    "description": "Annual cost reports filed by Medicare-participating hospitals, SNFs, home health agencies, and other facilities with CMS. Contains detailed financial data: cost centers, charges, payments, staffing FTEs, and utilization statistics. Primary source for hospital financial analysis and cost structure research.",
+    "category": "Provider",
+    "years": "1994-present",
+    "unit": "Facility-year",
+    "payers": ["All"],
+    "states": "All",
+    "linkageIds": ["PRVDR_NUM", "RPT_REC_NUM"]
+  },
+  {
+    "name": "MIPS Performance Data",
+    "description": "CMS-released clinician-level MIPS performance data including final scores, category scores (Quality, IA, PI, Cost), APM affiliation, and payment adjustment percentages. Available as public use file and through the CMS Care Compare website. Useful for studying QPP implementation and clinician performance variation.",
+    "category": "Provider",
+    "years": "2017-present",
+    "unit": "Clinician",
+    "payers": ["Medicare"],
+    "states": "All",
+    "linkageIds": ["NPI", "TIN"]
+  },
+  {
+    "name": "ACO Program Public Data",
+    "description": "Annual public use files for Medicare Shared Savings Program ACOs and other ACO models. Contains ACO financial results (benchmark, expenditures, shared savings/losses), quality scores, assigned beneficiary counts, and participant provider lists. Used for ACO performance and spillover research.",
+    "category": "Provider",
+    "years": "2013-present",
+    "unit": "ACO",
+    "payers": ["Medicare FFS"],
+    "states": "All",
+    "linkageIds": ["ACO_ID", "NPI"]
+  },
+  {
+    "name": "Area Health Resources File (ARF)",
+    "description": "County-level health resources data compiled by HRSA from multiple federal sources. Contains over 6,000 variables including physician supply, hospital beds, socioeconomic indicators, health outcomes, insurance coverage rates, and geographic classifications (RUCA, CBSA). Primary source for health workforce and access research.",
+    "category": "Provider",
+    "years": "1990-present",
+    "unit": "County",
+    "payers": ["All"],
+    "states": "All",
+    "linkageIds": ["FIPS_CD", "COUNTY_CD"]
+  },
+  {
+    "name": "Medicare Current Beneficiary Survey (MCBS)",
+    "description": "Continuous longitudinal survey of a nationally representative sample of Medicare beneficiaries. Collects data on health status, access to care, satisfaction, spending (including out-of-pocket), supplemental insurance, and social determinants of health. Includes both FFS and MA enrollees. Access Survey and Cost Supplement available.",
+    "category": "Survey",
+    "years": "1991-present",
+    "unit": "Beneficiary",
+    "payers": ["Medicare FFS", "Medicare Advantage"],
+    "states": "All",
+    "linkageIds": ["BASEID"]
+  },
+  {
+    "name": "Medical Expenditure Panel Survey (MEPS)",
+    "description": "AHRQ survey collecting detailed data on health services use, expenditures, insurance coverage, and health status for the U.S. civilian non-institutionalized population. Household, medical provider, and insurance components allow linkage across data sources. Standard source for all-payer spending research.",
+    "category": "Survey",
+    "years": "1996-present",
+    "unit": "Person",
+    "payers": ["All"],
+    "states": "All",
+    "linkageIds": ["DUPERSID", "PANEL"]
+  },
+  {
+    "name": "National Health and Nutrition Examination Survey (NHANES)",
+    "description": "CDC/NCHS cross-sectional survey combining interviews and physical examinations to assess health and nutritional status of U.S. adults and children. Contains laboratory results, clinical measurements, dietary recall, and interview data on demographics, health conditions, and behaviors.",
+    "category": "Survey",
+    "years": "1988-present",
+    "unit": "Person",
+    "payers": ["All"],
+    "states": "All",
+    "linkageIds": ["SEQN"]
+  },
+  {
+    "name": "HCUP National Inpatient Sample (NIS)",
+    "description": "AHRQ's Healthcare Cost and Utilization Project all-payer inpatient care database, approximating a 20% stratified sample of U.S. community hospital discharges. Contains ICD diagnoses/procedures, DRGs, charges, payer, and hospital characteristics. Largest all-payer inpatient database in the U.S.",
+    "category": "Claims",
+    "years": "1988-present",
+    "unit": "Discharge",
+    "payers": ["All payers"],
+    "states": "All",
+    "linkageIds": ["KEY_NIS", "HOSP_NIS"]
+  },
+  {
+    "name": "CMS Synthetic Public Use Files (SynPUF)",
+    "description": "De-identified synthetic claims data created by CMS to resemble Medicare claims data for training and software development purposes. Derived from a 5% sample of 2008-2010 Medicare beneficiaries using statistical simulation. Not suitable for statistical inference; intended for code development and methodology testing.",
+    "category": "Synthetic",
+    "years": "2008-2010",
+    "unit": "Beneficiary",
+    "payers": ["Medicare FFS"],
+    "states": "All",
+    "linkageIds": ["DESYNPUF_ID"]
+  }
+]

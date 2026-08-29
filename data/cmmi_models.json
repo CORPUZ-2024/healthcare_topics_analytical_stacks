@@ -1,0 +1,130 @@
+[
+  {
+    "id": "MSSP",
+    "name": "Medicare Shared Savings Program",
+    "category": "ACO",
+    "startDate": "2012-01-01",
+    "endDate": null,
+    "description": "CMS flagship ACO program where provider groups coordinate care for Medicare FFS beneficiaries and share savings relative to a benchmark. BASIC and ENHANCED tracks offer varying levels of shared savings and downside risk."
+  },
+  {
+    "id": "Pioneer",
+    "name": "Pioneer ACO Model",
+    "category": "ACO",
+    "startDate": "2012-01-01",
+    "endDate": "2016-12-31",
+    "description": "CMMI's first ACO model designed for health systems already experienced in coordinated care. Offered higher shared savings rates and greater downside risk than MSSP. Most participants transitioned to MSSP after model ended."
+  },
+  {
+    "id": "NextGen",
+    "name": "Next Generation ACO Model",
+    "category": "ACO",
+    "startDate": "2016-01-01",
+    "endDate": "2021-12-31",
+    "description": "CMMI model testing higher levels of risk and reward for ACOs experienced with population-based payments. Included prospective attribution, benchmark discounts, and benefit enhancements for beneficiaries."
+  },
+  {
+    "id": "ACO_REACH",
+    "name": "ACO REACH Model",
+    "category": "ACO",
+    "startDate": "2023-01-01",
+    "endDate": null,
+    "description": "Successor to the Global and Professional Direct Contracting Model. ACOs accept prospective attribution and financial accountability (Professional or Global risk) for Medicare FFS beneficiaries, with mandatory Health Equity Plans."
+  },
+  {
+    "id": "BPCI_ADV",
+    "name": "BPCI Advanced",
+    "category": "Episode",
+    "startDate": "2018-10-01",
+    "endDate": null,
+    "description": "Episode-based payment model for 90-day clinical episodes triggered by inpatient hospitalization. Participants — hospitals or physician group practices — are accountable for quality and cost across 32 clinical episode types."
+  },
+  {
+    "id": "CJR",
+    "name": "Comprehensive Care for Joint Replacement",
+    "category": "Episode",
+    "startDate": "2016-04-01",
+    "endDate": null,
+    "description": "Mandatory-then-voluntary episode payment model for hip and knee replacement surgeries. Hospitals bear upside and downside risk for the 90-day post-discharge episode. Initially mandatory in selected markets."
+  },
+  {
+    "id": "OCM",
+    "name": "Oncology Care Model",
+    "category": "Specialty",
+    "startDate": "2016-07-01",
+    "endDate": "2022-06-30",
+    "description": "Six-year CMMI model for oncology practices providing chemotherapy. Practices received monthly enhanced oncology services payments and could earn performance-based incentives. Predecessor to the Enhancing Oncology Model."
+  },
+  {
+    "id": "EOM",
+    "name": "Enhancing Oncology Model",
+    "category": "Specialty",
+    "startDate": "2023-07-01",
+    "endDate": null,
+    "description": "Successor to OCM. Oncology practices assume downside risk for 6-month chemotherapy episodes across 7 cancer types. Incorporates health equity screening requirements, care management payments, and mandatory downside risk."
+  },
+  {
+    "id": "CPCPlus",
+    "name": "Comprehensive Primary Care Plus",
+    "category": "Primary Care",
+    "startDate": "2017-01-01",
+    "endDate": "2021-12-31",
+    "description": "CMMI multi-payer primary care model offering care management fees and performance-based incentives to primary care practices. Tested in 14 regions with over 2,900 participating practices and 40 payer partners."
+  },
+  {
+    "id": "PCF",
+    "name": "Primary Care First",
+    "category": "Primary Care",
+    "startDate": "2021-01-01",
+    "endDate": null,
+    "description": "CMMI model offering a flat primary care visit fee, population-based payment, and performance-based adjustments for primary care practices ready to accept accountability for total cost of care."
+  },
+  {
+    "id": "MCP",
+    "name": "Making Care Primary",
+    "category": "Primary Care",
+    "startDate": "2024-07-01",
+    "endDate": null,
+    "description": "Ten-year CMMI primary care model in 8 states with a graduated pathway toward prospective total cost of care accountability. Focuses on care management, behavioral health integration, and specialist partnerships."
+  },
+  {
+    "id": "GUIDE",
+    "name": "Guiding an Improved Dementia Experience",
+    "category": "Primary Care",
+    "startDate": "2024-07-01",
+    "endDate": null,
+    "description": "CMMI model supporting individuals with dementia and their caregivers. Participants provide interdisciplinary care navigation, 24/7 access, and respite care. Monthly per-beneficiary-per-month payments fund model infrastructure."
+  },
+  {
+    "id": "AHEAD",
+    "name": "States Advancing All-Payer Health Equity Approaches",
+    "category": "State/Payer",
+    "startDate": "2024-01-01",
+    "endDate": null,
+    "description": "State-level CMMI model testing all-payer total cost of care approaches. States implement population-based payments spanning Medicare, Medicaid, and commercial payers, with explicit health equity goals."
+  },
+  {
+    "id": "ViT",
+    "name": "Value in Opioid Use Disorder Treatment",
+    "category": "Behavioral Health",
+    "startDate": "2021-01-01",
+    "endDate": null,
+    "description": "CMMI model testing episode-based payment for opioid use disorder treatment, bundling all services for a 6-month episode. Aims to expand access to evidence-based medication-assisted treatment (MAT)."
+  },
+  {
+    "id": "IBH",
+    "name": "Innovation in Behavioral Health",
+    "category": "Behavioral Health",
+    "startDate": "2024-01-01",
+    "endDate": null,
+    "description": "CMMI model integrating physical health services into community behavioral health settings. Practices receive infrastructure and per-member-per-month payments to screen and coordinate care for Medicare and Medicaid beneficiaries."
+  },
+  {
+    "id": "HHVBP",
+    "name": "Home Health Value-Based Purchasing",
+    "category": "Episode",
+    "startDate": "2016-01-01",
+    "endDate": null,
+    "description": "Model tying a portion of home health agency payment to quality performance. Originally piloted in 9 states, expanded nationally in 2022. Agencies can earn up to +5% or face up to -5% payment adjustments based on quality scores."
+  }
+]

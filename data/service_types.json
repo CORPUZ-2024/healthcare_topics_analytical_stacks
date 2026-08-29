@@ -1,0 +1,134 @@
+[
+  {
+    "name": "Inpatient Hospital",
+    "description": "Acute inpatient care provided by short-term acute care hospitals, paid under the Medicare Inpatient Prospective Payment System using Diagnosis-Related Groups (DRGs). Includes medical and surgical admissions, critical care, and psychiatric units (if distinct).",
+    "feeSchedule": "IPPS",
+    "valueBasedModels": [
+      "Hospital Value-Based Purchasing (VBP)",
+      "Hospital Readmissions Reduction Program (HRRP)",
+      "Hospital-Acquired Condition (HAC) Reduction"
+    ],
+    "innovationModels": [
+      "Comprehensive Care for Joint Replacement",
+      "BPCI Advanced",
+      "ACO REACH Model",
+      "Medicare Shared Savings Program"
+    ]
+  },
+  {
+    "name": "Outpatient Hospital",
+    "description": "Services furnished by hospital outpatient departments and ambulatory surgical centers (ASCs). Hospital outpatient services paid under OPPS using Ambulatory Payment Classifications (APCs); ASCs paid under a separate ASC fee schedule.",
+    "feeSchedule": "OPPS",
+    "valueBasedModels": [
+      "Ambulatory Surgical Center Quality Reporting"
+    ],
+    "innovationModels": [
+      "BPCI Advanced",
+      "ACO REACH Model"
+    ]
+  },
+  {
+    "name": "Physician/Professional Services",
+    "description": "Services furnished by physicians, nurse practitioners, physician assistants, and other eligible professionals. Paid under the Medicare Physician Fee Schedule using RBRVS-based relative value units (RVUs) multiplied by a conversion factor.",
+    "feeSchedule": "Physician Fee Schedule (PFS)",
+    "valueBasedModels": [
+      "MIPS",
+      "Advanced APMs"
+    ],
+    "innovationModels": [
+      "Making Care Primary",
+      "Primary Care First",
+      "Guiding an Improved Dementia Experience",
+      "ACO REACH Model",
+      "Medicare Shared Savings Program",
+      "Enhancing Oncology Model",
+      "Innovation in Behavioral Health",
+      "Value in Opioid Use Disorder Treatment"
+    ]
+  },
+  {
+    "name": "Skilled Nursing Facility",
+    "description": "Post-acute inpatient care provided by skilled nursing facilities for Medicare beneficiaries following a qualifying hospital stay of 3+ days. Paid under the SNF PPS using the Patient Driven Payment Model (PDPM) based on clinical characteristics.",
+    "feeSchedule": "SNF PPS (PDPM)",
+    "valueBasedModels": [
+      "SNF Value-Based Purchasing (SNFVBP)"
+    ],
+    "innovationModels": [
+      "BPCI Advanced",
+      "ACO REACH Model"
+    ]
+  },
+  {
+    "name": "Home Health",
+    "description": "Skilled nursing, therapy, and aide services provided in the home for homebound Medicare beneficiaries. Paid under the Home Health PPS using the Patient-Driven Groupings Model (PDGM), which classifies 30-day periods by clinical characteristics and functional impairment.",
+    "feeSchedule": "HH PPS (PDGM)",
+    "valueBasedModels": [
+      "Home Health Value-Based Purchasing (HHVBP)"
+    ],
+    "innovationModels": [
+      "BPCI Advanced",
+      "ACO REACH Model",
+      "Guiding an Improved Dementia Experience"
+    ]
+  },
+  {
+    "name": "Hospice",
+    "description": "Palliative care and support services for terminally ill Medicare beneficiaries with a life expectancy of 6 months or less. Paid on a per-diem basis with four levels of care: routine home care, continuous home care, inpatient respite, and general inpatient care.",
+    "feeSchedule": "Hospice Per Diem",
+    "valueBasedModels": [
+      "Hospice Quality Reporting"
+    ],
+    "innovationModels": [
+      "Guiding an Improved Dementia Experience"
+    ]
+  },
+  {
+    "name": "Inpatient Rehabilitation Facility",
+    "description": "Intensive inpatient rehabilitation services for patients requiring multi-disciplinary team rehabilitation (e.g., stroke, joint replacement). Paid under the IRF PPS using Case-Mix Groups (CMGs) based on patient clinical characteristics and functional status.",
+    "feeSchedule": "IRF PPS",
+    "valueBasedModels": [
+      "IRF Quality Reporting"
+    ],
+    "innovationModels": [
+      "BPCI Advanced"
+    ]
+  },
+  {
+    "name": "End-Stage Renal Disease",
+    "description": "Dialysis services for Medicare beneficiaries with ESRD. Paid under the ESRD PPS as a bundled per-treatment payment covering dialysis, labs, drugs, and supplies. Home dialysis is encouraged through expanded coverage and a transitional add-on payment.",
+    "feeSchedule": "ESRD PPS",
+    "valueBasedModels": [
+      "ESRD Quality Incentive Program (QIP)"
+    ],
+    "innovationModels": [
+      "Enhancing Oncology Model",
+      "ACO REACH Model"
+    ]
+  },
+  {
+    "name": "Oncology",
+    "description": "Cancer diagnosis, treatment, and management services including chemotherapy administration, radiation, surgical oncology, and associated supportive care. Paid primarily under the Physician Fee Schedule with drug payments under buy-and-bill (Part B drugs) or Part D.",
+    "feeSchedule": "Physician Fee Schedule (PFS)",
+    "valueBasedModels": [
+      "MIPS Oncology Specialty Set"
+    ],
+    "innovationModels": [
+      "Enhancing Oncology Model",
+      "BPCI Advanced",
+      "ACO REACH Model"
+    ]
+  },
+  {
+    "name": "Behavioral Health",
+    "description": "Mental health and substance use disorder (SUD) services including psychiatric evaluation, psychotherapy, medication management, and community mental health services. Paid under the Physician Fee Schedule. Mental Health Parity applies to Medicare Advantage and Medicaid managed care.",
+    "feeSchedule": "Physician Fee Schedule (PFS)",
+    "valueBasedModels": [
+      "MIPS Behavioral Health Specialty Set"
+    ],
+    "innovationModels": [
+      "Innovation in Behavioral Health",
+      "Value in Opioid Use Disorder Treatment",
+      "ACO REACH Model"
+    ]
+  }
+]
