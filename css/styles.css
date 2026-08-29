@@ -99,6 +99,20 @@ body {
   line-height: 1.5;
 }
 
+#app-header .header-live-link {
+  display: inline-block;
+  margin-top: 4px;
+  color: var(--accent-light);
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-decoration: none;
+  letter-spacing: 0.02em;
+}
+#app-header .header-live-link:hover {
+  text-decoration: underline;
+  color: #ffffff;
+}
+
 /* --- Info Bar --------------------------------------------- */
 #info-bar {
   background: var(--teal);
