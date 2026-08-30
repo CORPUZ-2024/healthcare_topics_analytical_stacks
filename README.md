@@ -24,7 +24,7 @@ Or open `index.html` directly from the repo — no server required. All data is 
 
 | Tab | Visualization | What it shows |
 |-----|--------------|---------------|
-| **Ontology Graph** | D3.js force-directed graph | Relationships between legislation, agencies, programs, and CMMI models |
+| **Ontology Graph** | D3.js force-directed graph | Two force-directed graphs: Legislative Map (legislation → agencies → programs → rules) and Payer & Company Map (plans, providers, pharma, health IT connected to CMS mandates) |
 | **Reimbursement Roadmap** | Swimlane timeline (2010–2026) | Payment system fee schedules and CMMI model overlays by service type |
 | **Data Taxonomy** | Filterable, sortable table | CMS and public research datasets with linkage variables and metadata |
 
@@ -45,6 +45,9 @@ healthcare_ref_materials/
 ├── data/
 │   ├── ontology_nodes.json     # 38 nodes: legislation, agency, program, model, rule
 │   ├── ontology_edges.json     # 51 directed relationships
+│   ├── company_nodes.json      # 58 nodes: payer, provider, pharma, hit, analytics, govt
+│   ├── company_edges.json      # 67 directed relationships (hier, serves, partner, funds, tension)
+│   ├── top_shifts.json         # 6 active policy shifts with catalysts and implications
 │   ├── cmmi_models.json        # 16 CMMI models with start/end dates
 │   ├── service_types.json      # 10 service types with fee schedules
 │   └── datasets.json           # 20 CMS and public research datasets
@@ -57,6 +60,10 @@ healthcare_ref_materials/
 
 ## Tab 1 — Ontology Graph
 
+The Ontology tab contains two switchable force-directed graphs and a Top Shifts section below.
+
+### Legislative Map
+
 **38 nodes across 5 categories:**
 
 | Category | Color | Examples |
@@ -67,12 +74,43 @@ healthcare_ref_materials/
 | Model | Steel blue | ACO REACH, BPCI Advanced, EOM, MCP, GUIDE, AHEAD |
 | Rule | Orange | IPPS, OPPS, PFS, ESRD Final Rules |
 
-**Interactions:**
+### Payer & Company Map
+
+**58 nodes across 9 categories:**
+
+| Category | Color | Examples |
+|----------|-------|---------|
+| Legislation | Red | ACA §3021/3022, MACRA, IRA 2022, HITECH, 21st Century Cures |
+| Program | Teal | Medicare Advantage, Medicaid/CHIP, QPP/MIPS, TEAM Model, CMS-0057-F, Drug Price Negotiation |
+| Payer | Blue | SCAN Health Plan, Alignment Health, Oscar Health, Covered California, Partnership HealthPlan, SFHP, Capital Rx, Included Health |
+| Provider | Steel blue | Privia Health, Astrana Health, DaVita, Strive Health, Omada Health, Hinge Health, August Health, AdventHealth |
+| Health IT | Green | Epic, Redox, Smile Digital Health, Notable, DoseSpot |
+| Pharma | Coral | AbbVie, Merck, Amgen, Roche/Genentech, GSK, Vertex, United Therapeutics, ConnectiveRx, Amazon Pharmacy, EVERSANA, Certara |
+| Analytics / AI | Dark teal | Tempus AI, Guardant Health, GeneDx, RTI International, Google for Health, Coalition for Health AI (CHAI), Anthropic |
+| Government | Slate | NIH, CDC, CA Dept of Health Care Services, CA Dept of Public Health |
+
+Edge types: **hier** (structural/mandated), **serves** (vendor/service), **partner** (voluntary), **funds** (funding), **tension** (structural tension)
+
+### Top Shifts
+
+Six active shifts displayed as cards below the graphs, each with a trend rating, catalyst narrative, and downstream implications:
+
+| # | Title | Trend |
+|---|-------|-------|
+| 1 | IRA Drug Price Negotiation — Cycle 3 Live | Critical |
+| 2 | CMS-0057-F Prior Auth APIs — Jan 2027 Deadline | Critical |
+| 3 | MA Risk Adjustment Tightening (HCC V28 + RADV) | Critical |
+| 4 | TEAM Model — Mandatory Episode Accountability | Rising |
+| 5 | MIPS Sunset Proposal — Advanced APM Pressure (2029) | Rising |
+| 6 | ACO REACH Equity Adjustments + MA Overlap | Watch |
+
+**Interactions (both graphs):**
 - Pan and zoom the graph canvas
-- Hover a node for name, category, policy type, enactment date, and description
+- Hover a node for name, category, and description
 - Click a node to highlight its 1-hop neighbors (non-neighbors dim to 15% opacity)
 - Click the background to reset
 - Click legend items to toggle category visibility
+- Use the toggle tabs above the graph to switch between Legislative Map and Payer & Company Map
 
 ---
 

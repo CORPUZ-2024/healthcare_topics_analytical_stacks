@@ -48,6 +48,29 @@
         } catch (e) {
           console.error('initOntology error:', e);
         }
+        try {
+          initCompanyOntology(window.__COMPANY_NODES__, window.__COMPANY_EDGES__);
+        } catch (e) {
+          console.error('initCompanyOntology error:', e);
+        }
+        try {
+          initTopShifts(window.__TOP_SHIFTS__);
+        } catch (e) {
+          console.error('initTopShifts error:', e);
+        }
+
+        /* Graph toggle logic */
+        const graphToggleBtns = document.querySelectorAll('.graph-toggle-btn');
+        const graphPanels = document.querySelectorAll('.graph-panel');
+
+        graphToggleBtns.forEach(btn => {
+          btn.addEventListener('click', function() {
+            graphToggleBtns.forEach(b => b.classList.remove('active'));
+            graphPanels.forEach(p => p.classList.remove('active'));
+            this.classList.add('active');
+            document.getElementById('graph-' + this.dataset.graph).classList.add('active');
+          });
+        });
       }
 
       if (tabName === 'reimbursement' && !initialized.reimbursement) {
@@ -117,6 +140,9 @@
     console.log(
       `Nodes: ${(window.__NODES__ || []).length} | ` +
       `Edges: ${(window.__EDGES__ || []).length} | ` +
+      `Company Nodes: ${(window.__COMPANY_NODES__ || []).length} | ` +
+      `Company Edges: ${(window.__COMPANY_EDGES__ || []).length} | ` +
+      `Top Shifts: ${(window.__TOP_SHIFTS__ || []).length} | ` +
       `Models: ${(window.__CMMI_MODELS__ || []).length} | ` +
       `Service Types: ${(window.__SERVICE_TYPES__ || []).length} | ` +
       `Datasets: ${(window.__DATASETS__ || []).length}`

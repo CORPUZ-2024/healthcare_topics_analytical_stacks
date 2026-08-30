@@ -1,0 +1,92 @@
+[
+  {
+    "id":"ts1",
+    "rank":1,
+    "trend":"critical",
+    "title":"IRA Drug Price Negotiation — Cycle 3 Live",
+    "activeNode":"Drug Price Negotiation",
+    "catalyst":"Cycle 1 prices (10 drugs, 38–79% discounts) took effect Jan 2026. Cycle 3 underway — first-ever Part B drug negotiations and renegotiations; prices effective 2028. CMS-4215-P codification comment period closed Aug 17, 2026.",
+    "implications":[
+      "AbbVie, Merck, Amgen face multi-billion annual Medicare revenue reductions",
+      "MA/Part D formulary redesign cascades to PBMs (Capital Rx) and MA plans (SCAN, Oscar, Alignment)",
+      "Patient access programs (ConnectiveRx, EVERSANA) restructure as out-of-pocket caps shift manufacturer concession math",
+      "Regulatory science firms (Certara) see rising demand as pharma builds evidence for price justification",
+      "Companion diagnostics (Guardant) tied to negotiated drugs face formulary and access ripple effects"
+    ]
+  },
+  {
+    "id":"ts2",
+    "rank":2,
+    "trend":"critical",
+    "title":"CMS-0057-F Prior Auth APIs — Jan 2027 Deadline",
+    "activeNode":"CMS-0057-F",
+    "catalyst":"January 2027 compliance deadline for four mandated FHIR APIs covering MA, Medicaid MCOs, and ACA marketplace plans. Prior auth decision timeframes compressed to 72 hours (expedited) and 7 days (standard).",
+    "implications":[
+      "SCAN, Alignment, Oscar, Partnership HealthPlan, SFHP all face mandated API buildout — IT spend rising",
+      "Epic's implementation roadmap becomes a critical dependency for health system compliance",
+      "Redox and Smile Digital Health positioned as essential middleware; Notable benefits from PA workflow automation volume",
+      "Prior auth denial rates likely to fall as transparency increases — downstream revenue risk for utilization management businesses",
+      "CHAI AI governance frameworks become more urgent as payers deploy AI for automated prior auth decisions"
+    ]
+  },
+  {
+    "id":"ts3",
+    "rank":3,
+    "trend":"critical",
+    "title":"MA Risk Adjustment Tightening (HCC V28 + RADV)",
+    "activeNode":"MA Risk Adjustment (HCC V28 / RADV)",
+    "catalyst":"HCC V28 model transition reduces average MA risk scores — compressing plan revenue. RADV extrapolation methodology finalized. DOJ scrutiny of retrospective chart chase and upcoding intensifying across major MA plans.",
+    "implications":[
+      "SCAN, Alignment, Oscar face revenue headwinds — per-member-per-month margins under pressure",
+      "Coding accuracy programs intensify; risk adjustment vendors (Acumen, RTI) see demand rise",
+      "Alignment's owned-provider model provides some insulation; pure plan models (Oscar) more exposed",
+      "MA enrollment growth may slow as plans exit unprofitable markets or raise premiums",
+      "RTI and CMS contractors evaluating whether V28 achieves intended overbilling correction without overcorrection"
+    ]
+  },
+  {
+    "id":"ts4",
+    "rank":4,
+    "trend":"rising",
+    "title":"TEAM Model — Mandatory Episode Accountability",
+    "activeNode":"TEAM Model",
+    "catalyst":"CMS mandatory bundled payment model for surgical episodes (joint replacement, CABG, spinal fusion) launches in selected regions. No opt-out. First mandatory CMMI model since CJR. Episodes cover 90-day post-acute period.",
+    "implications":[
+      "AdventHealth and other large health systems in selected markets face direct episode risk",
+      "Post-acute referral network optimization becomes a financial imperative — SNF and HH quality differentiation is now contractual",
+      "August Health (SNF care management) sees premium on PAC coordination capability",
+      "Hinge Health surgical decision support adjacent to TEAM joint replacement episodes",
+      "Care navigation for ACO REACH beneficiaries overlapping TEAM episodes creates attribution complexity"
+    ]
+  },
+  {
+    "id":"ts5",
+    "rank":5,
+    "trend":"rising",
+    "title":"MIPS Sunset Proposal — Advanced APM Pressure (2029)",
+    "activeNode":"QPP / MIPS",
+    "catalyst":"CY2027 PFS proposed rule signals sunsetting of traditional MIPS beginning the 2029 performance year. Clinicians face binary choice: qualify into an Advanced APM track or face growing payment adjustments under a restructured program.",
+    "implications":[
+      "Privia Health and Astrana face accelerated physician migration pressure into ACO REACH and other Advanced APM tracks",
+      "Independent practices without VBC infrastructure face meaningful payment pressure — consolidation accelerator",
+      "RTI's QPP evaluation contract scope likely expands as CMS builds transition evidence base",
+      "Oscar and Alignment must redesign value-based physician contracting to align with Advanced APM qualification",
+      "Coalition for Health AI (CHAI) AI quality measure governance becomes more critical as AI-generated quality data enters APM scoring"
+    ]
+  },
+  {
+    "id":"ts6",
+    "rank":6,
+    "trend":"watch",
+    "title":"ACO REACH Equity Adjustments + MA Overlap",
+    "activeNode":"MSSP / ACO REACH",
+    "catalyst":"ACO REACH's new health equity benchmark methodology adjustments active 2026. Growing ACO REACH enrollment overlapping MA markets creates dual-attribution complexity. CMS finalizing overlap rules.",
+    "implications":[
+      "Astrana and Privia must integrate SDOH data and equity metrics into care management workflows",
+      "Attribution conflicts between ACO REACH and MA plans (SCAN, Alignment) require CMS adjudication — revenue uncertainty",
+      "Strive Health kidney VBC models must align care pathways with ACO REACH equity requirements for CKD populations",
+      "Google for Health and analytics platforms face rising demand for SDOH data integration",
+      "Included Health navigation benefit creates opportunity to address equity gaps — ACO REACH financially incentivizes this"
+    ]
+  }
+]

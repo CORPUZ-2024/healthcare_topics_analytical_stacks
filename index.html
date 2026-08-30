@@ -54,15 +54,37 @@
   <div class="section-header">
     <h2>Healthcare Policy Ontology Graph</h2>
     <p>
-      Force-directed graph of U.S. healthcare legislation, federal agencies, payment programs,
-      CMMI innovation models, and annual payment rules. Click a node to highlight its neighbors.
-      Scroll to zoom, drag to pan. Use the legend below the graph to filter by category.
-      Keyboard shortcut: press <strong>1</strong> to return to this tab.
+      Two complementary force-directed graphs: the <strong>Legislative Map</strong> traces how legislation flows through federal agencies to CMS programs and payment rules; the <strong>Payer &amp; Company Map</strong> shows how those mandates connect to health plans, providers, digital health companies, pharma, and analytics vendors.
+      Click a node to highlight neighbors. Scroll to zoom, drag to pan. Use the legend to filter by category.
     </p>
   </div>
-  <div class="viz-container">
-    <div id="ontology-container" style="min-height:650px"></div>
+
+  <!-- Graph toggle -->
+  <div class="graph-toggle" role="tablist" aria-label="Ontology graph selector">
+    <button class="graph-toggle-btn active" id="btn-graph-legislative" data-graph="legislative">
+      &#9906; Legislative Map
+    </button>
+    <button class="graph-toggle-btn" id="btn-graph-company" data-graph="company">
+      &#127970; Payer &amp; Company Map
+    </button>
   </div>
+
+  <!-- Graph 1: Legislative -->
+  <div id="graph-legislative" class="graph-panel active">
+    <div class="viz-container">
+      <div id="ontology-container" style="min-height:650px"></div>
+    </div>
+  </div>
+
+  <!-- Graph 2: Payer & Company -->
+  <div id="graph-company" class="graph-panel">
+    <div class="viz-container">
+      <div id="company-ontology-container" style="min-height:650px"></div>
+    </div>
+  </div>
+
+  <!-- Top Shifts -->
+  <div id="top-shifts-container" class="top-shifts-section"></div>
 </div>
 
 <!-- Reimbursement Roadmap Panel -->
@@ -578,6 +600,246 @@ window.__EDGES__ = [
   { "source": "ARP2021", "target": "CHIP", "label": "enhanced funding" },
   { "source": "HRSA", "target": "PACE", "label": "coordinates" },
   { "source": "AHRQ", "target": "QPP", "label": "research supports" }
+]
+;
+
+/* ----- Company / Payer Ontology Nodes ----- */
+window.__COMPANY_NODES__ = [
+  {"id":"aca_c","name":"ACA \u00a73021/3022","category":"legislation","description":"Created CMMI (\u00a73021) and MSSP (\u00a73022). Expanded Medicaid and established ACA marketplace plans. Foundation for value-based care architecture."},
+  {"id":"macra_c","name":"MACRA 2015","category":"legislation","description":"Repealed SGR. Created QPP (MIPS + Advanced APMs). Sets physician Medicare payment adjustments for most clinicians."},
+  {"id":"ira_c","name":"Inflation Reduction Act 2022","category":"legislation","description":"Created Medicare Drug Price Negotiation Program. Cycle 1 (10 drugs) live Jan 2026. Cycle 3 underway \u2014 first Part B drugs and renegotiations, prices effective 2028."},
+  {"id":"hitech_c","name":"HITECH Act 2009","category":"legislation","description":"$19B+ for EHR adoption. Created ONC. Foundation for today's health IT infrastructure and eventual API mandates."},
+  {"id":"cures_c","name":"21st Century Cures Act 2016","category":"legislation","description":"Granted ONC interoperability authority. Created FDA RWE Program. Prohibits information blocking. Directly upstream of CMS-0057-F."},
+  {"id":"ma_prog","name":"Medicare Advantage","category":"program","description":"Part C managed care. ~33M enrollees. Funded via risk-adjusted capitation (HCC V28). RADV audits verify coding accuracy. HRRP, VBP penalties do not apply \u2014 separate quality bonus system."},
+  {"id":"medicaid_prog","name":"Medicaid / CHIP","category":"program","description":"State-federal means-tested coverage. Managed care dominates in most states. CMS-0057-F prior auth API mandate applies to Medicaid MCOs. ARP 2021 enhanced federal match still active in many states."},
+  {"id":"qpp_prog","name":"QPP / MIPS","category":"program","description":"Quality Payment Program. MIPS scores clinicians 1-100 across four categories; adjusts Part B payment two years later. CMS has proposed sunsetting traditional MIPS beginning the 2029 performance year \u2014 accelerating Advanced APM pressure."},
+  {"id":"mssp_prog","name":"MSSP / ACO REACH","category":"program","description":"Medicare Shared Savings Program and its evolution ACO REACH. ACOs share savings (or losses) vs spending benchmark. ACO REACH adds health equity adjustments and new benchmark methodology."},
+  {"id":"team_prog","name":"TEAM Model","category":"program","description":"Transforming Episode Accountability Model. Mandatory bundled payment for surgical episodes (joint replacement, CABG, spinal fusion) in selected regions. Hospitals cannot opt out. Active 2025+."},
+  {"id":"cms0057_prog","name":"CMS-0057-F","category":"program","description":"Interoperability and Prior Authorization final rule. Mandates four FHIR APIs for MA, Medicaid MCOs, and ACA marketplace plans. Jan 2027 compliance deadline. Reduces prior auth turnaround from weeks to days."},
+  {"id":"ira_drug_prog","name":"Drug Price Negotiation","category":"program","description":"IRA Medicare Drug Price Negotiation Program. Cycle 1: 10 drugs, Jan 2026 prices, 38-79% discounts. Cycle 2: 15 drugs effective 2027. Cycle 3: negotiating now \u2014 first Part B drugs, first renegotiations, prices effective 2028."},
+  {"id":"esrd_prog","name":"ESRD / Kidney Care Programs","category":"program","description":"ESRD QIP, Kidney Care Choices (KCC), and Comprehensive Kidney Care Contracting (CKCC). Mandatory ESRD QIP penalizes poor performers. KCC/CKCC are voluntary CMMI value-based models for kidney disease."},
+  {"id":"pac_prog","name":"PAC Quality Reporting","category":"program","description":"Post-Acute Care QRP. Standardized assessment data across SNF (MDS 3.0), IRF (IRF-PAI), and LTCH (LTCH CARE). Required under IMPACT Act 2014. Drives SNF VBP payment adjustments."},
+  {"id":"hcc_prog","name":"MA Risk Adjustment (HCC V28 / RADV)","category":"program","description":"HCC V28 transition reduces average MA risk scores \u2014 revenue headwind for plans. RADV chart-level audits verify HCC coding accuracy. DOJ scrutiny of upcoding practices intensifying. CMS extrapolation methodology finalized."},
+  {"id":"scan","name":"SCAN Health Plan","category":"payer","description":"California-focused Medicare Advantage plan. One of the oldest nonprofit MA plans. Operates primarily in Southern California. Subject to HCC V28 transition and RADV audits."},
+  {"id":"alignment","name":"Alignment Health","category":"payer","description":"Value-based Medicare Advantage plan with owned provider network. Asset-light + asset-heavy hybrid model. Operates MA plans in CA, TX, NC, AZ. Deep capitation risk with downstream provider partners."},
+  {"id":"oscar","name":"Oscar Health","category":"payer","description":"Tech-forward health insurer operating ACA marketplace and Medicare Advantage plans. Uses AI for care navigation and prior auth. Heavy FHIR investment. CMS-0057-F compliance infrastructure already being built."},
+  {"id":"covca","name":"Covered California","category":"payer","description":"California's ACA marketplace administrator. Coordinates with Medi-Cal (CA Medicaid) on dual-eligible enrollment. Sets plan participation standards and quality requirements for marketplace issuers."},
+  {"id":"partnerhp","name":"Partnership HealthPlan of CA","category":"payer","description":"Medi-Cal (California Medicaid) managed care plan covering northern California. Subject to CMS-0057-F Medicaid MCO prior auth API mandate. Coordinates closely with CA DHCS."},
+  {"id":"sfhp","name":"San Francisco Health Plan","category":"payer","description":"San Francisco's Medi-Cal managed care plan. Serves Medi-Cal and Healthy SF members. Subject to CMS-0057-F Medicaid MCO API mandate. Strong community health worker integration."},
+  {"id":"capital_rx","name":"Capital Rx","category":"payer","description":"Full-service PBM focused on transparent pricing and drug cost management. Serves health plans including government programs. Positioned as disruptor to legacy PBM model. IRA drug pricing changes affect formulary strategy."},
+  {"id":"included","name":"Included Health","category":"payer","description":"Virtual care and health navigation platform embedded in employer and health plan benefits. Connects members to in-network specialists. Partnered with MA plans for supplemental navigation benefits."},
+  {"id":"privia","name":"Privia Health","category":"provider","description":"Physician group management and VBC enablement company. Supports independent physicians participating in MIPS and Advanced APMs. ACO REACH and MSSP participation. National footprint across multiple specialties."},
+  {"id":"astrana","name":"Astrana Health","category":"provider","description":"Provider-network VBC enablement. Manages ACO REACH-eligible networks and MA capitation risk. California-centered with national expansion. Deep risk-bearing capability at the IPA level."},
+  {"id":"davita","name":"DaVita Kidney Care","category":"provider","description":"Largest US dialysis provider. Dominant in ESRD QIP compliance. Participates in CKCC and KCC value-based kidney care models. IRA drug pricing affects Sensipar/Parsabiv which treats ESRD complications."},
+  {"id":"strive","name":"Strive Health","category":"provider","description":"Kidney-focused value-based care company. Participates in CKCC Graduated and Global Risk tracks. Works with nephrologists on CKD-to-ESRD transition management. Competes and coordinates with DaVita."},
+  {"id":"omada","name":"Omada Health","category":"provider","description":"Digital therapeutics company for diabetes prevention and management, hypertension, and musculoskeletal health. Covered under Medicare Advantage supplemental benefits and employer plans. Outcomes data feeds MIPS quality measures."},
+  {"id":"hinge","name":"Hinge Health","category":"provider","description":"Digital musculoskeletal (MSK) health company. Covered under MA supplemental benefits and employer contracts. Expanding into surgical decision support (TEAM model adjacent). Outcomes published in peer-reviewed journals."},
+  {"id":"august","name":"August Health","category":"provider","description":"Digital care management platform for skilled nursing facilities (SNFs). Streamlines PAC QRP reporting, PDPM documentation, and care transitions. Directly serves the PAC quality reporting mandate."},
+  {"id":"adventhealth","name":"AdventHealth","category":"provider","description":"Large faith-based nonprofit health system (50+ hospitals). Operates in TEAM model-eligible markets. Subject to Hospital VBP, HRRP, and HAC reduction programs. SNF and home health affiliates under PAC QRP."},
+  {"id":"epic","name":"Epic","category":"hit","description":"Dominant EHR vendor (~35% of US hospital beds). Must implement CMS-0057-F FHIR APIs. Central to TEFCA exchange. Prior auth API compliance dependent on Epic's implementation roadmap."},
+  {"id":"redox","name":"Redox","category":"hit","description":"Healthcare integration platform. Middleware connecting EHRs (including Epic) to digital health apps and payer systems. Key infrastructure for CMS-0057-F API compliance for smaller health systems."},
+  {"id":"smile","name":"Smile Digital Health","category":"hit","description":"FHIR server infrastructure company. Powers FHIR implementations for health systems and payers. Core technical layer for CMS-0057-F Patient Access and Provider Directory APIs."},
+  {"id":"notable","name":"Notable","category":"hit","description":"AI-powered clinical automation platform. Automates clinical documentation, prior authorization, and patient intake workflows. Positioned to benefit from CMS-0057-F volume shift in prior auth processing."},
+  {"id":"dosespotco","name":"DoseSpot","category":"hit","description":"E-prescribing platform. Relevant to OTP (Opioid Treatment Programs) Medicare bundled payment for buprenorphine prescribing. PDMP integration and controlled substance e-prescribing infrastructure."},
+  {"id":"abbvie_c","name":"AbbVie","category":"pharma","description":"Imbruvica (ibrutinib) selected in IRA Cycle 1 drug negotiation \u2014 38% discount from list price. Revenue impact: ~$3B annual Medicare revenue reduction. Accelerating pipeline diversification post-Humira biosimilar competition."},
+  {"id":"merck_c","name":"Merck","category":"pharma","description":"Januvia/Janumet selected in IRA Cycle 1. Also has Keytruda (pembrolizumab) expected in future IRA cycles \u2014 largest revenue-at-risk drug in Medicare. Major Part B drug target."},
+  {"id":"amgen_c","name":"Amgen","category":"pharma","description":"Enbrel selected in IRA Cycle 1. Biosimilar competition and IRA negotiation creating dual pressure. Repatha (evolocumab) is a potential future IRA target. Significant Medicare Part D exposure."},
+  {"id":"roche_c","name":"Roche / Genentech","category":"pharma","description":"Major Part B drug exposure (Herceptin biosimilar, Avastin, Tecentriq). IRA Cycle 3 includes first Part B drugs \u2014 Roche/Genentech directly in scope. FDA RWE submissions for label expansions."},
+  {"id":"gsk_c","name":"GSK","category":"pharma","description":"Farxiga (dapagliflozin, co-developed) and pipeline drugs face IRA negotiation exposure. Active in respiratory (Breo, Nucala). FDA RWE submissions for post-approval effectiveness evidence."},
+  {"id":"vertex_c","name":"Vertex Pharmaceuticals","category":"pharma","description":"Trikafta/Kaftrio (elexacaftor/tezacaftor/ivacaftor) is a potential high-profile future IRA target given its price and Medicare utilization. Also developing CRISPR-based therapies (partnered with CRISPR Therapeutics). Rare disease pricing model under IRA scrutiny."},
+  {"id":"unitedthera","name":"United Therapeutics","category":"pharma","description":"Pulmonary arterial hypertension (Tyvaso, Orenitram) and rare lung disease drugs. Tyvaso DPI (inhaled treprostinil) is a high-cost Medicare Part D and Part B drug. Future IRA negotiation candidate. Lung transplant innovation via xenotransplantation (eGenesis partnership-adjacent)."},
+  {"id":"connrx","name":"ConnectiveRx","category":"pharma","description":"Patient access and affordability programs (copay assistance, prior auth support, hub services). IRA's Part D redesign (out-of-pocket cap) and manufacturer price concession rules directly reshape their copay card programs."},
+  {"id":"amazon_pharm","name":"Amazon Pharmacy","category":"pharma","description":"Retail pharmacy disruptor. Partners with MA plans and PBMs for prescription delivery. IRA price transparency and generic drug pricing align with Amazon's low-cost positioning. RxPass subscription for generics."},
+  {"id":"eversana","name":"EVERSANA","category":"pharma","description":"Pharma commercialization and market access company. Manages patient access programs, field reimbursement, and hub services for specialty drugs. IRA price negotiation results restructure their clients' market access strategies."},
+  {"id":"certara_c","name":"Certara","category":"pharma","description":"Drug development decision science. Biosimulation, regulatory submissions, and pharmacometric modeling. FDA RWE Program expands the evidence types they help clients generate and submit."},
+  {"id":"tempus","name":"Tempus AI","category":"analytics","description":"AI-driven clinical data platform. Genomic sequencing plus de-identified clinical records. FDA RWE submissions and real-world evidence generation for oncology. Also generates MIPS quality data for oncology practices."},
+  {"id":"guardant","name":"Guardant Health","category":"analytics","description":"Liquid biopsy (circulating tumor DNA). Medicare coverage for SHIELD colorectal cancer screening test. FDA-approved companion diagnostics relevant to IRA negotiation cycle drugs (e.g. Keytruda)."},
+  {"id":"genedx","name":"GeneDx","category":"analytics","description":"Genomic testing company specializing in rare disease and pediatric genetics. NIH research partnerships. FDA RWE data source for rare disease drug development. Exome and genome sequencing at scale."},
+  {"id":"rti","name":"RTI International","category":"analytics","description":"CMS research and evaluation contractor. Runs QPP evaluation, ACO REACH evaluation, and post-acute care research. Direct producer of CMS program performance data. Major government contract holder."},
+  {"id":"google_health","name":"Google for Health","category":"analytics","description":"Google's healthcare division. Health data search, imaging AI (DeepMind AlphaFold/Med-Gemini), and health information infrastructure. EHR integration via FHIR APIs. CMS-0057-F compliance creates expanded API ecosystem Google can access."},
+  {"id":"chai","name":"Coalition for Health AI (CHAI)","category":"analytics","description":"Multi-stakeholder body (health systems, payers, tech companies, government) developing AI governance frameworks for healthcare. Addresses AI use in prior auth, clinical decision support, and quality measurement \u2014 all touched by CMS programs."},
+  {"id":"anthropic_c","name":"Anthropic","category":"analytics","description":"AI safety and applied AI company. Claude models used in clinical documentation, coding assistance, and prior auth automation. Contributes AI safety frameworks referenced by CHAI and ONC health AI guidance."},
+  {"id":"nih_c","name":"National Institutes of Health","category":"govt","description":"Primary federal basic and clinical research funder. NIH-funded research underpins FDA regulatory submissions and IRA drug price justification arguments. All-of-Us program generates RWE-grade real-world health data."},
+  {"id":"cdc","name":"CDC","category":"govt","description":"Tracks population health metrics used in CMS quality program benchmarking. NHSN (National Healthcare Safety Network) is the source for hospital-acquired infection measures in Hospital VBP and HAC programs."},
+  {"id":"ca_dhcs","name":"CA Dept of Health Care Services","category":"govt","description":"Administers California Medicaid (Medi-Cal) \u2014 largest state Medicaid program in US. Contracts with Partnership HealthPlan, SFHP, and other Medi-Cal MCOs. Implements CMS-0057-F Medicaid MCO requirements at state level."},
+  {"id":"ca_dph","name":"CA Dept of Public Health","category":"govt","description":"California's public health agency. Coordinates with CDC on population health surveillance. Interacts with health systems and plans on reportable disease, immunization, and public health emergency response."}
+]
+;
+
+/* ----- Company / Payer Ontology Edges ----- */
+window.__COMPANY_EDGES__ = [
+  {"source":"aca_c","target":"ma_prog","label":"created framework","type":"hier"},
+  {"source":"aca_c","target":"medicaid_prog","label":"expanded eligibility","type":"hier"},
+  {"source":"aca_c","target":"covca","label":"established marketplace","type":"hier"},
+  {"source":"aca_c","target":"mssp_prog","label":"\u00a73022 created MSSP","type":"hier"},
+  {"source":"aca_c","target":"team_prog","label":"VBP authority","type":"hier"},
+  {"source":"macra_c","target":"qpp_prog","label":"created QPP","type":"hier"},
+  {"source":"ira_c","target":"ira_drug_prog","label":"established","type":"hier"},
+  {"source":"hitech_c","target":"cms0057_prog","label":"EHR foundation","type":"hier"},
+  {"source":"cures_c","target":"cms0057_prog","label":"info-blocking rules","type":"hier"},
+  {"source":"ma_prog","target":"scan","label":"plan participates","type":"hier"},
+  {"source":"ma_prog","target":"alignment","label":"plan participates","type":"hier"},
+  {"source":"ma_prog","target":"oscar","label":"plan participates","type":"hier"},
+  {"source":"medicaid_prog","target":"partnerhp","label":"MCO administers","type":"hier"},
+  {"source":"medicaid_prog","target":"sfhp","label":"MCO administers","type":"hier"},
+  {"source":"medicaid_prog","target":"covca","label":"Medi-Cal coordination","type":"hier"},
+  {"source":"hcc_prog","target":"scan","label":"risk adjustment applies","type":"hier"},
+  {"source":"hcc_prog","target":"alignment","label":"risk adjustment applies","type":"hier"},
+  {"source":"hcc_prog","target":"oscar","label":"risk adjustment applies","type":"hier"},
+  {"source":"cms0057_prog","target":"scan","label":"prior auth API mandate","type":"hier"},
+  {"source":"cms0057_prog","target":"alignment","label":"prior auth API mandate","type":"hier"},
+  {"source":"cms0057_prog","target":"oscar","label":"prior auth API mandate","type":"hier"},
+  {"source":"cms0057_prog","target":"partnerhp","label":"Medicaid MCO mandate","type":"hier"},
+  {"source":"cms0057_prog","target":"sfhp","label":"Medicaid MCO mandate","type":"hier"},
+  {"source":"cms0057_prog","target":"epic","label":"FHIR API required","type":"hier"},
+  {"source":"cms0057_prog","target":"redox","label":"middleware layer","type":"hier"},
+  {"source":"cms0057_prog","target":"smile","label":"FHIR infrastructure","type":"hier"},
+  {"source":"qpp_prog","target":"privia","label":"APM/MIPS participation","type":"hier"},
+  {"source":"qpp_prog","target":"astrana","label":"Advanced APM participation","type":"hier"},
+  {"source":"mssp_prog","target":"privia","label":"ACO participation","type":"hier"},
+  {"source":"mssp_prog","target":"astrana","label":"ACO REACH network","type":"hier"},
+  {"source":"team_prog","target":"adventhealth","label":"mandatory episode","type":"hier"},
+  {"source":"esrd_prog","target":"davita","label":"ESRD QIP / CKCC","type":"hier"},
+  {"source":"esrd_prog","target":"strive","label":"CKCC value-based","type":"hier"},
+  {"source":"pac_prog","target":"august","label":"SNF quality reporting","type":"hier"},
+  {"source":"pac_prog","target":"adventhealth","label":"PAC exposure","type":"hier"},
+  {"source":"ira_drug_prog","target":"abbvie_c","label":"Imbruvica Cycle 1","type":"hier"},
+  {"source":"ira_drug_prog","target":"merck_c","label":"Januvia Cycle 1","type":"hier"},
+  {"source":"ira_drug_prog","target":"amgen_c","label":"Enbrel Cycle 1","type":"hier"},
+  {"source":"ira_drug_prog","target":"roche_c","label":"Part B Cycle 3 scope","type":"hier"},
+  {"source":"ira_drug_prog","target":"gsk_c","label":"pipeline exposure","type":"hier"},
+  {"source":"ira_drug_prog","target":"vertex_c","label":"Trikafta future target","type":"hier"},
+  {"source":"ira_drug_prog","target":"unitedthera","label":"Tyvaso exposure","type":"hier"},
+  {"source":"ira_drug_prog","target":"connrx","label":"copay card restructure","type":"hier"},
+  {"source":"ira_drug_prog","target":"eversana","label":"market access impact","type":"hier"},
+  {"source":"scan","target":"capital_rx","label":"PBM services","type":"partner"},
+  {"source":"oscar","target":"capital_rx","label":"PBM services","type":"partner"},
+  {"source":"sfhp","target":"capital_rx","label":"Medicaid PBM","type":"partner"},
+  {"source":"scan","target":"included","label":"navigation benefit","type":"partner"},
+  {"source":"alignment","target":"privia","label":"VBC physician contracts","type":"partner"},
+  {"source":"oscar","target":"privia","label":"value-based contracts","type":"partner"},
+  {"source":"included","target":"omada","label":"routes to digital therapeutics","type":"partner"},
+  {"source":"included","target":"hinge","label":"MSK routing","type":"partner"},
+  {"source":"ma_prog","target":"omada","label":"supplemental benefits","type":"partner"},
+  {"source":"ma_prog","target":"hinge","label":"supplemental benefits","type":"partner"},
+  {"source":"roche_c","target":"certara_c","label":"regulatory science","type":"serves"},
+  {"source":"merck_c","target":"certara_c","label":"drug development analytics","type":"serves"},
+  {"source":"abbvie_c","target":"connrx","label":"patient access programs","type":"serves"},
+  {"source":"merck_c","target":"connrx","label":"patient access programs","type":"serves"},
+  {"source":"abbvie_c","target":"eversana","label":"market access ops","type":"serves"},
+  {"source":"amazon_pharm","target":"scan","label":"Part D delivery","type":"serves"},
+  {"source":"amazon_pharm","target":"oscar","label":"pharmacy benefit","type":"serves"},
+  {"source":"rti","target":"qpp_prog","label":"CMS evaluation contractor","type":"serves"},
+  {"source":"rti","target":"mssp_prog","label":"ACO REACH evaluation","type":"serves"},
+  {"source":"tempus","target":"esrd_prog","label":"oncology analytics","type":"serves"},
+  {"source":"guardant","target":"ira_drug_prog","label":"companion dx \u2014 Keytruda","type":"serves"},
+  {"source":"nih_c","target":"roche_c","label":"NIH-funded research basis","type":"funds"},
+  {"source":"nih_c","target":"tempus","label":"research data partnership","type":"funds"},
+  {"source":"nih_c","target":"genedx","label":"genomics research","type":"funds"},
+  {"source":"ca_dhcs","target":"medicaid_prog","label":"administers Medi-Cal","type":"hier"},
+  {"source":"ca_dhcs","target":"partnerhp","label":"MCO contract","type":"hier"},
+  {"source":"ca_dhcs","target":"sfhp","label":"MCO contract","type":"hier"},
+  {"source":"cdc","target":"pac_prog","label":"NHSN infection measures","type":"serves"},
+  {"source":"chai","target":"cms0057_prog","label":"AI governance for APIs","type":"serves"},
+  {"source":"anthropic_c","target":"chai","label":"AI safety input","type":"serves"},
+  {"source":"google_health","target":"cms0057_prog","label":"FHIR API ecosystem","type":"partner"},
+  {"source":"hcc_prog","target":"rti","label":"RADV evaluation","type":"serves"},
+  {"source":"cures_c","target":"nih_c","label":"NIH funding","type":"funds"}
+]
+;
+
+/* ----- Top Shifts ----- */
+window.__TOP_SHIFTS__ = [
+  {
+    "id":"ts1",
+    "rank":1,
+    "trend":"critical",
+    "title":"IRA Drug Price Negotiation \u2014 Cycle 3 Live",
+    "activeNode":"Drug Price Negotiation",
+    "catalyst":"Cycle 1 prices (10 drugs, 38\u201379% discounts) took effect Jan 2026. Cycle 3 underway \u2014 first-ever Part B drug negotiations and renegotiations; prices effective 2028. CMS-4215-P codification comment period closed Aug 17, 2026.",
+    "implications":[
+      "AbbVie, Merck, Amgen face multi-billion annual Medicare revenue reductions",
+      "MA/Part D formulary redesign cascades to PBMs (Capital Rx) and MA plans (SCAN, Oscar, Alignment)",
+      "Patient access programs (ConnectiveRx, EVERSANA) restructure as out-of-pocket caps shift manufacturer concession math",
+      "Regulatory science firms (Certara) see rising demand as pharma builds evidence for price justification",
+      "Companion diagnostics (Guardant) tied to negotiated drugs face formulary and access ripple effects"
+    ]
+  },
+  {
+    "id":"ts2",
+    "rank":2,
+    "trend":"critical",
+    "title":"CMS-0057-F Prior Auth APIs \u2014 Jan 2027 Deadline",
+    "activeNode":"CMS-0057-F",
+    "catalyst":"January 2027 compliance deadline for four mandated FHIR APIs covering MA, Medicaid MCOs, and ACA marketplace plans. Prior auth decision timeframes compressed to 72 hours (expedited) and 7 days (standard).",
+    "implications":[
+      "SCAN, Alignment, Oscar, Partnership HealthPlan, SFHP all face mandated API buildout \u2014 IT spend rising",
+      "Epic's implementation roadmap becomes a critical dependency for health system compliance",
+      "Redox and Smile Digital Health positioned as essential middleware; Notable benefits from PA workflow automation volume",
+      "Prior auth denial rates likely to fall as transparency increases \u2014 downstream revenue risk for utilization management businesses",
+      "CHAI AI governance frameworks become more urgent as payers deploy AI for automated prior auth decisions"
+    ]
+  },
+  {
+    "id":"ts3",
+    "rank":3,
+    "trend":"critical",
+    "title":"MA Risk Adjustment Tightening (HCC V28 + RADV)",
+    "activeNode":"MA Risk Adjustment (HCC V28 / RADV)",
+    "catalyst":"HCC V28 model transition reduces average MA risk scores \u2014 compressing plan revenue. RADV extrapolation methodology finalized. DOJ scrutiny of retrospective chart chase and upcoding intensifying across major MA plans.",
+    "implications":[
+      "SCAN, Alignment, Oscar face revenue headwinds \u2014 per-member-per-month margins under pressure",
+      "Coding accuracy programs intensify; risk adjustment vendors (Acumen, RTI) see demand rise",
+      "Alignment's owned-provider model provides some insulation; pure plan models (Oscar) more exposed",
+      "MA enrollment growth may slow as plans exit unprofitable markets or raise premiums",
+      "RTI and CMS contractors evaluating whether V28 achieves intended overbilling correction without overcorrection"
+    ]
+  },
+  {
+    "id":"ts4",
+    "rank":4,
+    "trend":"rising",
+    "title":"TEAM Model \u2014 Mandatory Episode Accountability",
+    "activeNode":"TEAM Model",
+    "catalyst":"CMS mandatory bundled payment model for surgical episodes (joint replacement, CABG, spinal fusion) launches in selected regions. No opt-out. First mandatory CMMI model since CJR. Episodes cover 90-day post-acute period.",
+    "implications":[
+      "AdventHealth and other large health systems in selected markets face direct episode risk",
+      "Post-acute referral network optimization becomes a financial imperative \u2014 SNF and HH quality differentiation is now contractual",
+      "August Health (SNF care management) sees premium on PAC coordination capability",
+      "Hinge Health surgical decision support adjacent to TEAM joint replacement episodes",
+      "Care navigation for ACO REACH beneficiaries overlapping TEAM episodes creates attribution complexity"
+    ]
+  },
+  {
+    "id":"ts5",
+    "rank":5,
+    "trend":"rising",
+    "title":"MIPS Sunset Proposal \u2014 Advanced APM Pressure (2029)",
+    "activeNode":"QPP / MIPS",
+    "catalyst":"CY2027 PFS proposed rule signals sunsetting of traditional MIPS beginning the 2029 performance year. Clinicians face binary choice: qualify into an Advanced APM track or face growing payment adjustments under a restructured program.",
+    "implications":[
+      "Privia Health and Astrana face accelerated physician migration pressure into ACO REACH and other Advanced APM tracks",
+      "Independent practices without VBC infrastructure face meaningful payment pressure \u2014 consolidation accelerator",
+      "RTI's QPP evaluation contract scope likely expands as CMS builds transition evidence base",
+      "Oscar and Alignment must redesign value-based physician contracting to align with Advanced APM qualification",
+      "Coalition for Health AI (CHAI) AI quality measure governance becomes more critical as AI-generated quality data enters APM scoring"
+    ]
+  },
+  {
+    "id":"ts6",
+    "rank":6,
+    "trend":"watch",
+    "title":"ACO REACH Equity Adjustments + MA Overlap",
+    "activeNode":"MSSP / ACO REACH",
+    "catalyst":"ACO REACH's new health equity benchmark methodology adjustments active 2026. Growing ACO REACH enrollment overlapping MA markets creates dual-attribution complexity. CMS finalizing overlap rules.",
+    "implications":[
+      "Astrana and Privia must integrate SDOH data and equity metrics into care management workflows",
+      "Attribution conflicts between ACO REACH and MA plans (SCAN, Alignment) require CMS adjudication \u2014 revenue uncertainty",
+      "Strive Health kidney VBC models must align care pathways with ACO REACH equity requirements for CKD populations",
+      "Google for Health and analytics platforms face rising demand for SDOH data integration",
+      "Included Health navigation benefit creates opportunity to address equity gaps \u2014 ACO REACH financially incentivizes this"
+    ]
+  }
 ]
 ;
 
