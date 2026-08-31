@@ -198,6 +198,12 @@ Always maintain exactly **6 shifts**, ranked 1–6 by urgency. Keep at least 2 e
 
 ### Step 6 — Tab 3: Data Taxonomy
 
+The taxonomy tab has two distinct content areas, each with its own update rules.
+
+---
+
+#### 6a — Dataset Catalog (`data/datasets.json`)
+
 **File to update:**
 - `data/datasets.json` ← then mirror into `window.__DATASETS__` in `index.html`
 
@@ -219,10 +225,53 @@ Always maintain exactly **6 shifts**, ranked 1–6 by urgency. Keep at least 2 e
 | Change type | Action |
 |-------------|--------|
 | Dataset now covers additional years | Update `years` field |
-| Dataset retired or access policy changed | Update `description` to note change |
+| Dataset retired or access policy changed | Update `description` to note the change |
 | New public dataset released by CMS/AHRQ/CDC | Add entry with correct category and schema |
 | Linkage variable renamed in new release | Update `linkageIds[]` |
 | Dataset moved to a new access pathway (ResDAC, etc.) | Update `description` |
+
+---
+
+#### 6b — Reference: Coding System Distinctions (static HTML in `index.html`)
+
+This section lives in `<div id="taxonomy-reference">` directly in `index.html` — it has no backing JSON file. Edit the HTML in place.
+
+**Location in index.html:** Search for `id="taxonomy-reference"` → Section A (`ref-section` for "Coding System Distinctions").
+
+**Covers:** DRG, HCPCS, HCC, ICD, APC — comparison table (8 rows: primary use, care setting, payment model, basis of grouping, scope, additivity, typical inputs, governing body) plus per-system deep-dive cards and claim form / TOB reference.
+
+**What to check and update:**
+| Change type | Action |
+|-------------|--------|
+| CMS releases a new HCC model version (e.g., V29+) | Update HCC column rows for care setting, payment model, and governing body; update deep-dive card bullets referencing RAF/benchmark methodology |
+| CMS restructures MS-DRG grouper (new MDC, CC/MCC tier changes) | Update DRG column "basis of grouping" and "typical inputs" rows; update DRG deep-dive card |
+| CMS introduces a new OPPS C-APC logic change or APC restructure | Update APC column rows; update APC deep-dive card |
+| AMA releases a new CPT structure that affects HCPCS Level I | Update HCPCS column and deep-dive card |
+| New TOB code series introduced (NUBC) | Add row to claim form / TOB reference block |
+| ICD-11 transition announced with a U.S. implementation date | Update ICD column and deep-dive card; note transition timeline |
+| Claim form replaced or renamed (UB-04 → successor, CMS-1500 revision) | Update claim form glossary block |
+
+---
+
+#### 6c — Reference: Important Variables & Cross-Program Linkage (static HTML in `index.html`)
+
+**Location in index.html:** Search for `id="taxonomy-reference"` → Section B (`ref-section` for "Important Variables & Cross-Program Linkage").
+
+**Covers:** Cross-program variable map table (FFS A/B, MA Encounters C, Professional B, Part D D, Medicaid TAF), analytic domain cards (Cost/Utilization/Disease Burden), mini-glossary, and quick starter variable list.
+
+**What to check and update:**
+| Change type | Action |
+|-------------|--------|
+| CCW/ResDAC renames a variable (e.g., `BENE_ID` → successor) | Update all occurrences in variable map table, mini-glossary, and quick starter grid |
+| CMS releases a new Medicare Part or program that introduces new claim types | Add column to cross-program variable map; add relevant entries to mini-glossary and starter grid |
+| TAF structure changes (T-MSIS schema update) | Update TAF column in variable map; update TAF mini-glossary entry |
+| Part D PDE variable names change in new release | Update Part D column in variable map and relevant starter grid entries |
+| New TOB series added affecting site/setting identification | Update site/setting row in variable map and TOB entries in mini-glossary |
+| HCC model version change affects RAF inputs or demographic interaction rules | Update HCC/RAF mini-glossary entry and disease burden analytic card |
+| ResDAC access pathway changes for a variable type | Update relevant mini-glossary entry `description` |
+| New linkage variable becomes standard across CMS files | Add to mini-glossary and quick starter grid under appropriate domain |
+
+**Do NOT update** this section for minor annual routine changes (e.g., new ICD-10-CM codes, yearly HCPCS code additions). Update only when the structure, name, or cross-program availability of a key variable class changes.
 
 ---
 
@@ -291,7 +340,7 @@ git push origin master
 | `js/taxonomy.js` | Visualization logic — frozen |
 | `js/app.js` | Tab controller — frozen |
 | `css/styles.css` | Styles — frozen |
-| `index.html` (structure) | HTML structure is frozen; only `window.__XXX__` blocks change |
+| `index.html` (structure) | Tab containers, nav, and script tags are frozen. Two editable zones: (1) `window.__XXX__` inline data blocks; (2) `<div id="taxonomy-reference">` static reference HTML (Steps 6b/6c) |
 | `.nojekyll` | Required for GitHub Pages static serving |
 | `.github/` | CI/CD — do not touch |
 
