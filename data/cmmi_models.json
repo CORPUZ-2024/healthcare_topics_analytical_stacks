@@ -2,7 +2,7 @@
   {
     "id": "MSSP",
     "name": "Medicare Shared Savings Program",
-    "category": "ACO",
+    "category": "Accountable Care Models",
     "startDate": "2012-01-01",
     "endDate": null,
     "description": "CMS flagship ACO program where provider groups coordinate care for Medicare FFS beneficiaries and share savings relative to a benchmark. BASIC and ENHANCED tracks offer varying levels of shared savings and downside risk."
@@ -10,7 +10,7 @@
   {
     "id": "Pioneer",
     "name": "Pioneer ACO Model",
-    "category": "ACO",
+    "category": "Accountable Care Models",
     "startDate": "2012-01-01",
     "endDate": "2016-12-31",
     "description": "CMMI's first ACO model designed for health systems already experienced in coordinated care. Offered higher shared savings rates and greater downside risk than MSSP. Most participants transitioned to MSSP after model ended."
@@ -18,7 +18,7 @@
   {
     "id": "NextGen",
     "name": "Next Generation ACO Model",
-    "category": "ACO",
+    "category": "Accountable Care Models",
     "startDate": "2016-01-01",
     "endDate": "2021-12-31",
     "description": "CMMI model testing higher levels of risk and reward for ACOs experienced with population-based payments. Included prospective attribution, benchmark discounts, and benefit enhancements for beneficiaries."
@@ -26,47 +26,15 @@
   {
     "id": "ACO_REACH",
     "name": "ACO REACH Model",
-    "category": "ACO",
+    "category": "Accountable Care Models",
     "startDate": "2023-01-01",
     "endDate": null,
     "description": "Successor to the Global and Professional Direct Contracting Model. ACOs accept prospective attribution and financial accountability (Professional or Global risk) for Medicare FFS beneficiaries, with mandatory Health Equity Plans."
   },
   {
-    "id": "BPCI_ADV",
-    "name": "BPCI Advanced",
-    "category": "Episode",
-    "startDate": "2018-10-01",
-    "endDate": null,
-    "description": "Episode-based payment model for 90-day clinical episodes triggered by inpatient hospitalization. Participants — hospitals or physician group practices — are accountable for quality and cost across 32 clinical episode types."
-  },
-  {
-    "id": "CJR",
-    "name": "Comprehensive Care for Joint Replacement",
-    "category": "Episode",
-    "startDate": "2016-04-01",
-    "endDate": null,
-    "description": "Mandatory-then-voluntary episode payment model for hip and knee replacement surgeries. Hospitals bear upside and downside risk for the 90-day post-discharge episode. Initially mandatory in selected markets."
-  },
-  {
-    "id": "OCM",
-    "name": "Oncology Care Model",
-    "category": "Specialty",
-    "startDate": "2016-07-01",
-    "endDate": "2022-06-30",
-    "description": "Six-year CMMI model for oncology practices providing chemotherapy. Practices received monthly enhanced oncology services payments and could earn performance-based incentives. Predecessor to the Enhancing Oncology Model."
-  },
-  {
-    "id": "EOM",
-    "name": "Enhancing Oncology Model",
-    "category": "Specialty",
-    "startDate": "2023-07-01",
-    "endDate": null,
-    "description": "Successor to OCM. Oncology practices assume downside risk for 6-month chemotherapy episodes across 7 cancer types. Incorporates health equity screening requirements, care management payments, and mandatory downside risk."
-  },
-  {
     "id": "CPCPlus",
     "name": "Comprehensive Primary Care Plus",
-    "category": "Primary Care",
+    "category": "Accountable Care Models",
     "startDate": "2017-01-01",
     "endDate": "2021-12-31",
     "description": "CMMI multi-payer primary care model offering care management fees and performance-based incentives to primary care practices. Tested in 14 regions with over 2,900 participating practices and 40 payer partners."
@@ -74,7 +42,7 @@
   {
     "id": "PCF",
     "name": "Primary Care First",
-    "category": "Primary Care",
+    "category": "Accountable Care Models",
     "startDate": "2021-01-01",
     "endDate": null,
     "description": "CMMI model offering a flat primary care visit fee, population-based payment, and performance-based adjustments for primary care practices ready to accept accountability for total cost of care."
@@ -82,31 +50,63 @@
   {
     "id": "MCP",
     "name": "Making Care Primary",
-    "category": "Primary Care",
+    "category": "Accountable Care Models",
     "startDate": "2024-07-01",
     "endDate": null,
     "description": "Ten-year CMMI primary care model in 8 states with a graduated pathway toward prospective total cost of care accountability. Focuses on care management, behavioral health integration, and specialist partnerships."
   },
   {
+    "id": "BPCI_ADV",
+    "name": "BPCI Advanced",
+    "category": "Disease-Specific & Episode-Based Models",
+    "startDate": "2018-10-01",
+    "endDate": null,
+    "description": "Episode-based payment model for 90-day clinical episodes triggered by inpatient hospitalization. Participants — hospitals or physician group practices — are accountable for quality and cost across 32 clinical episode types."
+  },
+  {
+    "id": "CJR",
+    "name": "Comprehensive Care for Joint Replacement",
+    "category": "Disease-Specific & Episode-Based Models",
+    "startDate": "2016-04-01",
+    "endDate": null,
+    "description": "Mandatory-then-voluntary episode payment model for hip and knee replacement surgeries. Hospitals bear upside and downside risk for the 90-day post-discharge episode. Initially mandatory in selected markets."
+  },
+  {
+    "id": "OCM",
+    "name": "Oncology Care Model",
+    "category": "Disease-Specific & Episode-Based Models",
+    "startDate": "2016-07-01",
+    "endDate": "2022-06-30",
+    "description": "Six-year CMMI model for oncology practices providing chemotherapy. Practices received monthly enhanced oncology services payments and could earn performance-based incentives. Predecessor to the Enhancing Oncology Model."
+  },
+  {
+    "id": "EOM",
+    "name": "Enhancing Oncology Model",
+    "category": "Disease-Specific & Episode-Based Models",
+    "startDate": "2023-07-01",
+    "endDate": null,
+    "description": "Successor to OCM. Oncology practices assume downside risk for 6-month chemotherapy episodes across 7 cancer types. Incorporates health equity screening requirements, care management payments, and mandatory downside risk."
+  },
+  {
+    "id": "HHVBP",
+    "name": "Home Health Value-Based Purchasing",
+    "category": "Disease-Specific & Episode-Based Models",
+    "startDate": "2016-01-01",
+    "endDate": null,
+    "description": "Model tying a portion of home health agency payment to quality performance. Originally piloted in 9 states, expanded nationally in 2022. Agencies can earn up to +5% or face up to -5% payment adjustments based on quality scores."
+  },
+  {
     "id": "GUIDE",
     "name": "Guiding an Improved Dementia Experience",
-    "category": "Primary Care",
+    "category": "Disease-Specific & Episode-Based Models",
     "startDate": "2024-07-01",
     "endDate": null,
     "description": "CMMI model supporting individuals with dementia and their caregivers. Participants provide interdisciplinary care navigation, 24/7 access, and respite care. Monthly per-beneficiary-per-month payments fund model infrastructure."
   },
   {
-    "id": "AHEAD",
-    "name": "States Advancing All-Payer Health Equity Approaches",
-    "category": "State/Payer",
-    "startDate": "2024-01-01",
-    "endDate": null,
-    "description": "State-level CMMI model testing all-payer total cost of care approaches. States implement population-based payments spanning Medicare, Medicaid, and commercial payers, with explicit health equity goals."
-  },
-  {
     "id": "ViT",
     "name": "Value in Opioid Use Disorder Treatment",
-    "category": "Behavioral Health",
+    "category": "Disease-Specific & Episode-Based Models",
     "startDate": "2021-01-01",
     "endDate": null,
     "description": "CMMI model testing episode-based payment for opioid use disorder treatment, bundling all services for a 6-month episode. Aims to expand access to evidence-based medication-assisted treatment (MAT)."
@@ -114,17 +114,65 @@
   {
     "id": "IBH",
     "name": "Innovation in Behavioral Health",
-    "category": "Behavioral Health",
+    "category": "Disease-Specific & Episode-Based Models",
     "startDate": "2024-01-01",
     "endDate": null,
     "description": "CMMI model integrating physical health services into community behavioral health settings. Practices receive infrastructure and per-member-per-month payments to screen and coordinate care for Medicare and Medicaid beneficiaries."
   },
   {
-    "id": "HHVBP",
-    "name": "Home Health Value-Based Purchasing",
-    "category": "Episode",
-    "startDate": "2016-01-01",
+    "id": "AHEAD",
+    "name": "States Advancing All-Payer Health Equity Approaches",
+    "category": "State & Community-Based Models",
+    "startDate": "2024-01-01",
     "endDate": null,
-    "description": "Model tying a portion of home health agency payment to quality performance. Originally piloted in 9 states, expanded nationally in 2022. Agencies can earn up to +5% or face up to -5% payment adjustments based on quality scores."
+    "description": "State-level CMMI model testing all-payer total cost of care approaches. States implement population-based payments spanning Medicare, Medicaid, and commercial payers, with explicit health equity goals."
+  },
+  {
+    "id": "TEAM",
+    "name": "Transforming Episode Accountability Model",
+    "category": "Disease-Specific & Episode-Based Models",
+    "startDate": "2026-01-01",
+    "endDate": null,
+    "description": "Mandatory episode-based payment model for five surgical procedures: lower extremity joint replacement, surgical hip femur fracture treatment, spinal fusion, coronary artery bypass graft, and major bowel procedure. Hospitals in selected geographic areas are required to participate. 90-day episode includes all related post-acute care."
+  },
+  {
+    "id": "VBID",
+    "name": "MA Value-Based Insurance Design Model",
+    "category": "Health Plan Models",
+    "startDate": "2017-01-01",
+    "endDate": null,
+    "description": "Tests whether Medicare Advantage plans can use health-condition-specific cost-sharing structures and supplemental benefits to improve care quality and reduce costs. Participating MA plans can offer targeted reduced cost-sharing for high-value services for chronically ill enrollees."
+  },
+  {
+    "id": "EnhancedMTM",
+    "name": "Enhanced Medication Therapy Management",
+    "category": "Prescription Drug Models",
+    "startDate": "2017-01-01",
+    "endDate": "2021-12-31",
+    "description": "CMMI model testing whether enhanced MTM services in Medicare Part D can improve medication adherence and health outcomes for high-risk beneficiaries. Participating Part D plan sponsors were incentivized to increase MTM program participation and reduce hospitalizations."
+  },
+  {
+    "id": "SIM",
+    "name": "State Innovation Models",
+    "category": "State & Community-Based Models",
+    "startDate": "2013-02-01",
+    "endDate": "2019-12-31",
+    "description": "CMMI initiative providing funding and technical assistance to states developing and testing multi-payer health system transformation models. Two rounds (2013 and 2015) funded 38 states to design and test state-led payment and delivery system reforms across all payers."
+  },
+  {
+    "id": "FAI",
+    "name": "Financial Alignment Initiative",
+    "category": "Statutory Demonstrations and Other Projects",
+    "startDate": "2013-01-01",
+    "endDate": "2023-12-31",
+    "description": "Capitated and managed fee-for-service demonstrations integrating Medicare and Medicaid financing and services for dual-eligible beneficiaries. States partnered with CMS to reduce fragmentation between Medicare and Medicaid for individuals dually enrolled in both programs."
+  },
+  {
+    "id": "PACE",
+    "name": "PACE Innovation",
+    "category": "Statutory Demonstrations and Other Projects",
+    "startDate": "2017-01-01",
+    "endDate": null,
+    "description": "Statutory demonstration expanding PACE (Program of All-Inclusive Care for the Elderly) to new populations and settings. Tests PACE-like models of comprehensive, integrated care for frail elderly individuals who do not yet qualify for nursing home level of care."
   }
 ]

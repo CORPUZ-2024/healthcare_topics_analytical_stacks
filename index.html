@@ -92,10 +92,7 @@
   <div class="section-header">
     <h2>Reimbursement &amp; Value-Based Care Roadmap</h2>
     <p>
-      Swimlane timeline showing CMMI innovation models active for each healthcare service type
-      from 2010 through 2026. Solid bars indicate active models; dashed bars indicate concluded
-      models. Hover over a model bar for details. The red dashed line marks today's date.
-      Keyboard shortcut: press <strong>2</strong> to switch to this tab.
+      Eligibility-based swimlane showing which CMMI innovation models apply to each healthcare service type, organized by the 6 official CMMI categories. Each model row shows the program's active date range. Use this to identify potential payment model overlaps and sequencing for any provider type. Scroll vertically to see all service types. Hover a bar for model details.
     </p>
   </div>
   <div class="viz-container">
@@ -847,134 +844,168 @@ window.__TOP_SHIFTS__ = [
 window.__SERVICE_TYPES__ = [
   {
     "name": "Inpatient Hospital",
-    "description": "Acute inpatient care provided by short-term acute care hospitals, paid under the Medicare Inpatient Prospective Payment System using Diagnosis-Related Groups (DRGs). Includes medical and surgical admissions, critical care, and psychiatric units (if distinct).",
+    "description": "Acute inpatient care paid under IPPS using DRGs. Subject to mandatory Hospital VBP, HRRP, and HAC reduction payment adjustments.",
     "feeSchedule": "IPPS",
-    "valueBasedModels": [
-      "Hospital Value-Based Purchasing (VBP)",
-      "Hospital Readmissions Reduction Program (HRRP)",
-      "Hospital-Acquired Condition (HAC) Reduction"
-    ],
+    "valueBasedModels": ["Hospital Value-Based Purchasing (VBP)", "Hospital Readmissions Reduction Program (HRRP)", "Hospital-Acquired Condition (HAC) Reduction"],
     "innovationModels": [
-      "Comprehensive Care for Joint Replacement",
-      "BPCI Advanced",
+      "Medicare Shared Savings Program",
+      "Pioneer ACO Model",
+      "Next Generation ACO Model",
       "ACO REACH Model",
-      "Medicare Shared Savings Program"
+      "BPCI Advanced",
+      "Comprehensive Care for Joint Replacement",
+      "Transforming Episode Accountability Model"
     ]
   },
   {
     "name": "Outpatient Hospital",
-    "description": "Services furnished by hospital outpatient departments and ambulatory surgical centers (ASCs). Hospital outpatient services paid under OPPS using Ambulatory Payment Classifications (APCs); ASCs paid under a separate ASC fee schedule.",
-    "feeSchedule": "OPPS",
-    "valueBasedModels": [
-      "Ambulatory Surgical Center Quality Reporting"
-    ],
+    "description": "Hospital outpatient and ASC services paid under OPPS/ASC fee schedule using Ambulatory Payment Classifications.",
+    "feeSchedule": "OPPS / ASC",
+    "valueBasedModels": ["Ambulatory Surgical Center Quality Reporting"],
     "innovationModels": [
+      "Medicare Shared Savings Program",
+      "Next Generation ACO Model",
+      "ACO REACH Model",
       "BPCI Advanced",
-      "ACO REACH Model"
+      "Enhancing Oncology Model",
+      "Oncology Care Model"
     ]
   },
   {
-    "name": "Physician/Professional Services",
-    "description": "Services furnished by physicians, nurse practitioners, physician assistants, and other eligible professionals. Paid under the Medicare Physician Fee Schedule using RBRVS-based relative value units (RVUs) multiplied by a conversion factor.",
+    "name": "Physician / Professional Services",
+    "description": "Physician and eligible professional services paid under the PFS. Subject to QPP (MIPS or Advanced APM) payment adjustments.",
     "feeSchedule": "Physician Fee Schedule (PFS)",
-    "valueBasedModels": [
-      "MIPS",
-      "Advanced APMs"
-    ],
+    "valueBasedModels": ["MIPS", "Advanced APMs"],
     "innovationModels": [
-      "Making Care Primary",
-      "Primary Care First",
-      "Guiding an Improved Dementia Experience",
-      "ACO REACH Model",
       "Medicare Shared Savings Program",
+      "Pioneer ACO Model",
+      "Next Generation ACO Model",
+      "ACO REACH Model",
+      "Comprehensive Primary Care Plus",
+      "Primary Care First",
+      "Making Care Primary",
+      "BPCI Advanced",
+      "Oncology Care Model",
       "Enhancing Oncology Model",
-      "Innovation in Behavioral Health",
-      "Value in Opioid Use Disorder Treatment"
+      "Comprehensive Care for Joint Replacement",
+      "Guiding an Improved Dementia Experience",
+      "Value in Opioid Use Disorder Treatment",
+      "Innovation in Behavioral Health"
     ]
   },
   {
     "name": "Skilled Nursing Facility",
-    "description": "Post-acute inpatient care provided by skilled nursing facilities for Medicare beneficiaries following a qualifying hospital stay of 3+ days. Paid under the SNF PPS using the Patient Driven Payment Model (PDPM) based on clinical characteristics.",
+    "description": "Post-acute SNF care paid under SNF PPS (PDPM). Subject to SNF VBP payment adjustments. Eligible as downstream episode participant for surgical and medical bundles.",
     "feeSchedule": "SNF PPS (PDPM)",
-    "valueBasedModels": [
-      "SNF Value-Based Purchasing (SNFVBP)"
-    ],
+    "valueBasedModels": ["SNF Value-Based Purchasing (SNFVBP)"],
     "innovationModels": [
+      "Medicare Shared Savings Program",
+      "Next Generation ACO Model",
+      "ACO REACH Model",
       "BPCI Advanced",
-      "ACO REACH Model"
+      "Comprehensive Care for Joint Replacement",
+      "Transforming Episode Accountability Model"
     ]
   },
   {
     "name": "Home Health",
-    "description": "Skilled nursing, therapy, and aide services provided in the home for homebound Medicare beneficiaries. Paid under the Home Health PPS using the Patient-Driven Groupings Model (PDGM), which classifies 30-day periods by clinical characteristics and functional impairment.",
+    "description": "Skilled home health services paid under HH PPS (PDGM). Subject to HHVBP quality-linked payment adjustments nationally since 2022.",
     "feeSchedule": "HH PPS (PDGM)",
-    "valueBasedModels": [
-      "Home Health Value-Based Purchasing (HHVBP)"
-    ],
+    "valueBasedModels": ["Home Health Value-Based Purchasing (HHVBP)"],
     "innovationModels": [
-      "BPCI Advanced",
+      "Medicare Shared Savings Program",
+      "Next Generation ACO Model",
       "ACO REACH Model",
+      "BPCI Advanced",
+      "Comprehensive Care for Joint Replacement",
+      "Transforming Episode Accountability Model",
+      "Home Health Value-Based Purchasing",
       "Guiding an Improved Dementia Experience"
     ]
   },
   {
     "name": "Hospice",
-    "description": "Palliative care and support services for terminally ill Medicare beneficiaries with a life expectancy of 6 months or less. Paid on a per-diem basis with four levels of care: routine home care, continuous home care, inpatient respite, and general inpatient care.",
+    "description": "Palliative per-diem care for beneficiaries with a terminal prognosis of ≤6 months. Hospice spending included in ACO benchmark expenditures.",
     "feeSchedule": "Hospice Per Diem",
-    "valueBasedModels": [
-      "Hospice Quality Reporting"
-    ],
+    "valueBasedModels": ["Hospice Quality Reporting Program"],
     "innovationModels": [
-      "Guiding an Improved Dementia Experience"
+      "Medicare Shared Savings Program",
+      "ACO REACH Model",
+      "Guiding an Improved Dementia Experience",
+      "Financial Alignment Initiative"
     ]
   },
   {
     "name": "Inpatient Rehabilitation Facility",
-    "description": "Intensive inpatient rehabilitation services for patients requiring multi-disciplinary team rehabilitation (e.g., stroke, joint replacement). Paid under the IRF PPS using Case-Mix Groups (CMGs) based on patient clinical characteristics and functional status.",
+    "description": "Intensive inpatient rehab paid under IRF PPS using Case-Mix Groups. Eligible as downstream participant in surgical episode bundles.",
     "feeSchedule": "IRF PPS",
-    "valueBasedModels": [
-      "IRF Quality Reporting"
-    ],
+    "valueBasedModels": ["IRF Quality Reporting Program"],
     "innovationModels": [
-      "BPCI Advanced"
+      "Medicare Shared Savings Program",
+      "ACO REACH Model",
+      "BPCI Advanced",
+      "Comprehensive Care for Joint Replacement",
+      "Transforming Episode Accountability Model"
     ]
   },
   {
     "name": "End-Stage Renal Disease",
-    "description": "Dialysis services for Medicare beneficiaries with ESRD. Paid under the ESRD PPS as a bundled per-treatment payment covering dialysis, labs, drugs, and supplies. Home dialysis is encouraged through expanded coverage and a transitional add-on payment.",
+    "description": "Dialysis services paid under ESRD PPS as a bundled per-treatment rate. Home dialysis encouraged through expanded coverage and transitional add-on payments.",
     "feeSchedule": "ESRD PPS",
-    "valueBasedModels": [
-      "ESRD Quality Incentive Program (QIP)"
-    ],
+    "valueBasedModels": ["ESRD Quality Incentive Program (QIP)"],
     "innovationModels": [
+      "Medicare Shared Savings Program",
+      "ACO REACH Model",
+      "BPCI Advanced",
       "Enhancing Oncology Model",
-      "ACO REACH Model"
+      "Financial Alignment Initiative"
     ]
   },
   {
     "name": "Oncology",
-    "description": "Cancer diagnosis, treatment, and management services including chemotherapy administration, radiation, surgical oncology, and associated supportive care. Paid primarily under the Physician Fee Schedule with drug payments under buy-and-bill (Part B drugs) or Part D.",
-    "feeSchedule": "Physician Fee Schedule (PFS)",
-    "valueBasedModels": [
-      "MIPS Oncology Specialty Set"
-    ],
+    "description": "Cancer diagnosis, treatment, and management paid under PFS (with Part B drug buy-and-bill) or Part D. Oncology practices subject to MIPS oncology specialty set.",
+    "feeSchedule": "PFS + Part B Drug Buy-and-Bill",
+    "valueBasedModels": ["MIPS Oncology Specialty Measure Set"],
     "innovationModels": [
+      "Medicare Shared Savings Program",
+      "ACO REACH Model",
+      "Oncology Care Model",
       "Enhancing Oncology Model",
-      "BPCI Advanced",
-      "ACO REACH Model"
+      "BPCI Advanced"
     ]
   },
   {
     "name": "Behavioral Health",
-    "description": "Mental health and substance use disorder (SUD) services including psychiatric evaluation, psychotherapy, medication management, and community mental health services. Paid under the Physician Fee Schedule. Mental Health Parity applies to Medicare Advantage and Medicaid managed care.",
+    "description": "Mental health and SUD services paid under PFS. Mental Health Parity applies to MA and Medicaid managed care. OTP Medicare bundled payment for opioid treatment.",
     "feeSchedule": "Physician Fee Schedule (PFS)",
-    "valueBasedModels": [
-      "MIPS Behavioral Health Specialty Set"
-    ],
+    "valueBasedModels": ["MIPS Behavioral Health Specialty Set"],
     "innovationModels": [
+      "Medicare Shared Savings Program",
+      "ACO REACH Model",
+      "Making Care Primary",
       "Innovation in Behavioral Health",
-      "Value in Opioid Use Disorder Treatment",
-      "ACO REACH Model"
+      "Value in Opioid Use Disorder Treatment"
+    ]
+  },
+  {
+    "name": "Medicare Advantage / Health Plan",
+    "description": "Medicare Advantage (Part C) managed care plans receive risk-adjusted capitation payments per enrollee. Plans take on full insurance risk for Medicare benefits.",
+    "feeSchedule": "Risk-Adjusted Capitation (HCC V28)",
+    "valueBasedModels": ["MA Quality Bonus Program", "RADV Audit"],
+    "innovationModels": [
+      "MA Value-Based Insurance Design Model",
+      "States Advancing All-Payer Health Equity Approaches",
+      "Financial Alignment Initiative"
+    ]
+  },
+  {
+    "name": "Prescription Drug (Part D)",
+    "description": "Outpatient prescription drug benefit administered by private Part D plan sponsors. IRA 2022 created Medicare Drug Price Negotiation, out-of-pocket cap, and manufacturer rebate rules.",
+    "feeSchedule": "Part D Negotiated Rates / DIR",
+    "valueBasedModels": ["IRA Drug Price Negotiation", "Low Income Subsidy (LIS)"],
+    "innovationModels": [
+      "Enhanced Medication Therapy Management",
+      "MA Value-Based Insurance Design Model"
     ]
   }
 ]
@@ -985,7 +1016,7 @@ window.__CMMI_MODELS__ = [
   {
     "id": "MSSP",
     "name": "Medicare Shared Savings Program",
-    "category": "ACO",
+    "category": "Accountable Care Models",
     "startDate": "2012-01-01",
     "endDate": null,
     "description": "CMS flagship ACO program where provider groups coordinate care for Medicare FFS beneficiaries and share savings relative to a benchmark. BASIC and ENHANCED tracks offer varying levels of shared savings and downside risk."
@@ -993,7 +1024,7 @@ window.__CMMI_MODELS__ = [
   {
     "id": "Pioneer",
     "name": "Pioneer ACO Model",
-    "category": "ACO",
+    "category": "Accountable Care Models",
     "startDate": "2012-01-01",
     "endDate": "2016-12-31",
     "description": "CMMI's first ACO model designed for health systems already experienced in coordinated care. Offered higher shared savings rates and greater downside risk than MSSP. Most participants transitioned to MSSP after model ended."
@@ -1001,7 +1032,7 @@ window.__CMMI_MODELS__ = [
   {
     "id": "NextGen",
     "name": "Next Generation ACO Model",
-    "category": "ACO",
+    "category": "Accountable Care Models",
     "startDate": "2016-01-01",
     "endDate": "2021-12-31",
     "description": "CMMI model testing higher levels of risk and reward for ACOs experienced with population-based payments. Included prospective attribution, benchmark discounts, and benefit enhancements for beneficiaries."
@@ -1009,47 +1040,15 @@ window.__CMMI_MODELS__ = [
   {
     "id": "ACO_REACH",
     "name": "ACO REACH Model",
-    "category": "ACO",
+    "category": "Accountable Care Models",
     "startDate": "2023-01-01",
     "endDate": null,
     "description": "Successor to the Global and Professional Direct Contracting Model. ACOs accept prospective attribution and financial accountability (Professional or Global risk) for Medicare FFS beneficiaries, with mandatory Health Equity Plans."
   },
   {
-    "id": "BPCI_ADV",
-    "name": "BPCI Advanced",
-    "category": "Episode",
-    "startDate": "2018-10-01",
-    "endDate": null,
-    "description": "Episode-based payment model for 90-day clinical episodes triggered by inpatient hospitalization. Participants — hospitals or physician group practices — are accountable for quality and cost across 32 clinical episode types."
-  },
-  {
-    "id": "CJR",
-    "name": "Comprehensive Care for Joint Replacement",
-    "category": "Episode",
-    "startDate": "2016-04-01",
-    "endDate": null,
-    "description": "Mandatory-then-voluntary episode payment model for hip and knee replacement surgeries. Hospitals bear upside and downside risk for the 90-day post-discharge episode. Initially mandatory in selected markets."
-  },
-  {
-    "id": "OCM",
-    "name": "Oncology Care Model",
-    "category": "Specialty",
-    "startDate": "2016-07-01",
-    "endDate": "2022-06-30",
-    "description": "Six-year CMMI model for oncology practices providing chemotherapy. Practices received monthly enhanced oncology services payments and could earn performance-based incentives. Predecessor to the Enhancing Oncology Model."
-  },
-  {
-    "id": "EOM",
-    "name": "Enhancing Oncology Model",
-    "category": "Specialty",
-    "startDate": "2023-07-01",
-    "endDate": null,
-    "description": "Successor to OCM. Oncology practices assume downside risk for 6-month chemotherapy episodes across 7 cancer types. Incorporates health equity screening requirements, care management payments, and mandatory downside risk."
-  },
-  {
     "id": "CPCPlus",
     "name": "Comprehensive Primary Care Plus",
-    "category": "Primary Care",
+    "category": "Accountable Care Models",
     "startDate": "2017-01-01",
     "endDate": "2021-12-31",
     "description": "CMMI multi-payer primary care model offering care management fees and performance-based incentives to primary care practices. Tested in 14 regions with over 2,900 participating practices and 40 payer partners."
@@ -1057,7 +1056,7 @@ window.__CMMI_MODELS__ = [
   {
     "id": "PCF",
     "name": "Primary Care First",
-    "category": "Primary Care",
+    "category": "Accountable Care Models",
     "startDate": "2021-01-01",
     "endDate": null,
     "description": "CMMI model offering a flat primary care visit fee, population-based payment, and performance-based adjustments for primary care practices ready to accept accountability for total cost of care."
@@ -1065,31 +1064,63 @@ window.__CMMI_MODELS__ = [
   {
     "id": "MCP",
     "name": "Making Care Primary",
-    "category": "Primary Care",
+    "category": "Accountable Care Models",
     "startDate": "2024-07-01",
     "endDate": null,
     "description": "Ten-year CMMI primary care model in 8 states with a graduated pathway toward prospective total cost of care accountability. Focuses on care management, behavioral health integration, and specialist partnerships."
   },
   {
+    "id": "BPCI_ADV",
+    "name": "BPCI Advanced",
+    "category": "Disease-Specific & Episode-Based Models",
+    "startDate": "2018-10-01",
+    "endDate": null,
+    "description": "Episode-based payment model for 90-day clinical episodes triggered by inpatient hospitalization. Participants — hospitals or physician group practices — are accountable for quality and cost across 32 clinical episode types."
+  },
+  {
+    "id": "CJR",
+    "name": "Comprehensive Care for Joint Replacement",
+    "category": "Disease-Specific & Episode-Based Models",
+    "startDate": "2016-04-01",
+    "endDate": null,
+    "description": "Mandatory-then-voluntary episode payment model for hip and knee replacement surgeries. Hospitals bear upside and downside risk for the 90-day post-discharge episode. Initially mandatory in selected markets."
+  },
+  {
+    "id": "OCM",
+    "name": "Oncology Care Model",
+    "category": "Disease-Specific & Episode-Based Models",
+    "startDate": "2016-07-01",
+    "endDate": "2022-06-30",
+    "description": "Six-year CMMI model for oncology practices providing chemotherapy. Practices received monthly enhanced oncology services payments and could earn performance-based incentives. Predecessor to the Enhancing Oncology Model."
+  },
+  {
+    "id": "EOM",
+    "name": "Enhancing Oncology Model",
+    "category": "Disease-Specific & Episode-Based Models",
+    "startDate": "2023-07-01",
+    "endDate": null,
+    "description": "Successor to OCM. Oncology practices assume downside risk for 6-month chemotherapy episodes across 7 cancer types. Incorporates health equity screening requirements, care management payments, and mandatory downside risk."
+  },
+  {
+    "id": "HHVBP",
+    "name": "Home Health Value-Based Purchasing",
+    "category": "Disease-Specific & Episode-Based Models",
+    "startDate": "2016-01-01",
+    "endDate": null,
+    "description": "Model tying a portion of home health agency payment to quality performance. Originally piloted in 9 states, expanded nationally in 2022. Agencies can earn up to +5% or face up to -5% payment adjustments based on quality scores."
+  },
+  {
     "id": "GUIDE",
     "name": "Guiding an Improved Dementia Experience",
-    "category": "Primary Care",
+    "category": "Disease-Specific & Episode-Based Models",
     "startDate": "2024-07-01",
     "endDate": null,
     "description": "CMMI model supporting individuals with dementia and their caregivers. Participants provide interdisciplinary care navigation, 24/7 access, and respite care. Monthly per-beneficiary-per-month payments fund model infrastructure."
   },
   {
-    "id": "AHEAD",
-    "name": "States Advancing All-Payer Health Equity Approaches",
-    "category": "State/Payer",
-    "startDate": "2024-01-01",
-    "endDate": null,
-    "description": "State-level CMMI model testing all-payer total cost of care approaches. States implement population-based payments spanning Medicare, Medicaid, and commercial payers, with explicit health equity goals."
-  },
-  {
     "id": "ViT",
     "name": "Value in Opioid Use Disorder Treatment",
-    "category": "Behavioral Health",
+    "category": "Disease-Specific & Episode-Based Models",
     "startDate": "2021-01-01",
     "endDate": null,
     "description": "CMMI model testing episode-based payment for opioid use disorder treatment, bundling all services for a 6-month episode. Aims to expand access to evidence-based medication-assisted treatment (MAT)."
@@ -1097,18 +1128,66 @@ window.__CMMI_MODELS__ = [
   {
     "id": "IBH",
     "name": "Innovation in Behavioral Health",
-    "category": "Behavioral Health",
+    "category": "Disease-Specific & Episode-Based Models",
     "startDate": "2024-01-01",
     "endDate": null,
     "description": "CMMI model integrating physical health services into community behavioral health settings. Practices receive infrastructure and per-member-per-month payments to screen and coordinate care for Medicare and Medicaid beneficiaries."
   },
   {
-    "id": "HHVBP",
-    "name": "Home Health Value-Based Purchasing",
-    "category": "Episode",
-    "startDate": "2016-01-01",
+    "id": "AHEAD",
+    "name": "States Advancing All-Payer Health Equity Approaches",
+    "category": "State & Community-Based Models",
+    "startDate": "2024-01-01",
     "endDate": null,
-    "description": "Model tying a portion of home health agency payment to quality performance. Originally piloted in 9 states, expanded nationally in 2022. Agencies can earn up to +5% or face up to -5% payment adjustments based on quality scores."
+    "description": "State-level CMMI model testing all-payer total cost of care approaches. States implement population-based payments spanning Medicare, Medicaid, and commercial payers, with explicit health equity goals."
+  },
+  {
+    "id": "TEAM",
+    "name": "Transforming Episode Accountability Model",
+    "category": "Disease-Specific & Episode-Based Models",
+    "startDate": "2026-01-01",
+    "endDate": null,
+    "description": "Mandatory episode-based payment model for five surgical procedures: lower extremity joint replacement, surgical hip femur fracture treatment, spinal fusion, coronary artery bypass graft, and major bowel procedure. Hospitals in selected geographic areas are required to participate. 90-day episode includes all related post-acute care."
+  },
+  {
+    "id": "VBID",
+    "name": "MA Value-Based Insurance Design Model",
+    "category": "Health Plan Models",
+    "startDate": "2017-01-01",
+    "endDate": null,
+    "description": "Tests whether Medicare Advantage plans can use health-condition-specific cost-sharing structures and supplemental benefits to improve care quality and reduce costs. Participating MA plans can offer targeted reduced cost-sharing for high-value services for chronically ill enrollees."
+  },
+  {
+    "id": "EnhancedMTM",
+    "name": "Enhanced Medication Therapy Management",
+    "category": "Prescription Drug Models",
+    "startDate": "2017-01-01",
+    "endDate": "2021-12-31",
+    "description": "CMMI model testing whether enhanced MTM services in Medicare Part D can improve medication adherence and health outcomes for high-risk beneficiaries. Participating Part D plan sponsors were incentivized to increase MTM program participation and reduce hospitalizations."
+  },
+  {
+    "id": "SIM",
+    "name": "State Innovation Models",
+    "category": "State & Community-Based Models",
+    "startDate": "2013-02-01",
+    "endDate": "2019-12-31",
+    "description": "CMMI initiative providing funding and technical assistance to states developing and testing multi-payer health system transformation models. Two rounds (2013 and 2015) funded 38 states to design and test state-led payment and delivery system reforms across all payers."
+  },
+  {
+    "id": "FAI",
+    "name": "Financial Alignment Initiative",
+    "category": "Statutory Demonstrations and Other Projects",
+    "startDate": "2013-01-01",
+    "endDate": "2023-12-31",
+    "description": "Capitated and managed fee-for-service demonstrations integrating Medicare and Medicaid financing and services for dual-eligible beneficiaries. States partnered with CMS to reduce fragmentation between Medicare and Medicaid for individuals dually enrolled in both programs."
+  },
+  {
+    "id": "PACE",
+    "name": "PACE Innovation",
+    "category": "Statutory Demonstrations and Other Projects",
+    "startDate": "2017-01-01",
+    "endDate": null,
+    "description": "Statutory demonstration expanding PACE (Program of All-Inclusive Care for the Elderly) to new populations and settings. Tests PACE-like models of comprehensive, integrated care for frail elderly individuals who do not yet qualify for nursing home level of care."
   }
 ]
 ;

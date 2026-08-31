@@ -25,7 +25,7 @@ Or open `index.html` directly from the repo — no server required. All data is 
 | Tab | Visualization | What it shows |
 |-----|--------------|---------------|
 | **Ontology Graph** | D3.js force-directed graph | Two force-directed graphs: Legislative Map (legislation → agencies → programs → rules) and Payer & Company Map (plans, providers, pharma, health IT connected to CMS mandates) |
-| **Reimbursement Roadmap** | Swimlane timeline (2010–2026) | Payment system fee schedules and CMMI model overlays by service type |
+| **Reimbursement Roadmap** | 3-level hierarchy swimlane (2010–2028) | Eligibility-based mapping of CMMI innovation models to 12 service types, organized by 6 official CMMI categories |
 | **Data Taxonomy** | Filterable, sortable table | CMS and public research datasets with linkage variables and metadata |
 
 ---
@@ -48,8 +48,8 @@ healthcare_ref_materials/
 │   ├── company_nodes.json      # 58 nodes: payer, provider, pharma, hit, analytics, govt
 │   ├── company_edges.json      # 67 directed relationships (hier, serves, partner, funds, tension)
 │   ├── top_shifts.json         # 6 active policy shifts with catalysts and implications
-│   ├── cmmi_models.json        # 16 CMMI models with start/end dates
-│   ├── service_types.json      # 10 service types with fee schedules
+│   ├── cmmi_models.json        # 22 CMMI models with start/end dates (6 official categories)
+│   ├── service_types.json      # 12 service types with fee schedules
 │   └── datasets.json           # 20 CMS and public research datasets
 ├── cli/
 │   └── update.py               # Phased update CLI (see below)
@@ -116,22 +116,41 @@ Six active shifts displayed as cards below the graphs, each with a trend rating,
 
 ## Tab 2 — Reimbursement Roadmap
 
-**10 service type swimlanes** with a 2010–2026 horizontal time axis:
+**3-level hierarchy swimlane** with a 2010–2028 horizontal time axis. The layout is:
+
+**Service Type** (header row) → **CMMI Category** (sub-header row) → **Individual CMMI Model** (one timeline row each, sorted by start date)
+
+This structure lets you see program eligibility overlap — when multiple models in the same service type and category are active simultaneously, the overlap is visible on the timeline.
+
+**12 service types** (eligibility-based, not actual participation):
 
 | Service Type | Fee Schedule | Value-Based Programs |
 |-------------|-------------|---------------------|
 | Inpatient Hospital | IPPS | VBP, HRRP, HAC |
-| Outpatient Hospital | OPPS | ASC Quality Reporting |
-| Physician/Professional | PFS | MIPS, Advanced APMs |
+| Outpatient Hospital | OPPS / ASC | ASC Quality Reporting |
+| Physician / Professional Services | PFS | MIPS, Advanced APMs |
 | Skilled Nursing Facility | SNF PPS (PDPM) | SNFVBP |
 | Home Health | HH PPS (PDGM) | HHVBP |
 | Hospice | Hospice Per Diem | Quality Reporting |
-| Inpatient Rehab Facility | IRF PPS | Quality Reporting |
+| Inpatient Rehabilitation Facility | IRF PPS | Quality Reporting |
 | End-Stage Renal Disease | ESRD PPS | QIP |
-| Oncology | PFS | MIPS Oncology Specialty |
+| Oncology | PFS + Part B Drug Buy-and-Bill | MIPS Oncology Specialty |
 | Behavioral Health | PFS | MIPS BH Specialty |
+| Medicare Advantage / Health Plan | Risk-Adjusted Capitation (HCC V28) | MA Quality Bonus, RADV |
+| Prescription Drug (Part D) | Part D Negotiated Rates / DIR | IRA Drug Price Negotiation, LIS |
 
-**CMMI model rectangles** are overlaid on applicable rows, color-coded by model category (ACO, Episode, Primary Care, Specialty, State/Payer, Behavioral Health). Hover for model details.
+**6 official CMMI categories** (from CMS.gov), each color-coded:
+
+| CMMI Category | Color |
+|--------------|-------|
+| Accountable Care Models | Teal (#2a9d8f) |
+| Disease-Specific & Episode-Based Models | Coral (#e76f51) |
+| Health Plan Models | Blue (#1b6ca8) |
+| Prescription Drug Models | Purple (#6a4c93) |
+| State & Community-Based Models | Dark teal (#264653) |
+| Statutory Demonstrations and Other Projects | Amber (#f4a261) |
+
+**22 CMMI models** (16 original + 6 new): TEAM, MA Value-Based Insurance Design Model, Enhanced Medication Therapy Management, State Innovation Models, Financial Alignment Initiative, and PACE Innovation. Each model row shows the program's full active date range. Ended models display dashed borders. Scroll vertically to see all service types. Hover a bar for program details including CMMI category, start/end dates, and description.
 
 ---
 
@@ -219,7 +238,8 @@ pip install colorama jsonschema
 
 ### CMMI Model
 ```json
-{ "id": "string", "name": "string", "category": "ACO|Episode|Primary Care|Specialty|State/Payer|Behavioral Health",
+{ "id": "string", "name": "string",
+  "category": "Accountable Care Models|Disease-Specific & Episode-Based Models|Health Plan Models|Prescription Drug Models|State & Community-Based Models|Statutory Demonstrations and Other Projects",
   "startDate": "YYYY-MM-DD", "endDate": "YYYY-MM-DD|null", "description": "string" }
 ```
 
