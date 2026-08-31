@@ -170,42 +170,63 @@ Each dataset shows: description, years covered, unit of observation, payer scope
 
 ---
 
-## Phased Update CLI
+## Content Refresh Workflow
+
+The full refresh protocol is defined in [`CLAUDE.md`](CLAUDE.md) at the repo root. Claude Code reads that file automatically and executes the workflow when given a prompt like:
+
+> *"Update the contents of all the tabs with new information as of today."*
+
+### What the workflow covers
+
+| Step | Scope |
+|------|-------|
+| 0 | Establish update baseline — check today vs. last freshness date; identify sources to search |
+| 1 | **Ontology — Legislative Map** (`ontology_nodes.json`, `ontology_edges.json`) |
+| 2 | **Ontology — Payer & Company Map** (`company_nodes.json`, `company_edges.json`) |
+| 3 | **Top Shifts cards** (`top_shifts.json`) — 6 shifts, ranked by urgency |
+| 4 | **CMMI Models** (`cmmi_models.json`) — start/end dates, new model additions |
+| 5 | **Service Types** (`service_types.json`) — fee schedules, VBP programs, model eligibility |
+| 6 | **Data Taxonomy** (`datasets.json`) — year ranges, new CMS/AHRQ dataset releases |
+| 7 | Sync all `window.__XXX__` inline blocks in `index.html` to match updated JSON files |
+| 8 | Update README freshness table |
+| 9 | Validate cross-references, commit, and push |
+
+### Design principle
+
+**Layout and visualization code are frozen.** All updates are data-only — the eight `data/*.json` files and their matching inline variables in `index.html`. No changes to `js/`, `css/`, or HTML structure are made during a content refresh.
+
+### Cross-reference validation
+
+Before committing, verify that every model name in `service_types.json → innovationModels[]` has a matching entry in `cmmi_models.json`:
 
 ```bash
-# Validate current data against schemas
-python cli/update.py ontology --validate
-
-# Sync ontology from a new source file (dry run)
-python cli/update.py ontology --sync --diff path/to/new_legislation.json --dry-run
-
-# Refresh reimbursement models
-python cli/update.py reimbursement --refresh --validate
-
-# Merge a new dataset into the catalog
-python cli/update.py data-dict --merge path/to/new_dataset.json
-
-# Analyze downstream impact of a model update
-python cli/update.py impact --analyze ACO_REACH
-
-# List registered source corpus entries
-python cli/update.py sources --list
-
-# Add a new source URL
-python cli/update.py sources --add https://www.federalregister.gov/...
-
-# Run all regression tests
-python cli/update.py test --all
-
-# Run tests for a specific tab
-python cli/update.py test --tab ontology
+node -e "
+  const svc = require('./data/service_types.json');
+  const models = require('./data/cmmi_models.json');
+  const names = new Set(models.map(m => m.name));
+  svc.forEach(s => (s.innovationModels||[]).forEach(n => {
+    if (!names.has(n)) console.log('BROKEN REF:', s.name, '->', n);
+  }));
+  console.log('Check complete.');
+"
 ```
 
-**Requirements:** Python 3.8+. Optional: `colorama` for colored output, `jsonschema` for schema validation.
+### Inline data sync map
 
-```bash
-pip install colorama jsonschema
-```
+Each JSON file has a corresponding `window.__XXX__` variable embedded in `index.html`. Both must be updated together:
+
+| `data/` file | `window.__XXX__` variable |
+|---|---|
+| `ontology_nodes.json` | `window.__NODES__` |
+| `ontology_edges.json` | `window.__EDGES__` |
+| `company_nodes.json` | `window.__COMPANY_NODES__` |
+| `company_edges.json` | `window.__COMPANY_EDGES__` |
+| `top_shifts.json` | `window.__TOP_SHIFTS__` |
+| `cmmi_models.json` | `window.__CMMI_MODELS__` |
+| `service_types.json` | `window.__SERVICE_TYPES__` |
+| `datasets.json` | `window.__DATASETS__` |
+
+> The inline variables allow the app to run as a local `file://` without a server. Keeping them in sync with the JSON files is mandatory.
 
 ---
 
@@ -255,15 +276,6 @@ pip install colorama jsonschema
   "years": "string", "unit": "string", "payers": ["string"], "states": "All|[...]",
   "linkageIds": ["string"] }
 ```
-
----
-
-## Adding New Content
-
-1. **Add to the appropriate `data/*.json` file** (nodes, edges, models, service types, datasets)
-2. **Update the matching `window.__XXX__` inline variable in `index.html`** — search for the variable name and replace the array
-3. For new ontology nodes, also add at least one edge connecting them to the graph
-4. Run `python cli/update.py test --all` to check for broken references
 
 ---
 
