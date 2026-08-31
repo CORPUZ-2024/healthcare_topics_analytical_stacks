@@ -112,6 +112,352 @@
     </p>
   </div>
   <div id="taxonomy-container"></div>
+
+  <!-- ===== Reference: Important Variables & Distinctions ===== -->
+  <div id="taxonomy-reference">
+
+    <!-- ---- Section A: Coding System Distinctions ---- -->
+    <div class="ref-section">
+      <h3 class="ref-section-title">Coding System Distinctions</h3>
+      <p class="ref-section-desc">How the five core Medicare coding and payment classification systems relate to each other — what they do, where they apply, and how they interact in bundling and value-based care contexts.</p>
+
+      <div class="ref-table-wrap">
+        <table class="ref-table">
+          <thead>
+            <tr>
+              <th class="ref-feature-col">Feature</th>
+              <th>DRG<br><span class="ref-th-sub">Diagnosis-Related Group</span></th>
+              <th>HCPCS<br><span class="ref-th-sub">Healthcare Common Procedure Coding System</span></th>
+              <th>HCC<br><span class="ref-th-sub">Hierarchical Condition Category</span></th>
+              <th>ICD<br><span class="ref-th-sub">International Classification of Diseases</span></th>
+              <th>APC<br><span class="ref-th-sub">Ambulatory Payment Classification</span></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="ref-feature-col"><strong>Primary use</strong></td>
+              <td>Inpatient hospital payment under IPPS.</td>
+              <td>Billing codes for procedures, supplies, drugs, and services (FFS). Level I = CPT; Level II = non-physician supplies/drugs/etc.</td>
+              <td>Risk adjustment to predict annual expected cost (premiums/capitation and quality models).</td>
+              <td>Clinical classification of diagnoses (ICD-10-CM) and inpatient procedures (ICD-10-PCS).</td>
+              <td>Hospital outpatient payment under OPPS.</td>
+            </tr>
+            <tr>
+              <td class="ref-feature-col"><strong>Care setting</strong></td>
+              <td>Acute inpatient stays.</td>
+              <td>All settings (professional, outpatient, ASC, DME, ambulance, etc.).</td>
+              <td>Population-level risk for Medicare Advantage/ACA and some Medicaid models.</td>
+              <td>All settings; foundational clinical coding on every claim/record.</td>
+              <td>Hospital outpatient departments (HOPDs); some ED/clinic/ancillary.</td>
+            </tr>
+            <tr>
+              <td class="ref-feature-col"><strong>Payment model</strong></td>
+              <td><strong>Episode-based</strong>: one payment per stay, adjusted by DRG weight, wage index, etc.</td>
+              <td><strong>Fee-for-service</strong>: line-item payment per code (subject to edits, bundling).</td>
+              <td><strong>Risk-adjusted</strong>: additive risk score applied to premiums/benchmarks.</td>
+              <td><strong>Not a payment system</strong> by itself; feeds DRG, HCC, quality, epi studies.</td>
+              <td><strong>Prospective</strong>: APC weight × conversion factor; packaging &amp; multiple-procedure rules under OPPS.</td>
+            </tr>
+            <tr>
+              <td class="ref-feature-col"><strong>Basis of grouping</strong></td>
+              <td>Groups from ICD-10-CM/PCS diagnoses &amp; procedures, age/sex/discharge status; CC/MCC tiers.</td>
+              <td>CPT/HCPCS codes describing the specific service/supply/drug; units and modifiers refine payment.</td>
+              <td>Mapped from <strong>ICD-10-CM</strong> diagnosis codes recorded over a look-back year; disease hierarchies.</td>
+              <td>ICD-10-CM (diagnoses) and ICD-10-PCS (inpatient procedures) with clinical rules/edits.</td>
+              <td>Groups <strong>CPT/HCPCS</strong> codes into clinical/resource bundles (status indicators determine packaging).</td>
+            </tr>
+            <tr>
+              <td class="ref-feature-col"><strong>Scope</strong></td>
+              <td>Single inpatient episode.</td>
+              <td>Individual services and supplies.</td>
+              <td><strong>Annual</strong> view of chronic disease burden per member.</td>
+              <td>Complete clinical picture across encounters (conditions &amp; procedures).</td>
+              <td>An outpatient visit/encounter; multiple APCs may apply.</td>
+            </tr>
+            <tr>
+              <td class="ref-feature-col"><strong>Additivity / interaction</strong></td>
+              <td><strong>Hierarchical</strong>: one DRG per stay; CC/MCC levels modify payment (not additive).</td>
+              <td>Generally <strong>not additive</strong> across bundled edits; each line evaluated (NCCI edits, modifiers).</td>
+              <td><strong>Additive with hierarchies</strong>: most unrelated HCCs add; within a disease family, higher-severity HCC suppresses lower.</td>
+              <td>Multiple diagnoses/procedures can be listed; downstream systems (DRG/HCC) impose hierarchy.</td>
+              <td><strong>Mixed</strong>: some APCs pay separately; many ancillary items are packaged into a primary APC; multiples discounted.</td>
+            </tr>
+            <tr>
+              <td class="ref-feature-col"><strong>Typical inputs</strong></td>
+              <td>Principal diagnosis, OR/non-OR procedures, comorbidities (CC/MCC), demographics, discharge status.</td>
+              <td>Procedure code + units + modifiers; sometimes drug strength (J-codes), DME details.</td>
+              <td>All qualifying chronic/severe diagnoses from claims/encounters in the model year.</td>
+              <td>Provider documentation abstracted to ICD codes; POA, laterality, encounter type, etc.</td>
+              <td>Outpatient CPT/HCPCS codes, status indicators, units; sometimes device edits, composite logic.</td>
+            </tr>
+            <tr>
+              <td class="ref-feature-col"><strong>Governing body</strong></td>
+              <td><strong>CMS</strong> (Medicare IPPS; MS-DRGs).</td>
+              <td><strong>CMS</strong> (HCPCS Level II) and <strong>AMA</strong> (CPT = HCPCS Level I).</td>
+              <td><strong>CMS</strong> (MA/ACA risk models; state variations for Medicaid).</td>
+              <td><strong>WHO</strong> (ICD), with U.S. maintenance by <strong>NCHS</strong> (ICD-10-CM) and <strong>CMS</strong> (ICD-10-PCS).</td>
+              <td><strong>CMS</strong> (OPPS/APC program).</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Per-system deep dives -->
+      <div class="ref-deepdive-grid">
+        <div class="ref-deepdive-card">
+          <div class="ref-deepdive-title">DRG</div>
+          <ul>
+            <li><strong>Creation (claim/part):</strong> Assigned by grouper to institutional inpatient (UB-04/837I) claims — Type of Bill <strong>11x</strong>, paid under <strong>Medicare Part A</strong> (IPPS). Medicaid IP claims in TAF also use UB-04 (state policies vary). Inputs: principal DX, procedures, CC/MCC, age/sex, discharge status.</li>
+            <li><strong>Input to bundling/VBC:</strong> Payment unit for IPPS (Part A); anchors episodes in DRG-based cost measures and readmissions programs (HRRP); state Medicaid programs may use DRG-based IP payment.</li>
+            <li><strong>Used with other data:</strong> Wage index, case-mix, outlier thresholds, discharge/transfer status, transfer rules.</li>
+          </ul>
+        </div>
+        <div class="ref-deepdive-card">
+          <div class="ref-deepdive-title">HCPCS (CPT Level I / Level II)</div>
+          <ul>
+            <li><strong>Creation (claim/part):</strong> Reported on professional (CMS-1500/837P) and hospital outpatient (UB-04/837I, TOB <strong>13x</strong>) claims in Medicare Part B; also used in MA (C) encounters and Medicaid (TAF). Level I maintained by AMA (CPT); Level II by CMS.</li>
+            <li><strong>Input to bundling/VBC:</strong> Drives OPPS/APC grouping (Part B), MPFS pricing (B), and episode/cost measures in value-based programs; similar logic in MA/Medicaid payment edits.</li>
+            <li><strong>Used with other data:</strong> Status indicators (OPPS B), units, modifiers (25/59/JW/JZ), revenue codes, NDC for drugs (especially Part D contexts).</li>
+          </ul>
+        </div>
+        <div class="ref-deepdive-card">
+          <div class="ref-deepdive-title">HCC — CMS Risk Adjustment</div>
+          <ul>
+            <li><strong>Creation (claim/part):</strong> Derived annually from ICD-10-CM diagnoses on institutional (UB-04/837I: A/B) and professional (1500/837P: B) claims across settings; computes RAF for <strong>Medicare Advantage (Part C)</strong>; some Medicaid programs adopt HCC-like risk models.</li>
+            <li><strong>Input to bundling/VBC:</strong> Adjusts MA (C) capitation and ACO benchmarks; used for risk stratification and performance attribution.</li>
+            <li><strong>Used with other data:</strong> Demographics (age/sex/dual/disability), model interactions, encounter completeness rules to produce final RAF.</li>
+          </ul>
+        </div>
+        <div class="ref-deepdive-card">
+          <div class="ref-deepdive-title">APC</div>
+          <ul>
+            <li><strong>Creation (claim/part):</strong> Assigned to hospital outpatient (UB-04/837I) claims — TOB <strong>13x</strong>, paid under <strong>Medicare Part B (OPPS)</strong>. State Medicaid programs may use OPPS-like rules. Built from CPT/HCPCS + status indicators (includes packaging and C-APC logic).</li>
+            <li><strong>Input to bundling/VBC:</strong> Payment unit for OPPS (B); packaging creates de facto ambulatory bundles; used in outpatient episode/cost measures in VBP contexts.</li>
+            <li><strong>Used with other data:</strong> OPPS conversion factor, wage index, multiple-procedure discounting, device/drug pass-through status, required modifiers.</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- TOB & claim form glossary -->
+      <div class="ref-block">
+        <div class="ref-block-title">Claim Forms &amp; Type of Bill Codes</div>
+        <div class="ref-deflist">
+          <div class="ref-def-row">
+            <span class="ref-def-term">UB-04 / Form CMS-1450 → 837I</span>
+            <span class="ref-def-body">Institutional claim form/transaction. Used for Medicare A/B facility billing to MACs and by many Medicaid State Agencies for institutional claims. <em>Setting indicator: Type of Bill (TOB).</em></span>
+          </div>
+          <div class="ref-def-row">
+            <span class="ref-def-term">CMS-1500 → 837P</span>
+            <span class="ref-def-body">Professional (non-institutional) claim form/transaction. Used for Medicare Part B physician/supplier claims and Medicaid professional billing. Stewarded by NUCC. <em>Setting indicator: Place of Service (POS).</em></span>
+          </div>
+          <div class="ref-def-row">
+            <span class="ref-def-term">TOB 11x</span>
+            <span class="ref-def-body">Hospital Inpatient (e.g., 111 = admit-through-discharge). Claims paid under <strong>Medicare Part A</strong> — IPPS, DRG-based payment. Medicaid institutional IP claims in TAF also carry TOB.</span>
+          </div>
+          <div class="ref-def-row">
+            <span class="ref-def-term">TOB 13x</span>
+            <span class="ref-def-body">Hospital Outpatient (e.g., 131 = outpatient claim). Claims paid under <strong>Medicare Part B — OPPS</strong>; APC-based payment applies.</span>
+          </div>
+          <div class="ref-def-row">
+            <span class="ref-def-term">Place of Service (POS)</span>
+            <span class="ref-def-body">2-digit code on professional claims (CMS-1500/837P) identifying the care setting. Required for Medicare Part B; widely used by Medicaid and other payers.</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ---- Section B: Important Variables ---- -->
+    <div class="ref-section">
+      <h3 class="ref-section-title">Important Variables &amp; Cross-Program Linkage</h3>
+      <p class="ref-section-desc">Core data elements that recur across Medicare and Medicaid research files, with notes on which Medicare Part or program each variable belongs to and how to use it for linkage, cost, utilization, and disease burden analysis.</p>
+
+      <!-- Cross-program variable map -->
+      <div class="ref-table-wrap">
+        <table class="ref-table ref-table-var">
+          <thead>
+            <tr>
+              <th>Function</th>
+              <th>Medicare FFS (A/B)</th>
+              <th>MA Encounters (C)</th>
+              <th>Professional (B)</th>
+              <th>Part D (D)</th>
+              <th>Medicaid (TAF)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Beneficiary key</strong></td>
+              <td><code>BENE_ID</code></td>
+              <td><code>BENE_ID</code></td>
+              <td><code>BENE_ID</code></td>
+              <td><code>BENE_ID</code></td>
+              <td><code>BENE_ID</code> (in CCW-linked TAF)</td>
+            </tr>
+            <tr>
+              <td><strong>Claim window</strong></td>
+              <td><code>CLM_FROM_DT</code> / <code>CLM_THRU_DT</code></td>
+              <td>same names</td>
+              <td>same names</td>
+              <td>fill date / PDE date vars</td>
+              <td>service dates in TAF</td>
+            </tr>
+            <tr>
+              <td><strong>Diagnoses</strong></td>
+              <td>ICD-10-CM (principal/secondary)</td>
+              <td>same</td>
+              <td>fewer DX fields</td>
+              <td>n/a (drug)</td>
+              <td>ICD-10-CM</td>
+            </tr>
+            <tr>
+              <td><strong>Procedures</strong></td>
+              <td>ICD-10-PCS (IP A) + HCPCS/CPT (OP B)</td>
+              <td>HCPCS/CPT</td>
+              <td>HCPCS/CPT</td>
+              <td>NDC</td>
+              <td>ICD-10-PCS/HCPCS/CPT parallels</td>
+            </tr>
+            <tr>
+              <td><strong>Site / setting</strong></td>
+              <td>TOB (11x, 13x) on UB-04/837I</td>
+              <td>encounter type mirrors</td>
+              <td>POS on 1500/837P</td>
+              <td>plan &amp; pharmacy context</td>
+              <td>UB-04/TOB &amp; professional POS</td>
+            </tr>
+            <tr>
+              <td><strong>Payment amounts</strong></td>
+              <td><code>CLM_PMT_AMT</code> + <code>REV_CNTR</code> lines</td>
+              <td>encounter pricing fields (when populated)</td>
+              <td>allowed/paid at line/claim</td>
+              <td>gross drug cost, plan paid, patient pay</td>
+              <td>TAF paid/allowed fields by claim type</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="ref-note">Note: <code>BENE_ID</code> is the CCW link key across Medicare and certain Medicaid data (when available via CCW) — not a general-purpose ID outside the CCW environment.</p>
+
+      <!-- Cost / utilization / disease burden -->
+      <div class="ref-block">
+        <div class="ref-block-title">Elements by Analytic Domain</div>
+        <div class="ref-analytic-grid">
+          <div class="ref-analytic-card">
+            <div class="ref-analytic-label">Cost (payment/pricing)</div>
+            <ul>
+              <li><strong>Institutional (UB-04/837I):</strong> claim-level <code>CLM_PMT_AMT</code>; sum of revenue-center payment/charge lines in Medicare A (IP) and B (OP). Medicaid TAF has analogous paid/allowed fields.</li>
+              <li><strong>Professional (CMS-1500/837P):</strong> allowed/paid amounts under Medicare Part B (Carrier/DME), line-level and claim-level rollups; similar constructs in Medicaid TAF non-institutional.</li>
+              <li><strong>Pharmacy (Part D PDE):</strong> gross drug cost, plan paid, patient pay, LIS, TrOOP contributors under Medicare Part D; Medicaid pharmacy has parallel elements in TAF.</li>
+              <li><strong>Plan context:</strong> Part C/D plan characteristics (premiums/service area) for benchmarking; state/plan constructs in Medicaid.</li>
+            </ul>
+          </div>
+          <div class="ref-analytic-card">
+            <div class="ref-analytic-label">Utilization (counts/intensity)</div>
+            <ul>
+              <li><strong>Units:</strong> HCPCS lines, revenue-center units (OP), E/M visits, admissions/stays (IP/SNF via MedPAR roll-ups under Medicare A), days supply (PDE Part D).</li>
+              <li><strong>Dates:</strong> <code>CLM_FROM/THRU</code>, <code>ADMSN/DSCHRG</code> for LOS, readmissions, episode triggers — primarily Medicare A/B/C; fill date for D; analogous in Medicaid TAF.</li>
+              <li><strong>Setting indicators:</strong> TOB 11x (IP/Part A), 13x (OP/Part B) for site-of-service splits; POS for B/C professional/encounter claims; Medicaid uses TOB/POS analogs in TAF.</li>
+            </ul>
+          </div>
+          <div class="ref-analytic-card">
+            <div class="ref-analytic-label">Disease Burden (clinical severity/risk)</div>
+            <ul>
+              <li><strong>Diagnoses:</strong> ICD-10-CM across A/B/C (and Medicaid TAF) feed HCC risk models used for MA (C) and sometimes Medicaid.</li>
+              <li><strong>Procedures:</strong> add clinical complexity — ICD-10-PCS in IP Part A, HCPCS/CPT in B/C.</li>
+              <li><strong>Part D (D):</strong> contributes medication exposure and adherence metrics for chronic disease burden analysis.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- Mini-glossary -->
+      <div class="ref-block">
+        <div class="ref-block-title">Mini-Glossary</div>
+        <div class="ref-deflist">
+          <div class="ref-def-row">
+            <span class="ref-def-term">BENE_ID</span>
+            <span class="ref-def-body">Encrypted CCW Beneficiary ID. Stable, linkable key across CCW files for Medicare FFS (A/B), MA encounters (C), Part D (D), and CCW-linked Medicaid (TAF). Use: link claims/encounters/PDEs to enrollment and each other; build denominators.</span>
+          </div>
+          <div class="ref-def-row">
+            <span class="ref-def-term">CLM_ID</span>
+            <span class="ref-def-body">Claim header identifier. Revenue-center/line segments appear beneath the header. Exists in Medicare FFS (A/B), MA encounters (C), and analogous constructs in Medicaid TAF (institutional/professional).</span>
+          </div>
+          <div class="ref-def-row">
+            <span class="ref-def-term">CLM_FROM_DT / CLM_THRU_DT</span>
+            <span class="ref-def-body">"Statement covers from/thru" dates. Present in Medicare FFS (A/B) and MA encounters (C). Part D uses fill date variables; TAF carries service dates for Medicaid.</span>
+          </div>
+          <div class="ref-def-row">
+            <span class="ref-def-term">CLM_PMT_AMT</span>
+            <span class="ref-def-body">Claim-level Medicare payment amount on institutional (UB-04/837I) claims. Paired with revenue-center line amounts for granular cost analysis.</span>
+          </div>
+          <div class="ref-def-row">
+            <span class="ref-def-term">MedPAR</span>
+            <span class="ref-def-body">Medicare Part A stay-level roll-up from inpatient hospital and SNF claims. Convenient for admissions/LOS analytics; not line-level.</span>
+          </div>
+          <div class="ref-def-row">
+            <span class="ref-def-term">RAF (Risk Adjustment Factor)</span>
+            <span class="ref-def-body">The numeric risk score produced by the HCC model. Combines HCC scores and demographic factors (age/sex/dual/disability). Applied to MA capitation benchmarks and ACO financial benchmarks.</span>
+          </div>
+          <div class="ref-def-row">
+            <span class="ref-def-term">NDC (National Drug Code)</span>
+            <span class="ref-def-body">11-digit drug identifier on Part D Prescription Drug Events (PDEs) and Medicaid pharmacy claims. Identifies the specific drug, strength, and package size.</span>
+          </div>
+          <div class="ref-def-row">
+            <span class="ref-def-term">TAF (T-MSIS Analytic Files)</span>
+            <span class="ref-def-body">Research-optimized Medicaid claims/encounters (institutional and non-institutional), eligibility, and provider files derived from T-MSIS. Access via ResDAC/CMS.</span>
+          </div>
+          <div class="ref-def-row">
+            <span class="ref-def-term">NPI (National Provider Identifier)</span>
+            <span class="ref-def-body">10-digit identifier for individual providers and organizations. Present in Medicare A/B/C/D contexts; Medicaid TAF has parallel provider keys. Use to link claims to POS file, HCRIS, and MIPS performance data.</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Quick starter list -->
+      <div class="ref-block">
+        <div class="ref-block-title">Quick Starter List — Variables to Pull First</div>
+        <div class="ref-starter-grid">
+          <div class="ref-starter-card">
+            <div class="ref-starter-label">Linkage &amp; scope</div>
+            <ul>
+              <li><code>BENE_ID</code> — A/B/C/D/TAF</li>
+              <li><code>CLM_ID</code> — A/B/C/TAF</li>
+              <li><code>CLM_FROM_DT</code>, <code>CLM_THRU_DT</code> — A/B/C/TAF</li>
+              <li><code>CLM_ADMSN_DT</code> — IP Part A, some TAF</li>
+            </ul>
+          </div>
+          <div class="ref-starter-card">
+            <div class="ref-starter-label">Clinical</div>
+            <ul>
+              <li>Principal/secondary <strong>ICD-10-CM</strong> — A/B/C/TAF</li>
+              <li><strong>ICD-10-PCS</strong> — A inpatient, some TAF</li>
+              <li><strong>HCPCS/CPT</strong> — B/C/TAF</li>
+              <li><strong>NDC</strong> — D, Medicaid pharmacy</li>
+            </ul>
+          </div>
+          <div class="ref-starter-card">
+            <div class="ref-starter-label">Payment</div>
+            <ul>
+              <li><code>CLM_PMT_AMT</code>, <code>REV_CNTR</code> amounts — A/B</li>
+              <li>Carrier/DME allowed/paid — B</li>
+              <li>PDE gross/plan/patient pay — D</li>
+              <li>TAF paid/allowed fields — Medicaid</li>
+            </ul>
+          </div>
+          <div class="ref-starter-card">
+            <div class="ref-starter-label">Context</div>
+            <ul>
+              <li><strong>TOB</strong> (11x = Part A, 13x = Part B) — A/B</li>
+              <li><strong>POS</strong> — B/C/TAF</li>
+              <li>Provider <strong>NPI</strong> — A/B/C/D/TAF</li>
+              <li>Plan IDs — C/D; Medicaid plan IDs in TAF</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- /ref-section B -->
+  </div><!-- /taxonomy-reference -->
 </div>
 
 <!-- ===== Inline Data ===== -->

@@ -834,6 +834,307 @@ code.link-tag {
 .link-hier    { stroke: #a8c0d6; stroke-dasharray: none; }
 
 /* ============================================================
+   Taxonomy Reference — Important Variables & Distinctions
+   ============================================================ */
+
+#taxonomy-reference {
+  margin-top: 40px;
+  border-top: 2px solid var(--border);
+  padding-top: 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
+
+.ref-section {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.ref-section-title {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--navy);
+  margin-bottom: 4px;
+}
+
+.ref-section-desc {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  line-height: 1.65;
+  max-width: 900px;
+}
+
+/* --- Comparison / variable map tables --------------------- */
+.ref-table-wrap {
+  overflow-x: auto;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+}
+
+.ref-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.8rem;
+  line-height: 1.5;
+}
+
+.ref-table th {
+  background: var(--navy);
+  color: #fff;
+  padding: 9px 12px;
+  text-align: left;
+  font-size: 0.78rem;
+  font-weight: 600;
+  white-space: nowrap;
+  vertical-align: bottom;
+}
+
+.ref-table th .ref-th-sub {
+  display: block;
+  font-weight: 400;
+  font-size: 0.7rem;
+  opacity: 0.75;
+  white-space: normal;
+  margin-top: 2px;
+}
+
+.ref-table td {
+  padding: 8px 12px;
+  border-bottom: 1px solid #eef2f6;
+  vertical-align: top;
+  color: var(--text);
+  font-size: 0.8rem;
+}
+
+.ref-table tr:last-child td {
+  border-bottom: none;
+}
+
+.ref-table tr:nth-child(odd) td {
+  background: #fafbfc;
+}
+
+.ref-feature-col {
+  min-width: 130px;
+  white-space: nowrap;
+  font-weight: 600 !important;
+  color: var(--navy) !important;
+  background: #f0f4f8 !important;
+}
+
+/* Variable map table — tighter columns */
+.ref-table-var th,
+.ref-table-var td {
+  min-width: 110px;
+}
+
+.ref-table code {
+  font-family: 'Consolas', 'Menlo', monospace;
+  font-size: 0.77rem;
+  background: #e8f0f8;
+  color: #1e40af;
+  padding: 1px 5px;
+  border-radius: 3px;
+}
+
+.ref-note {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  font-style: italic;
+  padding-left: 4px;
+  margin-top: -6px;
+}
+
+.ref-note code {
+  font-family: 'Consolas', 'Menlo', monospace;
+  font-size: 0.75rem;
+  background: #e8f0f8;
+  color: #1e40af;
+  padding: 1px 5px;
+  border-radius: 3px;
+}
+
+/* --- Deep-dive cards (per coding system) ------------------ */
+.ref-deepdive-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 14px;
+}
+
+.ref-deepdive-card {
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+}
+
+.ref-deepdive-title {
+  background: var(--navy);
+  color: #fff;
+  font-size: 0.8rem;
+  font-weight: 700;
+  padding: 7px 12px;
+}
+
+.ref-deepdive-card ul {
+  margin: 0;
+  padding: 10px 14px 12px 22px;
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+
+.ref-deepdive-card li {
+  font-size: 0.8rem;
+  color: var(--text);
+  line-height: 1.55;
+}
+
+/* --- Claim forms / glossary definition lists -------------- */
+.ref-block {
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+}
+
+.ref-block-title {
+  background: #f0f4f8;
+  color: var(--navy);
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  padding: 8px 14px;
+  border-bottom: 1px solid var(--border);
+}
+
+.ref-deflist {
+  padding: 10px 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.ref-def-row {
+  display: grid;
+  grid-template-columns: 220px 1fr;
+  gap: 14px;
+  padding: 8px 0;
+  border-bottom: 1px solid #f1f5f9;
+  align-items: start;
+}
+
+.ref-def-row:last-child {
+  border-bottom: none;
+}
+
+.ref-def-term {
+  font-family: 'Consolas', 'Menlo', monospace;
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: #1e40af;
+  background: #e8f0f8;
+  padding: 3px 8px;
+  border-radius: 3px;
+  align-self: start;
+  line-height: 1.4;
+}
+
+.ref-def-body {
+  font-size: 0.8rem;
+  color: var(--text);
+  line-height: 1.6;
+}
+
+/* --- Analytic domain cards -------------------------------- */
+.ref-analytic-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 12px;
+  padding: 12px 14px;
+}
+
+.ref-analytic-card {
+  background: #fafbfc;
+  border: 1px solid #e2eaf3;
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+}
+
+.ref-analytic-label {
+  font-size: 0.73rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: #fff;
+  background: var(--teal);
+  padding: 5px 10px;
+}
+
+.ref-analytic-card ul {
+  margin: 0;
+  padding: 8px 12px 10px 22px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.ref-analytic-card li {
+  font-size: 0.79rem;
+  color: var(--text);
+  line-height: 1.5;
+}
+
+/* --- Quick starter grid ----------------------------------- */
+.ref-starter-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 12px;
+  padding: 12px 14px;
+}
+
+.ref-starter-card {
+  background: #fafbfc;
+  border: 1px solid #e2eaf3;
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+}
+
+.ref-starter-label {
+  font-size: 0.73rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: #fff;
+  background: #264653;
+  padding: 5px 10px;
+}
+
+.ref-starter-card ul {
+  margin: 0;
+  padding: 8px 10px 10px 22px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.ref-starter-card li {
+  font-size: 0.79rem;
+  color: var(--text);
+  line-height: 1.5;
+}
+
+.ref-starter-card code {
+  font-family: 'Consolas', 'Menlo', monospace;
+  font-size: 0.75rem;
+  background: #e8f0f8;
+  color: #1e40af;
+  padding: 1px 4px;
+  border-radius: 3px;
+}
+
+/* ============================================================
    Program Eligibility Outline — Reimbursement Tab
    ============================================================ */
 
