@@ -1,10 +1,11 @@
 # CLAUDE.md — Healthcare Reference Materials
 
 ## Project overview
-Single-page app at https://corpuz-2024.github.io/healthcare_topics_toolkits/ with three tabs:
+Single-page app at https://corpuz-2024.github.io/healthcare_topics_analytical_stacks/ with four tabs:
 1. **Ontology** — Legislative Map + Payer & Company Map force-directed graphs + Top Shifts cards
 2. **Reimbursement Roadmap** — 3-level swimlane (Service Type → CMMI Category → Model) + Program Eligibility Outline
 3. **Data Taxonomy** — filterable/sortable dataset table
+4. **Analytical Stacks** — 14 analysis task types with tech/analytical stacks, healthcare use cases, caveats, and cross-cutting reference tables
 
 **Layout and visualization code are frozen.** All updates are data-only.
 
@@ -350,4 +351,4 @@ git push origin master
 
 - Active branch: `master`
 - GitHub Pages source: Deploy from branch → master → root
-- Deploy is automatic on push; allow ~60 seconds then verify at https://corpuz-2024.github.io/healthcare_topics_toolkits/
+- Deploy is automatic on push; allow ~60 seconds then verify at https://corpuz-2024.github.io/healthcare_topics_analytical_stacks/

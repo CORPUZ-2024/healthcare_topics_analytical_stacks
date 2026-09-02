@@ -1429,3 +1429,317 @@ code.link-tag {
   display: block;
   margin-bottom: 2px;
 }
+
+/* ============================================================
+   Analytical Stacks Tab
+   ============================================================ */
+
+/* --- Filter bar ------------------------------------------- */
+.analytical-filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 20px;
+}
+
+.analytical-filter-btn {
+  padding: 6px 16px;
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  background: #f8fafc;
+  color: var(--text);
+  font-size: 0.82rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s, border-color 0.15s;
+}
+
+.analytical-filter-btn:hover {
+  background: #e8f0f8;
+  border-color: var(--primary);
+  color: var(--primary);
+}
+
+.analytical-filter-btn.active {
+  background: var(--primary);
+  border-color: var(--primary);
+  color: #fff;
+}
+
+/* --- Task grid -------------------------------------------- */
+.analytical-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 32px;
+}
+
+.task-card {
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  background: #fff;
+  transition: box-shadow 0.15s;
+}
+
+.task-card:hover {
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+}
+
+/* --- Card header ------------------------------------------ */
+.task-card-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 16px;
+  cursor: pointer;
+  background: #f8fafc;
+  user-select: none;
+}
+
+.task-card-header:hover {
+  background: #eef4fb;
+}
+
+.task-rank {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--text-muted);
+  min-width: 26px;
+  text-align: center;
+  background: #e2eaf3;
+  border-radius: 4px;
+  padding: 2px 6px;
+}
+
+.task-name-label {
+  flex: 1;
+  font-size: 0.92rem;
+  font-weight: 600;
+  color: var(--navy);
+}
+
+.task-status-badge {
+  font-size: 0.71rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  padding: 2px 9px;
+  border-radius: 10px;
+}
+
+.badge-built {
+  background: #d1fae5;
+  color: #065f46;
+}
+
+.badge-specified {
+  background: #fef3c7;
+  color: #92400e;
+}
+
+.badge-deferred {
+  background: #f3f4f6;
+  color: #6b7280;
+}
+
+.task-toggle-icon {
+  font-size: 1rem;
+  color: var(--text-muted);
+  transition: transform 0.2s;
+}
+
+.task-card:not(.collapsed) .task-toggle-icon {
+  transform: rotate(180deg);
+}
+
+/* --- Card body -------------------------------------------- */
+.task-card-body {
+  padding: 16px 18px;
+  border-top: 1px solid var(--border);
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.task-card.collapsed .task-card-body {
+  display: none;
+}
+
+.task-section {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.task-section-title {
+  font-size: 0.78rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  color: var(--primary);
+  border-bottom: 1px solid #e2eaf3;
+  padding-bottom: 4px;
+}
+
+.task-method-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+@media (max-width: 640px) {
+  .task-method-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.task-method-label {
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--text-muted);
+  margin-bottom: 4px;
+}
+
+.task-method-grid p {
+  font-size: 0.85rem;
+  color: var(--text);
+  margin: 0;
+  line-height: 1.55;
+}
+
+.task-scale-row {
+  font-size: 0.85rem;
+  color: var(--text);
+  line-height: 1.55;
+}
+
+.task-use-cases,
+.task-caveats {
+  margin: 0;
+  padding-left: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.task-use-cases li,
+.task-caveats li {
+  font-size: 0.85rem;
+  color: var(--text);
+  line-height: 1.55;
+}
+
+.task-modules {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  font-style: italic;
+  padding-top: 4px;
+  border-top: 1px dashed #e2eaf3;
+}
+
+.task-status-note {
+  font-size: 0.8rem;
+  color: #92400e;
+  background: #fef9c3;
+  border: 1px solid #fde68a;
+  border-radius: var(--radius-sm);
+  padding: 8px 12px;
+}
+
+/* --- Cross-cutting section -------------------------------- */
+.analytical-crosscut {
+  margin-top: 8px;
+  padding: 20px 22px;
+  background: #f8fafc;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  margin-bottom: 28px;
+}
+
+.analytical-crosscut h4 {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--navy);
+  margin-bottom: 10px;
+}
+
+.analytical-crosscut p {
+  font-size: 0.85rem;
+  color: var(--text);
+  margin-bottom: 14px;
+  line-height: 1.55;
+}
+
+.crosscut-lib-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.83rem;
+  margin-bottom: 14px;
+}
+
+.crosscut-lib-table th {
+  text-align: left;
+  padding: 6px 10px;
+  background: #e8f0f8;
+  color: var(--navy);
+  font-weight: 600;
+  border-bottom: 2px solid var(--border);
+}
+
+.crosscut-lib-table td {
+  padding: 6px 10px;
+  border-bottom: 1px solid #e9eef5;
+  color: var(--text);
+  vertical-align: top;
+}
+
+.crosscut-lib-table tr:last-child td {
+  border-bottom: none;
+}
+
+/* --- Volume & grain reference ----------------------------- */
+.analytical-volgrain {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.analytical-volgrain h4 {
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--navy);
+  margin-bottom: 8px;
+}
+
+.volgrain-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.82rem;
+}
+
+.volgrain-table th {
+  text-align: left;
+  padding: 6px 10px;
+  background: #e8f0f8;
+  color: var(--navy);
+  font-weight: 600;
+  border-bottom: 2px solid var(--border);
+}
+
+.volgrain-table td {
+  padding: 6px 10px;
+  border-bottom: 1px solid #e9eef5;
+  color: var(--text);
+  vertical-align: top;
+}
+
+.volgrain-table tr:last-child td {
+  border-bottom: none;
+}
+
+.volgrain-table tr:nth-child(even) td {
+  background: #f8fafc;
+}

@@ -1,0 +1,354 @@
+{
+  "tasks": [
+    {
+      "id": "descriptive",
+      "rank": 1,
+      "name": "DESCRIPTIVE",
+      "status": "built",
+      "statusNote": "",
+      "techStack": "pandas (groupby, pivot_table) + numpy. Offline by default; Snowflake/BigQuery only if source.mode=platform and aggregation is pushed upstream via sql_templates.",
+      "analyticalStack": "Summary statistics only: count, sum, mean, median, mode, percentiles (p10/p25/p75/p90/p99), standard deviation, coefficient of variation. No inferential methods. CIs require layering rate_measure on top.",
+      "dataVolume": "10K–5M rows. Cheapest task in the toolkit; every other task's QA leans on it first.",
+      "inputGrain": "Any grain. Most often claim line, member, or provider.",
+      "outputGrain": "Any (pure aggregation, no grain transform)",
+      "modulesTouched": "core/analysis/{base,descriptive,complexity_monitor} + source-format readers/cleaners",
+      "useCases": [
+        "Baseline characterization of a Medicare FFS claims population before a CMMI model evaluation — prevalence by ICD-10 chapter, utilization counts by TOB (11x inpatient vs. 13x outpatient), average CLM_PMT_AMT by MS-DRG.",
+        "Fee schedule impact analysis: compare allowed amounts before and after an IPPS or PFS final rule effective date using CLM_PMT_AMT at claim-line grain, segmented by DRG or HCPCS code.",
+        "MA encounter data quality audit: count records by Medicare Part, flag anomalous TOB or POS values, profile NPI completeness rates by plan contract ID.",
+        "ACO attributed population summary: member count, age/sex/dual-eligible distribution, HCC risk score decile breakdown, and total attributed spend by service category (Part A vs. B vs. D)."
+      ],
+      "caveats": [
+        "Institutional (UB-04/837I) and professional (CMS-1500/837P) claims must be characterized separately before any cross-part rollup — they have different claim grains, coding systems (ICD-10-PCS vs. HCPCS/CPT), and setting indicators (TOB vs. POS). Summing CLM_PMT_AMT across Part A and Part B without distinguishing claim type misallocates cost.",
+        "A BENE_ID appearing in multiple Part files does not mean the beneficiary received all those services independently — the same individual appears in FFS claims (A/B), MA encounters (C), and Part D PDEs (D). Deduplication and attribution logic must be defined relative to the specific analytic question before counting.",
+        "Low volume in trailing months almost always reflects claims runout lag, not a true utilization decline. Confirm the expected data completeness date (complete_through or suspected_incomplete_through from the source metadata) before interpreting any trailing-period suppression as a care pattern."
+      ]
+    },
+    {
+      "id": "rate_measure",
+      "rank": 2,
+      "name": "RATE_MEASURE",
+      "status": "built",
+      "statusNote": "",
+      "techStack": "pandas for numerator/denominator construction + scipy.stats (statsmodels.stats.proportion) for Wilson score CI. Optional value_set_lookup (core/codesets.py) resolves NCQA/VSAC reference files at bootstrap.",
+      "analyticalStack": "Proportion estimation with Wilson score confidence intervals (default) or exact binomial CI as an alternative. Measurement, not prediction — the statistical content is in getting the denominator and CI method right, not algorithmic complexity.",
+      "dataVolume": "Denominator-bound, not row-bound. stability_min=30; most measures run 500–500K member-months per stratum. Below 30 the result computes but is flagged VAL-042 and excluded from ranking outputs.",
+      "inputGrain": "Member-month or distinct-member (denominator grain) joined against claim-line or clinical-observation events (numerator grain). Two different grains reconciled through an explicit denominator_definition.",
+      "outputGrain": "Stratum rate with CI bounds",
+      "modulesTouched": "core/analysis/{base,rate_measure,complexity_monitor}, core/codesets.py (value_set_lookup), core/validation/denominator.py [optional v2.1]",
+      "useCases": [
+        "HEDIS/NCQA measure calculation using VSAC value sets — e.g., Diabetes Care HbA1c testing rate where the denominator is continuously enrolled diabetic members and the numerator is a qualifying lab claim.",
+        "CMS VBP quality program performance tracking: Hospital Readmissions Reduction Program (HRRP) condition-specific readmission rates, HHVBP quality measure rates, SNF VBP claims-based measures.",
+        "ACO REACH quality scoring: computing measure rates for the ACO's attributed population to determine quality multiplier eligibility and health equity benchmark adjustments.",
+        "MIPS quality measure rate calculation for an Advanced APM, where the denominator is the eligible patient population and the numerator is care process completion."
+      ],
+      "caveats": [
+        "Denominator definition is everything — HEDIS denominators have specific continuous enrollment criteria, exclusion logic (e.g., hospice enrollment, conflicting diagnoses), and look-back windows. An incorrectly built denominator invalidates the rate regardless of how correctly the numerator is coded.",
+        "Hybrid measures (combining administrative claims with medical record review) and administrative measures are not interchangeable. Hybrid measures generally produce higher rates because chart review captures documented care that doesn't appear in claims. Mixing methodologies across periods or populations produces spurious trend signals.",
+        "Wilson score CI assumes independence across observations. For member-months where the same member contributes multiple months, this assumption fails — the CI will be artificially narrow. Use member-level rather than member-month-level as the denominator unit when repeated-measures correlation is a concern.",
+        "Results below stability_min=30 still compute numerically but should never appear in comparative rankings or public-facing reports. A rate of 2/5 (40%) and a rate of 20/50 (40%) are not equivalent analytically — the former has a CI spanning roughly 7%–85%."
+      ]
+    },
+    {
+      "id": "pmpm",
+      "rank": 3,
+      "name": "PMPM",
+      "status": "built",
+      "statusNote": "",
+      "techStack": "pandas only. PMPM is arithmetic (cost / member-months) with partial-month handling — not a modeling task. No specialized library needed.",
+      "analyticalStack": "Normalization arithmetic: prorated partial-month accrual, optional p99 percentile truncation to control high-cost-claimant skew. Both truncated and untruncated results always emitted for sensitivity visibility (ANL-009).",
+      "dataVolume": "Cost data at claim-line grain (100K–10M rows) aggregated against member-month data (10K–1M rows). The join is the expensive step; the arithmetic is cheap.",
+      "inputGrain": "Claim/encounter cost rows joined to member-month spans",
+      "outputGrain": "Member-month or group_by rollup (plan, county, provider panel)",
+      "modulesTouched": "core/analysis/{base,pmpm,complexity_monitor}, core/cleaning/{amount_resolver,span_resolver[optional]}",
+      "useCases": [
+        "ACO/VBC baseline total cost of care calculation for benchmark setting — aggregating Medicare Part A and Part B spend per attributed member-month for the baseline performance period.",
+        "Plan-to-plan per-member cost comparison for MA bid development, controlling for partial-year enrollment by prorating each member's contribution proportional to enrolled months.",
+        "Actuarial trend reporting: computing rolling 12-month PMPM trends by service category (inpatient, outpatient, professional, pharmacy) for contract pricing or reserve development.",
+        "Episode model pre-analysis: establishing baseline PMPM for a defined patient cohort (e.g., joint replacement patients) in the pre-trigger period to set a cost benchmark for a BPCI Advanced or TEAM episode."
+      ],
+      "caveats": [
+        "Partial-month enrollment proration is among the most common PMPM implementation errors. A member enrolled for 15 of 31 days in a month contributes 15/31 ≈ 0.484 member-months, not 1.0. Failure to prorate inflates the denominator and understates per-member cost, creating a phantom trend of improving efficiency.",
+        "Claims runout means trailing months are systematically underestimated — paid claims for services rendered in month M continue arriving for 3–18 months afterward depending on claim type. Always use complete_through metadata to exclude or flag incomplete trailing periods before computing trend.",
+        "Medicare Part A and Part B must both be included for total cost of care. Omitting either understates total PMPM by 30–50% depending on the population. Part D spend is an additional layer that must be explicitly included or excluded based on the analytic scope.",
+        "DRG bundled inpatient payment means the claim header amount (CLM_PMT_AMT) represents the full episode payment, not each revenue-center line. Double-counting occurs when both the header and individual revenue-center lines are summed for the same inpatient stay."
+      ]
+    },
+    {
+      "id": "trend",
+      "rank": 4,
+      "name": "TREND",
+      "status": "built",
+      "statusNote": "",
+      "techStack": "pandas (period reindexing) + matplotlib for chart_line output. No forecasting library — trend is descriptive-over-time, not projective.",
+      "analyticalStack": "Period-over-period and rolling aggregation with explicit gap handling: missing periods are reindexed to NaN rather than silently skipped (ANL-010). Runout-aware by construction — reads meta.suspected_incomplete_through and meta.complete_through.",
+      "dataVolume": "12–60 month series per stratum, same scale as descriptive.",
+      "inputGrain": "Any event grain with a period_col",
+      "outputGrain": "Period rollup (month/quarter/year)",
+      "modulesTouched": "core/analysis/{base,trend,complexity_monitor}, core/validation/anomaly_detect.py [KERNEL], core/validation/runout.py [optional], core/visualization/chart_line.py",
+      "useCases": [
+        "COVID-19 utilization impact analysis: tracking inpatient admission rates, ED visits, and elective procedure volumes across 2018–2024 to quantify the structural break and subsequent rebound.",
+        "IRA drug pricing impact monitoring: tracking Part B oncology drug allowed amounts per-claim before and after Cycle 1 negotiated price effective dates (January 2026).",
+        "MA enrollment trend analysis: monthly enrollment counts by plan type (HMO, PPO, PFFS) and county against CMS benchmark growth rates.",
+        "30-day readmission rate trend under HRRP: tracking condition-specific readmission rates across fiscal years for penalty assessment and improvement monitoring."
+      ],
+      "caveats": [
+        "Claims runout creates an artificial downward trend in trailing periods. The most recent 2–6 months of data will appear lower than complete periods simply because not all claims have been paid yet. Mark incomplete periods explicitly (NaN or a hatched bar in charts) rather than connecting the line through a suppressed trailing value — the latter projects a fake improvement.",
+        "The ICD-10 transition (October 2015) and the HCC V28 transition (2024–2026) each cause apparent disease burden shifts in trend data that are coding artifacts, not real clinical changes. Annotate these structural breaks in any trend that spans the transition dates.",
+        "COVID creates a non-stationarity that invalidates simple year-over-year comparisons across 2019–2022 without explicit break handling. A 2019 vs 2020 comparison shows an artificial decline; 2021 vs 2020 shows an artificial rebound. Both are driven by the utilization collapse and recovery, not secular trends."
+      ]
+    },
+    {
+      "id": "comparison",
+      "rank": 5,
+      "name": "COMPARISON",
+      "status": "built",
+      "statusNote": "",
+      "techStack": "scipy.stats (ttest_ind, mannwhitneyu, chi2_contingency) for tests; statsmodels (TTestIndPower / NormalIndPower) for power calculation.",
+      "analyticalStack": "Two-group hypothesis testing: Welch's t-test (default, unequal variance), Mann-Whitney U (non-normal), chi-square (categorical). Power/MDE reported alongside p-value so underpowered comparisons are visible.",
+      "dataVolume": "Two arms, 100–100K observations each. Below ~30 per arm the test runs but ANL-002 flags sample size.",
+      "inputGrain": "Any unit with a binary or categorical group assignment (pre/post period, intervention/control cohort, plan A vs B)",
+      "outputGrain": "Group-level test statistic with power and MDE",
+      "modulesTouched": "core/analysis/{base,comparison,complexity_monitor}",
+      "useCases": [
+        "Pre/post analysis of the Patient-Driven Payment Model (PDPM) implementation in SNF care — comparing resource utilization and cost per stay before (FY2019) and after (FY2020) the October 2019 effective date.",
+        "Intervention/control cohort comparison in a CMMI model evaluation: comparing total cost of care PMPM between ACO REACH participants and a matched comparison group.",
+        "Plan performance comparison: testing whether quality measure rates (e.g., preventive care compliance) differ significantly between two MA plan contracts serving the same county.",
+        "Readmission rate comparison between two hospital cohorts — high vs. low post-acute referral network quality — to quantify the impact of PAC network selection on HRRP exposure."
+      ],
+      "caveats": [
+        "Healthcare populations are almost never randomly assigned to comparison groups. Selection bias is the default assumption — ACO participants are healthier and better-organized than non-participants; high-volume hospitals have systematically different case mix than low-volume ones. Report the comparison alongside covariate balance statistics, not as a standalone p-value.",
+        "Healthcare cost distributions are heavily right-skewed. Welch's t-test on raw PMPM or CLM_PMT_AMT values is unreliable. Apply log transformation or use Mann-Whitney U before interpreting comparisons of cost outcomes. Equal variance between arms almost never holds for cost data.",
+        "A statistically significant result without effect size and CI is incomplete for any healthcare analytic deliverable. A p=0.03 readmission rate difference of 0.2 percentage points is not actionable; a p=0.03 difference of 3 percentage points with CI [1.1, 4.9] is.",
+        "Chi-square fails when expected cell counts fall below 5 — which is common for rare outcomes (mortality, specific procedure codes). Use Fisher's exact test for 2×2 tables with rare outcomes, or Barnard's test for unconstrained margins."
+      ]
+    },
+    {
+      "id": "regression",
+      "rank": 6,
+      "name": "REGRESSION",
+      "status": "built",
+      "statusNote": "",
+      "techStack": "statsmodels (OLS, GLM with Binomial/Poisson family). Chosen over scikit-learn specifically because statsmodels exposes p-values, CIs, and VIF diagnostics natively — which inferential healthcare analysis requires and sklearn does not surface by default. patsy for R-style formula strings.",
+      "analyticalStack": "OLS (continuous outcomes: cost), Binomial GLM / logistic (binary: 30-day readmission), Poisson GLM (count: ED visits). VIF for multicollinearity (ANL-004). Events-per-variable and separation detection run BEFORE model fit (ANL-003) — a separated logistic model fits 'successfully' with meaningless infinite coefficients.",
+      "dataVolume": "Events-per-variable floor (default 10) sets the real constraint. A 15-predictor readmission model needs ≥150 readmission events — at a 12% rate, that means ≥1,250 eligible admissions minimum, and 10–50× that for a stable production model.",
+      "inputGrain": "One row per modeled unit (admission, episode, or member-year) with outcome and covariate columns",
+      "outputGrain": "Coefficient table with p-values, CIs, and model diagnostics",
+      "modulesTouched": "core/analysis/{base,regression,complexity_monitor}",
+      "useCases": [
+        "30-day readmission risk modeling using logistic regression with HCC-mapped diagnosis categories, age/sex/dual-eligibility covariates, and facility fixed effects for hospital VBP performance prediction.",
+        "Total cost of care prediction with Poisson or Gamma GLM for ACO benchmark development, using HCC risk score, chronic condition flags from CCW, and prior-year spend as predictors.",
+        "Quality measure performance prediction for MIPS APM scoring, using OLS to identify provider characteristics (NPI specialty, rural/urban designation, panel size) associated with measure rate variation.",
+        "ESRD transition-to-home-dialysis rate modeling: logistic regression on patient characteristics to understand which populations are least likely to transition, informing CMMI model targeting."
+      ],
+      "caveats": [
+        "Healthcare cost distributions are heavily right-skewed. OLS on raw costs produces biased and inefficient estimates driven by a handful of catastrophic claimants. Use log transformation (and exponentiate coefficients for interpretation) or a Gamma GLM with log link — the latter handles the skew natively without requiring the retransformation correction that log-OLS needs.",
+        "ICD-10 diagnosis codes as raw predictors create thousands of sparse binary features that will overfit any reasonably sized dataset. Map diagnoses to HCC categories, Clinical Classifications Software (CCS) groupings, or Elixhauser comorbidity flags before entering them as covariates.",
+        "Temporal leakage is common in retrospective CMS data. Using diagnoses from the same service period to predict an outcome in that period (e.g., using a hospitalization's discharge diagnoses to predict whether the patient was readmitted) is valid only for descriptive modeling, not for a model intended to identify risk before the event occurs.",
+        "Separation detection before logistic model fit is non-negotiable. For rare outcomes in small datasets, a predictor that perfectly separates outcome=1 from outcome=0 will produce an infinite coefficient and a model that 'converges' but is analytically meaningless. Run the pre-check, not a post-fit diagnostic."
+      ]
+    },
+    {
+      "id": "risk_score",
+      "rank": 7,
+      "name": "RISK_SCORE",
+      "status": "built",
+      "statusNote": "",
+      "techStack": "pandas against a user-supplied HCC crosswalk and coefficient table (required reference data). No ML library — CMS-HCC is a published additive coefficient model; this task applies known weights rather than estimating them.",
+      "analyticalStack": "Additive risk score construction: sum of applicable HCC coefficients by model version (V24/V28/blend) plus demographic factors, adjusted by normalization factor and coding intensity factor from the CMS Rate Announcement. Model-year/service-year mismatch is a hard bootstrap-time check (ANL-008), not a runtime warning.",
+      "dataVolume": "30K–80K input rows (10K members × 3–8 HCC-eligible diagnoses each), collapsing to one score per member.",
+      "inputGrain": "Diagnosis rows (member × dx_cd)",
+      "outputGrain": "Member × payment-year risk score (RAF)",
+      "modulesTouched": "core/analysis/{base,risk_score,complexity_monitor} + CMS-HCC crosswalk and coefficient reference files (user-supplied, REQUIRED for this task)",
+      "useCases": [
+        "MA plan risk score calculation for CMS bid development — computing expected RAF scores for the plan's enrollment to project capitation revenue and set premium rates.",
+        "ACO REACH prospective benchmark risk adjustment — computing participant RAF scores to adjust the expenditure benchmark for the attributed population's predicted health status.",
+        "RADV audit preparation — reconciling submitted diagnosis codes against encounter data to identify HCCs at risk of deletion and estimate the associated payment impact before CMS audit.",
+        "HCC V24-to-V28 transition impact quantification — running both model versions on the same population to estimate the revenue impact of the blend schedule during the 2024–2026 transition."
+      ],
+      "caveats": [
+        "The HCC V28 transition uses a blend of V24 and V28 scores during 2024–2026 (33% V28 in 2024, 67% V28 in 2025, 100% V28 in 2026). Applying either model in isolation produces a score that does not match CMS's blended calculation during the transition period.",
+        "Both the normalization factor and the coding intensity factor from the annual CMS Rate Announcement must be applied. The normalization factor ensures scores are calibrated to the FFS reference population; the coding intensity factor adjusts for the systematic difference in diagnosis coding completeness between MA and FFS. Omitting either produces a RAF that will not reconcile to CMS's payment calculation.",
+        "V28 explicitly removes approximately 2,000 ICD-10 codes that were previously HCC-eligible — many in categories historically associated with upcoding (e.g., some major depression and diabetes complication codes). Populations relying heavily on these codes will see RAF declines that reflect coding artifact removal, not true health status improvement. Trend comparisons across the V24/V28 boundary are not apples-to-apples.",
+        "MA encounter data has historically had lower diagnosis capture completeness than Medicare FFS claims, creating systematically lower RAF scores for MA populations analyzed from encounter data vs. FFS claims data for equivalent health status. Adjusting for this gap requires the supplemental data (chart review, lab results) that MA plans submit alongside encounter data."
+      ]
+    },
+    {
+      "id": "benchmark",
+      "rank": 8,
+      "name": "BENCHMARK",
+      "status": "specified",
+      "statusNote": "v2.1 — added, config specified, not yet built",
+      "techStack": "pandas + statsmodels.stats.proportion (two-proportion z-test) or scipy.stats depending on comparison type.",
+      "analyticalStack": "Observed-vs-external comparison: rate difference, rate ratio, percentile rank against a benchmark distribution, or z-score. Vintage-matching enforced structurally — ANL-013 hard-errors a vintage mismatch.",
+      "dataVolume": "Observed side: whatever rate_measure/pmpm produced upstream (chain_from). Benchmark side: small reference table — hundreds to low thousands of rows.",
+      "inputGrain": "rate_measure or pmpm RESULT (not raw claims) joined to a benchmark_reference profile row on measure/population keys",
+      "outputGrain": "Comparison result (rate difference, ratio, or z-score) with CI",
+      "modulesTouched": "core/analysis/{base,benchmark,complexity_monitor}, chains from a prior run_id via chain_from",
+      "useCases": [
+        "MSSP ACO performance comparison against CMS regional fee-for-service expenditure benchmarks — determining whether the ACO generated shared savings or losses for the performance year.",
+        "MIPS quality measure benchmark comparison for payment adjustment calculation — ranking a clinician's measure rate against the national performance distribution to determine the MIPS score contribution.",
+        "MA plan premium adequacy testing — comparing the plan's observed PMPM cost to CMS national per capita cost benchmarks by county, adjusted for enrollment mix.",
+        "State Medicaid program cost comparison against FFS benchmark under a managed care contract — evaluating whether the MCO's per-member cost is within the actuarially sound rate corridor."
+      ],
+      "caveats": [
+        "Vintage mismatch — comparing 2024 observed rates to a 2020 benchmark — is the single most common and consequential benchmark error. It cannot be corrected by any analytical adjustment after the fact. The comparison is simply invalid. ANL-013 exists specifically because this error is easy to make and hard to catch by visual inspection of the output.",
+        "Geographic variation in Medicare FFS spending is up to 2× between low- and high-cost regions. National benchmarks applied to a single-region program without geographic adjustment will systematically penalize high-cost regions and reward low-cost ones, regardless of whether the program is actually performing well or poorly.",
+        "Population mix differences require risk adjustment before rate comparison. A plan with a sicker, older, or more dual-eligible enrollment will always look more expensive in raw PMPM than a plan with a younger, healthier enrollment — even if it delivers equivalent or superior care per risk unit. The benchmark comparison is only meaningful after risk normalization."
+      ]
+    },
+    {
+      "id": "provider_profile",
+      "rank": 9,
+      "name": "PROVIDER_PROFILE",
+      "status": "specified",
+      "statusNote": "v2.1 — added, config specified (Opus-gated)",
+      "techStack": "pandas + scipy.stats (beta-binomial shrinkage) or statsmodels MixedLM for alternative reliability method + matplotlib chart_funnel (v2.1 addition).",
+      "analyticalStack": "Indirect standardization (observed/expected ratio) with reliability adjustment (empirical Bayes shrinkage toward population mean, weighted by panel size). Funnel plot control limits (95%/99.8% by default) rather than a simple ranked list.",
+      "dataVolume": "50–5,000 providers, each with a panel of 10–2,000 attributed members/episodes. Panels under min_panel_cnt (default 30) excluded from ranking.",
+      "inputGrain": "Outcome events attributed to a provider/TIN unit",
+      "outputGrain": "Provider-level O/E ratio with reliability-adjusted score",
+      "modulesTouched": "core/analysis/{base,provider_profile,complexity_monitor}, core/visualization/chart_funnel.py",
+      "useCases": [
+        "ACO REACH participant provider performance profiling — computing O/E ratios for total cost of care and quality measure rates to identify outlier providers for network optimization.",
+        "MIPS performance attribution profiling — tracking individual clinician MIPS scores and category-level performance across performance years for Advanced APM qualification tracking.",
+        "SNF/PAC quality tiering for value-based contracting under the TEAM episode model — ranking post-acute facilities by episode cost and readmission O/E ratios to build a preferred network.",
+        "Home health agency quality profiling for HHVBP performance payment prediction — computing quality measure O/E ratios adjusted for agency enrollment mix and service area characteristics."
+      ],
+      "caveats": [
+        "Attribution methodology profoundly affects which outcomes appear on which provider's profile. TIN-level vs NPI-level attribution, prospective vs retrospective assignment, and plurality vs total-cost attribution rules each produce materially different rankings for the same care delivered. The attribution method must be fixed and disclosed before any comparative report.",
+        "Small panel sizes dominate simple ranked lists. A provider with 3 adverse outcomes out of 10 episodes (30%) looks far worse than one with 50 out of 200 (25%) in a ranked table, but the former is nearly unmeasurable while the latter is reliably estimated. Empirical Bayes shrinkage corrects this by pulling small-panel estimates toward the population mean — the funnel plot makes the reliability boundary visible.",
+        "TIN vs NPI attribution creates double-counting risk when physicians work across multiple practice settings. A physician billing under both a group TIN and individual NPI may appear in two separate provider profiles for the same attributed beneficiaries.",
+        "Funnel plots are the analytically correct visualization for this task. Ranked bar charts without reliability-adjusted CIs are indefensible for public reporting — they will systematically misidentify small-panel providers as outliers and large-panel average performers as exemplars."
+      ]
+    },
+    {
+      "id": "reconciliation",
+      "rank": 10,
+      "name": "RECONCILIATION",
+      "status": "specified",
+      "statusNote": "v2.1 — added, config specified (Opus-gated)",
+      "techStack": "pandas only. Deliberately no specialized library — this task is arithmetic composition of declared components, not statistical estimation. Complexity is in making the component sequence auditable.",
+      "analyticalStack": "Component-based financial reconciliation: historical trend or external benchmark construction, high-cost claimant truncation (p99), risk-adjustment factor application (with optional year-over-year growth cap), minimum savings rate threshold test, quality multiplier. components_must_reconcile asserts arithmetic closes (ANL-015).",
+      "dataVolume": "Population and cost data at the same scale as PMPM. Benchmark parameters are a handful of rows per performance year.",
+      "inputGrain": "Attributed member-months joined to cost data",
+      "outputGrain": "One row per performance period (and optionally per region/cohort)",
+      "modulesTouched": "core/analysis/{base,reconciliation,complexity_monitor}. Validate against the MSSP ACO PUF — the one task with published ground truth to check arithmetic against.",
+      "useCases": [
+        "MSSP ACO financial reconciliation — replicating CMS's published methodology to validate or audit settlement amounts before the official determination, using the public ACO PUF as ground truth.",
+        "MA-equivalent VBC contract settlement for delegated risk arrangements — computing surplus/deficit for a provider organization bearing financial risk under an MA plan contract.",
+        "BPCI Advanced episode bundle surplus/deficit calculation — reconciling actual episode spending against the episode target price for each episode type and performance year.",
+        "TEAM model prospective performance modeling — projecting expected episode performance before the performance year to inform hospital participation strategy and post-acute network investment."
+      ],
+      "caveats": [
+        "Every component in the reconciliation sequence must close — if your result does not match CMS's published ACO PUF calculation, the error is in your component application sequence, not in the source data. The diagnostics object showing every component in evaluation order is the actual deliverable; the headline savings number is just the bottom line.",
+        "The minimum savings rate (MSR) threshold is binary and non-linear — a program generating $5M in gross savings can receive $0 in shared savings if it falls below the MSR. The MSR varies by ACO size and track, making small-ACO reconciliation extremely sensitive to the population denominator calculation.",
+        "Quality multiplier sequencing matters — some contract methodologies apply the quality multiplier before the MSR threshold test (meaning quality scores can push a program over the MSR) while others apply it after. The sequence must exactly match the contract language; reversing it changes the settlement amount even though both arithmetic orderings are internally consistent.",
+        "p99 truncation applied before vs after risk adjustment produces different results. The truncation threshold should be defined on pre-truncation, pre-adjustment costs to match CMS benchmark methodology. Applying it at any other stage in the sequence will produce a number that looks reasonable but will not reconcile to CMS."
+      ]
+    },
+    {
+      "id": "segmentation",
+      "rank": 11,
+      "name": "SEGMENTATION",
+      "status": "deferred",
+      "statusNote": "v1.1 — deferred, enum value reserved",
+      "techStack": "scikit-learn (KMeans) or rule-based pandas cut/qcut — config must choose explicitly since silently picking one changes results.",
+      "analyticalStack": "K-means clustering, quartile/quintile stratification, or rule-based tiering (e.g., CMS-HCC risk tiers). Elbow/silhouette diagnostics required if K-means is used to avoid arbitrary K choice.",
+      "dataVolume": "Member or provider grain, 10K–1M rows, with 5–30 feature columns. K-means degrades in interpretability well before it degrades in compute at healthcare-typical scale.",
+      "inputGrain": "Member, provider, or claim — one row per unit with feature columns",
+      "outputGrain": "Unit × segment label",
+      "modulesTouched": "core/analysis/segmentation.py [not yet built]",
+      "useCases": [
+        "High-risk member identification for care management program targeting — stratifying an MA or ACO population into risk tiers using HCC score, prior-year utilization, and chronic condition flags.",
+        "Provider network tiering by quality/cost performance for value-based contracting — grouping SNFs or home health agencies into tiers based on episode cost, readmission rate, and quality measure O/E ratios.",
+        "Member outreach prioritization by predicted care gaps — segmenting a diabetic population by compliance with preventive care measures (HbA1c, nephropathy screening, eye exam) to target gap-closure interventions."
+      ],
+      "caveats": [
+        "K-means assumes Euclidean distance, which is meaningless for mixed clinical and cost features without standardization. Always normalize all features to comparable scales (z-scores or [0,1] min-max) before K-means — a cost variable with values in the thousands will dominate a binary flag if left on its natural scale.",
+        "Rule-based tiering (CMS-HCC risk tiers, MIPS performance categories) is usually more defensible for regulatory and contractual purposes than unsupervised clustering, because the logic is auditable, reproducible, and explainable to non-technical stakeholders.",
+        "Don't conflate predictive risk scores with segmentation. A risk score answers 'how likely is this outcome?' while a segment answers 'which group does this unit belong to?' Both are useful but answer different questions and require different validation approaches — a risk model is validated by calibration and discrimination; a segmentation is validated by clinical coherence and actionability."
+      ]
+    },
+    {
+      "id": "episode",
+      "rank": 12,
+      "name": "EPISODE",
+      "status": "deferred",
+      "statusNote": "v1.1 — deferred, enum value reserved",
+      "techStack": "pandas for windowing/grouping logic. No specialized episode-grouper library — CMS episode logic is implementable as explicit window rules in config rather than importing a black-box grouper.",
+      "analyticalStack": "Episode window construction (trigger event + defined look-back/look-forward window) and cost/event attribution to the episode. Unassigned-event accounting applies directly.",
+      "dataVolume": "Claim-line grain input (100K–5M rows) collapsing to episode grain (1K–100K episodes depending on trigger definition and population size).",
+      "inputGrain": "Claim lines anchored on a trigger event (surgery, admission, diagnosis onset)",
+      "outputGrain": "Episode — one row per constructed episode with attributed cost and quality events",
+      "modulesTouched": "core/analysis/episode.py [not yet built]",
+      "useCases": [
+        "BPCI Advanced 90-day episode cost analysis — constructing surgical and medical episode windows from MS-DRG trigger admissions and attributing all related post-acute care (SNF, HH, IRF, readmissions) to the episode for participant performance modeling.",
+        "CJR/TEAM mandatory episode cost attribution for hip/knee replacement and spinal fusion — replicating CMS's episode construction methodology to project payment surplus or deficit before the official reconciliation.",
+        "Oncology care episode construction for EOM performance analysis — defining 6-month chemotherapy episodes anchored on initiating chemotherapy claims and attributing all cancer-related Part A/B costs."
+      ],
+      "caveats": [
+        "Trigger event definition is everything. A difference of 30 vs. 90 days in the post-discharge attribution window can change episode count by 20–30% and shift attributed cost substantially. Define the inclusion/exclusion rules explicitly in configuration, not in code, so they are auditable.",
+        "Post-acute care attribution across TOB types requires explicit inclusion logic. SNF claims (TOB 21x), home health episodes (TOB 32x), and IRF stays (TOB 11x with qualifying DRGs) each use different claim structures. An episode construction that only follows inpatient TOB 11x claims will miss 30–50% of post-acute cost in surgical episodes.",
+        "Readmission-within-episode vs. readmission-as-separate-episode is a common double-counting error. If an unplanned readmission occurs within the 90-day episode window, it should be attributed to the original episode, not opened as a new trigger. Failure to enforce this rule inflates episode count and deflates average episode cost."
+      ]
+    },
+    {
+      "id": "forecast",
+      "rank": 13,
+      "name": "FORECAST",
+      "status": "deferred",
+      "statusNote": "v1.1 — deferred, enum value reserved",
+      "techStack": "statsmodels (ARIMA/SARIMAX) as default; Prophet (Meta) as optional dependency for series with strong seasonality. Both are heavier dependencies than anything else in the toolkit — the reason this task is deferred.",
+      "analyticalStack": "Time series extrapolation with explicit confidence intervals on the forecast, not just the point estimate. Must use the same runout-aware period handling as TREND — forecasting from a truncated trailing period without knowing it is truncated projects a false decline.",
+      "dataVolume": "12–60+ month history per series being forecast.",
+      "inputGrain": "Period rollup (same grain as TREND)",
+      "outputGrain": "Period rollup extended into the forecast horizon with CI bounds",
+      "modulesTouched": "core/analysis/forecast.py [not yet built]. Depends on core/validation/anomaly_detect.py [KERNEL] and runout.py [optional] being correct first.",
+      "useCases": [
+        "Actuarial rate development for VBC contract pricing — projecting baseline PMPM for the upcoming performance year using historical trend and seasonally adjusted ARIMA, accounting for known structural changes (IRA pricing, PDGM implementation).",
+        "MA enrollment forecast for network capacity planning — projecting enrollment by plan type and county for the following plan year to inform network adequacy filings and provider contracting.",
+        "Post-acute utilization trend projection for episode bundle risk modeling — forecasting SNF days per episode and home health episode rates to project TEAM model financial exposure."
+      ],
+      "caveats": [
+        "Forecasting from runout-affected trailing periods without adjustment projects a systematically downward-biased trend. The model observes a declining tail that is data artifact, not utilization reality, and extrapolates that decline into the forecast horizon. Always confirm complete_through before setting the training period end date.",
+        "COVID creates a structural break (2020–2021 utilization collapse, 2022 rebound) that standard ARIMA handles poorly without explicit exogenous intervention variables. A model trained on 2017–2024 data that ignores COVID will have distorted seasonal and trend coefficients because the most anomalous years are also the most recent ones.",
+        "Healthcare utilization has strong and consistent seasonality: flu season (Q1 inpatient spike), plan year deductible resets (Q1 suppression of elective care), Q4 utilization acceleration as deductibles are met. Plain ARIMA without a seasonal component will miss this pattern; SARIMAX with an explicit seasonal period is required for reliable forecasts."
+      ]
+    },
+    {
+      "id": "causal",
+      "rank": 14,
+      "name": "CAUSAL",
+      "status": "deferred",
+      "statusNote": "v1.1 — deferred, enum value reserved",
+      "techStack": "statsmodels for DiD (as regression with interaction term) and linearmodels/hand-rolled implementation for two-way fixed effects. scikit-learn or econml for propensity score matching.",
+      "analyticalStack": "Difference-in-differences (parallel-trends assumption must be checked with pre-period trend comparison — required diagnostic, not optional) and propensity score matching (balance diagnostics: standardized mean difference pre/post match — reported alongside the treatment effect estimate).",
+      "dataVolume": "Panel data: treatment and control groups across multiple pre/post periods. Credible DiD minimum: dozens of units per arm across 4+ periods. PSM needs control pool 3–10× the treated N.",
+      "inputGrain": "Unit × period panel with a treatment indicator and outcome at each period",
+      "outputGrain": "Treatment effect estimate with CI and balance diagnostics",
+      "modulesTouched": "core/analysis/causal.py [not yet built]. Intentionally gated behind explicit opt-in given how easily DiD/PSM are misapplied.",
+      "useCases": [
+        "CMMI model evaluation — estimating whether ACO REACH reduced total cost of care relative to a matched comparison group of non-participating providers using DiD with matched comparison group.",
+        "IRA drug pricing policy impact analysis — estimating the effect of Cycle 1 negotiated prices on Part B oncology drug utilization and spending using a difference-in-differences design with pre/post periods.",
+        "HHVBP national expansion impact — estimating the quality and cost effects of the 2022 mandatory national expansion using states that were in the original 9-state pilot as the treatment group and newly added states as a comparison."
+      ],
+      "caveats": [
+        "The parallel trends assumption for DiD must be demonstrated with pre-period data, not assumed. Plot treatment and control group outcome trends across multiple pre-intervention periods and formally test for differential pre-trends. If the pre-trends are not parallel, DiD will produce a biased treatment effect estimate regardless of how well the post-period data looks.",
+        "Voluntary program participation creates severe selection bias in CMMI model evaluations. ACO REACH participants self-selected into the program, meaning they are systematically better-organized, better-resourced, and better at measuring performance than non-participants. PSM reduces but cannot fully correct for this selection on unobservables.",
+        "Ashenfelter's dip is common in healthcare VBC program evaluations: participants often have an unusually bad performance year that triggers program enrollment (or meets a cost threshold for program eligibility), and the subsequent performance improvement is partly regression to the mean rather than true treatment effect. A pre-period trend plot will reveal this pattern — look for a dip in the treatment group just before the enrollment period.",
+        "CMS uses proprietary propensity score models for its own CMMI evaluations, which are not publicly available. A researcher's PSM using CMS public data will not exactly replicate CMS's published evaluation results even with the same underlying claims data. Report your PSM balance statistics explicitly rather than claiming equivalence to a CMS evaluation."
+      ]
+    }
+  ],
+  "crossCutting": {
+    "sharedFloor": "pandas, numpy, pyarrow (parquet I/O), pyyaml + jsonschema (config), matplotlib (all chart_* modules), pytest (all test tiers)",
+    "libraries": [
+      {"lib": "scipy.stats", "tasks": "rate_measure (Wilson CI), comparison (hypothesis tests), provider_profile (beta-binomial)"},
+      {"lib": "statsmodels", "tasks": "regression (OLS/GLM/VIF), comparison (power), provider_profile (MixedLM alt.), forecast (ARIMA), causal (DiD/fixed effects)"},
+      {"lib": "scikit-learn", "tasks": "segmentation (KMeans), causal (PSM alternative) [v1.1]"},
+      {"lib": "prophet", "tasks": "forecast — optional alternative to statsmodels SARIMAX [v1.1, heaviest single dependency]"}
+    ],
+    "platformNote": "Platform dependency is orthogonal to analysis_type. Any task can run against a flat file or a platform-adapted source. GROUP BY / JOIN work is pushed to the warehouse via sql_templates (Snowflake/BigQuery) for large sources, or done in pandas after a chunked pull for anything that fits in memory locally. The analyzer code itself is identical either way."
+  }
+}

@@ -1,8 +1,8 @@
-# Healthcare Topics Toolkits — Policy Synthesis
+# Healthcare Topics Analytical Stacks — Policy Synthesis
 
-[![Live Site](https://img.shields.io/badge/Live%20Site-GitHub%20Pages-0d1b2a?style=for-the-badge&logo=github)](https://corpuz-2024.github.io/healthcare_topics_toolkits/)
+[![Live Site](https://img.shields.io/badge/Live%20Site-GitHub%20Pages-0d1b2a?style=for-the-badge&logo=github)](https://corpuz-2024.github.io/healthcare_topics_analytical_stacks/)
 
-**https://corpuz-2024.github.io/healthcare_topics_toolkits/**
+**https://corpuz-2024.github.io/healthcare_topics_analytical_stacks/**
 
 A maintainable knowledge base and interactive visualization suite covering U.S. healthcare legislation, payment models, CMMI innovation programs, and research datasets. Built to support policy analysis, regulatory assessment, and evidence-based decision making.
 
@@ -10,7 +10,7 @@ A maintainable knowledge base and interactive visualization suite covering U.S. 
 
 ## Live Tool
 
-**Open in browser:** [https://corpuz-2024.github.io/healthcare_topics_toolkits/](https://corpuz-2024.github.io/healthcare_topics_toolkits/)
+**Open in browser:** [https://corpuz-2024.github.io/healthcare_topics_analytical_stacks/](https://corpuz-2024.github.io/healthcare_topics_analytical_stacks/)
 
 Or open `index.html` directly from the repo — no server required. All data is embedded inline.
 

@@ -10,7 +10,8 @@
   const initialized = {
     ontology:      false,
     reimbursement: false,
-    taxonomy:      false
+    taxonomy:      false,
+    analytical:    false
   };
 
   document.addEventListener('DOMContentLoaded', function () {
@@ -24,6 +25,9 @@
     }
     if (!window.__DATASETS__) {
       console.error('app.js: __DATASETS__ not found on window.');
+    }
+    if (!window.__ANALYTICAL_TASKS__) {
+      console.error('app.js: __ANALYTICAL_TASKS__ not found on window.');
     }
 
     /* --- Tab Switching ------------------------------------ */
@@ -90,6 +94,15 @@
           console.error('initTaxonomy error:', e);
         }
       }
+
+      if (tabName === 'analytical' && !initialized.analytical) {
+        initialized.analytical = true;
+        try {
+          initAnalytical(window.__ANALYTICAL_TASKS__);
+        } catch (e) {
+          console.error('initAnalytical error:', e);
+        }
+      }
     }
 
     tabs.forEach(tab => {
@@ -112,7 +125,7 @@
     /* --- Global keyboard shortcut: 1/2/3 to switch tabs -- */
     document.addEventListener('keydown', function (e) {
       if (e.target.tagName === 'INPUT' || e.target.tagName === 'SELECT') return;
-      const tabMap = { '1': 'ontology', '2': 'reimbursement', '3': 'taxonomy' };
+      const tabMap = { '1': 'ontology', '2': 'reimbursement', '3': 'taxonomy', '4': 'analytical' };
       if (tabMap[e.key]) activateTab(tabMap[e.key]);
     });
 
@@ -145,7 +158,8 @@
       `Top Shifts: ${(window.__TOP_SHIFTS__ || []).length} | ` +
       `Models: ${(window.__CMMI_MODELS__ || []).length} | ` +
       `Service Types: ${(window.__SERVICE_TYPES__ || []).length} | ` +
-      `Datasets: ${(window.__DATASETS__ || []).length}`
+      `Datasets: ${(window.__DATASETS__ || []).length} | ` +
+      `Analytical Tasks: ${(window.__ANALYTICAL_TASKS__ && window.__ANALYTICAL_TASKS__.tasks || []).length}`
     );
   });
 
