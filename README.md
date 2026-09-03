@@ -298,10 +298,4 @@ Each JSON file has a corresponding `window.__XXX__` variable embedded in `index.
 - Health services and policy researchers
 - Value-based care implementation teams
 
----
 
-## Inspiration 
-
-- Previous projects I worked on
-- Positions I was not hired for
-- Certain people for certain things 
