@@ -198,5 +198,49 @@
     "payers": ["Medicare FFS"],
     "states": "All",
     "linkageIds": ["DESYNPUF_ID"]
+  },
+  {
+    "name": "Medicare Part D Prescriber Public Use File",
+    "description": "Annual CMS public use file of prescriber-level Part D drug utilization and cost, including brand/generic drug name, total claims, days supply, and total drug cost by prescriber NPI. Used to study prescribing patterns and IRA-era formulary shifts.",
+    "category": "Drug/Formulary",
+    "years": "2013-present",
+    "unit": "Prescriber-drug-year",
+    "payers": ["Medicare Part D"],
+    "states": "All",
+    "linkageIds": ["NPI", "BRND_NAME", "GNRC_NAME"],
+    "use_case_by_stakeholder": [
+      { "stakeholder_type": "Payer/PBM", "intent": "formulary tier and utilization management design" },
+      { "stakeholder_type": "Pharma manufacturer", "intent": "post-negotiation prescribing-pattern monitoring" },
+      { "stakeholder_type": "Policy researcher", "intent": "IRA drug price negotiation impact evaluation" }
+    ]
+  },
+  {
+    "name": "Medicaid National Average Drug Acquisition Cost (NADAC)",
+    "description": "CMS-published survey-based national average retail pharmacy acquisition cost per NDC, updated weekly. Used as a Medicaid pharmacy reimbursement benchmark distinct from AWP-based pricing.",
+    "category": "Drug/Formulary",
+    "years": "2013-present",
+    "unit": "NDC-week",
+    "payers": ["Medicaid"],
+    "states": "All",
+    "linkageIds": ["NDC"],
+    "use_case_by_stakeholder": [
+      { "stakeholder_type": "State Medicaid agency", "intent": "pharmacy reimbursement benchmark-setting" },
+      { "stakeholder_type": "PBM", "intent": "acquisition-cost-based contract auditing" }
+    ]
+  },
+  {
+    "name": "Medicaid Drug Rebate Program / State Drug Utilization Data (SDUD)",
+    "description": "Quarterly state-reported Medicaid outpatient drug utilization and reimbursement data submitted under the Medicaid Drug Rebate Program (MDRP), covering units reimbursed and total amount reimbursed by NDC and state.",
+    "category": "Drug/Formulary",
+    "years": "1991-present",
+    "unit": "NDC-state-quarter",
+    "payers": ["Medicaid"],
+    "states": "All",
+    "linkageIds": ["NDC", "LABELER_CODE"],
+    "use_case_by_stakeholder": [
+      { "stakeholder_type": "Pharma manufacturer", "intent": "rebate liability reconciliation" },
+      { "stakeholder_type": "State Medicaid agency", "intent": "drug spend and rebate collection tracking" },
+      { "stakeholder_type": "Policy researcher", "intent": "cross-state Medicaid drug spending comparison" }
+    ]
   }
 ]

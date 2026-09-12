@@ -330,7 +330,9 @@ function initCompanyOntology(nodes, edges) {
     hit:         '#27ae60',
     pharma:      '#e76f51',
     analytics:   '#264653',
-    govt:        '#5B6663'
+    govt:        '#5B6663',
+    ai_gov:      '#8e44ad',
+    emergent:    '#95a5a6'
   };
 
   const RADII = {
@@ -342,7 +344,9 @@ function initCompanyOntology(nodes, edges) {
     hit:         10,
     pharma:      10,
     analytics:   10,
-    govt:        11
+    govt:        11,
+    ai_gov:      9,
+    emergent:    8
   };
 
   const CATEGORY_LABELS = {
@@ -354,7 +358,9 @@ function initCompanyOntology(nodes, edges) {
     hit:         'Health IT',
     pharma:      'Pharma',
     analytics:   'Analytics / AI',
-    govt:        'Government'
+    govt:        'Government',
+    ai_gov:      'AI Governance',
+    emergent:    'Special Topics (Emergent)'
   };
 
   const LINK_COLORS = {
@@ -362,7 +368,12 @@ function initCompanyOntology(nodes, edges) {
     serves:  '#f4a261',
     partner: '#2a9d8f',
     funds:   '#6a4c93',
-    tension: '#e63946'
+    tension: '#e63946',
+    cloud_ehr_partnership:       '#9b59b6',
+    regulates:                   '#c0392b',
+    certifies:                   '#16a085',
+    sets_voluntary_standard_for: '#8e44ad',
+    provides_internal_governance_for: '#34495e'
   };
 
   const LINK_DASH = {
@@ -370,7 +381,12 @@ function initCompanyOntology(nodes, edges) {
     serves:  '4,3',
     partner: '2,2',
     funds:   '6,3',
-    tension: '8,3'
+    tension: '8,3',
+    cloud_ehr_partnership:       '3,2',
+    regulates:                   '5,2',
+    certifies:                   '1,3',
+    sets_voluntary_standard_for: '4,4',
+    provides_internal_governance_for: '2,4'
   };
 
   /* --- Container & SVG ----------------------------------- */
@@ -436,9 +452,16 @@ function initCompanyOntology(nodes, edges) {
 
   function showTooltip(event, d) {
     tooltip.classList.add('visible');
+    const flagRows = [
+      d.qhin_designated !== undefined ? `<div class="tt-row"><span class="tt-label">TEFCA QHIN</span><span>${d.qhin_designated ? 'Yes' : 'No'}</span></div>` : '',
+      d.cms_aligned_network !== undefined ? `<div class="tt-row"><span class="tt-label">CMS-Aligned Network</span><span>${d.cms_aligned_network ? 'Yes' : 'No'}</span></div>` : '',
+      d.transitional ? `<div class="tt-row"><span class="tt-label">Status</span><span>Transitional</span></div>` : '',
+      d.weak_link ? `<div class="tt-row"><span class="tt-label">Link</span><span>⚠ Weak-link (2+ degrees from core)</span></div>` : ''
+    ].join('');
     tooltip.innerHTML = `
       <strong>${d.name}</strong>
       <div class="tt-row"><span class="tt-label">Category</span><span>${CATEGORY_LABELS[d.category] || d.category}</span></div>
+      ${flagRows}
       ${d.description ? `<div class="tt-desc">${d.description.substring(0, 220)}${d.description.length > 220 ? '…' : ''}</div>` : ''}
     `;
     positionTooltip(event);

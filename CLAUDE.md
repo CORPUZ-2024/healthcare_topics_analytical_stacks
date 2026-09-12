@@ -75,18 +75,26 @@ Sources to consult (web search each):
 {
   "id": "string (unique)",
   "name": "string",
-  "category": "legislation | program | payer | provider | hit | pharma | analytics | govt | digital",
-  "description": "string"
+  "category": "legislation | program | payer | provider | hit | pharma | analytics | govt | digital | ai_gov | emergent",
+  "description": "string",
+  "qhin_designated": "boolean (optional — interoperability nodes only, TEFCA QHIN status)",
+  "cms_aligned_network": "boolean (optional — interoperability nodes only, CMS-Aligned Network pledge status; independent of qhin_designated — a node can be either, both, or neither)",
+  "transitional": "boolean (optional — node is mid-transition, e.g. a recent acquisition/rebuild)",
+  "weak_link": "boolean (optional — true if the node's only path to the legislative/program core is 2+ edges removed, i.e. via an intermediary company rather than directly to a program/legislation/govt node; such nodes use category \"emergent\")"
 }
 ```
+`ai_gov` is for AI-governance stakeholders (FDA DHCoE/DHAC, ONC/ASTP, Joint Commission, CHAI-adjacent assurance providers, etc.) — it renders in this same graph and is toggled via the legend like any other category, not a separate view. `emergent` is for `weak_link: true` special-topics nodes that should not be intermingled with the main graph.
 
 **Edge schema:**
 ```json
 {
   "source": "node_id",
   "target": "node_id",
-  "type": "hier | serves | partner | funds | tension",
-  "label": "string"
+  "type": "hier | serves | partner | funds | tension | cloud_ehr_partnership | regulates | certifies | sets_voluntary_standard_for | provides_internal_governance_for",
+  "label": "string",
+  "relationship_type": "direct | emerging (optional — how formalized this specific connection is: direct = contractual/ownership/formal program participation with a verifiable public record; emerging = pilot/exploratory/distributed/not yet formalized)",
+  "tension_flag": "boolean (optional — true ONLY for an active, unresolved dispute with at least two named sides; general regulatory uncertainty does not qualify)",
+  "tension_note": "string | null (required if tension_flag is true — one sentence naming both sides of the dispute)"
 }
 ```
 
@@ -95,7 +103,9 @@ Edge type meanings:
 - `serves` — vendor or service relationship
 - `partner` — voluntary collaboration
 - `funds` — funding flow
-- `tension` — structural conflict or competitive tension
+- `tension` — structural conflict or competitive tension (pair with `tension_flag`/`tension_note`)
+- `cloud_ehr_partnership` — cloud vendor ↔ EHR/health-system relationship
+- `regulates` / `certifies` / `sets_voluntary_standard_for` / `provides_internal_governance_for` — AI-governance-specific vocabulary (distinct from the legislation→program edge vocabulary used elsewhere in this graph)
 
 **What to check and update:**
 | Change type | Action |
@@ -213,14 +223,16 @@ The taxonomy tab has two distinct content areas, each with its own update rules.
 {
   "name": "string",
   "description": "string",
-  "category": "Claims | Enrollment | Provider | Survey | Synthetic",
+  "category": "Claims | Enrollment | Provider | Survey | Synthetic | Drug/Formulary",
   "years": "string (e.g. '1991-present')",
   "unit": "string",
   "payers": ["string"],
   "states": "All | [list]",
-  "linkageIds": ["string"]
+  "linkageIds": ["string"],
+  "use_case_by_stakeholder": [{ "stakeholder_type": "string", "intent": "string" }]
 }
 ```
+`use_case_by_stakeholder` is optional and additive — it answers "who uses this dataset and why" (cross-tabulated a second way against the dataset's category), and does not replace or require any other use-case field.
 
 **What to check and update:**
 | Change type | Action |

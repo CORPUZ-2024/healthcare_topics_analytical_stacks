@@ -77,16 +77,16 @@
   {
     "id":"ts6",
     "rank":6,
-    "trend":"watch",
-    "title":"ACO REACH Equity Adjustments + MA Overlap",
-    "activeNode":"MSSP / ACO REACH",
-    "catalyst":"ACO REACH's new health equity benchmark methodology adjustments active 2026. Growing ACO REACH enrollment overlapping MA markets creates dual-attribution complexity. CMS finalizing overlap rules.",
+    "trend":"rising",
+    "title":"AI Governance Fragmentation — Three Regimes, No Reconciliation",
+    "activeNode":"Coalition for Health AI (CHAI)",
+    "catalyst":"FDA finalized PCCP guidance (Aug 2025) for continuously-learning AI devices, ONC's HTI-1 transparency rule took effect Jan 2025, and CHAI's model-card registry (3,000+ members) partnered with the Joint Commission (Sept 2025) on a certification track for 22,000+ accredited hospitals — three parallel regimes, mandatory and voluntary, with no single authority reconciling them.",
     "implications":[
-      "Astrana and Privia must integrate SDOH data and equity metrics into care management workflows",
-      "Attribution conflicts between ACO REACH and MA plans (SCAN, Alignment) require CMS adjudication — revenue uncertainty",
-      "Strive Health kidney VBC models must align care pathways with ACO REACH equity requirements for CKD populations",
-      "Google for Health and analytics platforms face rising demand for SDOH data integration",
-      "Included Health navigation benefit creates opportunity to address equity gaps — ACO REACH financially incentivizes this"
+      "Health systems (Kaiser, Providence, Cleveland Clinic) face three overlapping AI governance obligations rather than one",
+      "ModelOp and other CHAI-certified assurance providers compete to operationalize recurring model validation as the de facto trust layer",
+      "Liability for algorithm-driven coverage denials (MA prior-auth) remains unresolved even as FDA/ONC/CHAI regimes mature",
+      "State-level AI laws (Utah, Colorado, Texas) add a fourth layer of fragmentation on top of the federal regimes",
+      "Notable and other AI-enabled clinical automation vendors must track FDA device rules, ONC transparency rules, and CHAI/Joint Commission certification simultaneously"
     ]
   }
 ]

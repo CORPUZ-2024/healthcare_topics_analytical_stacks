@@ -45,12 +45,12 @@ healthcare_ref_materials/
 ├── data/
 │   ├── ontology_nodes.json     # 38 nodes: legislation, agency, program, model, rule
 │   ├── ontology_edges.json     # 51 directed relationships
-│   ├── company_nodes.json      # 58 nodes: payer, provider, pharma, hit, analytics, govt
-│   ├── company_edges.json      # 67 directed relationships (hier, serves, partner, funds, tension)
+│   ├── company_nodes.json      # 111 nodes: payer, provider, pharma, hit, analytics, govt, digital, ai_gov, emergent
+│   ├── company_edges.json      # 163 directed relationships (hier, serves, partner, funds, tension, cloud_ehr_partnership, regulates, certifies, sets_voluntary_standard_for, provides_internal_governance_for)
 │   ├── top_shifts.json         # 6 active policy shifts with catalysts and implications
 │   ├── cmmi_models.json        # 22 CMMI models with start/end dates (6 official categories)
 │   ├── service_types.json      # 12 service types with fee schedules
-│   └── datasets.json           # 20 CMS and public research datasets
+│   └── datasets.json           # 23 CMS and public research datasets (incl. Drug/Formulary)
 ├── cli/
 │   └── update.py               # Phased update CLI (see below)
 └── project_specs/              # Original specification documents
@@ -76,20 +76,25 @@ The Ontology tab contains two switchable force-directed graphs and a Top Shifts 
 
 ### Payer & Company Map
 
-**58 nodes across 9 categories:**
+**111 nodes across 11 categories:**
 
 | Category | Color | Examples |
 |----------|-------|---------|
 | Legislation | Red | ACA §3021/3022, MACRA, IRA 2022, HITECH, 21st Century Cures |
-| Program | Teal | Medicare Advantage, Medicaid/CHIP, QPP/MIPS, TEAM Model, CMS-0057-F, Drug Price Negotiation |
+| Program | Teal | Medicare Advantage, Medicaid/CHIP, QPP/MIPS, TEAM Model, CMS-0057-F, Drug Price Negotiation, ACO REACH, LEAD, TEFCA, CMS-Aligned Network, IBH, RMADA 3, Hospital IQR/HVBP/HRRP/HAC |
 | Payer | Blue | SCAN Health Plan, Alignment Health, Oscar Health, Covered California, Partnership HealthPlan, SFHP, Capital Rx, Included Health |
-| Provider | Steel blue | Privia Health, Astrana Health, DaVita, Strive Health, Omada Health, Hinge Health, August Health, AdventHealth |
-| Health IT | Green | Epic, Redox, Smile Digital Health, Notable, DoseSpot |
+| Provider | Steel blue | Privia Health, Astrana Health, DaVita, Strive Health, Omada Health, Hinge Health, August Health, AdventHealth, HCA, Kaiser Permanente, CommonSpirit, Ascension, Providence, Trinity Health, Advocate Health, Mayo Clinic, Cleveland Clinic, Mass General Brigham, Intermountain Health, Northwell Health, Mount Sinai, AHA |
+| Health IT | Green | Epic, Redox, Smile Digital Health, Notable, DoseSpot, Health Gorilla, CommonWell, eHealth Exchange, Surescripts, Oracle Health Information Network |
+| Digital Health | Purple | Microsoft Azure, Oracle Health, Google Cloud, AWS |
 | Pharma | Coral | AbbVie, Merck, Amgen, Roche/Genentech, GSK, Vertex, United Therapeutics, ConnectiveRx, Amazon Pharmacy, EVERSANA, Certara |
-| Analytics / AI | Dark teal | Tempus AI, Guardant Health, GeneDx, RTI International, Google for Health, Coalition for Health AI (CHAI), Anthropic |
-| Government | Slate | NIH, CDC, CA Dept of Health Care Services, CA Dept of Public Health |
+| Analytics / AI | Dark teal | Tempus AI, Guardant Health, GeneDx, RTI International, Google for Health, Coalition for Health AI (CHAI), Anthropic, Datavant, Aetion, Truveta, Komodo Health, IQVIA, Flatiron Health, TriNetX, HealthVerity, Particle Health, Acumen LLC, Mathematica, Yale New Haven Health/CORE |
+| Government | Slate | NIH, CDC, CA Dept of Health Care Services, CA Dept of Public Health, FDA |
+| AI Governance | Violet | FDA DHCoE, FDA DHAC, ONC/ASTP, The Joint Commission, Duke Health AI Evaluation & Governance Program, Duke-Margolis Institute, NIST, ModelOp |
+| Special Topics (Emergent) | Gray | Opioid Response (Program Context), ED Innovation (Program Context) — `weak_link: true` nodes, 2+ degrees from the legislative/program core |
 
-Edge types: **hier** (structural/mandated), **serves** (vendor/service), **partner** (voluntary), **funds** (funding), **tension** (structural tension)
+Edge types: **hier** (structural/mandated), **serves** (vendor/service), **partner** (voluntary), **funds** (funding), **tension** (structural/contentious dispute — carries `tension_note`), **cloud_ehr_partnership**, **regulates**, **certifies**, **sets_voluntary_standard_for**, **provides_internal_governance_for** (AI-governance-specific vocabulary)
+
+Every edge may also carry `relationship_type: "direct" | "emerging"`, describing how formalized that specific connection is. Interoperability/RWD nodes carry two independent booleans, `qhin_designated` and `cms_aligned_network`, since an entity can be either, both, or neither. The AI Governance and Special Topics (Emergent) categories are toggleable via the legend exactly like any other category — there is no separate view to switch to.
 
 ### Top Shifts
 
@@ -102,7 +107,7 @@ Six active shifts displayed as cards below the graphs, each with a trend rating,
 | 3 | MA Risk Adjustment Tightening (HCC V28 + RADV) | Critical |
 | 4 | TEAM Model — Mandatory Episode Accountability | Rising |
 | 5 | MIPS Sunset Proposal — Advanced APM Pressure (2029) | Rising |
-| 6 | ACO REACH Equity Adjustments + MA Overlap | Watch |
+| 6 | AI Governance Fragmentation — Three Regimes, No Reconciliation | Rising |
 
 **Interactions (both graphs):**
 - Pan and zoom the graph canvas
@@ -156,7 +161,7 @@ This structure lets you see program eligibility overlap — when multiple models
 
 ## Tab 3 — Data Taxonomy
 
-**20 datasets** across 5 categories, filterable by name, category, and payer:
+**23 datasets** across 6 categories, filterable by name, category, and payer:
 
 | Category | Datasets |
 |----------|---------|
@@ -165,8 +170,9 @@ This structure lets you see program eligibility overlap — when multiple models
 | Provider | POS File, HCRIS Cost Reports, MIPS Performance, ACO Public Data, ARF |
 | Survey | MCBS, MEPS, NHANES |
 | Synthetic | CMS SynPUF |
+| Drug/Formulary | Part D Prescriber PUF, Medicaid NADAC, Medicaid Drug Rebate Program / SDUD |
 
-Each dataset shows: description, years covered, unit of observation, payer scope, and linkage variable IDs (e.g. `BENE_ID`, `NPI`, `CLM_ID`). Rows expand for full detail. Export to CSV available.
+Each dataset shows: description, years covered, unit of observation, payer scope, and linkage variable IDs (e.g. `BENE_ID`, `NPI`, `CLM_ID`). Rows expand for full detail, including a **Use Case by Stakeholder** cross-tab (`use_case_by_stakeholder`) where present — who uses the dataset and for what intent, distinct from the dataset's category. Export to CSV available.
 
 ---
 
@@ -237,9 +243,10 @@ Each JSON file has a corresponding `window.__XXX__` variable embedded in `index.
 | Legislation | IRA 2022 (most recent major law) |
 | CMMI Models | August 2026 |
 | Fee Schedules | CY/FY 2025 Final Rules |
-| Datasets | August 2026 |
+| Datasets | September 2026 |
+| Payer & Company Map | September 2026 (hospital systems, interoperability/RWD, cloud/EHR partnerships, AI governance stakeholders) |
 
-**Sources:** CMS.gov, CMMI, Federal Register, ResDAC, AHRQ HCUP, NIH, CDC
+**Sources:** CMS.gov, CMMI, Federal Register, ResDAC, AHRQ HCUP, NIH, CDC, Becker's Hospital Review, KFF, Sequoia Project, FDA, ONC/ASTP, CHAI, The Joint Commission
 
 ---
 
@@ -272,10 +279,30 @@ Each JSON file has a corresponding `window.__XXX__` variable embedded in `index.
 
 ### Dataset
 ```json
-{ "name": "string", "description": "string", "category": "Claims|Enrollment|Provider|Survey|Synthetic",
+{ "name": "string", "description": "string", "category": "Claims|Enrollment|Provider|Survey|Synthetic|Drug/Formulary",
   "years": "string", "unit": "string", "payers": ["string"], "states": "All|[...]",
-  "linkageIds": ["string"] }
+  "linkageIds": ["string"],
+  "use_case_by_stakeholder": [{ "stakeholder_type": "string", "intent": "string" }]  // optional, additive
+}
 ```
+
+### Company / Payer Node (additional optional fields, added 2026-09)
+```json
+{ "qhin_designated": "boolean",       // interoperability nodes only — TEFCA QHIN status
+  "cms_aligned_network": "boolean",   // interoperability nodes only — CMS-Aligned Network pledge/status
+  "transitional": "boolean",          // e.g. Oracle Health's 2022 acquisition -> 2025 native rebuild
+  "weak_link": "boolean"              // true if the node's only path to the legislative/program core is 2+ edges; rendered under category "emergent"
+}
+```
+
+### Company / Payer Edge (additional optional fields, added 2026-09)
+```json
+{ "relationship_type": "direct | emerging",   // how formalized this specific connection is
+  "tension_flag": "boolean",                   // true only for an active, unresolved dispute with 2+ named sides
+  "tension_note": "string | null"              // required if tension_flag is true; names both sides
+}
+```
+Category enum extended with `ai_gov` (AI governance stakeholders — FDA DHCoE/DHAC, ONC/ASTP, Joint Commission, Duke AI programs, NIST, ModelOp) and `emergent` (weak-link special-topics nodes). Edge `type` enum extended with `cloud_ehr_partnership`, `regulates`, `certifies`, `sets_voluntary_standard_for`, `provides_internal_governance_for` for the AI-governance and cloud/EHR verticals — these render in the same single Payer & Company Map graph and are toggled via the existing legend, not a separate view.
 
 ---
 

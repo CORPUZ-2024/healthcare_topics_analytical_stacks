@@ -262,6 +262,13 @@ function initTaxonomy(datasets) {
             const dtd = document.createElement('td');
             dtd.colSpan = COLUMNS.length;
             const statesLabel = Array.isArray(d.states) ? d.states.join(', ') : (d.states || 'All');
+            const useCaseBlock = (d.use_case_by_stakeholder && d.use_case_by_stakeholder.length) ? `
+                <div style="min-width:220px">
+                  <span style="font-weight:600;color:#0d1b2a;font-size:11px;text-transform:uppercase;letter-spacing:.04em">Use Case by Stakeholder</span>
+                  <ul style="margin:4px 0 0;padding-left:16px;line-height:1.55;color:#374151">
+                    ${d.use_case_by_stakeholder.map(u => `<li><strong>${u.stakeholder_type}</strong> — ${u.intent}</li>`).join('')}
+                  </ul>
+                </div>` : '';
             dtd.innerHTML = `
               <div style="display:flex;gap:24px;flex-wrap:wrap">
                 <div>
@@ -272,6 +279,7 @@ function initTaxonomy(datasets) {
                   <span style="font-weight:600;color:#0d1b2a;font-size:11px;text-transform:uppercase;letter-spacing:.04em">States</span>
                   <p style="margin-top:4px">${statesLabel}</p>
                 </div>
+                ${useCaseBlock}
               </div>
             `;
             detailRow.appendChild(dtd);
