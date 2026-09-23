@@ -354,12 +354,25 @@ Added September 2026. This tab has **no backing JSON file** — it lives entirel
 | Change type | Action |
 |-------------|--------|
 | CBO publishes a new OBBBA coverage-loss score | Update the figure in National Context and Affected Populations sections; update the citation |
-| KFF or Georgetown CCF tracker data changes materially | Update the relevant Archetypes table row and its evidence grade |
-| A state case-study number is superseded (NE, MT, GA, TX figures) | Update the Archetypes table and the corresponding Case Study card |
-| Litigation status changes (ruling, injunction, dismissal) | Update the Litigants archetype row and the National Context tension edge (`data/company_edges.json`, `obbba_c` → `ca_dhcs`) |
+| KFF or Georgetown CCF tracker data changes materially | Update the relevant Categories of Impact table row and its evidence grade, **and the matching record in the any-state dataset** (see below) |
+| A state case-study number is superseded (NE, MT, GA, TX figures) | Update the Categories of Impact table, the corresponding Case Study card, **and that state's record in the any-state dataset** |
+| A state gains its first verifiable coverage-loss figure | Fill in that state's `est` and `grade` in the any-state dataset — it currently renders "no verified state-specific estimate" for 44 of 51 jurisdictions, which is the intended conservative default, not a gap to paper over |
+| Litigation status changes (ruling, injunction, dismissal) | Update the Litigants category row, the any-state dataset's litigation copy, and the National Context tension edge (`data/company_edges.json`, `obbba_c` → `ca_dhcs`) |
 | A state changes its individual mandate penalty (annual, CY change) | Update the Individual Mandate Variation table |
 | Evidence grade should change (e.g. an "insufficient" figure becomes verifiable) | Update the grade badge and remove the corresponding Limitations bullet if resolved |
-| New archetype-relevant state moves to enforcement | Add to the relevant Archetypes table row or create a new Case Study card if it becomes one of the three drill-down states |
+| A new state moves to enforcement ahead of the federal deadline | Add to the relevant Categories of Impact row, update its any-state record's timeline, or create a new Case Study card if it becomes one of the deep-dive states |
+| A new catalyst belongs on the coverage/cost quadrant | Add a `.sp-chip` to the correct quadrant cell with a `data-tip` carrying the full detail, and colour it by the existing three-way legend (direct OBBBA provision / separate catalyst / partial offset) |
+
+**Terminology:** this tab says **category**, not "archetype" — the section is "Categories of Impact." Keep that consistent when editing.
+
+**Estimate policy (applies to every figure added here):** lead with the most conservative credible number — normally the issuing agency's own central estimate — and name any higher-end scenario separately rather than headlining it. Never derive a state- or org-specific figure from a national average; if no attributable figure exists, say so. Every headline figure carries a source link.
+
+**Inline any-state dataset:** the drill-down in the Case Studies section is driven by a `var S = [...]` array inside a `<script>` block at the end of `<div id="tab-special">`. Each row is `[code, name, category, isExpansion, isLitigant, verifiedEstimate|null, grade, note]`. When editing it, keep these invariants true — they are cross-checked against figures published elsewhere on the tab:
+- 51 jurisdictions, no duplicate codes
+- 41 expansion jurisdictions (40 states + DC)
+- 26 litigant jurisdictions (25 states + DC)
+
+**Scoped styling:** the tab's headers, quadrant, and picker are styled by a `<style>` block scoped under `#tab-special`, inside `index.html`. Edit that block rather than `css/styles.css`, which stays frozen.
 
 **Also touches the standard data files** (these ARE covered by Steps 1–3 above, since OBBBA is now permanent content in the main graphs):
 - `data/ontology_nodes.json` / `ontology_edges.json` — `OBBBA2025` node and its 3 edges
@@ -381,7 +394,7 @@ Added September 2026. This tab has **no backing JSON file** — it lives entirel
 | `js/taxonomy.js` | Visualization logic — frozen |
 | `js/app.js` | Tab controller — frozen. Exception: the 5-tab keyboard-shortcut map (`tabMap`) was extended once, Sept 2026, to add the Special Topics tab; do not modify further during routine content refreshes |
 | `css/styles.css` | Styles — frozen |
-| `index.html` (structure) | Tab containers, nav, and script tags are frozen. Editable zones: (1) `window.__XXX__` inline data blocks; (2) `<div id="taxonomy-reference">` static reference HTML (Steps 6b/6c); (3) `<div id="tab-special">` static reference HTML (Step 10) |
+| `index.html` (structure) | Tab containers, nav, and the `js/` script tags are frozen. Editable zones: (1) `window.__XXX__` inline data blocks; (2) `<div id="taxonomy-reference">` static reference HTML (Steps 6b/6c); (3) `<div id="tab-special">` — its static reference HTML, its scoped `<style>` block, and its inline any-state drill-down `<script>` (Step 10) |
 | `.nojekyll` | Required for GitHub Pages static serving |
 | `.github/` | CI/CD — do not touch |
 

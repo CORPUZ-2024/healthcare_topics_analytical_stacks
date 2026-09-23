@@ -28,7 +28,7 @@ Or open `index.html` directly from the repo — no server required. All data is 
 | **Reimbursement Roadmap** | 3-level hierarchy swimlane (2010–2028) | Eligibility-based mapping of CMMI innovation models to 12 service types, organized by 6 official CMMI categories |
 | **Data Taxonomy** | Filterable, sortable table | CMS and public research datasets with linkage variables and metadata, plus static coding-system and cross-program-variable reference sections |
 | **Analytical Stacks** | Expandable card grid | 14 analysis task types with tech/analytical stacks, healthcare use cases, and caveats |
-| **Special Topics: OBBBA** | Static reference deep-dive | One Big Beautiful Bill Act (P.L. 119-21) national provisions, 5 state-archetype impact table, individual mandate variation, 3-state case-study drill-down (CA/MT/GA), and a topic-organized reading guide — see [Tab 5](#tab-5--special-topics-access--cost-under-obbba) below |
+| **Special Topics: OBBBA** | Static reference + interactive lookup | One Big Beautiful Bill Act (P.L. 119-21) national provisions, a 5-category state impact table, individual mandate variation, a visual coverage/cost quadrant with tooltips, case studies for CA/MT/GA plus an any-state drill-down covering all 50 states + DC, and a topic-organized reading guide — see [Tab 5](#tab-5--special-topics-access--cost-under-obbba) below |
 
 ---
 
@@ -59,6 +59,7 @@ healthcare_ref_materials/
 │   └── update.py               # Phased update CLI (see below)
 ├── special-topics/
 │   └── bay-area-navigation.html # Standalone companion page — Bay Area org risk rankings, county breakdown, externality cost reference, navigator action framework (linked from Tab 5)
+├── changelog/                  # Dated correction and revision logs, each entry linked to its sources
 └── project_specs/              # Spec/planning working files (not tracked in this repo)
 ```
 
@@ -189,18 +190,25 @@ Each dataset shows: description, years covered, unit of observation, payer scope
 A standalone static reference deep-dive on the One Big Beautiful Bill Act (H.R. 1 / P.L. 119-21, signed July 4, 2025), added September 2026. No backing JSON — edited directly in `index.html` under `<div id="tab-special">`, following the same pattern as the Data Taxonomy reference sections (Tab 3).
 
 **Covers:**
-- National context: work requirements, immigrant eligibility, PTC repayment-cap repeal, provider tax/SDP caps, Rural Health Transformation Fund
-- Archetypes of impact: 5 state response patterns (Early Adopters, Waiver-Only/Non-Expansion, Expansion+Waiver, Administratively Overwhelmed, Litigants), each graded by evidence quality (confirmed / modeled / insufficient)
+- National context: work requirements, immigrant eligibility (§71109 Medicaid-side vs. §71301/§71302 marketplace-side), PTC repayment-cap repeal, provider tax/SDP caps, Rural Health Transformation Fund
+- **Categories of impact:** 5 state response patterns (Early Adopters, Waiver-Only/Non-Expansion, Expansion+Waiver, Administratively Overwhelmed, Litigants), each graded by evidence quality (confirmed / modeled / insufficient)
 - Individual mandate variation by state for 2026
 - Disproportionately affected populations (coverage loss, subsidy clawback, ESRD/disability duals, immigrant eligibility)
-- A 2026–2030 coverage/cost quadrant grid
-- Three-state case-study drill-down: California (Expansion+Litigant), Montana (Early Adopter), Georgia (Waiver-Only) — plus a Bay Area companion page ([`special-topics/bay-area-navigation.html`](special-topics/bay-area-navigation.html), also published as a private Claude Artifact) with a curated actionable-insights framework, top-10 resilient/at-risk organization tables (modeled $ revenue-at-risk, patient counts, core strengths/weaknesses), a county-by-county risk delineation, a condition-by-condition externality cost reference, and a notable people/entities table
+- **A visual 2×2 coverage/cost quadrant** — catalysts plotted by dominant impact (coverage vs. cost) against origin (legislative/regulatory vs. market/structural), as colour-coded chips with hover/keyboard tooltips carrying the full detail. Colour keys whether a catalyst is a direct OBBBA provision, a separate compounding event, or a partial offset
+- **State drill-down:** three deep-dive case studies — California (Expansion+Litigant), Montana (Early Adopter), Georgia (Waiver-Only) — plus an **any-state lookup** covering all 50 states + DC, returning each jurisdiction's category, expansion status, work-requirement timeline, litigation posture, and verified coverage-loss figure where one exists
+- A Bay Area companion page ([`special-topics/bay-area-navigation.html`](special-topics/bay-area-navigation.html), also published as a private Claude Artifact) with a *potential* actionable-insights framework, top-10 resilient/at-risk organization tables, a county-by-county risk delineation, a condition-by-condition externality cost reference, and a notable people/entities table
 - A topic-organized works-cited reading guide
 - A static/dynamic refresh protocol (see [CLAUDE.md](CLAUDE.md) Step 10)
 
+**Estimate policy.** Where a range exists, the tab leads with the **most conservative credible figure** — normally the issuing agency's own central estimate — and names any higher-end scenario separately rather than headlining it. California leads with DHCS's ~1.1M central estimate (not the 3.4M high-end scenario); Nebraska with the state Medicaid director's ~200 first-round figure (not the 20,000–40,000 advocacy projection); Montana with DPHHS's own ~13,000. Where no state- or organization-specific figure is traceable to a named source, the tab says so rather than extrapolating from a national average — in the any-state lookup, only **7 of 51 jurisdictions** carry a verified figure, and the remaining 44 state that explicitly and link out to the KFF and Georgetown CCF trackers.
+
+**Framing.** The companion page's options are presented as *Potential* Actionable Insights: the stated intent is to explore what solution space exists and surface trade-offs, not to predict or prescribe what stakeholders will actually do. Several options depend on decisions that are unsettled as of writing (CalAIM waiver renewal, MCP contracting, litigation outcomes).
+
 **Cross-links:** The Ontology tab's #1 Top Shift links here; the Payer & Company Map gained an `obbba_c` legislation node plus `cbo`, `kff`, `georgetown_ccf`, `ga_dch`, and `rhtf_prog` nodes documenting the national-context entities this tab draws on.
 
-**Sourcing & fact-check trail:** every figure in this tab and its Bay Area companion page was run through an independent, primary-source verification pass (or explicitly flagged where it couldn't be confirmed) rather than published on first draft, across several audit rounds. The build log is kept locally in `project_specs/` (not tracked in this repo).
+**Sourcing & fact-check trail:** every figure in this tab and its Bay Area companion page was run through an independent, primary-source verification pass (or explicitly flagged where it couldn't be confirmed) rather than published on first draft, across several audit rounds. Corrections are logged in [`changelog/`](changelog/); the working build log is kept locally in `project_specs/` (not tracked in this repo).
+
+**Implementation note.** The tab's headers, quadrant, and state picker are styled by a `<style>` block scoped to `#tab-special` inside `index.html`, and the any-state lookup is a self-contained inline script — `css/styles.css` and everything in `js/` remain untouched, per the project's frozen-asset rule.
 
 ---
 
@@ -224,7 +232,7 @@ The full refresh protocol is defined in [`CLAUDE.md`](CLAUDE.md) at the repo roo
 | 7 | Sync all `window.__XXX__` inline blocks in `index.html` to match updated JSON files |
 | 8 | Update README freshness table |
 | 9 | Validate cross-references, commit, and push |
-| 10 | **Special Topics: OBBBA** (Tab 5, static HTML) — check CBO/KFF/Georgetown CCF tracking data, state case-study numbers, litigation status, and individual mandate penalty amounts; not covered by steps 1–9 |
+| 10 | **Special Topics: OBBBA** (Tab 5, static HTML + inline state dataset) — check CBO/KFF/Georgetown CCF tracking data, state case-study numbers, the any-state drill-down's per-state records, litigation status, and individual mandate penalty amounts; not covered by steps 1–9 |
 
 ### Design principle
 
