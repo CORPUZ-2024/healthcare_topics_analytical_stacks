@@ -505,70 +505,21 @@
   font-size: 0.82rem; line-height: 1.6; color: var(--text);
 }
 
-/* --- Coverage / Cost quadrant --- */
-#tab-special .sp-quad {
-  display: grid; grid-template-columns: 26px minmax(0,1fr) minmax(0,1fr);
-  grid-template-rows: auto auto auto; gap: 8px; margin-top: 18px;
+/* --- Coverage / Cost scatter chart --- */
+#tab-special .sp-chart-wrap {
+  margin-top: 16px; border: 1px solid var(--border);
+  border-radius: var(--radius-md); background: var(--white);
+  padding: 10px 6px 4px; overflow-x: auto;
 }
-#tab-special .sp-quad-colhead {
-  font-size: 0.72rem; font-weight: 700; text-transform: uppercase;
-  letter-spacing: 0.06em; color: var(--text-muted); text-align: center;
-  padding-bottom: 2px; border-bottom: 2px solid var(--border);
-}
-#tab-special .sp-quad-rowhead {
-  writing-mode: vertical-rl; transform: rotate(180deg);
-  font-size: 0.72rem; font-weight: 700; text-transform: uppercase;
-  letter-spacing: 0.06em; color: #fff; border-radius: var(--radius-sm);
-  display: flex; align-items: center; justify-content: center; padding: 6px 2px;
-}
-#tab-special .sp-rh-coverage { background: var(--teal); }
-#tab-special .sp-rh-cost { background: #6a4c93; }
-#tab-special .sp-quad-cell {
-  background: var(--white); border: 1px solid var(--border);
-  border-radius: var(--radius-md); padding: 12px;
-  display: flex; flex-wrap: wrap; gap: 7px; align-content: flex-start;
-}
-#tab-special .sp-chip {
-  position: relative; display: inline-flex; align-items: center; gap: 5px;
-  font-size: 0.78rem; font-weight: 600; line-height: 1.25;
-  padding: 5px 10px; border-radius: 14px; cursor: help;
-  border: 1px solid transparent; max-width: 100%;
-}
-#tab-special .sp-chip:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
-#tab-special .sp-chip-obbba  { background: #ffe3e5; color: #7d0a10; border-color: #f6c9cc; }
-#tab-special .sp-chip-sep    { background: #e4ecf6; color: #23456b; border-color: #cfdcec; }
-#tab-special .sp-chip-offset { background: #d9f2e6; color: #12543c; border-color: #bde3d1; }
-#tab-special .sp-chip::after {
-  content: attr(data-tip); position: absolute; bottom: calc(100% + 8px); left: 0;
-  width: max-content; max-width: 290px; background: var(--navy); color: #fff;
-  font-size: 0.74rem; font-weight: 400; line-height: 1.5; text-transform: none;
-  letter-spacing: 0; padding: 8px 11px; border-radius: var(--radius-sm);
-  box-shadow: var(--shadow-md); opacity: 0; visibility: hidden;
-  transition: opacity var(--transition); z-index: 40; pointer-events: none;
-}
-#tab-special .sp-chip:hover::after,
-#tab-special .sp-chip:focus-visible::after { opacity: 1; visibility: visible; }
-#tab-special .sp-chip-dot { width: 7px; height: 7px; border-radius: 50%; flex: 0 0 auto; }
+#tab-special .sp-chart { width: 100%; min-width: 620px; height: auto; display: block; }
+#tab-special .sp-chart text { font-family: inherit; }
+#tab-special .sp-chart g[class] { cursor: help; }
 #tab-special .sp-legend {
-  display: flex; flex-wrap: wrap; gap: 14px; margin-top: 12px;
+  display: flex; flex-wrap: wrap; gap: 16px; margin-top: 12px;
   font-size: 0.76rem; color: var(--text-muted); align-items: center;
 }
 #tab-special .sp-legend span { display: inline-flex; align-items: center; gap: 6px; }
-#tab-special .sp-cell-label { display: none; }
-/* Below 760px the 2x2 matrix stops working as a matrix — stack it into four
-   labelled blocks instead, so nothing is squeezed or scrolls sideways. */
-@media (max-width: 760px) {
-  #tab-special .sp-quad { grid-template-columns: minmax(0,1fr); }
-  #tab-special .sp-quad-colhead,
-  #tab-special .sp-quad-rowhead,
-  #tab-special .sp-quad-spacer { display: none; }
-  #tab-special .sp-cell-label {
-    display: block; width: 100%; font-size: 0.72rem; font-weight: 700;
-    text-transform: uppercase; letter-spacing: 0.05em; color: var(--teal);
-    margin-bottom: 2px;
-  }
-  #tab-special .sp-chip::after { left: auto; right: 0; max-width: 240px; }
-}
+#tab-special .sp-legend svg { flex: 0 0 auto; }
 
 /* --- State drill-down selector --- */
 #tab-special .sp-picker {
@@ -601,6 +552,38 @@
 #tab-special .sp-grade-confirmed { background: #d9f2e6; color: #12543c; }
 #tab-special .sp-grade-modeled   { background: #fdefd0; color: #7a4a00; }
 #tab-special .sp-grade-none      { background: #eef2f6; color: #52606d; }
+#tab-special .sp-state-name {
+  font-size: 1rem; font-weight: 700; color: var(--navy);
+  margin: 4px 0 10px; display: flex; flex-wrap: wrap; align-items: center; gap: 10px;
+}
+#tab-special .sp-state-cat {
+  font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em;
+  background: var(--teal); color: #fff; padding: 3px 10px; border-radius: 12px;
+}
+#tab-special .sp-analysis {
+  margin-top: 14px; border: 1px solid var(--border);
+  border-radius: var(--radius-md); overflow: hidden;
+}
+#tab-special .sp-analysis-head {
+  background: #f0f4f8; color: var(--navy); font-size: 0.74rem; font-weight: 700;
+  text-transform: uppercase; letter-spacing: 0.06em; padding: 8px 14px;
+  border-bottom: 1px solid var(--border);
+}
+#tab-special .sp-an-row {
+  display: grid; grid-template-columns: 160px minmax(0,1fr); gap: 14px;
+  padding: 10px 14px; border-bottom: 1px solid #eef2f6; align-items: start;
+}
+#tab-special .sp-an-row:last-child { border-bottom: none; }
+#tab-special .sp-an-label {
+  font-size: 0.72rem; font-weight: 700; text-transform: uppercase;
+  letter-spacing: 0.05em; color: var(--teal); padding-top: 2px;
+}
+#tab-special .sp-an-value { font-size: 0.84rem; line-height: 1.6; color: var(--text); }
+#tab-special ul.sp-stake { margin: 0; padding-left: 18px; display: flex; flex-direction: column; gap: 5px; }
+#tab-special ul.sp-stake li { font-size: 0.83rem; line-height: 1.55; }
+@media (max-width: 620px) {
+  #tab-special .sp-an-row { grid-template-columns: minmax(0,1fr); gap: 4px; }
+}
 </style>
   <div class="section-header">
     <h2>Special Topics: Access &amp; Cost under OBBBA</h2>
@@ -781,47 +764,113 @@
   <!-- ---- Section: 2026-2030 Grid ---- -->
   <div class="ref-section" id="special-grid">
     <h3 class="ref-section-title">The 2026–2030 Landscape: Coverage Loss Amid Accelerating Cost Growth</h3>
-    <p class="ref-section-desc">OBBBA is not an isolated event — it compounds an existing cost trend. PwC's 2027 medical cost trend survey (published June 11, 2026) puts Group at 9% and Individual at 8.5% — the highest commercial trend in 17 years, independent of anything in OBBBA. Aon's "9.5%" figure needs a year caveat: this project has two differently-dated Aon sources — one from Sept 2025 headlined "9.5% in 2026" and one from Aug 2026 headlined "9.5% in 2027" — and could not resolve in this pass whether that's a genuine coincidence across two separate annual reports or a citation mix-up; verify against Aon's original report before citing a specific year. Mercer's 8.2% and WTW's 11.1% figures circulate widely for this period but were not independently re-verified against each firm's own published report in this pass; cite with that caveat. The grid below plots each catalyst by its dominant impact (coverage vs. cost) and its origin (legislative/regulatory vs. market/structural).</p>
-    <p class="sp-subhead" style="margin-top:14px;">Hover or focus any chip for the full detail and date</p>
-    <div class="sp-quad">
-      <div class="sp-quad-spacer"></div>
-      <div class="sp-quad-colhead">Legislative / Regulatory catalyst</div>
-      <div class="sp-quad-colhead">Market / Structural catalyst</div>
+    <p class="ref-section-desc">OBBBA is not an isolated event — it compounds an existing cost trend. PwC's 2027 medical cost trend survey (published June 11, 2026) puts Group at 9% and Individual at 8.5% — the highest commercial trend in 17 years, independent of anything in OBBBA. Aon's "9.5%" figure needs a year caveat: this project has two differently-dated Aon sources — one from Sept 2025 headlined "9.5% in 2026" and one from Aug 2026 headlined "9.5% in 2027" — and could not resolve in this pass whether that's a genuine coincidence across two separate annual reports or a citation mix-up; verify against Aon's original report before citing a specific year. Mercer's 8.2% and WTW's 11.1% figures circulate widely for this period but were not independently re-verified against each firm's own published report in this pass; cite with that caveat. The chart below plots each catalyst on two axes — its effect on <strong>access</strong> (horizontal) against its effect on <strong>cost</strong> (vertical) — while marker shape and colour preserve the catalyst's <strong>root</strong>: an OBBBA provision, another federal law or policy, a market/structural force, a state action, or litigation. Reading those two dimensions together is the point: it shows not just how much pressure exists but where it originates, and therefore which lever could relieve it.</p>
+    <p class="sp-subhead" style="margin-top:14px;">Each catalyst is placed by its access effect (horizontal) against its cost effect (vertical); marker shape and colour carry its root. Hover any marker for the full detail.</p>
+    <div class="sp-chart-wrap">
+      <svg class="sp-chart" viewBox="0 0 900 600" role="img" aria-label="Scatter chart plotting OBBBA and adjacent catalysts by access impact against cost impact, with marker shape indicating each catalyst's root.">
+        <!-- quadrant washes -->
+        <rect x="90" y="30" width="390" height="220" fill="#fbeeec"></rect>
+        <rect x="480" y="30" width="390" height="220" fill="#fdf7ea"></rect>
+        <rect x="90" y="250" width="390" height="220" fill="#fdf7ea"></rect>
+        <rect x="480" y="250" width="390" height="220" fill="#edf6f0"></rect>
+        <rect x="90" y="30" width="780" height="440" fill="none" stroke="#c9d8e4" stroke-width="1"></rect>
 
-      <div class="sp-quad-rowhead sp-rh-coverage">Coverage impact</div>
-      <div class="sp-quad-cell">
-        <div class="sp-cell-label">Coverage impact &middot; Legislative catalyst</div>
-        <span class="sp-chip sp-chip-obbba" tabindex="0" data-tip="OBBBA Medicaid work requirements — 80 hrs/month for the ACA expansion population, effective by January 1, 2027 nationally across 40 expansion states + DC."><span class="sp-chip-dot" style="background:#7d0a10"></span>Work requirements</span>
-        <span class="sp-chip sp-chip-obbba" tabindex="0" data-tip="OBBBA immigrant eligibility narrowing — §71109 (Medicaid, already phasing) and §71301/§71302 (marketplace premium tax credits, 2025 and 2027 effective dates)."><span class="sp-chip-dot" style="background:#7d0a10"></span>Immigrant eligibility</span>
-        <span class="sp-chip sp-chip-sep" tabindex="0" data-tip="Enhanced ACA premium tax credits expired December 31, 2025 without congressional renewal. Not an OBBBA provision — a separate, coincidentally-timed event that compounds it."><span class="sp-chip-dot" style="background:#23456b"></span>Enhanced PTC expiration</span>
-        <span class="sp-chip sp-chip-offset" tabindex="0" data-tip="Rural Health Transformation Fund — $50B distributed FY2026-2030 via CMS-approved state blueprints. A partial coverage-preservation offset, widely expected not to fully offset losses."><span class="sp-chip-dot" style="background:#12543c"></span>Rural Health Fund (offset)</span>
-      </div>
-      <div class="sp-quad-cell">
-        <div class="sp-cell-label">Coverage impact &middot; Market / Structural catalyst</div>
-        <span class="sp-chip sp-chip-sep" tabindex="0" data-tip="State eligibility-system administrative backlog — documented in Texas (~1,600 to 210,000+ pending applications, Jan-Aug 2026) and North Dakota (pending-renewal share 11.2% to 24.8%, Q4 2025 to Q1 2026)."><span class="sp-chip-dot" style="background:#23456b"></span>Eligibility-system backlog</span>
-        <span class="sp-chip sp-chip-sep" tabindex="0" data-tip="State individual mandate variation — 5 jurisdictions (CA, NJ, RI, DC, MA) impose a penalty, VT requires reporting only, and the remaining ~44 states have no mandate at all."><span class="sp-chip-dot" style="background:#23456b"></span>State mandate variation</span>
-        <span class="sp-chip sp-chip-sep" tabindex="0" data-tip="Employer coverage erosion as premium growth outpaces wage growth — a structural trend independent of OBBBA, but one that compounds its coverage effects."><span class="sp-chip-dot" style="background:#23456b"></span>Employer coverage erosion</span>
-      </div>
+        <!-- gridlines -->
+        <g stroke="#dde7ef" stroke-width="1">
+          <line x1="285" y1="30" x2="285" y2="470"></line>
+          <line x1="675" y1="30" x2="675" y2="470"></line>
+          <line x1="90" y1="140" x2="870" y2="140"></line>
+          <line x1="90" y1="360" x2="870" y2="360"></line>
+        </g>
+        <!-- centre axes -->
+        <line x1="480" y1="30" x2="480" y2="470" stroke="#9fb6c8" stroke-width="1.5"></line>
+        <line x1="90" y1="250" x2="870" y2="250" stroke="#9fb6c8" stroke-width="1.5"></line>
 
-      <div class="sp-quad-rowhead sp-rh-cost">Cost impact</div>
-      <div class="sp-quad-cell">
-        <div class="sp-cell-label">Cost impact &middot; Legislative catalyst</div>
-        <span class="sp-chip sp-chip-obbba" tabindex="0" data-tip="OBBBA provider-tax freeze (Oct 1, 2026) and phase-down from 6% to 3.5% in expansion states (FFY2028-2032); state-directed payment caps phase down starting January 1, 2028. Nursing facilities and ICF/IDD are exempt from the phase-down."><span class="sp-chip-dot" style="background:#7d0a10"></span>Provider tax / SDP caps</span>
-        <span class="sp-chip sp-chip-obbba" tabindex="0" data-tip="OBBBA §71305 repeals the PTC repayment caps from tax year 2026 — any marketplace enrollee whose actual income exceeds their estimate now repays the full excess credit, uncapped, at any income level."><span class="sp-chip-dot" style="background:#7d0a10"></span>Uncapped PTC clawback</span>
-        <span class="sp-chip sp-chip-sep" tabindex="0" data-tip="MA risk adjustment (HCC V28) plus RADV litigation. Separate from OBBBA: RADV extrapolation authority was vacated by the N.D. Texas in September 2025 and is on appeal at the Fifth Circuit."><span class="sp-chip-dot" style="background:#23456b"></span>MA risk adjustment / RADV</span>
-      </div>
-      <div class="sp-quad-cell">
-        <div class="sp-cell-label">Cost impact &middot; Market / Structural catalyst</div>
-        <span class="sp-chip sp-chip-sep" tabindex="0" data-tip="2027 medical cost trend — PwC's confirmed figure is 9% (Group) / 8.5% (Individual), the highest commercial trend in 17 years. GLP-1s and specialty drug utilization are the major drivers. Other firms' widely-circulated figures carry sourcing caveats noted above."><span class="sp-chip-dot" style="background:#23456b"></span>2027 medical trend (PwC 9%)</span>
-        <span class="sp-chip sp-chip-sep" tabindex="0" data-tip="Vendor-heavy work-requirement administrative spend. Georgia precedent: GAO found $54.2M administrative vs. $26.1M care spending (2021-June 2025) — though that ratio is front-loaded, falling from 96.5% of spend in FY2023 to 58.8% in FY2024."><span class="sp-chip-dot" style="background:#23456b"></span>Administrative / vendor spend</span>
-        <span class="sp-chip sp-chip-sep" tabindex="0" data-tip="Uncompensated care cost-shift onto safety-net hospitals and FQHCs. California's LAO projects statewide hospital uncompensated care rising from roughly $2B (2024) toward $4B by 2030, attributing about 90% of the increase to H.R. 1."><span class="sp-chip-dot" style="background:#23456b"></span>Uncompensated care shift</span>
-      </div>
+        <!-- quadrant corner labels -->
+        <g font-size="11" font-style="italic" fill="#7c8b99">
+          <text x="100" y="46">Access lost, cost up</text>
+          <text x="860" y="46" text-anchor="end">Access gained, cost up</text>
+          <text x="100" y="462">Access lost, cost down</text>
+          <text x="860" y="462" text-anchor="end">Access gained, cost down</text>
+        </g>
+
+        <!-- axis titles -->
+        <text x="480" y="500" text-anchor="middle" font-size="12" font-weight="700" fill="#0d1b2a">Access impact &nbsp;&#8592;&nbsp; loss &nbsp;&nbsp;|&nbsp;&nbsp; gain &nbsp;&#8594;</text>
+        <text transform="translate(30,250) rotate(-90)" text-anchor="middle" font-size="12" font-weight="700" fill="#0d1b2a">Cost impact &nbsp;&#8592;&nbsp; down &nbsp;|&nbsp; up &nbsp;&#8594;</text>
+
+        <g font-size="12" fill="#1a1a2e">
+          <!-- ===== OBBBA provisions (circle, red) ===== -->
+          <g><title>OBBBA Medicaid work requirements — 80 hrs/month for the ACA expansion population, effective by January 1, 2027 nationally across 40 expansion states + DC. The single largest access-loss catalyst on this chart.</title>
+            <circle cx="129" cy="74" r="8" fill="#c1372f"></circle>
+            <text x="143" y="78">Work requirements</text></g>
+          <g><title>OBBBA immigrant eligibility narrowing — §71109 narrows Medicaid eligibility for lawfully present immigrants (the FQHC-revenue driver); §71301/§71302 narrow marketplace premium tax credit eligibility.</title>
+            <circle cx="149" cy="162" r="8" fill="#c1372f"></circle>
+            <text x="163" y="166">Immigrant eligibility cuts</text></g>
+          <g><title>Applicable enrollees move from annual to 6-month redeterminations. Lands on the full applicable population regardless of how the work test itself performs — an administrative access risk more than a policy one.</title>
+            <circle cx="227" cy="206" r="8" fill="#c1372f"></circle>
+            <text x="241" y="210">6-month redeterminations</text></g>
+          <g><title>OBBBA §71305 repeals the PTC repayment caps from tax year 2026 — any marketplace enrollee whose actual income exceeds their estimate repays the full excess credit, uncapped, at any income level. A household cost risk that also deters enrollment.</title>
+            <circle cx="344" cy="239" r="8" fill="#c1372f"></circle>
+            <text x="358" y="243">Uncapped PTC clawback</text></g>
+          <g><title>Provider-tax freeze (Oct 1, 2026) and phase-down from 6% to 3.5% in expansion states (FFY2028-2032); state-directed payment caps phase down from January 1, 2028. Nursing facilities and ICF/IDD are exempt from the phase-down.</title>
+            <circle cx="383" cy="85" r="8" fill="#c1372f"></circle>
+            <text x="397" y="89">Provider tax &amp; SDP caps</text></g>
+          <g><title>Rural Health Transformation Fund — $50B distributed FY2026-2030 via CMS-approved state blueprints. An OBBBA provision working in the opposite direction to the rest: a partial offset, though rural-health analysts widely expect it not to fully cover the losses.</title>
+            <circle cx="656" cy="316" r="8" fill="#c1372f"></circle>
+            <text x="642" y="320" text-anchor="end">Rural Health Transformation Fund</text></g>
+
+          <!-- ===== Other federal law / policy (diamond, amber) ===== -->
+          <g><title>Enhanced ACA premium tax credits expired December 31, 2025 without congressional renewal. NOT an OBBBA provision — an IRA-era credit lapsing on its own schedule, which happens to compound OBBBA's effects in the same window.</title>
+            <rect x="200" y="111" width="14" height="14" fill="#b06a00" transform="rotate(45 207 118)"></rect>
+            <text x="221" y="122">Enhanced PTC expiration</text></g>
+          <g><title>MA risk adjustment (HCC V28) plus RADV litigation. Separate from OBBBA: RADV extrapolation authority was vacated by the N.D. Texas in September 2025 and is on appeal at the Fifth Circuit.</title>
+            <rect x="493" y="111" width="14" height="14" fill="#b06a00" transform="rotate(45 500 118)"></rect>
+            <text x="514" y="122">MA risk adjustment / RADV</text></g>
+          <g><title>IRA Medicare drug price negotiation — Cycle 1 prices took effect January 2026 with 38-79% discounts. A separate law pushing access up and cost down, included to show the full catalyst field rather than only the downside ones.</title>
+            <rect x="668" y="408" width="14" height="14" fill="#b06a00" transform="rotate(45 675 415)"></rect>
+            <text x="661" y="419" text-anchor="end">IRA drug price negotiation</text></g>
+
+          <!-- ===== Market / structural (square, blue) ===== -->
+          <g><title>State eligibility-system administrative strain — documented in Texas (~1,600 to 210,000+ pending applications, Jan-Aug 2026) and North Dakota (pending-renewal share 11.2% to 24.8%, Q4 2025 to Q1 2026).</title>
+            <rect x="278" y="177" width="14" height="14" fill="#23456b"></rect>
+            <text x="299" y="188">Admin capacity strain</text></g>
+          <g><title>Employer coverage erosion as premium growth outpaces wage growth — a structural trend independent of OBBBA that compounds its coverage effects.</title>
+            <rect x="298" y="133" width="14" height="14" fill="#23456b"></rect>
+            <text x="319" y="144">Employer coverage erosion</text></g>
+          <g><title>Uncompensated care cost-shift onto safety-net hospitals and FQHCs. California's LAO projects statewide hospital uncompensated care rising from roughly $2B (2024) toward $4B by 2030, attributing about 90% of the increase to H.R. 1.</title>
+            <rect x="415" y="144" width="14" height="14" fill="#23456b"></rect>
+            <text x="436" y="155">Uncompensated care shift</text></g>
+          <g><title>Vendor-heavy work-requirement administrative spend. Georgia precedent: GAO found $54.2M administrative vs. $26.1M care spending (2021-June 2025) — though that ratio is front-loaded, falling from 96.5% of spend in FY2023 to 58.8% in FY2024.</title>
+            <rect x="454" y="188" width="14" height="14" fill="#23456b"></rect>
+            <text x="475" y="199">Vendor / admin spend</text></g>
+          <g><title>2027 medical cost trend — PwC's confirmed figure is 9% (Group) / 8.5% (Individual), the highest commercial trend in 17 years, with GLP-1s and specialty drug utilization the major drivers. Pure cost pressure, largely independent of access.</title>
+            <rect x="532" y="45" width="14" height="14" fill="#23456b"></rect>
+            <text x="553" y="56">GLP-1 &amp; specialty drug trend</text></g>
+
+          <!-- ===== State action (triangle, green) ===== -->
+          <g><title>State individual mandate variation — 5 jurisdictions (CA, NJ, RI, DC, MA) impose a penalty, VT requires reporting only, and the remaining ~44 states have no mandate at all. A modest access support where it exists.</title>
+            <polygon points="441,264 449,278 433,278" fill="#12543c"></polygon>
+            <text x="455" y="276">State mandate variation</text></g>
+          <g><title>Medicaid value-based care and housing-health integration (CalAIM Community Supports and equivalents) — state-led programs pushing access up and total cost down, though several depend on 1115 waiver authority that expires December 31, 2026 in California.</title>
+            <polygon points="714,363 722,377 706,377" fill="#12543c"></polygon>
+            <text x="700" y="375" text-anchor="end">Medicaid VBC &amp; housing-health integration</text></g>
+
+          <!-- ===== Litigation (star, purple) ===== -->
+          <g><title>Commonwealth of Massachusetts et al. v. Oz — 25 states + DC challenging the interim final rule's narrowed "medically frail" exemption. A federal judge denied the preliminary injunction July 29, 2026, so the rule stays in effect; access upside is contingent and unresolved.</title>
+            <path d="M597 208 L600 215 L607 217 L600 219 L597 226 L594 219 L587 217 L594 215 Z" fill="#6a4c93"></path>
+            <text x="583" y="221" text-anchor="end">Litigation (Mass. v. Oz)</text></g>
+        </g>
+      </svg>
     </div>
     <div class="sp-legend">
-      <span><span class="sp-chip-dot" style="background:#7d0a10"></span> Direct OBBBA provision</span>
-      <span><span class="sp-chip-dot" style="background:#23456b"></span> Separate / compounding catalyst</span>
-      <span><span class="sp-chip-dot" style="background:#12543c"></span> Partial offset</span>
+      <span><svg width="16" height="16" aria-hidden="true"><circle cx="8" cy="8" r="6" fill="#c1372f"></circle></svg> OBBBA provision</span>
+      <span><svg width="16" height="16" aria-hidden="true"><rect x="3" y="3" width="10" height="10" fill="#b06a00" transform="rotate(45 8 8)"></rect></svg> Other federal law / policy</span>
+      <span><svg width="16" height="16" aria-hidden="true"><rect x="2" y="2" width="12" height="12" fill="#23456b"></rect></svg> Market / structural</span>
+      <span><svg width="16" height="16" aria-hidden="true"><polygon points="8,2 14,13 2,13" fill="#12543c"></polygon></svg> State action</span>
+      <span><svg width="16" height="16" aria-hidden="true"><path d="M8 1 L10 6 L15 8 L10 10 L8 15 L6 10 L1 8 L6 6 Z" fill="#6a4c93"></path></svg> Litigation</span>
     </div>
+    <p class="ref-note">Positions are qualitative judgements about direction and rough magnitude, not measured coordinates — the chart is a way to see which catalysts pull against each other, not a quantitative model. Note that the two quadrants doing most of the work are opposite corners: nearly everything OBBBA does directly sits in <em>access lost, cost up</em>, while the offsets that might pull the other way (its own Rural Health Fund, state value-based-care programs, IRA drug pricing) are fewer, smaller, and in several cases depend on authority that expires or is still in litigation.</p>
+
     <p class="ref-note">Fills a gap in the existing Top Shifts cascade (Ontology tab): MA risk-adjustment litigation and the Rural Health Transformation Fund were previously untracked in this project's OBBBA-adjacent content; both are now cross-referenced here and in the Payer &amp; Company Map (<code>rhtf_prog</code> node).</p>
   </div>
 
@@ -997,83 +1046,168 @@
 
 <script>
 /* Any-state OBBBA drill-down. Scoped to the Special Topics tab.
-   Conservative by design: `est` is populated only where a state-specific figure
-   is traceable to a named official/agency source. Everything else stays null and
-   renders as "no verified state-specific estimate". */
+
+   Conservative by design. Three kinds of content are kept strictly separate:
+     1. Verified state facts  — expansion status, administering agency, litigation
+                                posture, timeline, and (for 7 of 51) a sourced figure.
+     2. Category-level analysis — the exposure/action/tipping-point/cost-shift pattern
+                                that follows from the state's category. True of the
+                                category, not a state-specific claim.
+     3. Explicit gaps         — anything not verified for that state says so. */
 (function () {
   'use strict';
 
-  var NATIONAL = 'Jan 1, 2027 (national deadline)';
   var TRACKERS = {
     kff: { label: 'KFF work-requirements tracker', url: 'https://www.kff.org/medicaid/medicaid-work-requirements-tracker-overview/' },
     ccf: { label: 'Georgetown CCF H.R.1 Readiness Tracker', url: 'https://ccf.georgetown.edu/2026/08/24/h-r-1-readiness-tracker-update-strain-is-building-before-the-work-reporting-requirements-clock-starts/' }
   };
 
-  /* cat: primary category · exp: Medicaid expansion · lit: plaintiff in Massachusetts v. Oz
-     est: verified state-specific figure (else null) · grade: confirmed | modeled | none */
+  /* Category-level analysis. Applies to every state in the category — these are
+     statements about the pattern, not invented state-specific findings. */
+  var CAT = {
+    early: {
+      label: 'Early Adopter',
+      exposure: 'Enforcing ahead of the January 1, 2027 federal deadline on its own state timeline, so it generates the first real operational evidence on how the requirement behaves in practice.',
+      action: 'Mass beneficiary-notification campaigns and state-run online resource hubs ahead of enforcement, rather than new eligibility infrastructure.',
+      watch: 'The first disenrollment wave — specifically whether procedural/paperwork failure, rather than genuine non-compliance, drives most of the loss. That is what happened in Arkansas’s 2018-19 rollout, the only prior real-world comparison.',
+      cost: 'Rural hospitals and FQHCs absorb uncompensated care first; the state general fund backstops eligibility-system and call-center costs.'
+    },
+    waiver: {
+      label: 'Waiver-Only / Non-Expansion',
+      exposure: 'No ACA expansion population, so exposure runs through §1115 waiver enrollees rather than the general expansion group. A narrower population, but one already inside a work-requirement framework.',
+      action: 'Vendor-heavy eligibility-system and outreach spend, which in Georgia’s documented case ran well ahead of spending on actual care.',
+      watch: 'Whether the state’s waiver is folded into the 2027 national framework or renewed standalone — and whether its administrative cost structure becomes the template CMS exports or the cautionary tale other states cite.',
+      cost: 'Administrative spend has been heavily federally funded to date; that shifts toward states if the national framework moves more of the burden down.'
+    },
+    expwaiver: {
+      label: 'Expansion + Waiver intersection',
+      exposure: 'Dual-track compliance: existing §1115 waiver terms plus the new federal requirement, applied to overlapping but non-identical populations.',
+      action: 'Call-center capacity and dual eligibility-system work — reconciling two sets of rules against one enrollee record.',
+      watch: 'Administrative capacity rather than policy: whether the state can run both tracks without the call-center and processing backlogs that other states have already reported.',
+      cost: 'Public hospitals and safety-net systems in areas with a high dual-eligible share absorb the access impact first.'
+    },
+    admin: {
+      label: 'Administratively Overwhelmed',
+      exposure: 'Eligibility-system backlog is building <em>before</em> work-requirement enforcement begins — the constraint is processing capacity, not policy design.',
+      action: '"Good faith" and self-declaration workarounds, plus emergency eligibility-office staffing. Missouri is cited in reporting as having improved measurably after a staffing increase.',
+      watch: 'Whether pending-application and renewal backlogs clear before the January 2027 deadline adds a new verification workload on top of them.',
+      cost: 'State budgets absorb overtime and temporary staffing first; rural providers absorb the downstream access impact.'
+    },
+    expansion: {
+      label: 'Standard Expansion',
+      exposure: 'Expansion population subject to the requirement on the national timeline, without an early-adopter rollout or a waiver population complicating it.',
+      action: 'Not separately documented for this state in this project’s research — check the trackers below before assuming a posture either way.',
+      watch: 'Whether the state’s eligibility system absorbs the shift from annual to 6-month redeterminations, which lands on the full applicable population regardless of how the work test itself performs.',
+      cost: 'Standard path: uncompensated care to safety-net providers, state general fund for administrative cost.'
+    },
+    nonexp: {
+      label: 'Non-Expansion',
+      exposure: 'Never adopted ACA Medicaid expansion, so there is no expansion population subject to the work requirement at all. Exposure runs through the marketplace-side provisions instead.',
+      action: 'Not a work-requirement implementation story. The relevant levers are §71301/§71302 marketplace subsidy eligibility and the separate enhanced-PTC expiration.',
+      watch: 'Marketplace enrollment and uninsured rates rather than Medicaid disenrollment — and, where the state runs a large eligibility operation, cross-program strain from SNAP verification changes.',
+      cost: 'Uncompensated care driven by marketplace attrition and the uninsured, concentrated in hospitals without a Medicaid expansion revenue base to begin with.'
+    }
+  };
+
+  var LIT_ANALYSIS = 'Also a plaintiff in the multi-state challenge — a compliance-under-protest posture. The obligation continues during litigation, so exposure is deferred rather than avoided. A federal judge denied the coalition’s preliminary injunction on July 29, 2026 and the rule remains in effect.';
+
+  /* [code, name, categoryKey, isExpansion, isLitigant, verifiedEstimate|null, grade, note, administeringAgency] */
   var S = [
-    ['AL','Alabama','Non-Expansion',false,false,null,'none',''],
-    ['AK','Alaska','Standard Expansion',true,false,null,'none',''],
-    ['AZ','Arizona','Litigant',true,true,null,'none',''],
-    ['AR','Arkansas','Early Adopter',true,false,null,'none','Began July 1, 2026 with enforcement delayed until January 2027 — named as an early mover in CMS’s own interim final rule. No verified state coverage-loss figure located for this rollout.'],
-    ['CA','California','Litigant + Expansion',true,true,'DHCS: 4.8M subject, 2.2M expected exempt, 1.1M central coverage-loss estimate (3.4M as a high-end scenario). LAO separately projects ~2M more uninsured by 2030 from OBBBA plus state changes combined.','confirmed','Covered in full in the California card above.'],
-    ['CO','Colorado','Litigant',true,true,null,'none',''],
-    ['CT','Connecticut','Litigant',true,true,null,'none',''],
-    ['DE','Delaware','Litigant',true,true,null,'none',''],
-    ['DC','District of Columbia','Litigant',true,true,null,'none','One of five jurisdictions with its own individual mandate penalty ($795/adult, 2025 amount).'],
-    ['FL','Florida','Non-Expansion',false,false,null,'none',''],
-    ['GA','Georgia','Waiver-Only / Non-Expansion',false,false,'GAO: $54.2M administrative vs. $26.1M care spending (2021-June 2025); enrollment 7,400-9,175 against ~246,365 eligible.','confirmed','Covered in full in the Georgia card above.'],
-    ['HI','Hawaii','Expansion + Waiver',true,true,null,'none','Qualitative reporting describes long eligibility call-center wait times; the specific 193-minute figure used in this project’s source spec could not be verified.'],
-    ['ID','Idaho','Standard Expansion',true,false,null,'none',''],
-    ['IL','Illinois','Litigant',true,true,null,'none',''],
-    ['IN','Indiana','Standard Expansion',true,false,null,'none',''],
-    ['IA','Iowa','Early Adopter',true,false,'~32,000 projected coverage loss (Iowa Legislative Services Agency projection).','modeled','Enforcement begins December 1, 2026.'],
-    ['KS','Kansas','Non-Expansion',false,false,null,'none',''],
-    ['KY','Kentucky','Litigant',true,true,null,'none','Joined the coalition via the Governor rather than the Attorney General.'],
-    ['LA','Louisiana','Standard Expansion',true,false,null,'none',''],
-    ['ME','Maine','Litigant',true,true,null,'none',''],
-    ['MD','Maryland','Litigant',true,true,null,'none',''],
-    ['MA','Massachusetts','Litigant (lead) + Expansion&nbsp;+&nbsp;Waiver',true,true,null,'none','Named lead plaintiff in Commonwealth of Massachusetts et al. v. Oz. Also one of five jurisdictions with an individual mandate penalty (income/age-tiered).'],
-    ['MI','Michigan','Litigant',true,true,null,'none',''],
-    ['MN','Minnesota','Litigant',true,true,null,'none',''],
-    ['MS','Mississippi','Non-Expansion',false,false,null,'none',''],
-    ['MO','Missouri','Standard Expansion',true,false,null,'none','Cited in reporting as having improved eligibility-processing performance after an eligibility-office staffing increase.'],
-    ['MT','Montana','Early Adopter',true,false,'~13,000 adults (~18% of the expansion population) — Montana DPHHS estimate.','confirmed','Covered in full in the Montana card above.'],
-    ['NE','Nebraska','Early Adopter',true,false,'~200 in the first disenrollment round (state Medicaid director estimate, week of July 31, 2026). Advocates separately project 20,000-40,000 eventually.','confirmed','First state in the nation to disenroll under the new requirement.'],
-    ['NV','Nevada','Litigant',true,true,null,'none',''],
-    ['NH','New Hampshire','Standard Expansion',true,false,null,'none',''],
-    ['NJ','New Jersey','Litigant',true,true,null,'none','One of five jurisdictions with an individual mandate penalty (~$695/adult plus 2.5% of income).'],
-    ['NM','New Mexico','Litigant',true,true,null,'none',''],
-    ['NY','New York','Litigant + Expansion&nbsp;+&nbsp;Waiver',true,true,null,'none',''],
-    ['NC','North Carolina','Litigant',true,true,null,'none',''],
-    ['ND','North Dakota','Administratively Overwhelmed',true,false,'ND HHS estimates only 5,000-7,000 of ~23,000 expansion members will be affected — nearly half pre-qualify for an exemption. Pending-renewal share rose from 11.2% (Q4 2025) to 24.8% (Q1 2026); 69.3% of applicants waited &gt;30 days.','confirmed','The clearest documented case of eligibility-system strain building ahead of enforcement.'],
-    ['OH','Ohio','Standard Expansion',true,false,null,'none',''],
-    ['OK','Oklahoma','Standard Expansion',true,false,null,'none',''],
-    ['OR','Oregon','Litigant + Expansion&nbsp;+&nbsp;Waiver',true,true,null,'none',''],
-    ['PA','Pennsylvania','Litigant',true,true,null,'none','Joined the coalition via the Governor rather than the Attorney General.'],
-    ['RI','Rhode Island','Litigant',true,true,null,'none','One of five jurisdictions with an individual mandate penalty ($695/adult, $2,085 cap).'],
-    ['SC','South Carolina','Non-Expansion',false,false,null,'none',''],
-    ['SD','South Dakota','Standard Expansion',true,false,null,'none',''],
-    ['TN','Tennessee','Waiver-Only / Non-Expansion',false,false,null,'none','CMS identified §1115 waiver enrollees (parents at or below the federal poverty level) as subject to the requirement. No verified state coverage-loss figure located.'],
-    ['TX','Texas','Non-Expansion',false,false,'Medicaid application backlog grew from ~1,600 to 210,000+ (Jan-Aug 2026); on-time processing fell from &gt;90% to 62%.','confirmed','Texas never adopted expansion, so it has no population subject to the work requirement — its backlog is attributed primarily to SNAP verification changes and 6-month redeterminations, not work-requirement enforcement.'],
-    ['UT','Utah','Expansion + Waiver',true,false,null,'none',''],
-    ['VT','Vermont','Litigant',true,true,null,'none','Requires coverage reporting but imposes no financial penalty.'],
-    ['VA','Virginia','Litigant',true,true,null,'none',''],
-    ['WA','Washington','Litigant',true,true,null,'none',''],
-    ['WV','West Virginia','Standard Expansion',true,false,null,'none',''],
-    ['WI','Wisconsin','Waiver-Only / Non-Expansion',false,true,null,'none','New applicants subject from January 1, 2027; current members at their next renewal. Non-expansion, but a §1115 waiver population (income at or below the poverty level) is covered.'],
-    ['WY','Wyoming','Non-Expansion',false,false,null,'none','']
+    ['AL','Alabama','nonexp',false,false,null,'none','','Alabama Medicaid Agency'],
+    ['AK','Alaska','expansion',true,false,null,'none','','Alaska Division of Health Care Services'],
+    ['AZ','Arizona','expansion',true,true,null,'none','','Arizona Health Care Cost Containment System (AHCCCS)'],
+    ['AR','Arkansas','early',true,false,null,'none','Began July 1, 2026 with enforcement delayed until January 2027 — named as an early mover in CMS’s own interim final rule. Arkansas also ran the only prior U.S. Medicaid work requirement (2018-19), the evidence base the rest of this tab leans on. No verified coverage-loss figure located for the current rollout.','Arkansas Division of Medical Services (DHS)'],
+    ['CA','California','expansion',true,true,'DHCS: 4.8M subject, 2.2M expected exempt, 1.1M central coverage-loss estimate (3.4M as a high-end scenario). LAO separately projects ~2M more uninsured by 2030 from OBBBA plus state changes combined.','confirmed','Covered in full in the California card above, including the Bay Area companion analysis.','CA Dept. of Health Care Services (DHCS)'],
+    ['CO','Colorado','expansion',true,true,null,'none','','Colorado Dept. of Health Care Policy &amp; Financing'],
+    ['CT','Connecticut','expansion',true,true,null,'none','','Connecticut Dept. of Social Services'],
+    ['DE','Delaware','expansion',true,true,null,'none','','Delaware Division of Medicaid &amp; Medical Assistance'],
+    ['DC','District of Columbia','expansion',true,true,null,'none','One of five jurisdictions with its own individual mandate penalty ($795/adult, 2025 amount — roughly $100 higher than NJ/RI).','DC Dept. of Health Care Finance'],
+    ['FL','Florida','nonexp',false,false,null,'none','','Florida Agency for Health Care Administration (AHCA)'],
+    ['GA','Georgia','waiver',false,false,'GAO: $54.2M administrative vs. $26.1M care spending (2021-June 2025); enrollment 7,400-9,175 against ~246,365 eligible.','confirmed','Covered in full in the Georgia card above.','Georgia Dept. of Community Health (DCH)'],
+    ['HI','Hawaii','expwaiver',true,true,null,'none','Qualitative reporting describes long eligibility call-center wait times; the specific 193-minute figure used in this project’s source spec could not be verified and is not repeated here.','Hawaii Med-QUEST Division (DHS)'],
+    ['ID','Idaho','expansion',true,false,null,'none','','Idaho Division of Medicaid'],
+    ['IL','Illinois','expansion',true,true,null,'none','','Illinois Dept. of Healthcare &amp; Family Services'],
+    ['IN','Indiana','expansion',true,false,null,'none','','Indiana Family &amp; Social Services Administration'],
+    ['IA','Iowa','early',true,false,'~32,000 projected coverage loss — Iowa Legislative Services Agency projection.','modeled','Enforcement begins December 1, 2026. The figure is a legislative-agency projection, not a realized outcome.','Iowa Dept. of Health &amp; Human Services'],
+    ['KS','Kansas','nonexp',false,false,null,'none','','Kansas Dept. of Health &amp; Environment (KanCare)'],
+    ['KY','Kentucky','expansion',true,true,null,'none','Joined the coalition via the Governor rather than the Attorney General.','Kentucky Dept. for Medicaid Services'],
+    ['LA','Louisiana','expansion',true,false,null,'none','','Louisiana Dept. of Health'],
+    ['ME','Maine','expansion',true,true,null,'none','','MaineCare (Maine DHHS)'],
+    ['MD','Maryland','expansion',true,true,null,'none','','Maryland Dept. of Health'],
+    ['MA','Massachusetts','expwaiver',true,true,null,'none','Named lead plaintiff in <em>Commonwealth of Massachusetts et al. v. Oz</em>. Also one of five jurisdictions with an individual mandate penalty (income/age-tiered; this project could not confirm the exact 2026 top-tier amount).','MassHealth (EOHHS)'],
+    ['MI','Michigan','expansion',true,true,null,'none','','Michigan Dept. of Health &amp; Human Services'],
+    ['MN','Minnesota','expansion',true,true,null,'none','','Minnesota Dept. of Human Services'],
+    ['MS','Mississippi','nonexp',false,false,null,'none','','Mississippi Division of Medicaid'],
+    ['MO','Missouri','expansion',true,false,null,'none','Cited in reporting as having improved eligibility-processing performance after an eligibility-office staffing increase — a useful counterexample to the backlog pattern.','MO HealthNet'],
+    ['MT','Montana','early',true,false,'~13,000 adults (~18% of the expansion population) — Montana DPHHS’s own estimate.','confirmed','Covered in full in the Montana card above. This page uses the DPHHS figure rather than the wider 10,000-30,000 span in circulation.','Montana DPHHS'],
+    ['NE','Nebraska','early',true,false,'~200 in the first disenrollment round (week of July 31, 2026) — the state Medicaid director’s own figure.','confirmed','First state in the nation to disenroll under the new requirement. Advocacy groups separately project 20,000-40,000 eventually; that wider figure is not adopted here as the expected outcome.','Nebraska DHHS, Division of Medicaid &amp; Long-Term Care'],
+    ['NV','Nevada','expansion',true,true,null,'none','','Nevada Division of Health Care Financing &amp; Policy'],
+    ['NH','New Hampshire','expansion',true,false,null,'none','','New Hampshire Dept. of Health &amp; Human Services'],
+    ['NJ','New Jersey','expansion',true,true,null,'none','One of five jurisdictions with an individual mandate penalty (~$695/adult plus 2.5% of income, capped at the statewide average Bronze premium).','NJ FamilyCare (Division of Medical Assistance)'],
+    ['NM','New Mexico','expansion',true,true,null,'none','','New Mexico Health Care Authority'],
+    ['NY','New York','expwaiver',true,true,null,'none','','NY State Dept. of Health, Office of Health Insurance Programs'],
+    ['NC','North Carolina','expansion',true,true,null,'none','','NC Division of Health Benefits'],
+    ['ND','North Dakota','admin',true,false,'ND HHS estimates only 5,000-7,000 of ~23,000 expansion members will be affected — nearly half pre-qualify for an exemption. Pending-renewal share rose from 11.2% (Q4 2025) to 24.8% (Q1 2026); 69.3% of applicants waited &gt;30 days.','confirmed','The clearest documented case of eligibility-system strain building ahead of enforcement. Note the state’s own affected-population estimate is markedly <em>lower</em> than its backlog statistics might suggest.','North Dakota Health &amp; Human Services'],
+    ['OH','Ohio','expansion',true,false,null,'none','','Ohio Dept. of Medicaid'],
+    ['OK','Oklahoma','expansion',true,false,null,'none','','Oklahoma Health Care Authority'],
+    ['OR','Oregon','expwaiver',true,true,null,'none','','Oregon Health Authority'],
+    ['PA','Pennsylvania','expansion',true,true,null,'none','Joined the coalition via the Governor rather than the Attorney General.','Pennsylvania Dept. of Human Services'],
+    ['RI','Rhode Island','expansion',true,true,null,'none','One of five jurisdictions with an individual mandate penalty ($695/adult, $347.50/child, $2,085 flat-dollar cap).','Rhode Island EOHHS'],
+    ['SC','South Carolina','nonexp',false,false,null,'none','','South Carolina Dept. of Health &amp; Human Services'],
+    ['SD','South Dakota','expansion',true,false,null,'none','','South Dakota Dept. of Social Services'],
+    ['TN','Tennessee','waiver',false,false,null,'none','CMS identified §1115 waiver enrollees — parents at or below the federal poverty level — as subject to the requirement. No verified state coverage-loss figure located.','Division of TennCare'],
+    ['TX','Texas','nonexp',false,false,'Medicaid application backlog grew from ~1,600 to 210,000+ (Jan-Aug 2026); on-time processing fell from &gt;90% to 62%.','confirmed','Texas never adopted expansion, so it has no population subject to the work requirement. Its backlog is attributed primarily to SNAP verification changes and 6-month redeterminations — real cross-program eligibility strain, but not work-requirement enforcement. It was removed from the Administratively Overwhelmed category for this reason.','Texas Health &amp; Human Services Commission'],
+    ['UT','Utah','expwaiver',true,false,null,'none','','Utah Dept. of Health &amp; Human Services'],
+    ['VT','Vermont','expansion',true,true,null,'none','Requires coverage reporting but imposes no financial penalty — the only jurisdiction in that posture.','Dept. of Vermont Health Access'],
+    ['VA','Virginia','expansion',true,true,null,'none','','Virginia Dept. of Medical Assistance Services'],
+    ['WA','Washington','expansion',true,true,null,'none','','Washington State Health Care Authority'],
+    ['WV','West Virginia','expansion',true,false,null,'none','','West Virginia Bureau for Medical Services'],
+    ['WI','Wisconsin','waiver',false,true,null,'none','New applicants subject from January 1, 2027; current members at their next renewal. Non-expansion, but a §1115 waiver population (income at or below the poverty level) is covered — and it is simultaneously a plaintiff in the litigation.','Wisconsin Dept. of Health Services (BadgerCare Plus)'],
+    ['WY','Wyoming','nonexp',false,false,null,'none','','Wyoming Division of Healthcare Financing']
   ];
+
+  var TIMELINE = {
+    MT: 'July 1, 2026 start; first disenrollment wave Dec 31, 2026',
+    NE: 'First disenrollments week of July 31, 2026',
+    IA: 'December 1, 2026',
+    AR: 'July 1, 2026 start; enforcement delayed to January 2027',
+    WI: 'Jan 1, 2027 for new applicants; current members at next renewal'
+  };
 
   var GRADE_TEXT = { confirmed: 'Confirmed', modeled: 'Modeled', none: 'No verified figure' };
 
   function esc(s) {
-    return String(s).replace(/&(?!nbsp;|amp;|gt;|lt;|#)/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+    return String(s).replace(/&(?!nbsp;|amp;|gt;|lt;|#)/g, '&amp;');
   }
 
   function field(label, value) {
     return '<div class="sp-state-field"><div class="sp-state-label">' + label +
            '</div><div class="sp-state-value">' + value + '</div></div>';
+  }
+
+  function analysisRow(label, value) {
+    return '<div class="sp-an-row"><div class="sp-an-label">' + label +
+           '</div><div class="sp-an-value">' + value + '</div></div>';
+  }
+
+  function stakeholders(row) {
+    var name = row[1], key = row[2], lit = row[4], agency = row[8];
+    var list = [
+      '<strong>' + agency + '</strong> — administers the program and owns eligibility processing, exemption verification, and member notices'
+    ];
+    if (lit) {
+      list.push('<strong>' + name + ' Attorney General’s office</strong> — plaintiff-side counsel in <em>Commonwealth of Massachusetts et al. v. Oz</em>');
+    }
+    if (key === 'nonexp') {
+      list.push('<strong>' + name + ' marketplace enrollees and navigators</strong> — the population actually touched here, via subsidy eligibility rather than Medicaid');
+    } else {
+      list.push('<strong>Medicaid managed care plans operating in ' + name + '</strong> — carry the member-communication and redetermination workload, and lose capitation revenue on every procedural disenrollment');
+    }
+    list.push('<strong>' + name + ' Hospital Association and its safety-net/FQHC members</strong> — absorb uncompensated care downstream of coverage loss');
+    if (key === 'early' || key === 'admin') {
+      list.push('<strong>County/local eligibility offices</strong> — the operational bottleneck this category turns on');
+    }
+    return '<ul class="sp-stake">' + list.map(function (x) { return '<li>' + x + '</li>'; }).join('') + '</ul>';
   }
 
   function render(code) {
@@ -1083,38 +1217,46 @@
     for (var i = 0; i < S.length; i++) { if (S[i][0] === code) { row = S[i]; break; } }
     if (!row) { out.innerHTML = ''; return; }
 
-    var name = row[1], cat = row[2], exp = row[3], lit = row[4],
+    var name = row[1], key = row[2], exp = row[3], lit = row[4],
         est = row[5], grade = row[6], note = row[7];
+    var cat = CAT[key];
 
-    var timeline = NATIONAL;
-    if (code === 'MT') timeline = 'July 1, 2026 start; first disenrollment wave Dec 31, 2026';
-    else if (code === 'NE') timeline = 'First disenrollments week of July 31, 2026';
-    else if (code === 'IA') timeline = 'December 1, 2026';
-    else if (code === 'AR') timeline = 'July 1, 2026 start; enforcement delayed to January 2027';
-    else if (code === 'WI') timeline = 'Jan 1, 2027 for new applicants; current members at next renewal';
-    else if (!exp) timeline = 'Not applicable to a general expansion population — see note';
+    var catLabel = cat.label + (lit ? ' + Litigant' : '');
+    var timeline = TIMELINE[code] || (exp ? 'Jan 1, 2027 (national deadline)' : 'No general expansion population subject to the requirement');
 
     var gradeClass = grade === 'confirmed' ? 'sp-grade-confirmed'
                    : grade === 'modeled' ? 'sp-grade-modeled' : 'sp-grade-none';
     var estHtml = est
       ? esc(est) + ' <span class="sp-grade ' + gradeClass + '">' + GRADE_TEXT[grade] + '</span>'
-      : '<em>No verified state-specific coverage-loss estimate located for this state in this research pass.</em> ' +
+      : '<em>No verified state-specific coverage-loss estimate located for ' + name + ' in this research pass</em> — deliberately left blank rather than extrapolated from a national average. ' +
         '<span class="sp-grade sp-grade-none">' + GRADE_TEXT.none + '</span>';
 
-    var html = '<div class="sp-state-grid">' +
-      field('Category', esc(cat)) +
+    var html = '<h4 class="sp-state-name">' + name + ' <span class="sp-state-cat">' + catLabel + '</span></h4>';
+
+    html += '<div class="sp-state-grid">' +
       field('Medicaid expansion', exp ? 'Adopted ACA expansion' : 'Did <strong>not</strong> adopt ACA expansion') +
       field('Work-requirement timeline', esc(timeline)) +
+      field('Administering agency', esc(row[8])) +
       field('Litigation posture', lit
-        ? 'Plaintiff in <em>Commonwealth of Massachusetts et al. v. Oz</em> (25 states + DC). Preliminary injunction denied July 29, 2026 — the rule remains in effect while litigation continues.'
-        : 'Not a plaintiff in <em>Commonwealth of Massachusetts et al. v. Oz</em>.') +
+        ? 'Plaintiff in <em>Commonwealth of Massachusetts et al. v. Oz</em> (25 states + DC)'
+        : 'Not a plaintiff in <em>Commonwealth of Massachusetts et al. v. Oz</em>') +
       field('Verified coverage-loss estimate', estHtml) +
       '</div>';
 
+    html += '<div class="sp-analysis"><div class="sp-analysis-head">Analysis &mdash; ' + cat.label + ' pattern</div>' +
+      analysisRow('Exposure', cat.exposure) +
+      analysisRow('Action posture', cat.action) +
+      analysisRow('What to watch', cat.watch) +
+      analysisRow('Cost-shift path', cat.cost) +
+      (lit ? analysisRow('Litigation overlay', LIT_ANALYSIS) : '') +
+      analysisRow('Relevant stakeholders', stakeholders(row)) +
+      '</div>';
+
     if (note) {
-      html += '<p class="ref-note" style="margin-top:12px;">' + esc(note) + '</p>';
+      html += '<p class="ref-note" style="margin-top:12px;"><strong>' + name + '-specific note:</strong> ' + note + '</p>';
     }
-    html += '<p class="ref-note" style="margin-top:8px;">Check for newer state figures: ' +
+
+    html += '<p class="ref-note" style="margin-top:8px;"><strong>Scope of this card.</strong> The grid above is verified state fact. The Analysis block describes the pattern that follows from ' + name + '’s category — it is true of the category, not a separately-researched finding about this state. Check for newer state figures: ' +
       '<a href="' + TRACKERS.kff.url + '" target="_blank" rel="noopener">' + TRACKERS.kff.label + '</a> &middot; ' +
       '<a href="' + TRACKERS.ccf.url + '" target="_blank" rel="noopener">' + TRACKERS.ccf.label + '</a>.</p>';
 
@@ -1126,7 +1268,7 @@
     if (!sel || sel.options.length) return;
     var opts = ['<option value="">— Select —</option>'];
     for (var i = 0; i < S.length; i++) {
-      opts.push('<option value="' + S[i][0] + '">' + S[i][1].replace(/&nbsp;/g, ' ') + '</option>');
+      opts.push('<option value="' + S[i][0] + '">' + S[i][1] + '</option>');
     }
     sel.innerHTML = opts.join('');
     sel.addEventListener('change', function () { render(this.value); });

@@ -16,6 +16,7 @@
     --amber:#7a5a0e; --amber-bg:#fdf3d8;
     --purple:#4a3a8c; --purple-bg:#edeaf8;
     --accent-wash:#e8f1f2;
+    --visited:#6b4a7a;
   }
   @media (prefers-color-scheme: dark){
     :root:not([data-theme="light"]){
@@ -28,6 +29,7 @@
       --amber:#d4a840; --amber-bg:#2a2010;
       --purple:#a494d8; --purple-bg:#221c38;
       --accent-wash:#182a2d;
+      --visited:#c39ad4;
     }
   }
   :root[data-theme="dark"]{
@@ -40,6 +42,7 @@
     --amber:#d4a840; --amber-bg:#2a2010;
     --purple:#a494d8; --purple-bg:#221c38;
     --accent-wash:#182a2d;
+    --visited:#c39ad4;
   }
   *{box-sizing:border-box;}
   html,body{margin:0;}
@@ -81,6 +84,21 @@
   }
   .callout p{margin:0; font-size:1.02rem;}
   .callout strong{color:var(--bay);}
+
+  /* Body links carry an explicit unvisited / visited / hover set so a reader can
+     see at a glance which sources they have already opened. Browser defaults
+     (blue / purple) clash with this palette, so both states are themed. */
+  .callout a, section a:not(.back-link), .method-box a, td a, li a{
+    color:var(--bay); text-decoration:underline; text-underline-offset:2px;
+    text-decoration-thickness:1px; transition:color .15s;
+  }
+  .callout a:visited, section a:not(.back-link):visited, .method-box a:visited,
+  td a:visited, li a:visited{ color:var(--visited); }
+  .callout a:hover, section a:not(.back-link):hover, .method-box a:hover,
+  td a:hover, li a:hover{ color:var(--bay-bright); text-decoration-thickness:2px; }
+  .callout a:focus-visible, section a:focus-visible, .method-box a:focus-visible{
+    outline:2px solid var(--bay-bright); outline-offset:2px; border-radius:2px;
+  }
 
   section{margin-bottom:52px;}
   /* Header rule echoes the accent bar used on the Special Topics tab it links from,
