@@ -1,0 +1,443 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Bay Area Navigation Networks</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+  :root{
+    --ink:#182635; --ink-soft:#4b5a68;
+    --paper:#f3f6f5; --surface:#ffffff; --surface-alt:#eef2f1;
+    --line:#d7dfdc;
+    --bay:#1f5f74; --bay-bright:#2f8fa8;
+    --resilient:#2f6b45; --resilient-bg:#e5f0e6;
+    --risk:#a8452c; --risk-bg:#f6e6e0;
+    --amber:#7a5a0e; --amber-bg:#fdf3d8;
+    --purple:#4a3a8c; --purple-bg:#edeaf8;
+    --accent-wash:#e8f1f2;
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --ink:#e9edec; --ink-soft:#a9b8bc;
+      --paper:#131b22; --surface:#1a232b; --surface-alt:#202b33;
+      --line:#2c3941;
+      --bay:#5fa9bd; --bay-bright:#7cc3d6;
+      --resilient:#7fbf8f; --resilient-bg:#1c2e21;
+      --risk:#d98a6f; --risk-bg:#33201a;
+      --amber:#d4a840; --amber-bg:#2a2010;
+      --purple:#a494d8; --purple-bg:#221c38;
+      --accent-wash:#182a2d;
+    }
+  }
+  :root[data-theme="dark"]{
+    --ink:#e9edec; --ink-soft:#a9b8bc;
+    --paper:#131b22; --surface:#1a232b; --surface-alt:#202b33;
+    --line:#2c3941;
+    --bay:#5fa9bd; --bay-bright:#7cc3d6;
+    --resilient:#7fbf8f; --resilient-bg:#1c2e21;
+    --risk:#d98a6f; --risk-bg:#33201a;
+    --amber:#d4a840; --amber-bg:#2a2010;
+    --purple:#a494d8; --purple-bg:#221c38;
+    --accent-wash:#182a2d;
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;}
+  body{
+    background:var(--paper); color:var(--ink);
+    font-family:"IBM Plex Sans", system-ui, -apple-system, sans-serif;
+    font-size:16px; line-height:1.6;
+    padding-inline:20px;
+    padding-block:calc(28px + env(safe-area-inset-top,0px)) calc(40px + env(safe-area-inset-bottom,0px));
+  }
+  h1,h2,h3{font-family:"Source Serif 4", Georgia, serif; text-wrap:balance; color:var(--ink); margin:0;}
+  .wrap{max-width:1120px; margin:0 auto;}
+  .eyebrow{
+    font-family:"IBM Plex Mono", monospace; font-size:0.72rem; letter-spacing:0.11em;
+    text-transform:uppercase; color:var(--bay-bright); font-weight:500;
+  }
+  header.masthead{
+    display:flex; flex-direction:column; gap:10px;
+    padding-block:8px 28px; border-bottom:1px solid var(--line); margin-bottom:32px;
+  }
+  header.masthead h1{font-size:clamp(1.9rem, 4.2vw, 2.7rem); font-weight:700; line-height:1.08;}
+  header.masthead .dek{font-size:1.05rem; color:var(--ink-soft); max-width:68ch; font-weight:400;}
+  .meta-row{display:flex; flex-wrap:wrap; gap:14px; font-family:"IBM Plex Mono",monospace; font-size:0.78rem; color:var(--ink-soft); margin-top:4px;}
+  .meta-row span{white-space:nowrap;}
+  .back-link{font-family:"IBM Plex Mono",monospace; font-size:0.78rem; color:var(--bay); text-decoration:none; border-bottom:1px solid var(--bay-bright);}
+  .back-link:hover{color:var(--bay-bright);}
+
+  nav.toc{background:var(--surface); border:1px solid var(--line); border-radius:6px; padding:16px 20px; margin-bottom:36px;}
+  nav.toc .toc-label{font-family:"IBM Plex Mono",monospace; font-size:0.7rem; letter-spacing:0.08em; text-transform:uppercase; color:var(--ink-soft); margin-bottom:8px; display:block;}
+  nav.toc ol{margin:0; padding-left:20px; columns:2; column-gap:24px; font-size:0.86rem;}
+  nav.toc li{margin:3px 0; break-inside:avoid;}
+  nav.toc a{color:var(--bay); text-decoration:none;}
+  nav.toc a:hover{text-decoration:underline;}
+  @media (max-width:600px){ nav.toc ol{columns:1;} }
+
+  .callout{
+    background:var(--accent-wash); border-left:3px solid var(--bay);
+    padding:18px 22px; border-radius:2px; margin-bottom:40px;
+  }
+  .callout p{margin:0; font-size:1.02rem;}
+  .callout strong{color:var(--bay);}
+
+  section{margin-bottom:52px;}
+  section > h2{font-size:1.5rem; font-weight:700; margin-bottom:6px;}
+  section > .section-dek{color:var(--ink-soft); font-size:0.94rem; max-width:74ch; margin-bottom:20px;}
+
+  .insight-grid{display:grid; grid-template-columns:repeat(auto-fit, minmax(300px,1fr)); gap:14px;}
+  .insight-card{
+    background:var(--surface); border:1px solid var(--line); border-radius:6px;
+    padding:16px 18px; display:flex; flex-direction:column; gap:8px;
+  }
+  .insight-card .issue-badges{display:flex; gap:6px; flex-wrap:wrap;}
+  .badge{font-size:0.66rem; font-weight:600; padding:2px 9px; border-radius:20px; letter-spacing:0.02em;}
+  .badge-admin{background:#e5f0f9; color:#1a5c8a;}
+  .badge-infra{background:var(--resilient-bg); color:var(--resilient);}
+  .badge-work{background:var(--amber-bg); color:var(--amber);}
+  .badge-fund{background:var(--purple-bg); color:var(--purple);}
+  .badge-mkt{background:var(--risk-bg); color:var(--risk);}
+  .badge-clin{background:#dff0f0; color:#1a5a5a;}
+  :root[data-theme="dark"] .badge-admin, :root:not([data-theme="light"]) .badge-admin { background:#12293c; color:#7cb8dd; }
+  :root[data-theme="dark"] .badge-clin, :root:not([data-theme="light"]) .badge-clin { background:#123333; color:#5fc7c7; }
+  .insight-card h3{font-size:0.98rem; font-weight:600; margin:2px 0 0; font-family:"IBM Plex Sans",sans-serif; line-height:1.4;}
+  .action-box{background:var(--surface-alt); border-radius:4px; padding:8px 11px; font-size:0.85rem; line-height:1.55;}
+  .action-box strong{display:block; font-size:0.72rem; text-transform:uppercase; letter-spacing:0.04em; font-weight:700; margin-bottom:3px; color:var(--ink-soft);}
+  .action-primary{border-left:3px solid var(--resilient);}
+  .action-alt{border-left:3px solid var(--bay);}
+  .incentive-box{background:var(--purple-bg); border-left:3px solid var(--purple); border-radius:4px; padding:8px 11px; font-size:0.85rem; line-height:1.55;}
+  .incentive-box strong{display:block; font-size:0.72rem; text-transform:uppercase; letter-spacing:0.04em; font-weight:700; margin-bottom:3px; color:var(--purple);}
+  .who-line{font-size:0.76rem; color:var(--ink-soft); margin-top:2px;}
+
+  .org-table-wrap{overflow-x:auto; border:1px solid var(--line); border-radius:8px;}
+  table.org-table{width:100%; border-collapse:collapse; font-size:0.83rem; min-width:820px;}
+  table.org-table thead th{background:var(--surface-alt); text-align:left; font-weight:700; padding:9px 12px; border-bottom:2px solid var(--line); font-size:0.72rem; text-transform:uppercase; letter-spacing:0.04em; color:var(--ink-soft); white-space:nowrap;}
+  table.org-table td{padding:10px 12px; border-bottom:1px solid var(--line); vertical-align:top;}
+  table.org-table tr:last-child td{border-bottom:none;}
+  table.org-table .org-name{font-weight:600; display:block;}
+  table.org-table .org-loc{color:var(--ink-soft); font-size:0.76rem;}
+  table.org-table .rank{font-family:"IBM Plex Mono",monospace; font-weight:600; color:var(--ink-soft);}
+  .rank.resilient{color:var(--resilient);}
+  .rank.risk{color:var(--risk);}
+  table.org-table .fig{font-weight:600; font-family:"IBM Plex Mono",monospace; font-size:0.8rem; font-variant-numeric:tabular-nums;}
+  .fig.risk{color:var(--risk);}
+  .fig.resilient{color:var(--resilient);}
+
+  .county-grid{display:grid; grid-template-columns:repeat(auto-fit, minmax(260px,1fr)); gap:14px;}
+  .county-card{background:var(--surface); border:1px solid var(--line); border-radius:6px; padding:14px 16px;}
+  .county-card h3{font-size:0.95rem; margin-bottom:4px;}
+  .county-card .stat{font-family:"IBM Plex Mono",monospace; font-size:1.35rem; font-weight:700; color:var(--risk); display:block; margin:2px 0 6px; font-variant-numeric:tabular-nums;}
+  .county-card p{font-size:0.83rem; color:var(--ink-soft); margin:0; line-height:1.55;}
+
+  .ext-grid{display:grid; grid-template-columns:repeat(auto-fit, minmax(250px,1fr)); gap:12px;}
+  .ext-card{background:var(--surface); border:1px solid var(--line); border-radius:6px; padding:14px 16px;}
+  .ext-card .condition{font-size:0.72rem; font-weight:700; text-transform:uppercase; letter-spacing:0.05em; color:var(--ink-soft); margin-bottom:6px;}
+  .ext-card .row{font-size:0.82rem; margin-bottom:3px;}
+  .ext-card .managed{color:var(--resilient);}
+  .ext-card .unmanaged{color:var(--risk);}
+  .ext-card .delta{font-family:"IBM Plex Mono",monospace; font-size:1.05rem; font-weight:700; color:var(--purple); margin-top:6px;}
+
+  .people-table-wrap{overflow-x:auto; border:1px solid var(--line); border-radius:8px;}
+  table.people-table{width:100%; border-collapse:collapse; font-size:0.85rem;}
+  table.people-table thead th{background:var(--surface-alt); text-align:left; font-weight:700; padding:8px 12px; border-bottom:2px solid var(--line); font-size:0.72rem; text-transform:uppercase; letter-spacing:0.04em; color:var(--ink-soft);}
+  table.people-table td{padding:9px 12px; border-bottom:1px solid var(--line); vertical-align:top;}
+  table.people-table tr:last-child td{border-bottom:none;}
+  table.people-table .p-name{font-weight:600; white-space:nowrap;}
+
+  .method-box{
+    background:var(--surface); border:1px solid var(--line); border-radius:8px;
+    padding:20px 22px; font-size:0.88rem; color:var(--ink-soft);
+  }
+  .method-box h3{font-size:0.95rem; font-weight:600; color:var(--ink); margin-bottom:8px; font-family:"IBM Plex Sans",sans-serif;}
+  .method-box ul{margin:0 0 14px; padding-left:18px;}
+  .method-box ul:last-child{margin-bottom:0;}
+  .method-box li{margin-bottom:6px;}
+  .verify-tag{font-family:"IBM Plex Mono",monospace; font-size:0.68rem; padding:1px 7px; border-radius:10px; font-weight:600; white-space:nowrap;}
+  .verify-confirmed{background:var(--resilient-bg); color:var(--resilient);}
+  .verify-est{background:var(--amber-bg); color:var(--amber);}
+  .verify-corrected{background:var(--risk-bg); color:var(--risk);}
+
+  footer{border-top:1px solid var(--line); padding-top:18px; margin-top:8px;
+    font-family:"IBM Plex Mono",monospace; font-size:0.74rem; color:var(--ink-soft);
+    display:flex; justify-content:space-between; flex-wrap:wrap; gap:8px;}
+
+  @media (max-width:480px){
+    table.org-table{min-width:680px;}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="masthead">
+    <div class="eyebrow">Special Topics: Access &amp; Cost under OBBBA — Companion Page</div>
+    <h1>Bay Area Navigation Networks</h1>
+    <p class="dek">Organization-level risk analysis, an actionable framework for health-housing navigators, and the people and institutions shaping the response, as Medi-Cal work requirements (effective January 1, 2027 nationally) intersect with the region's dense but unevenly resourced safety-net infrastructure.</p>
+    <div class="meta-row">
+      <span>Prepared September 2026</span>
+      <span>·</span>
+      <span>Region: San Francisco, Alameda, Santa Clara, Contra Costa, San Mateo counties</span>
+      <span>·</span>
+      <a class="back-link" href="../index.html#special">← Back to Special Topics: OBBBA</a>
+    </div>
+  </header>
+
+  <nav class="toc">
+    <span class="toc-label">On this page</span>
+    <ol>
+      <li><a href="#insights">Actionable Insights for Navigation Networks</a></li>
+      <li><a href="#resilient">Top 10 Most Resilient Organizations</a></li>
+      <li><a href="#at-risk">Top 10 At-Risk Organizations</a></li>
+      <li><a href="#counties">County-Level Risk Delineation</a></li>
+      <li><a href="#externalities">Externality Cost Reference</a></li>
+      <li><a href="#people">Notable People &amp; Entities</a></li>
+      <li><a href="#method">Methodology, Sourcing &amp; Limitations</a></li>
+    </ol>
+  </nav>
+
+  <div class="callout">
+    <p><strong>Throughline:</strong> Federal savings from OBBBA's Medicaid provisions are consistently smaller than the costs they shift onto county health systems, MCOs, and safety-net providers — and no reconciliation event has closed that gap yet. Modeled county-level and org-level analysis below puts an order-of-magnitude figure on that shift: every $1 in Medi-Cal coverage removed plausibly generates $3-5 in downstream ED, incarceration, disability, and homelessness-system costs. In the Bay Area specifically, that gap lands unevenly — dense urban cores with mature Medi-Cal MCO and FQHC infrastructure are better positioned to absorb documentation-driven disenrollment than the region's thinner safety-net edges.</p>
+  </div>
+
+  <section id="insights">
+    <h2>Actionable Insights for Navigation Networks</h2>
+    <p class="section-dek">A curated set from a 20-issue navigator action framework spanning administrative/compliance, infrastructure, workforce, funding, market-structure, and clinical-integration problems — each paired with a primary action, a fallback, and the incentive structure that makes the fix durable rather than one-off. Practical steps for case managers, MCO member-services teams, and housing-health crossover programs ahead of the rollout.</p>
+    <div class="insight-grid">
+      <div class="insight-card">
+        <div class="issue-badges"><span class="badge badge-admin">Administrative</span></div>
+        <h3>Procedural Medi-Cal disenrollment (work requirements + 6-month redeterminations)</h3>
+        <div class="action-box action-primary"><strong>Primary action</strong>Embed medical-legal partnerships at FQHCs — law clinics help clients document exemptions (disability, caregiving, housing instability); train county navigators on exemption-documentation workflows.<div class="who-line">Who: La Clínica, TVHC, Bay Area Legal Aid, UC Berkeley &amp; Stanford Law</div></div>
+        <div class="action-box action-alt"><strong>Alternative</strong>DHCS auto-verification of income/work status against EDD wage records, DMV, and tax databases — the approach credited with preventing ~77% of procedural disenrollment in a comparable state rollout elsewhere.<div class="who-line">Who: DHCS, county social services agencies, CalHEERS vendors</div></div>
+        <div class="incentive-box"><strong>Incentive leverage</strong>Every 1,000 procedural disenrollments averted is modeled at roughly $1.5-3M in avoided uncompensated ED cost that hospitals currently absorb under EMTALA.</div>
+      </div>
+      <div class="insight-card">
+        <div class="issue-badges"><span class="badge badge-infra">Infrastructure</span></div>
+        <h3>Navigator system fragmentation — 3-5 non-interoperable platforms per client (EHR, HMIS, CalHEERS, CalSAWS, Salesforce)</h3>
+        <div class="action-box action-primary"><strong>Primary action</strong>Invest in a shared case-management layer (e.g. Salesforce Health Cloud) with API bridges to HMIS and CalHEERS; standardize data entry to cut duplicate documentation.<div class="who-line">Who: Abode Services, Hamilton Families, BACS, La Clínica, county HMIS admins</div></div>
+        <div class="action-box action-alt"><strong>Alternative</strong>Accelerate the state-level CalAIM data-sharing framework so navigators can pull a client's full service history without restarting intake.<div class="who-line">Who: DHCS CalAIM team, county HMIS leads, CHCN</div></div>
+        <div class="incentive-box"><strong>Incentive leverage</strong>Navigator time-use studies consistently report 30-40% of working hours lost to duplicate documentation — closing that gap is functionally equivalent to adding a navigator per 10-person team without new hires.</div>
+      </div>
+      <div class="insight-card">
+        <div class="issue-badges"><span class="badge badge-work">Workforce</span></div>
+        <h3>CHW/navigator wages unsustainable relative to Bay Area cost of living — turnover destroys institutional knowledge</h3>
+        <div class="action-box action-primary"><strong>Primary action</strong>Fund staff through California's Community Health Worker Medi-Cal certification (added as a billable benefit under CalAIM, July 2022) — turnover costs ~$8,000-15,000 per hire, making retention pay for itself in year one.<div class="who-line">Who: FQHCs, Abode, Hamilton Families, BACS</div></div>
+        <div class="action-box action-alt"><strong>Alternative</strong>Pool a Bay Area CHW retention fund across regional foundations for salary supplements independent of any single org's budget cycle.<div class="who-line">Who: DHCS, regional community foundations</div></div>
+        <div class="incentive-box"><strong>Incentive leverage</strong>State CHW certification turns certified staff into revenue-generating billing categories rather than pure grant costs — health plans benefit from the resulting drop in ED utilization.</div>
+      </div>
+      <div class="insight-card">
+        <div class="issue-badges"><span class="badge badge-fund">Funding</span></div>
+        <h3>No flex/discretionary funds for navigators — a structural gap that blocks otherwise-completable placements</h3>
+        <div class="action-box action-primary"><strong>Primary action</strong>Braided $500-1,000 unrestricted discretionary line per caseload (10-15 clients) — covers a government ID (~$35), a bus pass (~$50-100/mo), or a storage deposit (~$150) that would otherwise stall an entire placement.<div class="who-line">Who: Community-foundation emergency grantmaking, org operating reserves</div></div>
+        <div class="action-box action-alt"><strong>Alternative</strong>County emergency-assistance funds with a 24-hour navigator request process; pre-positioned gift cards at navigator offices.<div class="who-line">Who: County human services departments, local emergency funds</div></div>
+        <div class="incentive-box"><strong>Incentive leverage</strong>A $35 government ID can unlock a housing placement worth $1,000-3,000 in the pipeline — a documented 10-30x leverage ratio on flex spending.</div>
+      </div>
+      <div class="insight-card">
+        <div class="issue-badges"><span class="badge badge-mkt">Market Structure</span></div>
+        <h3>Safety-net FQHC acquisition risk by non-mission-aligned entities, triggered by fiscal distress</h3>
+        <div class="action-box action-primary"><strong>Primary action</strong>State AG healthcare-rights offices proactively engage FQHC leadership before distress forces rushed deals — pre-negotiating acceptable acquisition conditions (community-majority board retention, FQHC designation preservation).<div class="who-line">Who: State AG healthcare rights units, county health officers</div></div>
+        <div class="action-box action-alt"><strong>Alternative</strong>CDFI lenders pre-position bridge/acquisition financing for mission-aligned FQHC consolidators, since nonprofit acquirers otherwise lose acquisition-speed races to private capital.<div class="who-line">Who: Community development financial institutions (CDFIs)</div></div>
+        <div class="incentive-box"><strong>Incentive leverage</strong>FQHC 340B drug-pricing designation alone is worth roughly 20-30% of pharmacy revenue — a strong financial reason for any acquirer to preserve it rather than let it lapse.</div>
+      </div>
+      <div class="insight-card">
+        <div class="issue-badges"><span class="badge badge-clin">Clinical Integration</span></div>
+        <h3>Health and housing navigators operate in parallel silos — CalAIM requires an integration most orgs haven't built yet</h3>
+        <div class="action-box action-primary"><strong>Primary action</strong>Co-located, co-supervised health-housing navigator teams with weekly shared case conferences and joint intake protocols that assess housing stability and health needs together.<div class="who-line">Who: Abode Services, BACS, Hamilton Families, La Clínica</div></div>
+        <div class="action-box action-alt"><strong>Alternative</strong>Where co-location isn't feasible, a standardized warm-handoff referral protocol between health and housing orgs rather than paper referrals.<div class="who-line">Who: Regional homelessness-coordination bodies, CHCN</div></div>
+        <div class="incentive-box"><strong>Incentive leverage</strong>CalAIM Community Supports makes housing navigation Medi-Cal billable when delivered as part of an integrated model — integrated orgs qualify for more billable service categories per client.</div>
+      </div>
+    </div>
+    <p class="section-dek" style="margin-top:16px;">Route through CalAIM infrastructure wherever possible: California's existing CalAIM Community Supports and Enhanced Care Management screening rails can double as a documentation pathway for work-requirement exemptions — most Bay Area MCOs already collect this social-needs data. Also flag the litigation timeline in outreach messaging: a live compliance-under-protest window (a federal preliminary injunction was denied in August 2026; see the main Special Topics tab) means members still need to comply with current rules while litigation proceeds — navigation messaging should avoid implying the requirement might not apply, which risks members skipping documentation entirely.</p>
+  </section>
+
+  <section id="resilient">
+    <h2>Top 10 Most Resilient Organizations</h2>
+    <p class="section-dek">Resilience = revenue diversification away from Medi-Cal, endowment or tax-base backing, CalAIM integration, or a funder/research role that isn't directly service-delivery dependent. Even resilient orgs face real losses — "resilient" means an organization survives the 2026-2028 window intact, not that it emerges unaffected. Dollar figures are modeled estimates (see Methodology), not audited projections.</p>
+    <div class="org-table-wrap">
+      <table class="org-table">
+        <thead><tr><th>#</th><th>Organization</th><th>Type · Medi-Cal % of revenue</th><th>Est. $ at risk, 2026-28</th><th>Why it's resilient</th></tr></thead>
+        <tbody>
+          <tr><td class="rank resilient">01</td><td><span class="org-name">Kaiser Permanente (Bay Area)</span><span class="org-loc">Oakland HQ · Alameda, Contra Costa, SF, Santa Clara</span></td><td>Integrated HMO · ~20-25% (commercial-dominant)</td><td class="fig resilient">$400-600M [est.]</td><td>Integrated payer-provider model absorbs Medi-Cal losses through commercial cross-subsidy; capitated structure means disenrollment cuts costs and revenue together, so margin impact is smaller than for fee-for-service systems.</td></tr>
+          <tr><td class="rank resilient">02</td><td><span class="org-name">UCSF Health</span><span class="org-loc">San Francisco · Parnassus, Mission Bay, ZSFG affiliate</span></td><td>Academic medical center · ~28-32%</td><td class="fig resilient">$170-250M [est.]</td><td>Academic mission, research grants, and philanthropy form a three-layer buffer; specialty-care premium pricing (oncology, transplant, neurology) sustains commercial margins.</td></tr>
+          <tr><td class="rank resilient">03</td><td><span class="org-name">Stanford Health Care</span><span class="org-loc">Stanford / Palo Alto · Peninsula</span></td><td>Academic health system · ~15-20%</td><td class="fig resilient">$150-250M [est.]</td><td>Lowest Medi-Cal dependency of any major Bay Area system; Peninsula geography skews toward commercially insured patients; large philanthropy base.</td></tr>
+          <tr><td class="rank resilient">04</td><td><span class="org-name">Sutter Health (Northern CA)</span><span class="org-loc">Sacramento HQ · Alta Bates Summit (Oakland/Berkeley), CPMC (SF)</span></td><td>Nonprofit system · ~18-22%</td><td class="fig resilient">$300-450M [est.]</td><td>Multi-market scale and cross-subsidy; commercial-heavy Alta Bates/CPMC markets offset thinner-margin sites elsewhere in the system.</td></tr>
+          <tr><td class="rank resilient">05</td><td><span class="org-name">Abode Services</span><span class="org-loc">Fremont HQ · Alameda, Santa Clara, San Mateo counties</span></td><td>Housing/homelessness nonprofit · ~30-35% (CalAIM billing)</td><td class="fig resilient">$10-18M [est.]</td><td>Most diversified funding structure among Bay Area housing orgs — county contracts, CalAIM Community Supports billing, CARE Court contracts, philanthropy; PSH operating subsidies are contractually locked for 10-20 years.</td></tr>
+          <tr><td class="rank resilient">06</td><td><span class="org-name">Bay Area Community Services (BACS)</span><span class="org-loc">Oakland · Alameda County</span></td><td>Behavioral health/housing nonprofit · ~35-40%</td><td class="fig resilient">$8-15M [est.]</td><td>CARE Court contracts are court-ordered, not Medi-Cal dependent; Prop 1 behavioral-health bonds create a new non-Medi-Cal funding stream for the same service lines.</td></tr>
+          <tr><td class="rank resilient">07</td><td><span class="org-name">The Health Trust</span><span class="org-loc">San Jose · Santa Clara &amp; N. San Benito counties</span></td><td>Operating foundation (funder) · 0% (grants out, doesn't bill Medi-Cal)</td><td class="fig resilient">$0 direct; grantees at risk</td><td>Endowment-funded from a 1996 hospital sale — fully insulated from Medi-Cal revenue risk; can activate a rapid-response fund for grantee emergencies.</td></tr>
+          <tr><td class="rank resilient">08</td><td><span class="org-name">Silicon Valley Community Foundation (SVCF)</span><span class="org-loc">Mountain View · Bay Area-wide</span></td><td>Community foundation (funder) · 0%</td><td class="fig resilient">$0 direct</td><td>Large AUM community foundation, immune to Medi-Cal revenue risk; role is strategic coordinator/co-funder for regional housing, health, and equity initiatives.</td></tr>
+          <tr><td class="rank resilient">09</td><td><span class="org-name">Terner Center / Terner Labs</span><span class="org-loc">UC Berkeley · Oakland</span></td><td>Research + accelerator (nonprofit) · 0%</td><td class="fig resilient">$0 direct</td><td>University-backed and philanthropically funded, no Medi-Cal dependency; academic tenure insulates staff from budget swings.</td></tr>
+          <tr><td class="rank resilient">10</td><td><span class="org-name">Community Health Center Network (CHCN)</span><span class="org-loc">Oakland · Alameda + Contra Costa</span></td><td>Medi-Cal MCO admin backbone for 8 FQHCs · ~90%</td><td class="fig resilient">Revenue tracks enrollment, not a direct service-revenue org</td><td>Structural role as shared administrative infrastructure (not clinical care) makes it more, not less, needed by member FQHCs during a revenue disruption.</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section id="at-risk">
+    <h2>Top 10 At-Risk Organizations</h2>
+    <p class="section-dek">Ranked by combined revenue exposure, organizational fragility, population vulnerability, and absence of a structural backstop. Dollar losses represent modeled revenue at risk, not confirmed losses — actual impact depends on state mitigation and org-level response. Figures are estimates (see Methodology).</p>
+    <div class="org-table-wrap">
+      <table class="org-table">
+        <thead><tr><th>#</th><th>Organization</th><th>Medi-Cal %</th><th>Est. $ revenue at risk, 2026-28</th><th>Core weakness</th></tr></thead>
+        <tbody>
+          <tr><td class="rank risk">01</td><td><span class="org-name">Alameda Health System (AHS)</span><span class="org-loc">Oakland (Highland Hospital), San Leandro, Fairmont</span></td><td>~67%</td><td class="fig risk">$370-480M/yr [est.]</td><td>Pre-existing budget gap entering the HR1/OBBBA shock; highly unionized cost structure limits rapid downsizing; sole Level II trauma center for 1.7M county residents, so EMTALA obligations don't shrink with revenue.</td></tr>
+          <tr><td class="rank risk">02</td><td><span class="org-name">Santa Clara Valley Healthcare (SCVMC + county clinics)</span><span class="org-loc">San Jose, Gilroy, Sunnyvale, Santa Clara</span></td><td>~63% at SCVMC</td><td class="fig risk">$300-500M/yr [est.]</td><td>County-wide fiscal deficit forces triage between SCVMC and other county services; legally obligated to serve indigent patients regardless of funding; sole Level I trauma and one of four Northern CA burn centers.</td></tr>
+          <tr><td class="rank risk">03</td><td><span class="org-name">Zuckerberg San Francisco General Hospital (ZSFG)</span><span class="org-loc">San Francisco (Mission/SoMa/Potrero)</span></td><td>~67%</td><td class="fig risk">$200-320M/yr [est.]</td><td>SF general fund backstop, but the city faces its own budget pressure; highest concentration of unhoused patients of any Bay Area hospital; primary HIV/ARV and psychiatric-emergency site in the city.</td></tr>
+          <tr><td class="rank risk">04</td><td><span class="org-name">La Clínica de la Raza</span><span class="org-loc">Oakland HQ · 35 sites, Alameda/Contra Costa/Solano</span></td><td>~72-78% [est.]</td><td class="fig risk">$38-55M/yr [est.]</td><td>Immigrant-eligibility cuts (already in effect for lawfully-present immigrants under 100% FPL) are a cliff event, not a gradual decline, for its immigrant-heavy caseload; 35-site footprint means the shock lands everywhere simultaneously, not in one place.</td></tr>
+          <tr><td class="rank risk">05</td><td><span class="org-name">Tiburcio Vasquez Health Center (TVHC)</span><span class="org-loc">Hayward · Union City · Fremont · Newark</span></td><td>~75-82% [est.]</td><td class="fig risk">$30-50M/yr [est.]</td><td>Primary safety-net provider for South Alameda County with no FQHC backup in its corridor; smaller reserve base than multi-county peers.</td></tr>
+          <tr><td class="rank risk">06</td><td><span class="org-name">Bay Area Community Health (BACH)</span><span class="org-loc">Fremont HQ · San Jose · Union City · Milpitas</span></td><td>~72% [est.]</td><td class="fig risk">$18-32M/yr [est.]</td><td>Two-county exposure (Santa Clara + Alameda) doubles regulatory/CalAIM contracting complexity relative to single-county peers.</td></tr>
+          <tr><td class="rank risk">07</td><td><span class="org-name">San Francisco Community Health Center (SFCHC)</span><span class="org-loc">San Francisco (Tenderloin, SoMa)</span></td><td>~70-75%</td><td class="fig risk">$12-20M/yr [est.]</td><td>Core patient population (DV/trafficking survivors, HIV+ patients) overlaps directly with populations OBBBA's immigrant-eligibility provisions target; no other SF provider replicates its trauma-informed, LGBTQ+/immigrant-integrated model.</td></tr>
+          <tr><td class="rank risk">08</td><td><span class="org-name">LifeLong Medical Care</span><span class="org-loc">Berkeley · Richmond · Oakland · Novato</span></td><td>~72% [est.]</td><td class="fig risk">$15-25M/yr [est.]</td><td>Working-age expansion-population patients are highly exposed to work requirements even though its elder-care patients have more Medicare-eligibility insulation; 340B pharmacy designation requires maintaining patient-volume thresholds that a revenue shock could jeopardize.</td></tr>
+          <tr><td class="rank risk">09</td><td><span class="org-name">Roots Community Health Center</span><span class="org-loc">East Oakland · San Jose (South Bay site)</span></td><td>~70-75% [est.]</td><td class="fig risk">$7-12M/yr [est.]</td><td>Small revenue base (~$24M) means a modeled $9M mid-estimate loss is roughly 38% of total revenue — existential at this scale despite genuine fiscal discipline and a small social-enterprise revenue buffer.</td></tr>
+          <tr><td class="rank risk">10</td><td><span class="org-name">Native American Health Center</span><span class="org-loc">Oakland</span></td><td>~70-75%</td><td class="fig risk">$5-10M/yr [est.]</td><td>Smallest safety-net FQHC serving a population with among the highest per-capita disease burden of any group profiled; IHS federal backstop funding is itself separately exposed to federal budget pressure.</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="section-dek" style="margin-top:12px;">A broader source analysis extends this list to 15 organizations, adding West Oakland Health Council, Axis Community Health (Tri-Valley), Tri-City Health Center, Hamilton Families, and Street Level Health Project (Oakland day-laborer health) — all sharing the same core exposure pattern: thin reserves, high Medi-Cal/immigrant-population dependence, and no adjacent FQHC to absorb overflow if they contract.</p>
+  </section>
+
+  <section id="counties">
+    <h2>County-Level Risk Delineation</h2>
+    <p class="section-dek">The same disenrollment mechanics translate into different effective risk depending on each county's safety-net density, fiscal position, and geography. Figures below are county-level modeled estimates, not confirmed counts.</p>
+    <div class="county-grid">
+      <div class="county-card">
+        <h3>Alameda County</h3>
+        <span class="stat">290,000-380,000 [est.]</span>
+        <p>Medi-Cal members estimated at risk of coverage loss by 2028. AHS is the sole safety-net trauma center; 8 FQHCs in the county's health-center consortium serve 260,000+ patients, all exposed simultaneously. Highest-risk cities: Oakland (all districts), Hayward, Fremont, Union City, Livermore, Emeryville.</p>
+      </div>
+      <div class="county-card">
+        <h3>Santa Clara County</h3>
+        <span class="stat">~500,000</span>
+        <p>1 in 4 residents on Medi-Cal; a county-wide fiscal deficit (recently offset in part by a dedicated local sales-tax measure directed to the county health system) forces service triage. SCVMC is the only Level I trauma center in San Jose and one of four Northern California burn centers. Highest-risk areas: East San Jose, Gilroy (agricultural workers), North San Jose (warehouse workers).</p>
+      </div>
+      <div class="county-card">
+        <h3>San Francisco County</h3>
+        <span class="stat">~120,000-150,000 [est.]</span>
+        <p>ZSFG is the sole public hospital and trauma center; SF has among the highest per-capita unhoused populations in California, creating a convergence of housing and health risk. Highest-risk neighborhoods: Tenderloin, SoMa, Bayview-Hunters Point, Mission.</p>
+      </div>
+      <div class="county-card">
+        <h3>Contra Costa County</h3>
+        <span class="stat">~100,000-130,000 [est.]</span>
+        <p>La Clínica's Concord/Antioch sites and LifeLong's Richmond site face the same coverage cliff as Alameda County sites; Contra Costa Health Services is the county safety net but has less capacity than AHS. Highest-risk cities: Richmond, Antioch, Concord, Pittsburg.</p>
+      </div>
+      <div class="county-card">
+        <h3>San Mateo County</h3>
+        <span class="stat">~60,000-80,000 [est.]</span>
+        <p>Relative county-wide affluence means a lower overall Medi-Cal base, but the immigrant-worker population in Daly City, Redwood City, and South County is substantial with limited FQHC backup. Abode Services operates permanent supportive housing here.</p>
+      </div>
+      <div class="county-card">
+        <h3>Regional cross-county risk</h3>
+        <span class="stat">20,000-30,000 [est.]</span>
+        <p>Estimated Bay Area healthcare jobs at risk from OBBBA-driven Medicaid revenue contraction (regional share of a statewide job-loss estimate) — a second-order shock where job losses raise the uninsured count independent of eligibility rules.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="externalities">
+    <h2>Externality Cost Reference — by Condition</h2>
+    <p class="section-dek">Per-patient annual cost comparison: Medi-Cal-managed care vs. uninsured/unmanaged care. The delta is the externality cost that shifts onto EDs, county systems, disability programs, and criminal justice when coverage is lost — this is the argument that changes funder and policymaker incentive calculus. All figures are modeled ranges from peer-reviewed and government literature, not this project's own measurement.</p>
+    <div class="ext-grid">
+      <div class="ext-card">
+        <div class="condition">Type 2 Diabetes</div>
+        <div class="row managed">✓ Managed (Medi-Cal): $3,000-5,000/yr</div>
+        <div class="row unmanaged">✗ Unmanaged (uninsured): $18,000-25,000/yr</div>
+        <div class="delta">+$15-20K/yr</div>
+      </div>
+      <div class="ext-card">
+        <div class="condition">ESRD / Dialysis</div>
+        <div class="row managed">✓ Managed (scheduled): $87,000-98,000/yr</div>
+        <div class="row unmanaged">✗ Uninsured (ED dialysis, 3x/week): $936K-$1.7M/yr</div>
+        <div class="delta">+$850K-$1.6M/yr</div>
+      </div>
+      <div class="ext-card">
+        <div class="condition">HIV/AIDS (ARV therapy)</div>
+        <div class="row managed">✓ Managed: $20,000-30,000/yr</div>
+        <div class="row unmanaged">✗ Unmanaged, per virologic-failure episode: $50,000-150,000/yr</div>
+        <div class="delta">+$30-120K/yr</div>
+      </div>
+      <div class="ext-card">
+        <div class="condition">Behavioral Health Crisis</div>
+        <div class="row managed">✓ Managed: $200-400/day community/outpatient</div>
+        <div class="row unmanaged">✗ Unmanaged: $1,500-3,000/day inpatient psychiatric</div>
+        <div class="delta">Up to $200-500K/yr per cycling patient</div>
+      </div>
+      <div class="ext-card">
+        <div class="condition">Substance Use Disorder</div>
+        <div class="row managed">✓ Managed: $5,000-8,000/yr outpatient + MAT</div>
+        <div class="row unmanaged">✗ Unmanaged: $50,000-80,000/yr in ED, detox, justice costs</div>
+        <div class="delta">+$45-72K/yr</div>
+      </div>
+      <div class="ext-card">
+        <div class="condition">Maternal / OB (uninsured delivery)</div>
+        <div class="row managed">✓ Managed: $4,000-6,000 uncomplicated</div>
+        <div class="row unmanaged">✗ Uninsured: $10,000-15,000 uncomplicated; $20,000-50,000 complicated</div>
+        <div class="delta">+$6-44K per delivery</div>
+      </div>
+      <div class="ext-card">
+        <div class="condition">Homelessness (per person/yr)</div>
+        <div class="row managed">✓ Housed with wraparound (PSH): $18,000-25,000/yr</div>
+        <div class="row unmanaged">✗ Unhoused (ED, shelter, police, jail): $30,000-50,000/yr</div>
+        <div class="delta">+$12-25K/yr — housing is cheaper</div>
+      </div>
+      <div class="ext-card">
+        <div class="condition">Pediatric Asthma</div>
+        <div class="row managed">✓ Managed: $400-800/yr preventive care</div>
+        <div class="row unmanaged">✗ Unmanaged (3-5 ED visits/yr): $3,600-12,500/yr</div>
+        <div class="delta">+$3-12K/yr</div>
+      </div>
+    </div>
+  </section>
+
+  <section id="people">
+    <h2>Notable People &amp; Entities Shaping This Conversation</h2>
+    <div class="people-table-wrap">
+      <table class="people-table">
+        <thead><tr><th>Person / Org</th><th>Role</th><th>Why they matter</th></tr></thead>
+        <tbody>
+          <tr><td class="p-name">Michelle Baass</td><td>Director, CA Dept. of Health Care Services (DHCS)</td><td>State authority over Medi-Cal; every OBBBA operational decision for California flows through DHCS.</td></tr>
+          <tr><td class="p-name">Tyler Sadwith</td><td>CA State Medicaid Director / Chief Deputy Director, Health Care Programs (DHCS)</td><td>Reports to Baass; the operational lead on DHCS's eligibility-system readiness for the January 2027 work-requirement rollout.</td></tr>
+          <tr><td class="p-name">Mia Bonta</td><td>Chair, CA Assembly Health Committee (represents Oakland/Alameda, AD-18)</td><td>Convened a legislative informational hearing on OBBBA's Medi-Cal impact with "stark warning" framing — the legislative gatekeeper for any state-level health-funding response bill; a Bay Area-district legislator.</td></tr>
+          <tr><td class="p-name">Rob Bonta</td><td>California Attorney General</td><td>Co-plaintiff counsel in <em>Commonwealth of Massachusetts et al. v. Oz</em> (Massachusetts is the named lead plaintiff), the 25-state-and-DC coalition suing over the medically-frail exemption rule.</td></tr>
+          <tr><td class="p-name">California Health Care Foundation (CHCF)</td><td>Health policy research &amp; grantmaking</td><td>Publisher of the most-cited California-specific OBBBA/Medi-Cal implementation policy briefs and regional market reports.</td></tr>
+          <tr><td class="p-name">San Francisco Health Plan, Partnership HealthPlan, Alameda Alliance, Santa Clara Family Health Plan</td><td>Regional Medi-Cal MCOs</td><td>Directly administer eligibility processing and member communications for the work requirement in their respective counties.</td></tr>
+          <tr><td class="p-name">Chan Zuckerberg Initiative (CZI), Silicon Valley Community Foundation (SVCF), Sobrato Philanthropies, Emerson Collective</td><td>Regional philanthropy</td><td>The largest sources of discretionary bridge capital for Bay Area health and housing nonprofits facing a federal-funding gap; increasingly influence nonprofit strategy toward data-driven, shorter-cycle grantmaking.</td></tr>
+          <tr><td class="p-name">County Health Care Services Agency directors (SF, Alameda, Santa Clara, San Mateo, Contra Costa)</td><td>County health officials</td><td>Operationalize eligibility processing and safety-net backstop funding at the county level — the front line for documentation-driven disenrollment.</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="section-dek" style="margin-top:14px;">Statewide advocacy organizations (California Pan-Ethnic Health Network, Western Center on Law &amp; Poverty, California Primary Care Association) and state legislative health-committee leadership are active on this issue nationally; their specific Bay Area–focused positions were not independently verified in this research pass — treat as directionally relevant, confirm before citing specifics.</p>
+  </section>
+
+  <section id="method">
+    <h2>Methodology, Sourcing &amp; Limitations</h2>
+    <div class="method-box">
+      <h3>Where this page's content comes from</h3>
+      <ul>
+        <li>Organization risk rankings, county-level figures, and the externality cost reference are drawn from a prior detailed org-risk-analysis working document prepared for this project, itself modeled from ProPublica Form 990 filings (most recent available), regional healthcare market reports, county-level fiscal analyses, and peer-reviewed externality-cost literature. Where exact 990 figures were unavailable, estimates are labeled <strong>[est.]</strong> and modeled from sector averages.</li>
+        <li>The actionable-insights framework is a curated subset of a 20-issue navigator action framework covering administrative, infrastructure, workforce, funding, market-structure, and clinical-integration problems, each originally scored against real navigator/case-manager daily-work impact.</li>
+        <li><strong>Every dollar figure on this page is a planning estimate, not an audited projection</strong> — actual outcomes depend on state mitigation, litigation results, and org-level response between now and 2028.</li>
+      </ul>
+      <h3>What was independently re-verified before publishing</h3>
+      <ul>
+        <li><span class="verify-tag verify-confirmed">Confirmed</span> National Medicaid work-requirement effective date is <strong>January 1, 2027</strong> (CMS interim final rule, June 2026) — not "2028," which appeared in an earlier working draft of this analysis and has been corrected throughout this page.</li>
+        <li><span class="verify-tag verify-confirmed">Confirmed</span> Named litigation (<em>Commonwealth of Massachusetts et al. v. Oz</em>), lead plaintiff, and August 2026 preliminary-injunction denial — see the main Special Topics tab for full detail and sourcing.</li>
+        <li><span class="verify-tag verify-est">Modeled / not individually re-verified</span> Organization-level dollar figures, patient counts, and externality-cost ranges — these were sourced from the underlying working document's own citations (ProPublica 990s, CHCF regional reports, UC Berkeley Labor Center county projections, peer-reviewed cost literature) but were not re-run against primary sources one by one in this pass. Treat every $ figure and patient count on this page as a planning-level estimate.</li>
+        <li><span class="verify-tag verify-est">Not independently verified</span> Named county-level officials' specific quoted framing and some named research/advocacy voices from the underlying working document were not carried onto this page pending direct source verification — the People &amp; Entities table above lists only roles independently corroborated elsewhere in this project's research.</li>
+      </ul>
+      <h3>How the resilient/at-risk rankings were built</h3>
+      <ul>
+        <li>Organizations were selected as real, currently operating Bay Area entities in categories directly relevant to Medi-Cal work-requirement exposure (health systems, Medi-Cal MCOs, FQHCs, safety-net hospitals, housing/behavioral-health nonprofits, and funders).</li>
+        <li>Ranking is a <strong>structural</strong> assessment — payer-mix diversification, known infrastructure maturity (e.g. CalAIM/1115-waiver systems), reserve position, and organization scale — not an audited financial or credit-rating analysis. No individual organization's balance sheet, reserve position, or bond rating was independently verified for this page.</li>
+        <li>Revenue-at-risk methodology (from the source working document): estimated revenue × Medi-Cal share × a population-specific disenrollment-rate assumption (immigrant-heavy populations 35-50%; general low-income 15-25%; homeless-adjacent 20-30%) — a planning heuristic, not a statistical model validated against realized outcomes.</li>
+      </ul>
+    </div>
+  </section>
+
+  <footer>
+    <span>Companion to Special Topics: Access &amp; Cost under OBBBA — Healthcare Reference Materials</span>
+    <span>Static reference · refresh alongside CLAUDE.md Step 10</span>
+  </footer>
+
+</div>
+</body>
+</html>
+</content>

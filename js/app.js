@@ -125,7 +125,7 @@
     /* --- Global keyboard shortcut: 1/2/3 to switch tabs -- */
     document.addEventListener('keydown', function (e) {
       if (e.target.tagName === 'INPUT' || e.target.tagName === 'SELECT') return;
-      const tabMap = { '1': 'ontology', '2': 'reimbursement', '3': 'taxonomy', '4': 'analytical' };
+      const tabMap = { '1': 'ontology', '2': 'reimbursement', '3': 'taxonomy', '4': 'analytical', '5': 'special' };
       if (tabMap[e.key]) activateTab(tabMap[e.key]);
     });
 

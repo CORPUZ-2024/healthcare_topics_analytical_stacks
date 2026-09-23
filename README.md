@@ -20,13 +20,15 @@ Or open `index.html` directly from the repo — no server required. All data is 
 
 ## What's Inside
 
-### Three Interactive Tabs
+### Five Tabs
 
 | Tab | Visualization | What it shows |
 |-----|--------------|---------------|
-| **Ontology Graph** | D3.js force-directed graph | Two force-directed graphs: Legislative Map (legislation → agencies → programs → rules) and Payer & Company Map (plans, providers, pharma, health IT connected to CMS mandates) |
+| **Ontology Graph** | D3.js force-directed graph | Two force-directed graphs: Legislative Map (legislation → agencies → programs → rules) and Payer & Company Map (plans, providers, pharma, health IT connected to CMS mandates), plus the Top Shifts cards |
 | **Reimbursement Roadmap** | 3-level hierarchy swimlane (2010–2028) | Eligibility-based mapping of CMMI innovation models to 12 service types, organized by 6 official CMMI categories |
-| **Data Taxonomy** | Filterable, sortable table | CMS and public research datasets with linkage variables and metadata |
+| **Data Taxonomy** | Filterable, sortable table | CMS and public research datasets with linkage variables and metadata, plus static coding-system and cross-program-variable reference sections |
+| **Analytical Stacks** | Expandable card grid | 14 analysis task types with tech/analytical stacks, healthcare use cases, and caveats |
+| **Special Topics: OBBBA** | Static reference deep-dive | One Big Beautiful Bill Act (P.L. 119-21) national provisions, 5 state-archetype impact table, individual mandate variation, 3-state case-study drill-down (CA/MT/GA), and a topic-organized reading guide — see [Tab 5](#tab-5--special-topics-access--cost-under-obbba) below |
 
 ---
 
@@ -53,6 +55,8 @@ healthcare_ref_materials/
 │   └── datasets.json           # 23 CMS and public research datasets (incl. Drug/Formulary)
 ├── cli/
 │   └── update.py               # Phased update CLI (see below)
+├── special-topics/
+│   └── bay-area-navigation.html # Standalone companion page — Bay Area org risk rankings, county breakdown, externality cost reference, navigator action framework (linked from Tab 5)
 └── project_specs/              # Original specification documents
 ```
 
@@ -102,12 +106,14 @@ Six active shifts displayed as cards below the graphs, each with a trend rating,
 
 | # | Title | Trend |
 |---|-------|-------|
-| 1 | IRA Drug Price Negotiation — Cycle 3 Live | Critical |
-| 2 | CMS-0057-F Prior Auth APIs — Jan 2027 Deadline | Critical |
-| 3 | MA Risk Adjustment Tightening (HCC V28 + RADV) | Critical |
-| 4 | TEAM Model — Mandatory Episode Accountability | Rising |
-| 5 | MIPS Sunset Proposal — Advanced APM Pressure (2029) | Rising |
+| 1 | OBBBA Medicaid Work Requirements + ACA Subsidy Cliff Compound | Critical |
+| 2 | IRA Drug Price Negotiation — Cycle 3 Live | Critical |
+| 3 | CMS-0057-F Prior Auth APIs — Jan 2027 Deadline | Critical |
+| 4 | MA Risk Adjustment Tightening (HCC V28 + RADV) | Critical |
+| 5 | TEAM Model — Mandatory Episode Accountability | Rising |
 | 6 | AI Governance Fragmentation — Three Regimes, No Reconciliation | Rising |
+
+> The #1 shift links directly to the new **Special Topics: OBBBA** tab for the full state-by-state breakdown. The MIPS Sunset shift was retired to make room (its content overlaps the Reimbursement Roadmap tab's QPP/MIPS coverage) — see the [implementation guide](project_specs/V0%20Specs/OBBBA_Special_Topics_Implementation_Guide.md) for the rationale.
 
 **Interactions (both graphs):**
 - Pan and zoom the graph canvas
@@ -176,6 +182,26 @@ Each dataset shows: description, years covered, unit of observation, payer scope
 
 ---
 
+## Tab 5 — Special Topics: Access & Cost under OBBBA
+
+A standalone static reference deep-dive on the One Big Beautiful Bill Act (H.R. 1 / P.L. 119-21, signed July 4, 2025), added September 2026. No backing JSON — edited directly in `index.html` under `<div id="tab-special">`, following the same pattern as the Data Taxonomy reference sections (Tab 3).
+
+**Covers:**
+- National context: work requirements, immigrant eligibility, PTC repayment-cap repeal, provider tax/SDP caps, Rural Health Transformation Fund
+- Archetypes of impact: 5 state response patterns (Early Adopters, Waiver-Only/Non-Expansion, Expansion+Waiver, Administratively Overwhelmed, Litigants), each graded by evidence quality (confirmed / modeled / insufficient)
+- Individual mandate variation by state for 2026
+- Disproportionately affected populations (coverage loss, subsidy clawback, ESRD/disability duals, immigrant eligibility)
+- A 2026–2030 coverage/cost quadrant grid
+- Three-state case-study drill-down: California (Expansion+Litigant), Montana (Early Adopter), Georgia (Waiver-Only) — plus a Bay Area companion page ([`special-topics/bay-area-navigation.html`](special-topics/bay-area-navigation.html), also published as a private Claude Artifact) with a curated actionable-insights framework, top-10 resilient/at-risk organization tables (modeled $ revenue-at-risk, patient counts, core strengths/weaknesses), a county-by-county risk delineation, a condition-by-condition externality cost reference, and a notable people/entities table
+- A topic-organized works-cited reading guide
+- A static/dynamic refresh protocol (see [CLAUDE.md](CLAUDE.md) Step 10)
+
+**Cross-links:** The Ontology tab's #1 Top Shift links here; the Payer & Company Map gained an `obbba_c` legislation node plus `cbo`, `kff`, `georgetown_ccf`, `ga_dch`, and `rhtf_prog` nodes documenting the national-context entities this tab draws on.
+
+**Sourcing & fact-check trail:** every figure in this tab and its Bay Area companion page was run through an independent, primary-source verification pass (or explicitly flagged where it couldn't be confirmed) rather than published on first draft. The full build log — what was verified, what was corrected, and what's still open — is in [`project_specs/V0 Specs/OBBBA_Special_Topics_Implementation_Guide.md`](<project_specs/V0 Specs/OBBBA_Special_Topics_Implementation_Guide.md>).
+
+---
+
 ## Content Refresh Workflow
 
 The full refresh protocol is defined in [`CLAUDE.md`](CLAUDE.md) at the repo root. Claude Code reads that file automatically and executes the workflow when given a prompt like:
@@ -196,6 +222,7 @@ The full refresh protocol is defined in [`CLAUDE.md`](CLAUDE.md) at the repo roo
 | 7 | Sync all `window.__XXX__` inline blocks in `index.html` to match updated JSON files |
 | 8 | Update README freshness table |
 | 9 | Validate cross-references, commit, and push |
+| 10 | **Special Topics: OBBBA** (Tab 5, static HTML) — check CBO/KFF/Georgetown CCF tracking data, state case-study numbers, litigation status, and individual mandate penalty amounts; not covered by steps 1–9 |
 
 ### Design principle
 
@@ -240,13 +267,14 @@ Each JSON file has a corresponding `window.__XXX__` variable embedded in `index.
 
 | Layer | Current as of |
 |-------|--------------|
-| Legislation | IRA 2022 (most recent major law) |
+| Legislation | OBBBA / H.R. 1 (P.L. 119-21, signed July 4, 2025 — most recent major law) |
 | CMMI Models | August 2026 |
 | Fee Schedules | CY/FY 2025 Final Rules |
 | Datasets | September 2026 |
-| Payer & Company Map | September 2026 (hospital systems, interoperability/RWD, cloud/EHR partnerships, AI governance stakeholders) |
+| Payer & Company Map | September 2026 (hospital systems, interoperability/RWD, cloud/EHR partnerships, AI governance stakeholders, OBBBA national-context entities) |
+| Special Topics: OBBBA (Tab 5) | September 2026 |
 
-**Sources:** CMS.gov, CMMI, Federal Register, ResDAC, AHRQ HCUP, NIH, CDC, Becker's Hospital Review, KFF, Sequoia Project, FDA, ONC/ASTP, CHAI, The Joint Commission
+**Sources:** CMS.gov, CMMI, Federal Register, ResDAC, AHRQ HCUP, NIH, CDC, Becker's Hospital Review, KFF, Sequoia Project, FDA, ONC/ASTP, CHAI, The Joint Commission, CBO, Georgetown University Center for Children and Families, GAO, California DHCS, California DOJ, California LAO, California Health Care Foundation (CHCF), Georgetown Litigation Tracker
 
 ---
 

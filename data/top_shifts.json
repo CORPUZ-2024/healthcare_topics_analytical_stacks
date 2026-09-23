@@ -1,7 +1,23 @@
 [
   {
-    "id":"ts1",
+    "id":"ts_obbba",
     "rank":1,
+    "trend":"critical",
+    "title":"OBBBA Medicaid Work Requirements + ACA Subsidy Cliff Compound",
+    "activeNode":"One Big Beautiful Bill Act (H.R. 1 / P.L. 119-21)",
+    "catalyst":"P.L. 119-21, signed July 4, 2025, mandates 80 hrs/month Medicaid work requirements for the ACA expansion population across 40 states + DC by Jan 1, 2027 (CMS interim final rule, June 1, 2026); several states are implementing earlier on their own timelines. It lands the same year the separate, IRA-era enhanced ACA premium tax credits expired (Dec 31, 2025, unrenewed by Congress) — subsidized marketplace enrollees' average annual premium roughly doubled, from $888 to $1,904. CBO projects ~10M combined coverage losses by 2034. A 25-state-and-DC coalition (Massachusetts leads; CA is a co-plaintiff) is suing CMS (Commonwealth of Massachusetts et al. v. Oz, filed June 2026) over the rule's narrowed 'medically frail' exemption — a federal judge denied the coalition's preliminary injunction in early August 2026, so the rule remains in effect while litigation continues. <a onclick=\"var b=document.querySelector('.tab-btn[data-tab=&quot;special&quot;]'); if(b) b.click();\" style=\"cursor:pointer;color:#00b4d8;text-decoration:underline;font-weight:600;\">Full state-by-state breakdown and case studies: Special Topics: Access &amp; Cost under OBBBA →</a>",
+    "implications":[
+      "Georgia Pathways to Coverage (GA Dept of Community Health) is the cautionary preview: GAO found $54.2M spent on admin vs. $26.1M on care since 2021, with enrollment still far below the ~240,000-eligible target",
+      "Rural hospitals and FQHCs face compounding pressure from coverage loss plus provider-tax/state-directed-payment caps — the $50B Rural Health Transformation Fund is widely expected not to fully offset losses",
+      "Medi-Cal plans (San Francisco Health Plan, Partnership HealthPlan of CA) and similar Medicaid MCOs nationally face semi-annual redetermination cycles and rising administrative costs as CA alone estimates up to 3.4M Medi-Cal members at risk",
+      "CBO, KFF, and Georgetown University's Center for Children and Families (CCF) become the reference infrastructure most states and hospital associations cite for coverage-loss and state-readiness tracking",
+      "State AG litigation (CA-led coalition vs. CMS) creates a live compliance-under-protest dynamic for expansion states — obligations continue during litigation, deferring rather than avoiding exposure",
+      "Covered California and other ACA marketplace administrators face enrollment and affordability pressure independent of OBBBA, from the expired enhanced premium tax credits alone"
+    ]
+  },
+  {
+    "id":"ts1",
+    "rank":2,
     "trend":"critical",
     "title":"IRA Drug Price Negotiation — Cycle 3 Live",
     "activeNode":"Drug Price Negotiation",
@@ -16,7 +32,7 @@
   },
   {
     "id":"ts2",
-    "rank":2,
+    "rank":3,
     "trend":"critical",
     "title":"CMS-0057-F Prior Auth APIs — Jan 2027 Deadline",
     "activeNode":"CMS-0057-F",
@@ -31,7 +47,7 @@
   },
   {
     "id":"ts3",
-    "rank":3,
+    "rank":4,
     "trend":"critical",
     "title":"MA Risk Adjustment Tightening (HCC V28 + RADV)",
     "activeNode":"MA Risk Adjustment (HCC V28 / RADV)",
@@ -46,7 +62,7 @@
   },
   {
     "id":"ts4",
-    "rank":4,
+    "rank":5,
     "trend":"rising",
     "title":"TEAM Model — Mandatory Episode Accountability",
     "activeNode":"TEAM Model",
@@ -57,21 +73,6 @@
       "August Health (SNF care management) sees premium on PAC coordination capability",
       "Hinge Health surgical decision support adjacent to TEAM joint replacement episodes",
       "Care navigation for ACO REACH beneficiaries overlapping TEAM episodes creates attribution complexity"
-    ]
-  },
-  {
-    "id":"ts5",
-    "rank":5,
-    "trend":"rising",
-    "title":"MIPS Sunset Proposal — Advanced APM Pressure (2029)",
-    "activeNode":"QPP / MIPS",
-    "catalyst":"CY2027 PFS proposed rule signals sunsetting of traditional MIPS beginning the 2029 performance year. Clinicians face binary choice: qualify into an Advanced APM track or face growing payment adjustments under a restructured program.",
-    "implications":[
-      "Privia Health and Astrana face accelerated physician migration pressure into ACO REACH and other Advanced APM tracks",
-      "Independent practices without VBC infrastructure face meaningful payment pressure — consolidation accelerator",
-      "RTI's QPP evaluation contract scope likely expands as CMS builds transition evidence base",
-      "Oscar and Alignment must redesign value-based physician contracting to align with Advanced APM qualification",
-      "Coalition for Health AI (CHAI) AI quality measure governance becomes more critical as AI-generated quality data enters APM scoring"
     ]
   },
   {

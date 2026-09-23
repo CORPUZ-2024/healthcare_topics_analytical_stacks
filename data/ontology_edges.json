@@ -49,5 +49,8 @@
   { "source": "ARP2021", "target": "Medicaid", "label": "enhanced funding" },
   { "source": "ARP2021", "target": "CHIP", "label": "enhanced funding" },
   { "source": "HRSA", "target": "PACE", "label": "coordinates" },
-  { "source": "AHRQ", "target": "QPP", "label": "research supports" }
+  { "source": "AHRQ", "target": "QPP", "label": "research supports" },
+  { "source": "OBBBA2025", "target": "Medicaid", "label": "imposes work requirements & provider tax caps on" },
+  { "source": "OBBBA2025", "target": "CMS", "label": "directs implementation by" },
+  { "source": "OBBBA2025", "target": "ACA", "label": "narrows marketplace subsidy eligibility under" }
 ]

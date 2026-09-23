@@ -337,10 +337,38 @@ node -e "
 
 Then commit:
 ```bash
-git add data/ index.html README.md
+git add data/ index.html README.md special-topics/
 git commit -m "Refresh content as of [YYYY-MM-DD]: [brief summary of changes]"
 git push origin master
 ```
+
+---
+
+### Step 10 — Tab 5: Special Topics (OBBBA Access & Cost)
+
+Added September 2026. This tab has **no backing JSON file** — it lives entirely as static HTML in `<div id="tab-special">` in `index.html`, following the same edit-in-place pattern as the Taxonomy reference sections (Steps 6b/6c). It is **not** touched by the standard "update all tabs" pass (Steps 0–9) — it has its own trigger conditions, checked as an explicit extra step whenever a refresh explicitly asks for it, or on the cadence noted in the tab's own "Static/Dynamic Refresh Protocol" section.
+
+**Location in index.html:** Search for `id="tab-special"`.
+
+**What to check and update, each refresh cycle:**
+| Change type | Action |
+|-------------|--------|
+| CBO publishes a new OBBBA coverage-loss score | Update the figure in National Context and Affected Populations sections; update the citation |
+| KFF or Georgetown CCF tracker data changes materially | Update the relevant Archetypes table row and its evidence grade |
+| A state case-study number is superseded (NE, MT, GA, TX figures) | Update the Archetypes table and the corresponding Case Study card |
+| Litigation status changes (ruling, injunction, dismissal) | Update the Litigants archetype row and the National Context tension edge (`data/company_edges.json`, `obbba_c` → `ca_dhcs`) |
+| A state changes its individual mandate penalty (annual, CY change) | Update the Individual Mandate Variation table |
+| Evidence grade should change (e.g. an "insufficient" figure becomes verifiable) | Update the grade badge and remove the corresponding Limitations bullet if resolved |
+| New archetype-relevant state moves to enforcement | Add to the relevant Archetypes table row or create a new Case Study card if it becomes one of the three drill-down states |
+
+**Also touches the standard data files** (these ARE covered by Steps 1–3 above, since OBBBA is now permanent content in the main graphs):
+- `data/ontology_nodes.json` / `ontology_edges.json` — `OBBBA2025` node and its 3 edges
+- `data/company_nodes.json` / `company_edges.json` — `obbba_c`, `cbo`, `kff`, `georgetown_ccf`, `ga_dch`, `rhtf_prog` nodes and their edges
+- `data/top_shifts.json` — the `ts_obbba` shift (rank 1); keep its catalyst/implications current the same way any other shift is maintained
+
+**Companion file:** `special-topics/bay-area-navigation.html` is a standalone page (not part of the SPA's tab system) linked from the Bay Area sub-section. It has its own Methodology & Limitations section — update its organization rankings only if new structural information (not full financial audits) becomes available.
+
+**Do NOT** touch this tab as part of a routine Steps 0–9 pass unless one of the triggers above applies — it is intentionally decoupled so routine refreshes stay fast.
 
 ---
 
@@ -351,9 +379,9 @@ git push origin master
 | `js/ontology.js` | Visualization logic — frozen |
 | `js/reimbursement.js` | Visualization logic — frozen |
 | `js/taxonomy.js` | Visualization logic — frozen |
-| `js/app.js` | Tab controller — frozen |
+| `js/app.js` | Tab controller — frozen. Exception: the 5-tab keyboard-shortcut map (`tabMap`) was extended once, Sept 2026, to add the Special Topics tab; do not modify further during routine content refreshes |
 | `css/styles.css` | Styles — frozen |
-| `index.html` (structure) | Tab containers, nav, and script tags are frozen. Two editable zones: (1) `window.__XXX__` inline data blocks; (2) `<div id="taxonomy-reference">` static reference HTML (Steps 6b/6c) |
+| `index.html` (structure) | Tab containers, nav, and script tags are frozen. Editable zones: (1) `window.__XXX__` inline data blocks; (2) `<div id="taxonomy-reference">` static reference HTML (Steps 6b/6c); (3) `<div id="tab-special">` static reference HTML (Step 10) |
 | `.nojekyll` | Required for GitHub Pages static serving |
 | `.github/` | CI/CD — do not touch |
 

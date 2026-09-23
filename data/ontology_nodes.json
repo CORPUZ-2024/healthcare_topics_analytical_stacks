@@ -85,10 +85,23 @@
     "category": "legislation",
     "ptype": "Public Law",
     "enacted": "2022-08-16",
-    "description": "P.L. 117-169 authorizing Medicare to negotiate drug prices directly with manufacturers (starting 2026), capping Medicare Part D out-of-pocket costs at $2,000/year, extending ACA premium tax credits, and funding climate/energy provisions.",
+    "description": "P.L. 117-169 authorizing Medicare to negotiate drug prices directly with manufacturers (starting 2026), capping Medicare Part D out-of-pocket costs at $2,000/year, and extending ACA premium tax credits through plan year 2025. Those enhanced premium tax credits expired December 31, 2025 without congressional renewal, restoring the pre-2021 'subsidy cliff' at 400% FPL for ACA marketplace enrollees in 2026.",
     "links": [
       { "label": "CMS Drug Negotiation", "url": "https://www.cms.gov/inflation-reduction-act" },
       { "label": "CMS Part D Redesign", "url": "https://www.cms.gov/medicare/prescription-drug-coverage/part-d-drug-pricing" }
+    ]
+  },
+  {
+    "id": "OBBBA2025",
+    "name": "One Big Beautiful Bill Act",
+    "category": "legislation",
+    "ptype": "Public Law",
+    "enacted": "2025-07-04",
+    "description": "P.L. 119-21 (H.R. 1) budget reconciliation law. Healthcare provisions: mandatory Medicaid community-engagement (work) requirements of 80 hrs/month for the ACA expansion population in the 40 expansion states + DC, effective by January 1, 2027 (CMS interim final rule published June 1, 2026; several states implementing on accelerated state-level timelines); restricts ACA marketplace premium tax credit eligibility for lawfully present immigrants (five-year waiting period for sub-100%-FPL immigrants effective for tax years after 2025; narrows the 'lawfully present' definition itself, excluding refugees/asylees/TPS holders, effective January 1, 2027); phases down state Medicaid provider taxes from 6% to 3.5% (expansion states, by 2032) and caps state-directed payments at 100%/110% of Medicare rates; and establishes a $50B Rural Health Transformation Fund (FY2026-2030) to partially offset provider revenue losses. CBO estimated approximately 10 million people losing Medicaid/marketplace coverage by 2034 from OBBBA's coverage provisions combined.",
+    "links": [
+      { "label": "Full Text (P.L. 119-21)", "url": "https://www.congress.gov/bill/119th-congress/house-bill/1" },
+      { "label": "KFF: Tracking Work Requirements Implementation", "url": "https://www.kff.org/medicaid/medicaid-work-requirements-tracker-1115-waivers/" },
+      { "label": "Georgetown CCF: H.R. 1 Readiness Tracker", "url": "https://ccf.georgetown.edu/2026/08/24/h-r-1-readiness-tracker-update-strain-is-building-before-the-work-reporting-requirements-clock-starts/" }
     ]
   },
   {
