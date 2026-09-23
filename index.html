@@ -511,7 +511,14 @@
   border-radius: var(--radius-md); background: var(--white);
   padding: 10px 6px 4px; overflow-x: auto;
 }
-#tab-special .sp-chart { width: 100%; min-width: 620px; height: auto; display: block; }
+/* max-width matches the viewBox width, so the chart never scales ABOVE 1:1 —
+   that keeps its 12px labels at 12px, in proportion with the ~13px body text
+   around it, instead of ballooning on a wide screen. Below 900px it scales
+   down proportionally; below 660px the wrapper scrolls rather than squashing. */
+#tab-special .sp-chart {
+  display: block; width: 100%; max-width: 900px; min-width: 660px;
+  height: auto; margin: 0 auto;
+}
 #tab-special .sp-chart text { font-family: inherit; }
 #tab-special .sp-chart g[class] { cursor: help; }
 #tab-special .sp-legend {
@@ -767,7 +774,7 @@
     <p class="ref-section-desc">OBBBA is not an isolated event — it compounds an existing cost trend. PwC's 2027 medical cost trend survey (published June 11, 2026) puts Group at 9% and Individual at 8.5% — the highest commercial trend in 17 years, independent of anything in OBBBA. Aon's "9.5%" figure needs a year caveat: this project has two differently-dated Aon sources — one from Sept 2025 headlined "9.5% in 2026" and one from Aug 2026 headlined "9.5% in 2027" — and could not resolve in this pass whether that's a genuine coincidence across two separate annual reports or a citation mix-up; verify against Aon's original report before citing a specific year. Mercer's 8.2% and WTW's 11.1% figures circulate widely for this period but were not independently re-verified against each firm's own published report in this pass; cite with that caveat. The chart below plots each catalyst on two axes — its effect on <strong>access</strong> (horizontal) against its effect on <strong>cost</strong> (vertical) — while marker shape and colour preserve the catalyst's <strong>root</strong>: an OBBBA provision, another federal law or policy, a market/structural force, a state action, or litigation. Reading those two dimensions together is the point: it shows not just how much pressure exists but where it originates, and therefore which lever could relieve it.</p>
     <p class="sp-subhead" style="margin-top:14px;">Each catalyst is placed by its access effect (horizontal) against its cost effect (vertical); marker shape and colour carry its root. Hover any marker for the full detail.</p>
     <div class="sp-chart-wrap">
-      <svg class="sp-chart" viewBox="0 0 900 600" role="img" aria-label="Scatter chart plotting OBBBA and adjacent catalysts by access impact against cost impact, with marker shape indicating each catalyst's root.">
+      <svg class="sp-chart" viewBox="0 0 900 525" role="img" aria-label="Scatter chart plotting OBBBA and adjacent catalysts by access impact against cost impact, with marker shape indicating each catalyst's root.">
         <!-- quadrant washes -->
         <rect x="90" y="30" width="390" height="220" fill="#fbeeec"></rect>
         <rect x="480" y="30" width="390" height="220" fill="#fdf7ea"></rect>
@@ -788,77 +795,89 @@
 
         <!-- quadrant corner labels -->
         <g font-size="11" font-style="italic" fill="#7c8b99">
-          <text x="100" y="46">Access lost, cost up</text>
-          <text x="860" y="46" text-anchor="end">Access gained, cost up</text>
-          <text x="100" y="462">Access lost, cost down</text>
-          <text x="860" y="462" text-anchor="end">Access gained, cost down</text>
+          <text x="98" y="46">Access lost, cost up</text>
+          <text x="862" y="46" text-anchor="end">Access gained, cost up</text>
+          <text x="98" y="462">Access lost, cost down</text>
+          <text x="862" y="462" text-anchor="end">Access gained, cost down</text>
         </g>
 
         <!-- axis titles -->
         <text x="480" y="500" text-anchor="middle" font-size="12" font-weight="700" fill="#0d1b2a">Access impact &nbsp;&#8592;&nbsp; loss &nbsp;&nbsp;|&nbsp;&nbsp; gain &nbsp;&#8594;</text>
-        <text transform="translate(30,250) rotate(-90)" text-anchor="middle" font-size="12" font-weight="700" fill="#0d1b2a">Cost impact &nbsp;&#8592;&nbsp; down &nbsp;|&nbsp; up &nbsp;&#8594;</text>
+        <text transform="translate(26,250) rotate(-90)" text-anchor="middle" font-size="12" font-weight="700" fill="#0d1b2a">Cost impact &nbsp;&#8592;&nbsp; down &nbsp;|&nbsp; up &nbsp;&#8594;</text>
 
         <g font-size="12" fill="#1a1a2e">
-          <!-- ===== OBBBA provisions (circle, red) ===== -->
+          <!-- ===== cost +9 ===== -->
+          <g><title>2027 medical cost trend — PwC's confirmed figure is 9% (Group) / 8.5% (Individual), the highest commercial trend in 17 years, with GLP-1s and specialty drug utilization the major drivers. Pure cost pressure, largely independent of access.</title>
+            <rect x="493" y="45" width="14" height="14" fill="#23456b"></rect>
+            <text x="514" y="56">GLP-1 &amp; specialty drug trend</text></g>
+
+          <!-- ===== cost +7.5 ===== -->
           <g><title>OBBBA Medicaid work requirements — 80 hrs/month for the ACA expansion population, effective by January 1, 2027 nationally across 40 expansion states + DC. The single largest access-loss catalyst on this chart.</title>
-            <circle cx="129" cy="74" r="8" fill="#c1372f"></circle>
-            <text x="143" y="78">Work requirements</text></g>
-          <g><title>OBBBA immigrant eligibility narrowing — §71109 narrows Medicaid eligibility for lawfully present immigrants (the FQHC-revenue driver); §71301/§71302 narrow marketplace premium tax credit eligibility.</title>
-            <circle cx="149" cy="162" r="8" fill="#c1372f"></circle>
-            <text x="163" y="166">Immigrant eligibility cuts</text></g>
-          <g><title>Applicable enrollees move from annual to 6-month redeterminations. Lands on the full applicable population regardless of how the work test itself performs — an administrative access risk more than a policy one.</title>
-            <circle cx="227" cy="206" r="8" fill="#c1372f"></circle>
-            <text x="241" y="210">6-month redeterminations</text></g>
-          <g><title>OBBBA §71305 repeals the PTC repayment caps from tax year 2026 — any marketplace enrollee whose actual income exceeds their estimate repays the full excess credit, uncapped, at any income level. A household cost risk that also deters enrollment.</title>
-            <circle cx="344" cy="239" r="8" fill="#c1372f"></circle>
-            <text x="358" y="243">Uncapped PTC clawback</text></g>
+            <circle cx="129" cy="85" r="8" fill="#c1372f"></circle>
+            <text x="143" y="89">Work requirements</text></g>
           <g><title>Provider-tax freeze (Oct 1, 2026) and phase-down from 6% to 3.5% in expansion states (FFY2028-2032); state-directed payment caps phase down from January 1, 2028. Nursing facilities and ICF/IDD are exempt from the phase-down.</title>
             <circle cx="383" cy="85" r="8" fill="#c1372f"></circle>
             <text x="397" y="89">Provider tax &amp; SDP caps</text></g>
-          <g><title>Rural Health Transformation Fund — $50B distributed FY2026-2030 via CMS-approved state blueprints. An OBBBA provision working in the opposite direction to the rest: a partial offset, though rural-health analysts widely expect it not to fully cover the losses.</title>
-            <circle cx="656" cy="316" r="8" fill="#c1372f"></circle>
-            <text x="642" y="320" text-anchor="end">Rural Health Transformation Fund</text></g>
 
-          <!-- ===== Other federal law / policy (diamond, amber) ===== -->
+          <!-- ===== cost +6 ===== -->
           <g><title>Enhanced ACA premium tax credits expired December 31, 2025 without congressional renewal. NOT an OBBBA provision — an IRA-era credit lapsing on its own schedule, which happens to compound OBBBA's effects in the same window.</title>
             <rect x="200" y="111" width="14" height="14" fill="#b06a00" transform="rotate(45 207 118)"></rect>
             <text x="221" y="122">Enhanced PTC expiration</text></g>
           <g><title>MA risk adjustment (HCC V28) plus RADV litigation. Separate from OBBBA: RADV extrapolation authority was vacated by the N.D. Texas in September 2025 and is on appeal at the Fifth Circuit.</title>
             <rect x="493" y="111" width="14" height="14" fill="#b06a00" transform="rotate(45 500 118)"></rect>
             <text x="514" y="122">MA risk adjustment / RADV</text></g>
-          <g><title>IRA Medicare drug price negotiation — Cycle 1 prices took effect January 2026 with 38-79% discounts. A separate law pushing access up and cost down, included to show the full catalyst field rather than only the downside ones.</title>
-            <rect x="668" y="408" width="14" height="14" fill="#b06a00" transform="rotate(45 675 415)"></rect>
-            <text x="661" y="419" text-anchor="end">IRA drug price negotiation</text></g>
 
-          <!-- ===== Market / structural (square, blue) ===== -->
-          <g><title>State eligibility-system administrative strain — documented in Texas (~1,600 to 210,000+ pending applications, Jan-Aug 2026) and North Dakota (pending-renewal share 11.2% to 24.8%, Q4 2025 to Q1 2026).</title>
-            <rect x="278" y="177" width="14" height="14" fill="#23456b"></rect>
-            <text x="299" y="188">Admin capacity strain</text></g>
-          <g><title>Employer coverage erosion as premium growth outpaces wage growth — a structural trend independent of OBBBA that compounds its coverage effects.</title>
-            <rect x="298" y="133" width="14" height="14" fill="#23456b"></rect>
-            <text x="319" y="144">Employer coverage erosion</text></g>
+          <!-- ===== cost +4.5 ===== -->
           <g><title>Uncompensated care cost-shift onto safety-net hospitals and FQHCs. California's LAO projects statewide hospital uncompensated care rising from roughly $2B (2024) toward $4B by 2030, attributing about 90% of the increase to H.R. 1.</title>
-            <rect x="415" y="144" width="14" height="14" fill="#23456b"></rect>
-            <text x="436" y="155">Uncompensated care shift</text></g>
-          <g><title>Vendor-heavy work-requirement administrative spend. Georgia precedent: GAO found $54.2M administrative vs. $26.1M care spending (2021-June 2025) — though that ratio is front-loaded, falling from 96.5% of spend in FY2023 to 58.8% in FY2024.</title>
-            <rect x="454" y="188" width="14" height="14" fill="#23456b"></rect>
-            <text x="475" y="199">Vendor / admin spend</text></g>
-          <g><title>2027 medical cost trend — PwC's confirmed figure is 9% (Group) / 8.5% (Individual), the highest commercial trend in 17 years, with GLP-1s and specialty drug utilization the major drivers. Pure cost pressure, largely independent of access.</title>
-            <rect x="532" y="45" width="14" height="14" fill="#23456b"></rect>
-            <text x="553" y="56">GLP-1 &amp; specialty drug trend</text></g>
+            <rect x="454" y="144" width="14" height="14" fill="#23456b"></rect>
+            <text x="475" y="155">Uncompensated care shift</text></g>
 
-          <!-- ===== State action (triangle, green) ===== -->
+          <!-- ===== cost +3 ===== -->
+          <g><title>OBBBA immigrant eligibility narrowing — §71109 narrows Medicaid eligibility for lawfully present immigrants (the FQHC-revenue driver); §71301/§71302 narrow marketplace premium tax credit eligibility.</title>
+            <circle cx="149" cy="184" r="8" fill="#c1372f"></circle>
+            <text x="163" y="188">Immigrant eligibility cuts</text></g>
+          <g><title>Employer coverage erosion as premium growth outpaces wage growth — a structural trend independent of OBBBA that compounds its coverage effects.</title>
+            <rect x="337" y="177" width="14" height="14" fill="#23456b"></rect>
+            <text x="358" y="188">Employer coverage erosion</text></g>
+
+          <!-- ===== cost +1.5 ===== -->
+          <g><title>State eligibility-system administrative strain — documented in Texas (~1,600 to 210,000+ pending applications, Jan-Aug 2026) and North Dakota (pending-renewal share 11.2% to 24.8%, Q4 2025 to Q1 2026).</title>
+            <rect x="278" y="210" width="14" height="14" fill="#23456b"></rect>
+            <text x="299" y="221">Admin capacity strain</text></g>
+          <g><title>Vendor-heavy work-requirement administrative spend. Georgia precedent: GAO found $54.2M administrative vs. $26.1M care spending (2021-June 2025) — though that ratio is front-loaded, falling from 96.5% of spend in FY2023 to 58.8% in FY2024.</title>
+            <rect x="493" y="210" width="14" height="14" fill="#23456b"></rect>
+            <text x="514" y="221">Vendor / admin spend</text></g>
+
+          <!-- ===== cost +0.5 ===== -->
+          <g><title>Applicable enrollees move from annual to 6-month redeterminations. Lands on the full applicable population regardless of how the work test itself performs — an administrative access risk more than a policy one.</title>
+            <circle cx="227" cy="239" r="8" fill="#c1372f"></circle>
+            <text x="241" y="243">6-month redeterminations</text></g>
+          <g><title>OBBBA §71305 repeals the PTC repayment caps from tax year 2026 — any marketplace enrollee whose actual income exceeds their estimate repays the full excess credit, uncapped, at any income level. A household cost risk that also deters enrollment.</title>
+            <circle cx="422" cy="239" r="8" fill="#c1372f"></circle>
+            <text x="436" y="243">Uncapped PTC clawback</text></g>
+          <g><title>Commonwealth of Massachusetts et al. v. Oz — 25 states + DC challenging the interim final rule's narrowed "medically frail" exemption. A federal judge denied the preliminary injunction July 29, 2026, so the rule stays in effect; access upside is contingent and unresolved.</title>
+            <path d="M597 230 L600 237 L607 239 L600 241 L597 248 L594 241 L587 239 L594 237 Z" fill="#6a4c93"></path>
+            <text x="611" y="243">Litigation (Mass. v. Oz)</text></g>
+
+          <!-- ===== cost -1 ===== -->
           <g><title>State individual mandate variation — 5 jurisdictions (CA, NJ, RI, DC, MA) impose a penalty, VT requires reporting only, and the remaining ~44 states have no mandate at all. A modest access support where it exists.</title>
             <polygon points="441,264 449,278 433,278" fill="#12543c"></polygon>
             <text x="455" y="276">State mandate variation</text></g>
+
+          <!-- ===== cost -3 ===== -->
+          <g><title>Rural Health Transformation Fund — $50B distributed FY2026-2030 via CMS-approved state blueprints. An OBBBA provision working in the opposite direction to the rest: a partial offset, though rural-health analysts widely expect it not to fully cover the losses.</title>
+            <circle cx="656" cy="316" r="8" fill="#c1372f"></circle>
+            <text x="642" y="320" text-anchor="end">Rural Health Transformation Fund</text></g>
+
+          <!-- ===== cost -5.5 ===== -->
           <g><title>Medicaid value-based care and housing-health integration (CalAIM Community Supports and equivalents) — state-led programs pushing access up and total cost down, though several depend on 1115 waiver authority that expires December 31, 2026 in California.</title>
             <polygon points="714,363 722,377 706,377" fill="#12543c"></polygon>
             <text x="700" y="375" text-anchor="end">Medicaid VBC &amp; housing-health integration</text></g>
 
-          <!-- ===== Litigation (star, purple) ===== -->
-          <g><title>Commonwealth of Massachusetts et al. v. Oz — 25 states + DC challenging the interim final rule's narrowed "medically frail" exemption. A federal judge denied the preliminary injunction July 29, 2026, so the rule stays in effect; access upside is contingent and unresolved.</title>
-            <path d="M597 208 L600 215 L607 217 L600 219 L597 226 L594 219 L587 217 L594 215 Z" fill="#6a4c93"></path>
-            <text x="583" y="221" text-anchor="end">Litigation (Mass. v. Oz)</text></g>
+          <!-- ===== cost -7.5 ===== -->
+          <g><title>IRA Medicare drug price negotiation — Cycle 1 prices took effect January 2026 with 38-79% discounts. A separate law pushing access up and cost down, included to show the full catalyst field rather than only the downside ones.</title>
+            <rect x="668" y="408" width="14" height="14" fill="#b06a00" transform="rotate(45 675 415)"></rect>
+            <text x="661" y="419" text-anchor="end">IRA drug price negotiation</text></g>
         </g>
       </svg>
     </div>
