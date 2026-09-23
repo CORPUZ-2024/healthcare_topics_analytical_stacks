@@ -486,10 +486,126 @@
 
 <!-- Special Topics: OBBBA Panel -->
 <div id="tab-special" class="tab-panel" role="tabpanel">
+<style>
+/* Scoped to the Special Topics tab only — does not alter the shared stylesheet. */
+#tab-special .ref-section { padding-top: 4px; }
+#tab-special .ref-section-title {
+  font-size: 1.08rem; font-weight: 700; color: var(--navy);
+  border-left: 4px solid var(--accent); padding: 2px 0 2px 12px;
+  margin-bottom: 2px; letter-spacing: -0.01em;
+}
+#tab-special .ref-block-title { color: var(--navy); }
+#tab-special .sp-subhead {
+  font-size: 0.78rem; font-weight: 700; text-transform: uppercase;
+  letter-spacing: 0.07em; color: var(--teal); margin: 4px 0 6px;
+}
+#tab-special .sp-note-strong {
+  border-left: 3px solid var(--teal); background: #f2f8fc;
+  padding: 10px 14px; border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+  font-size: 0.82rem; line-height: 1.6; color: var(--text);
+}
+
+/* --- Coverage / Cost quadrant --- */
+#tab-special .sp-quad {
+  display: grid; grid-template-columns: 26px minmax(0,1fr) minmax(0,1fr);
+  grid-template-rows: auto auto auto; gap: 8px; margin-top: 18px;
+}
+#tab-special .sp-quad-colhead {
+  font-size: 0.72rem; font-weight: 700; text-transform: uppercase;
+  letter-spacing: 0.06em; color: var(--text-muted); text-align: center;
+  padding-bottom: 2px; border-bottom: 2px solid var(--border);
+}
+#tab-special .sp-quad-rowhead {
+  writing-mode: vertical-rl; transform: rotate(180deg);
+  font-size: 0.72rem; font-weight: 700; text-transform: uppercase;
+  letter-spacing: 0.06em; color: #fff; border-radius: var(--radius-sm);
+  display: flex; align-items: center; justify-content: center; padding: 6px 2px;
+}
+#tab-special .sp-rh-coverage { background: var(--teal); }
+#tab-special .sp-rh-cost { background: #6a4c93; }
+#tab-special .sp-quad-cell {
+  background: var(--white); border: 1px solid var(--border);
+  border-radius: var(--radius-md); padding: 12px;
+  display: flex; flex-wrap: wrap; gap: 7px; align-content: flex-start;
+}
+#tab-special .sp-chip {
+  position: relative; display: inline-flex; align-items: center; gap: 5px;
+  font-size: 0.78rem; font-weight: 600; line-height: 1.25;
+  padding: 5px 10px; border-radius: 14px; cursor: help;
+  border: 1px solid transparent; max-width: 100%;
+}
+#tab-special .sp-chip:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+#tab-special .sp-chip-obbba  { background: #ffe3e5; color: #7d0a10; border-color: #f6c9cc; }
+#tab-special .sp-chip-sep    { background: #e4ecf6; color: #23456b; border-color: #cfdcec; }
+#tab-special .sp-chip-offset { background: #d9f2e6; color: #12543c; border-color: #bde3d1; }
+#tab-special .sp-chip::after {
+  content: attr(data-tip); position: absolute; bottom: calc(100% + 8px); left: 0;
+  width: max-content; max-width: 290px; background: var(--navy); color: #fff;
+  font-size: 0.74rem; font-weight: 400; line-height: 1.5; text-transform: none;
+  letter-spacing: 0; padding: 8px 11px; border-radius: var(--radius-sm);
+  box-shadow: var(--shadow-md); opacity: 0; visibility: hidden;
+  transition: opacity var(--transition); z-index: 40; pointer-events: none;
+}
+#tab-special .sp-chip:hover::after,
+#tab-special .sp-chip:focus-visible::after { opacity: 1; visibility: visible; }
+#tab-special .sp-chip-dot { width: 7px; height: 7px; border-radius: 50%; flex: 0 0 auto; }
+#tab-special .sp-legend {
+  display: flex; flex-wrap: wrap; gap: 14px; margin-top: 12px;
+  font-size: 0.76rem; color: var(--text-muted); align-items: center;
+}
+#tab-special .sp-legend span { display: inline-flex; align-items: center; gap: 6px; }
+#tab-special .sp-cell-label { display: none; }
+/* Below 760px the 2x2 matrix stops working as a matrix — stack it into four
+   labelled blocks instead, so nothing is squeezed or scrolls sideways. */
+@media (max-width: 760px) {
+  #tab-special .sp-quad { grid-template-columns: minmax(0,1fr); }
+  #tab-special .sp-quad-colhead,
+  #tab-special .sp-quad-rowhead,
+  #tab-special .sp-quad-spacer { display: none; }
+  #tab-special .sp-cell-label {
+    display: block; width: 100%; font-size: 0.72rem; font-weight: 700;
+    text-transform: uppercase; letter-spacing: 0.05em; color: var(--teal);
+    margin-bottom: 2px;
+  }
+  #tab-special .sp-chip::after { left: auto; right: 0; max-width: 240px; }
+}
+
+/* --- State drill-down selector --- */
+#tab-special .sp-picker {
+  display: flex; flex-wrap: wrap; align-items: center; gap: 10px;
+  background: #f2f8fc; border: 1px solid var(--border);
+  border-radius: var(--radius-md); padding: 12px 14px; margin-bottom: 14px;
+}
+#tab-special .sp-picker label { font-size: 0.8rem; font-weight: 600; color: var(--navy); }
+#tab-special .sp-picker select {
+  font-size: 0.85rem; padding: 7px 10px; border: 1px solid var(--border);
+  border-radius: var(--radius-sm); background: var(--white); color: var(--text);
+  min-width: 230px; font-family: inherit;
+}
+#tab-special .sp-state-grid {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 12px;
+}
+#tab-special .sp-state-field {
+  border: 1px solid var(--border); border-radius: var(--radius-sm);
+  padding: 10px 12px; background: #fafcfe;
+}
+#tab-special .sp-state-label {
+  font-size: 0.68rem; font-weight: 700; text-transform: uppercase;
+  letter-spacing: 0.06em; color: var(--text-muted); margin-bottom: 4px;
+}
+#tab-special .sp-state-value { font-size: 0.84rem; line-height: 1.55; color: var(--text); }
+#tab-special .sp-grade {
+  display: inline-block; font-size: 0.68rem; font-weight: 700;
+  padding: 2px 8px; border-radius: 10px; margin-left: 6px; vertical-align: 1px;
+}
+#tab-special .sp-grade-confirmed { background: #d9f2e6; color: #12543c; }
+#tab-special .sp-grade-modeled   { background: #fdefd0; color: #7a4a00; }
+#tab-special .sp-grade-none      { background: #eef2f6; color: #52606d; }
+</style>
   <div class="section-header">
     <h2>Special Topics: Access &amp; Cost under OBBBA</h2>
     <p>
-      A standalone deep-dive on the One Big Beautiful Bill Act (H.R. 1 / P.L. 119-21, signed July 4, 2025) and its 2026+ coverage and cost implications — national provisions, five state-archetype impact patterns, individual mandate variation, a three-state case-study drill-down, and a topic-organized reading guide. Static reference content, edited in place like the Data Taxonomy reference sections. Keyboard shortcut: press <strong>5</strong> to switch to this tab.
+      A standalone deep-dive on the One Big Beautiful Bill Act (H.R. 1 / P.L. 119-21, signed July 4, 2025) and its 2026+ coverage and cost implications — national provisions, five state impact categories, individual mandate variation, a state-by-state drill-down, and a topic-organized reading guide. Static reference content, edited in place like the Data Taxonomy reference sections. Keyboard shortcut: press <strong>5</strong> to switch to this tab.
     </p>
   </div>
 
@@ -500,18 +616,21 @@
     <h3 class="ref-section-title">Table of Contents</h3>
     <ol style="line-height:1.9;padding-left:22px;">
       <li><a href="#special-national">Introduction &amp; National Context: OBBBA's Core Provisions</a></li>
-      <li><a href="#special-archetypes">Archetypes of Impact: Five State Response Patterns</a></li>
+      <li><a href="#special-categories">Categories of Impact: Five State Response Patterns</a></li>
       <li><a href="#special-tax">Individual Mandate Variation: State Penalty Rules for 2026</a></li>
       <li><a href="#special-populations">Disproportionately Affected Populations</a></li>
       <li><a href="#special-grid">The 2026–2030 Landscape: Coverage Loss Amid Accelerating Cost Growth</a></li>
-      <li><a href="#special-casestudies">Three-State Drill-Down: California, Montana, Georgia</a>
-        <ol type="a" style="padding-left:22px;"><li><a href="#special-bayarea">The Bay Area as Bellwether</a></li></ol>
+      <li><a href="#special-casestudies">State Drill-Down: California, Montana, Georgia &mdash; plus any-state lookup</a>
+        <ol type="a" style="padding-left:22px;"><li><a href="#special-statepicker">Any-State Drill-Down (all 50 states + DC)</a></li><li><a href="#special-bayarea">The Bay Area as Bellwether</a></li></ol>
       </li>
       <li><a href="#special-cited">Works Cited by Topic: A Reading Guide</a></li>
       <li><a href="#special-refresh">Static/Dynamic Refresh Protocol</a></li>
       <li><a href="#special-limitations">Limitations &amp; Caveats</a></li>
     </ol>
     <p class="ref-note">Throughline across every section below: OBBBA's federal savings are consistently smaller than the state, county, and provider costs it shifts downstream — and no reconciliation event (a follow-on bill, a court injunction that sticks, or a funding backstop) has yet closed that gap.</p>
+    <div class="sp-note-strong">
+      <strong>How estimates are handled on this page.</strong> Where a range exists, this page leads with the <strong>most conservative credible figure</strong> — normally the issuing agency's own central estimate — and names the higher-end scenario separately rather than blending the two or headlining the larger number. Where no state- or organization-specific figure is traceable to a named source, the page says so plainly instead of extrapolating one from a national average. Every headline figure carries the source it came from; if a number here has no attribution, treat it as unverified.
+    </div>
   </div>
 
   <!-- ---- Section: National Context ---- -->
@@ -525,7 +644,7 @@
         <ul>
           <li><strong>What it requires:</strong> 80 hrs/month of work, work/education program, or community service (or a $580+/month income equivalent in some state implementations) as a condition of Medicaid eligibility for the ACA expansion population, ages 19-64.</li>
           <li><strong>Effective:</strong> By January 1, 2027 nationally, across the 40 expansion states + DC. CMS published the implementing interim final rule (CMS-2454-IFC, "Community Engagement Requirement for Certain Individuals") June 1, 2026. Self-declaration of exemptions is permitted for 2027; supporting documentation is required starting 2028. Applicable enrollees move to 6-month (from annual) redeterminations.</li>
-          <li><strong>Early movers:</strong> Nebraska, Montana, Iowa, and Arkansas are enforcing ahead of the federal deadline on their own state timelines — CMS's own interim final rule names all four (detail in Archetypes, below).</li>
+          <li><strong>Early movers:</strong> Nebraska, Montana, Iowa, and Arkansas are enforcing ahead of the federal deadline on their own state timelines — CMS's own interim final rule names all four (detail in Categories of Impact, below).</li>
           <li><strong>CBO estimate:</strong> ~10M combined coverage loss by 2034 across OBBBA's Medicaid and marketplace provisions — see Affected Populations for sourcing caveats.</li>
         </ul>
       </div>
@@ -557,14 +676,14 @@
     <p class="ref-note"><strong>What compounds OBBBA (not part of the law itself):</strong> The IRA-era enhanced ACA premium tax credits expired December 31, 2025 without congressional renewal — subsidized marketplace enrollees' average annual premium roughly doubled, from $888 to $1,904, and the "subsidy cliff" at 400% FPL returned for everyone. Separately, MA risk-adjustment (HCC V28) and RADV litigation is compressing plan margins for reasons unrelated to OBBBA (see Top Shifts, Ontology tab). Both land in the same 2026-2027 window as OBBBA's provisions and are treated as compounding catalysts throughout this tab, not attributed to OBBBA itself.</p>
   </div>
 
-  <!-- ---- Section: Archetypes ---- -->
-  <div class="ref-section" id="special-archetypes">
-    <h3 class="ref-section-title">Archetypes of Impact: Five State Response Patterns</h3>
+  <!-- ---- Section: Categories of Impact ---- -->
+  <div class="ref-section" id="special-categories">
+    <h3 class="ref-section-title">Categories of Impact: Five State Response Patterns</h3>
     <p class="ref-section-desc">States are not implementing OBBBA uniformly. Grouping by exposure type — rather than by region or party — is more predictive of operational outcome. Evidence grade follows each row's sourcing quality: <strong>confirmed</strong> (official agency data or GAO/auditor report), <strong>modeled</strong> (advocacy/research-org projection), <strong>insufficient</strong> (qualitative reporting only, no verified figure as of this pass).</p>
     <div class="ref-table-wrap">
       <table class="ref-table">
         <thead>
-          <tr><th class="ref-feature-col">Archetype</th><th>States</th><th>Exposure Type</th><th>Action Plan</th><th>Projected Coverage Loss</th><th>Cost Impact</th><th>Evidence</th></tr>
+          <tr><th class="ref-feature-col">Category</th><th>States</th><th>Exposure Type</th><th>Action Plan</th><th>Projected Coverage Loss</th><th>Cost Impact</th><th>Evidence</th></tr>
         </thead>
         <tbody>
           <tr>
@@ -572,7 +691,7 @@
             <td>NE, MT, IA, AR</td>
             <td>Rapid, state-initiated timeline ahead of the Jan 2027 federal deadline</td>
             <td>Mass beneficiary notification campaigns; state-run online resource hubs</td>
-            <td>NE: ~200 in first disenrollment round (July 31, 2026, state estimate; advocates project 20,000-40,000 eventually). MT: ~13,000 adults (~18% of expansion population) by the 2027 enforcement completion. IA: enforcement begins Dec 1, 2026; ~32,000 estimated coverage loss (analyst projection). AR: began July 1, 2026, with enforcement delayed until January 2027 (per CMS's own IFR, which names all four states as early movers) — a non-enforcement grace period matching Montana's.</td>
+            <td>NE: ~200 in the first disenrollment round (July 31, 2026) — the state Medicaid director's own figure, used here as the headline; advocacy groups separately project 20,000-40,000 eventually, which this page does not adopt as the expected outcome. MT: ~13,000 adults (~18% of expansion population) by the 2027 enforcement completion. IA: enforcement begins Dec 1, 2026; ~32,000 estimated coverage loss (analyst projection). AR: began July 1, 2026, with enforcement delayed until January 2027 (per CMS's own IFR, which names all four states as early movers) — a non-enforcement grace period matching Montana's.</td>
             <td>Rural hospitals, FQHCs absorb uncompensated care first</td>
             <td><span style="background:#2a9d8f;color:#fff;padding:2px 8px;border-radius:4px;font-size:0.75rem;font-weight:700;">Confirmed</span> (NE, MT, AR) / <span style="background:#f4a261;color:#3a2a00;padding:2px 8px;border-radius:4px;font-size:0.75rem;font-weight:700;">Modeled</span> (IA)</td>
           </tr>
@@ -609,13 +728,13 @@
             <td>Compliance-under-protest — must implement while suing</td>
             <td>Multi-state coalition litigation: <em>Commonwealth of Massachusetts et al. v. Oz</em> (filed June 2026; MA is the named lead plaintiff, CA a co-plaintiff) challenges the interim final rule's narrowed "medically frail" exemption; a separate 21-AG + 1-governor coalition (filed N.D. Cal.) challenges the 2027 Notice of Benefit and Payment Parameters' expanded catastrophic-plan eligibility (HHS's own estimate: 2M lose coverage in 2027, 5M by 2030)</td>
             <td>A federal judge <strong>denied</strong> the preliminary injunction in <em>Massachusetts v. Oz</em> on July 29, 2026 — the rule stays in effect nationwide while litigation continues (a motion to reconsider was filed Aug 26, 2026; outcome not yet resolved as of this pass) — deferred, not avoided</td>
-            <td>Same downstream cost pattern as the state's underlying archetype (e.g., CA is also Expansion+Litigant)</td>
+            <td>Same downstream cost pattern as the state's underlying category (e.g., CA is also Expansion+Litigant)</td>
             <td><span style="background:#2a9d8f;color:#fff;padding:2px 8px;border-radius:4px;font-size:0.75rem;font-weight:700;">Confirmed</span></td>
           </tr>
         </tbody>
       </table>
     </div>
-    <p class="ref-note">Texas was removed from the Administratively Overwhelmed archetype above: Texas never adopted ACA Medicaid expansion, so it has no expansion population subject to the work requirement, and its confirmed application backlog (~1,600 &rarr; 210,000+ applications, Jan-Aug 2026; on-time processing fell from &gt;90% to 62%) is attributed by advocates primarily to new SNAP accuracy requirements and the shift to 6-month redeterminations, not work-requirement enforcement. It's still a real and useful finding — <strong>cross-program eligibility-system strain</strong> (SNAP verification changes compounding with Medicaid redetermination cycles) is straining state capacity in both non-expansion states like Texas and expansion states like North Dakota, independent of whether work requirements are the direct cause.</p>
+    <p class="ref-note">Texas was removed from the Administratively Overwhelmed category above: Texas never adopted ACA Medicaid expansion, so it has no expansion population subject to the work requirement, and its confirmed application backlog (~1,600 &rarr; 210,000+ applications, Jan-Aug 2026; on-time processing fell from &gt;90% to 62%) is attributed by advocates primarily to new SNAP accuracy requirements and the shift to 6-month redeterminations, not work-requirement enforcement. It's still a real and useful finding — <strong>cross-program eligibility-system strain</strong> (SNAP verification changes compounding with Medicaid redetermination cycles) is straining state capacity in both non-expansion states like Texas and expansion states like North Dakota, independent of whether work requirements are the direct cause.</p>
   </div>
 
   <!-- ---- Section: Individual Mandate ---- -->
@@ -663,57 +782,62 @@
   <div class="ref-section" id="special-grid">
     <h3 class="ref-section-title">The 2026–2030 Landscape: Coverage Loss Amid Accelerating Cost Growth</h3>
     <p class="ref-section-desc">OBBBA is not an isolated event — it compounds an existing cost trend. PwC's 2027 medical cost trend survey (published June 11, 2026) puts Group at 9% and Individual at 8.5% — the highest commercial trend in 17 years, independent of anything in OBBBA. Aon's "9.5%" figure needs a year caveat: this project has two differently-dated Aon sources — one from Sept 2025 headlined "9.5% in 2026" and one from Aug 2026 headlined "9.5% in 2027" — and could not resolve in this pass whether that's a genuine coincidence across two separate annual reports or a citation mix-up; verify against Aon's original report before citing a specific year. Mercer's 8.2% and WTW's 11.1% figures circulate widely for this period but were not independently re-verified against each firm's own published report in this pass; cite with that caveat. The grid below plots each catalyst by its dominant impact (coverage vs. cost) and its origin (legislative/regulatory vs. market/structural).</p>
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:2px;background:var(--border);border:1px solid var(--border);border-radius:8px;overflow:hidden;margin-top:16px;">
-      <div style="background:#fff;padding:16px;">
-        <div style="font-weight:700;color:var(--navy);margin-bottom:8px;font-size:0.85rem;">↑ COVERAGE IMPACT &nbsp;|&nbsp; LEGISLATIVE CATALYST</div>
-        <ul style="margin:0;padding-left:18px;font-size:0.88rem;line-height:1.6;">
-          <li>OBBBA Medicaid work requirements (2027 national deadline)</li>
-          <li>OBBBA immigrant PTC eligibility narrowing (2025/2027)</li>
-          <li>Enhanced ACA PTC expiration (separate, Dec 2025)</li>
-          <li>Rural Health Transformation Fund — partial coverage-preservation offset</li>
-        </ul>
+    <p class="sp-subhead" style="margin-top:14px;">Hover or focus any chip for the full detail and date</p>
+    <div class="sp-quad">
+      <div class="sp-quad-spacer"></div>
+      <div class="sp-quad-colhead">Legislative / Regulatory catalyst</div>
+      <div class="sp-quad-colhead">Market / Structural catalyst</div>
+
+      <div class="sp-quad-rowhead sp-rh-coverage">Coverage impact</div>
+      <div class="sp-quad-cell">
+        <div class="sp-cell-label">Coverage impact &middot; Legislative catalyst</div>
+        <span class="sp-chip sp-chip-obbba" tabindex="0" data-tip="OBBBA Medicaid work requirements — 80 hrs/month for the ACA expansion population, effective by January 1, 2027 nationally across 40 expansion states + DC."><span class="sp-chip-dot" style="background:#7d0a10"></span>Work requirements</span>
+        <span class="sp-chip sp-chip-obbba" tabindex="0" data-tip="OBBBA immigrant eligibility narrowing — §71109 (Medicaid, already phasing) and §71301/§71302 (marketplace premium tax credits, 2025 and 2027 effective dates)."><span class="sp-chip-dot" style="background:#7d0a10"></span>Immigrant eligibility</span>
+        <span class="sp-chip sp-chip-sep" tabindex="0" data-tip="Enhanced ACA premium tax credits expired December 31, 2025 without congressional renewal. Not an OBBBA provision — a separate, coincidentally-timed event that compounds it."><span class="sp-chip-dot" style="background:#23456b"></span>Enhanced PTC expiration</span>
+        <span class="sp-chip sp-chip-offset" tabindex="0" data-tip="Rural Health Transformation Fund — $50B distributed FY2026-2030 via CMS-approved state blueprints. A partial coverage-preservation offset, widely expected not to fully offset losses."><span class="sp-chip-dot" style="background:#12543c"></span>Rural Health Fund (offset)</span>
       </div>
-      <div style="background:#fff;padding:16px;">
-        <div style="font-weight:700;color:var(--navy);margin-bottom:8px;font-size:0.85rem;">↑ COVERAGE IMPACT &nbsp;|&nbsp; MARKET / STRUCTURAL CATALYST</div>
-        <ul style="margin:0;padding-left:18px;font-size:0.88rem;line-height:1.6;">
-          <li>State eligibility-system administrative backlog (TX, early-adopter states)</li>
-          <li>State individual mandate variation (5 states + DC vs. 44 states)</li>
-          <li>Employer coverage erosion as premiums rise faster than wages</li>
-        </ul>
+      <div class="sp-quad-cell">
+        <div class="sp-cell-label">Coverage impact &middot; Market / Structural catalyst</div>
+        <span class="sp-chip sp-chip-sep" tabindex="0" data-tip="State eligibility-system administrative backlog — documented in Texas (~1,600 to 210,000+ pending applications, Jan-Aug 2026) and North Dakota (pending-renewal share 11.2% to 24.8%, Q4 2025 to Q1 2026)."><span class="sp-chip-dot" style="background:#23456b"></span>Eligibility-system backlog</span>
+        <span class="sp-chip sp-chip-sep" tabindex="0" data-tip="State individual mandate variation — 5 jurisdictions (CA, NJ, RI, DC, MA) impose a penalty, VT requires reporting only, and the remaining ~44 states have no mandate at all."><span class="sp-chip-dot" style="background:#23456b"></span>State mandate variation</span>
+        <span class="sp-chip sp-chip-sep" tabindex="0" data-tip="Employer coverage erosion as premium growth outpaces wage growth — a structural trend independent of OBBBA, but one that compounds its coverage effects."><span class="sp-chip-dot" style="background:#23456b"></span>Employer coverage erosion</span>
       </div>
-      <div style="background:#fff;padding:16px;">
-        <div style="font-weight:700;color:var(--navy);margin-bottom:8px;font-size:0.85rem;">↓ COST IMPACT &nbsp;|&nbsp; LEGISLATIVE CATALYST</div>
-        <ul style="margin:0;padding-left:18px;font-size:0.88rem;line-height:1.6;">
-          <li>OBBBA provider tax / state-directed-payment caps (phasing in FFY2028-2032)</li>
-          <li>OBBBA §71305 uncapped PTC repayment clawback</li>
-          <li>MA risk adjustment (HCC V28) + RADV litigation — separate from OBBBA</li>
-        </ul>
+
+      <div class="sp-quad-rowhead sp-rh-cost">Cost impact</div>
+      <div class="sp-quad-cell">
+        <div class="sp-cell-label">Cost impact &middot; Legislative catalyst</div>
+        <span class="sp-chip sp-chip-obbba" tabindex="0" data-tip="OBBBA provider-tax freeze (Oct 1, 2026) and phase-down from 6% to 3.5% in expansion states (FFY2028-2032); state-directed payment caps phase down starting January 1, 2028. Nursing facilities and ICF/IDD are exempt from the phase-down."><span class="sp-chip-dot" style="background:#7d0a10"></span>Provider tax / SDP caps</span>
+        <span class="sp-chip sp-chip-obbba" tabindex="0" data-tip="OBBBA §71305 repeals the PTC repayment caps from tax year 2026 — any marketplace enrollee whose actual income exceeds their estimate now repays the full excess credit, uncapped, at any income level."><span class="sp-chip-dot" style="background:#7d0a10"></span>Uncapped PTC clawback</span>
+        <span class="sp-chip sp-chip-sep" tabindex="0" data-tip="MA risk adjustment (HCC V28) plus RADV litigation. Separate from OBBBA: RADV extrapolation authority was vacated by the N.D. Texas in September 2025 and is on appeal at the Fifth Circuit."><span class="sp-chip-dot" style="background:#23456b"></span>MA risk adjustment / RADV</span>
       </div>
-      <div style="background:#fff;padding:16px;">
-        <div style="font-weight:700;color:var(--navy);margin-bottom:8px;font-size:0.85rem;">↓ COST IMPACT &nbsp;|&nbsp; MARKET / STRUCTURAL CATALYST</div>
-        <ul style="margin:0;padding-left:18px;font-size:0.88rem;line-height:1.6;">
-          <li>2027 medical trend 8.5%-11.1% across major actuarial surveys (PwC confirmed at 9%/8.5%; Mercer, Aon, WTW figures carry sourcing caveats — see note above) — GLP-1s and specialty drug utilization a major driver</li>
-          <li>Vendor-heavy Medicaid work-requirement administrative spend (GA precedent: 2:1 admin-to-care)</li>
-          <li>Uncompensated care cost-shift onto safety-net hospitals and FQHCs</li>
-        </ul>
+      <div class="sp-quad-cell">
+        <div class="sp-cell-label">Cost impact &middot; Market / Structural catalyst</div>
+        <span class="sp-chip sp-chip-sep" tabindex="0" data-tip="2027 medical cost trend — PwC's confirmed figure is 9% (Group) / 8.5% (Individual), the highest commercial trend in 17 years. GLP-1s and specialty drug utilization are the major drivers. Other firms' widely-circulated figures carry sourcing caveats noted above."><span class="sp-chip-dot" style="background:#23456b"></span>2027 medical trend (PwC 9%)</span>
+        <span class="sp-chip sp-chip-sep" tabindex="0" data-tip="Vendor-heavy work-requirement administrative spend. Georgia precedent: GAO found $54.2M administrative vs. $26.1M care spending (2021-June 2025) — though that ratio is front-loaded, falling from 96.5% of spend in FY2023 to 58.8% in FY2024."><span class="sp-chip-dot" style="background:#23456b"></span>Administrative / vendor spend</span>
+        <span class="sp-chip sp-chip-sep" tabindex="0" data-tip="Uncompensated care cost-shift onto safety-net hospitals and FQHCs. California's LAO projects statewide hospital uncompensated care rising from roughly $2B (2024) toward $4B by 2030, attributing about 90% of the increase to H.R. 1."><span class="sp-chip-dot" style="background:#23456b"></span>Uncompensated care shift</span>
       </div>
+    </div>
+    <div class="sp-legend">
+      <span><span class="sp-chip-dot" style="background:#7d0a10"></span> Direct OBBBA provision</span>
+      <span><span class="sp-chip-dot" style="background:#23456b"></span> Separate / compounding catalyst</span>
+      <span><span class="sp-chip-dot" style="background:#12543c"></span> Partial offset</span>
     </div>
     <p class="ref-note">Fills a gap in the existing Top Shifts cascade (Ontology tab): MA risk-adjustment litigation and the Rural Health Transformation Fund were previously untracked in this project's OBBBA-adjacent content; both are now cross-referenced here and in the Payer &amp; Company Map (<code>rhtf_prog</code> node).</p>
   </div>
 
   <!-- ---- Section: Case Studies ---- -->
   <div class="ref-section" id="special-casestudies">
-    <h3 class="ref-section-title">Three-State Drill-Down: California, Montana, Georgia</h3>
-    <p class="ref-section-desc">Three distinct archetypes, chosen for contrast: CA (Expansion + Litigant, largest Medicaid program in the U.S.), MT (Early Adopter, rapid state-initiated rollout), GA (Waiver-Only/Non-Expansion, the only state with a multi-year work-requirement track record). Each card covers exposure, action plan, strengths/weaknesses, tipping point, cost-shift cascade, and incentive structure.</p>
+    <h3 class="ref-section-title">State Drill-Down: California, Montana, Georgia &mdash; plus any-state lookup</h3>
+    <p class="ref-section-desc">Three distinct categories, chosen for contrast: CA (Expansion + Litigant, largest Medicaid program in the U.S.), MT (Early Adopter, rapid state-initiated rollout), GA (Waiver-Only/Non-Expansion, the only state with a multi-year work-requirement track record). Each card covers exposure, action plan, strengths/weaknesses, tipping point, cost-shift cascade, and incentive structure.</p>
 
     <div class="ref-deepdive-grid">
       <div class="ref-deepdive-card">
         <div class="ref-deepdive-title">California — Expansion + Litigant</div>
         <ul>
-          <li><strong>Exposure:</strong> Largest Medicaid program in the U.S. (Medi-Cal). Three distinct, non-conflicting DHCS/LAO estimates, not competing numbers: <strong>DHCS</strong> puts 4.8M enrollees subject to the work requirement (2.2M expected exempt), with <strong>1.1M as its own central estimate</strong> of coverage loss and <strong>up to 3.4M as a higher-end/worst-case scenario</strong> (modeled on other states' early work-requirement experience); the <strong>LAO</strong> separately projects ~2M more Californians uninsured by end of 2030 from OBBBA plus state policy changes combined (a broader net figure spanning Medi-Cal, marketplace, and immigrant-eligibility effects, netting out those who find other coverage — LAO attributes roughly 90% of it to OBBBA). Effective Jan 1, 2027; 6-month redeterminations from March 2027; $580/month income accepted as an alternative to 80 hrs/month.</li>
+          <li><strong>Exposure:</strong> Largest Medicaid program in the U.S. (Medi-Cal). Three distinct, non-conflicting DHCS/LAO estimates, not competing numbers: <strong>DHCS</strong> puts 4.8M enrollees subject to the work requirement (2.2M expected exempt), with <strong>1.1M as its own central estimate</strong> of coverage loss and <strong>up to 3.4M as a higher-end/worst-case scenario</strong> (modeled on other states' early work-requirement experience); the <strong>LAO</strong> separately projects ~2M more Californians uninsured by end of 2030 from OBBBA plus state policy changes combined (a broader net figure spanning Medi-Cal, marketplace, and immigrant-eligibility effects, netting out those who find other coverage — LAO attributes roughly 90% of it to OBBBA — <a href="https://lao.ca.gov/Publications/Report/5180" target="_blank" rel="noopener">LAO report</a>). Effective Jan 1, 2027; 6-month redeterminations from March 2027; $580/month income accepted as an alternative to 80 hrs/month.</li>
           <li><strong>Action plan:</strong> DHCS "Tracking Federal Impact" public hub; CA is a co-plaintiff (not lead) in <em>Commonwealth of Massachusetts et al. v. Oz</em> (MA is the named lead plaintiff; 25 states + DC total, filed June 2026) over the medically-frail exemption rule — a federal judge denied the coalition's preliminary injunction on July 29, 2026, so the rule remains in effect while litigation continues — and co-leads a separate 21-AG + 1-governor suit (filed N.D. Cal.) against the 2027 Notice of Benefit and Payment Parameters. CHCF publishes provider/plan implementation guidance.</li>
           <li><strong>Strengths vs. weaknesses:</strong> Mature statewide MCO infrastructure and existing CalAIM 1115-waiver social-needs screening could double as an exemption-documentation rail (strength) — but CA faces its own concurrent state budget shortfalls even as DHCS's own reporting flags implementation capacity risk (weakness), and CA's sheer population size means even a small procedural-failure rate produces large absolute coverage-loss numbers.</li>
-          <li><strong>Tipping point:</strong> If CA's Jan 2027 rollout mirrors early-adopter states' experience — where paperwork/documentation failure, not actual non-work, drives most disenrollment — the realized number could exceed DHCS's 3.4M at-risk estimate.</li>
+          <li><strong>Tipping point:</strong> Whether paperwork/documentation failure — rather than actual non-work — ends up driving most disenrollment, as it did in early-adopter states. <strong>The figure this page uses is DHCS's own central estimate of ~1.1M</strong>; the 3.4M number is a high-end scenario modeled on other states' early experience and should not be treated as the expected outcome. If procedural failure dominates, the realized number moves toward the upper end of that span rather than past it. (<a href="https://www.chcf.org/resource/2026/06/05/hr1-work-requirement-affect-californians-medi-cal-policy-at-a-glance/" target="_blank" rel="noopener">CHCF, citing DHCS</a>)</li>
           <li><strong>Cost-shift cascade:</strong> Federal Medicaid match reductions shift onto the state general fund, county eligibility offices, and public/safety-net hospitals (e.g. Zuckerberg SF General, LAC+USC, Highland Hospital) as the ultimate backstop.</li>
           <li><strong>Incentive structure:</strong> Counties and MCOs are financially incentivized to minimize procedural disenrollment — counties to avoid downstream uncompensated-care cost, MCOs because capitation revenue depends on retained enrollment.</li>
         </ul>
@@ -724,7 +848,7 @@
           <li><strong>Exposure:</strong> Enforcement begins July 1, 2026 — six months ahead of the federal deadline. A 3-month non-enforcement grace period (Jul-Oct 2026) precedes actual disenrollment risk.</li>
           <li><strong>Action plan:</strong> DPHHS launched a public online resource hub (March 2026) and is "moving forward... despite questions" (per its own framing in state press coverage) about system readiness.</li>
           <li><strong>Strengths vs. weaknesses:</strong> Early move gives MT (and CMS) real operational data before most states reach their 2027 deadline (strength) — but the Montana Budget &amp; Policy Center and Montana Hospital Association have both publicly flagged eligibility-system readiness gaps (weakness).</li>
-          <li><strong>Tipping point:</strong> First disenrollment wave, December 31, 2026. DPHHS's own estimate is ~13,000 adults (~18% of the expansion population) losing coverage by the 2027 enforcement completion — if GA's experience (procedural loss dominating over genuine non-compliance) repeats, this is a floor, not a ceiling.</li>
+          <li><strong>Tipping point:</strong> First disenrollment wave, December 31, 2026. DPHHS's own estimate is ~13,000 adults (~18% of the expansion population) losing coverage by the 2027 enforcement completion (<a href="https://montanafreepress.org/2026/07/01/montana-medicaid-work-requirements-loom-questions-remain/" target="_blank" rel="noopener">Montana Free Press, citing DPHHS</a>). This page uses DPHHS's own number rather than the wider 10,000-30,000 span that circulates in advocacy estimates.</li>
           <li><strong>Cost-shift cascade:</strong> Rural Montana hospitals, already thin-margin, absorb uncompensated care first; the state general fund backstops eligibility-system costs.</li>
           <li><strong>Incentive structure:</strong> Moving early lets Montana shape its own implementation terms ahead of a one-size-fits-all federal framework, per its budget-policy-center reporting.</li>
         </ul>
@@ -734,7 +858,7 @@
         <ul>
           <li><strong>Exposure:</strong> Pathways to Coverage has run since July 2023 — two-plus years before OBBBA's national requirement — and was extended through Dec 31, 2026 despite its own cost findings.</li>
           <li><strong>Action plan:</strong> State and federal government (the Trump administration extended the program in Sept 2025) have doubled down rather than restructured, despite the GAO's admin-cost findings.</li>
-          <li><strong>Strengths vs. weaknesses:</strong> GA is the only state with real multi-year operational data on a Medicaid work-requirement program — genuinely useful evidence as CMS designs the national rollout (strength) — but GAO documented a 2:1 admin-to-care spending ratio ($54.2M vs. $26.1M, 2021-June 2025, ~88% federally funded) and enrollment has run far below target (7,400-9,175 vs. ~246,365 eligible, missing even its own ~25,000 first-year goal per GAO) (weakness). Deloitte's $27M Pathways marketing contract (grown from an initial $10.7M award) produced enrollment still under 3% of the ~246,365 eligible even after the campaign ran.</li>
+          <li><strong>Strengths vs. weaknesses:</strong> GA is the only state with real multi-year operational data on a Medicaid work-requirement program — genuinely useful evidence as CMS designs the national rollout (strength) — but GAO documented a 2:1 admin-to-care spending ratio (<a href="https://www.gao.gov/assets/gao-25-108160.pdf" target="_blank" rel="noopener">GAO-25-108160</a>: $54.2M vs. $26.1M, 2021-June 2025, ~88% federally funded) and enrollment has run far below target (7,400-9,175 vs. ~246,365 eligible, missing even its own ~25,000 first-year goal per GAO) (weakness). Deloitte's $27M Pathways marketing contract (grown from an initial $10.7M award) produced enrollment still under 3% of the ~246,365 eligible even after the campaign ran.</li>
           <li><strong>Tipping point:</strong> The Dec 31, 2026 extension deadline — if Pathways is folded into the 2027 national framework rather than renewed standalone, GA's cost structure becomes either the template CMS exports or the cautionary tale other states cite to avoid it.</li>
           <li><strong>Cost-shift cascade:</strong> The federal government has covered ~88% of Pathways' administrative spend to date, so the "vendor spending &gt; care" pattern has so far been a federal cost, not a Georgia one — that changes if OBBBA's national framework shifts more administrative burden onto states. The 2:1 admin-to-care ratio is also front-loaded, not a steady state: the administrative share fell from 96.5% of spend in FY2023 to 58.8% in FY2024 as the initial system buildout cost was absorbed — a caution against extrapolating GA's early ratio flatly onto the national rollout's steady-state cost.</li>
           <li><strong>Incentive structure:</strong> State political incentive to preserve Pathways as proof-of-concept for work requirements nationally, even as its own numbers argue against the model's cost-effectiveness.</li>
@@ -742,12 +866,25 @@
       </div>
     </div>
 
+    <!-- Any-state drill-down -->
+    <div class="ref-block" id="special-statepicker">
+      <div class="ref-block-title">Any-State Drill-Down</div>
+      <div style="padding:14px;">
+        <p class="ref-section-desc" style="margin-bottom:0;">The three cards above are the deep-dive states. Select any other state or DC below for its category assignment, expansion status, work-requirement timeline, litigation posture, and whichever coverage-loss figure is actually verifiable for it. Most states have <strong>no verified state-specific coverage-loss estimate yet</strong> — where that is the case this says so plainly rather than extrapolating one, and points at the tracker to check.</p>
+        <div class="sp-picker">
+          <label for="sp-state-select">Select a state or DC:</label>
+          <select id="sp-state-select" aria-label="Select a state for OBBBA drill-down"></select>
+        </div>
+        <div id="sp-state-output" aria-live="polite"></div>
+      </div>
+    </div>
+
     <!-- Bay Area sub-section -->
     <div class="ref-block" id="special-bayarea">
       <div class="ref-block-title">The Bay Area as Bellwether</div>
-      <p style="margin:0 0 10px;">Within California, the Bay Area's dense MCO/FQHC safety-net infrastructure diverges sharply from Central Valley and rural CA, where thinner provider networks and longer travel distances likely translate the same paperwork-failure rate into a higher effective coverage-loss rate. A standalone page maps actionable navigation-network insights and a top-10 at-risk/resilient organization list for healthcare-and-housing navigation networks in the region:</p>
+      <p style="margin:0 0 10px;">Within California, the Bay Area's dense MCO/FQHC safety-net infrastructure diverges sharply from Central Valley and rural CA, where thinner provider networks and longer travel distances likely translate the same paperwork-failure rate into a higher effective coverage-loss rate. A standalone page maps potential navigation-network options to explore and a top-10 at-risk/resilient organization list for healthcare-and-housing navigation networks in the region:</p>
       <p style="margin:0 0 10px;">
-        <a href="special-topics/bay-area-navigation.html" target="_blank" rel="noopener" style="color:#00b4d8;font-weight:600;text-decoration:underline;">&#8594; Open: Bay Area Navigation Networks — Actionable Insights (standalone page)</a>
+        <a href="special-topics/bay-area-navigation.html" target="_blank" rel="noopener" style="color:#00b4d8;font-weight:600;text-decoration:underline;">&#8594; Open: Bay Area Navigation Networks — Potential Actionable Insights (standalone page)</a>
       </p>
       <p style="margin:0;"><strong>Notable people &amp; entities shaping this conversation:</strong> Michelle Baass (Director, CA Dept. of Health Care Services); Rob Bonta (CA Attorney General, co-plaintiff counsel in <em>Commonwealth of Massachusetts et al. v. Oz</em> — Massachusetts is the named lead plaintiff); California Health Care Foundation (CHCF, implementation-guidance publisher); San Francisco Health Plan, Alameda Alliance for Health, Santa Clara Family Health Plan, Contra Costa Health Plan, Health Plan of San Mateo (regional Medi-Cal MCOs — not Partnership HealthPlan of CA, which serves Northern California counties outside this footprint). Statewide advocacy organizations (California Pan-Ethnic Health Network, Western Center on Law &amp; Poverty, California Primary Care Association) are active on this issue nationally but their specific Bay Area positions were not independently verified in this research pass — treat as directionally relevant, confirm before citing specifics.</p>
     </div>
@@ -846,10 +983,10 @@
   <div class="ref-section" id="special-limitations">
     <h3 class="ref-section-title">Limitations &amp; Caveats</h3>
     <ul style="line-height:1.8;">
-      <li>State case-study numbers are mostly projections, not realized outcomes — evidence grade varies by row (see Archetypes table): <strong>confirmed</strong> for NE, MT, GA (GAO), and ND (all independently re-verified against state-agency/GAO/tracker sources across multiple research passes); <strong>modeled</strong> for IA (state Legislative Services Agency projection); <strong>insufficient</strong> for the Expansion+Waiver archetype (HI/MA/NY/OR/UT) pending a verified state-specific figure. Texas's confirmed application-backlog figure is real but was removed from the archetype table itself, since Texas is a non-expansion state with no work-requirement population — see the note below the Archetypes table.</li>
+      <li>State case-study numbers are mostly projections, not realized outcomes — evidence grade varies by row (see Categories of Impact table): <strong>confirmed</strong> for NE, MT, GA (GAO), and ND (all independently re-verified against state-agency/GAO/tracker sources across multiple research passes); <strong>modeled</strong> for IA (state Legislative Services Agency projection); <strong>insufficient</strong> for the Expansion+Waiver category (HI/MA/NY/OR/UT) pending a verified state-specific figure. Texas's confirmed application-backlog figure is real but was removed from the Categories of Impact table itself, since Texas is a non-expansion state with no work-requirement population — see the note below the Categories of Impact table.</li>
       <li>Threading state individual-mandate penalty interactions with the federal enhanced-subsidy expiration (Individual Mandate Variation section) is original synthesis for this repo, not a claim mirrored from any single cited source — treat it as an analytical framing, not an established consensus finding.</li>
       <li>The Georgia Pathways-to-national-rollout comparison (Case Studies) is illustrative of work-requirement administrative-cost mechanics, but GA's waiver program and OBBBA's national requirement are legally distinct instruments — GA's numbers are a preview, not a direct prediction, of national-rollout costs.</li>
-      <li>This research pass could not independently verify: the spec's original Hawaii 193-minute call-center wait-time figure, or Bay Area advocacy organizations' specific published positions on OBBBA. Both are flagged inline rather than asserted as fact. (Iowa's and North Dakota's figures, previously flagged as unverified here, were confirmed in a later independent verification pass — see Archetypes table. North Dakota was reinstated to that table after initially being dropped in error.)</li>
+      <li>This research pass could not independently verify: the spec's original Hawaii 193-minute call-center wait-time figure, or Bay Area advocacy organizations' specific published positions on OBBBA. Both are flagged inline rather than asserted as fact. (Iowa's and North Dakota's figures, previously flagged as unverified here, were confirmed in a later independent verification pass — see Categories of Impact table. North Dakota was reinstated to that table after initially being dropped in error.)</li>
       <li>The specific ESRD/disability dual-eligible disparity ratio (this project has at different points used both "2x" and "4.7x") could <strong>not</strong> be confirmed against a single CMS source pairing both a dual-eligible and a Medicare-only figure — treat any such multiplier as unverified until re-sourced.</li>
       <li>The CBO ~10M coverage-loss figure is a combined, cross-provision estimate that varies by score vintage and methodology across CBO, KFF, and Georgetown CCF — used here as an order-of-magnitude anchor, not a precise number.</li>
       <li>Litigation status is a snapshot as of this pass (early September 2026): a preliminary injunction was denied in <em>Massachusetts v. Oz</em> on July 29, 2026, and a motion to reconsider filed Aug 26, 2026 was still pending as of this update — check current docket status before citing "depends on injunction outcome" as the live state of play.</li>
@@ -857,6 +994,153 @@
   </div>
 
   </div><!-- /special-topics-content -->
+
+<script>
+/* Any-state OBBBA drill-down. Scoped to the Special Topics tab.
+   Conservative by design: `est` is populated only where a state-specific figure
+   is traceable to a named official/agency source. Everything else stays null and
+   renders as "no verified state-specific estimate". */
+(function () {
+  'use strict';
+
+  var NATIONAL = 'Jan 1, 2027 (national deadline)';
+  var TRACKERS = {
+    kff: { label: 'KFF work-requirements tracker', url: 'https://www.kff.org/medicaid/medicaid-work-requirements-tracker-overview/' },
+    ccf: { label: 'Georgetown CCF H.R.1 Readiness Tracker', url: 'https://ccf.georgetown.edu/2026/08/24/h-r-1-readiness-tracker-update-strain-is-building-before-the-work-reporting-requirements-clock-starts/' }
+  };
+
+  /* cat: primary category · exp: Medicaid expansion · lit: plaintiff in Massachusetts v. Oz
+     est: verified state-specific figure (else null) · grade: confirmed | modeled | none */
+  var S = [
+    ['AL','Alabama','Non-Expansion',false,false,null,'none',''],
+    ['AK','Alaska','Standard Expansion',true,false,null,'none',''],
+    ['AZ','Arizona','Litigant',true,true,null,'none',''],
+    ['AR','Arkansas','Early Adopter',true,false,null,'none','Began July 1, 2026 with enforcement delayed until January 2027 — named as an early mover in CMS’s own interim final rule. No verified state coverage-loss figure located for this rollout.'],
+    ['CA','California','Litigant + Expansion',true,true,'DHCS: 4.8M subject, 2.2M expected exempt, 1.1M central coverage-loss estimate (3.4M as a high-end scenario). LAO separately projects ~2M more uninsured by 2030 from OBBBA plus state changes combined.','confirmed','Covered in full in the California card above.'],
+    ['CO','Colorado','Litigant',true,true,null,'none',''],
+    ['CT','Connecticut','Litigant',true,true,null,'none',''],
+    ['DE','Delaware','Litigant',true,true,null,'none',''],
+    ['DC','District of Columbia','Litigant',true,true,null,'none','One of five jurisdictions with its own individual mandate penalty ($795/adult, 2025 amount).'],
+    ['FL','Florida','Non-Expansion',false,false,null,'none',''],
+    ['GA','Georgia','Waiver-Only / Non-Expansion',false,false,'GAO: $54.2M administrative vs. $26.1M care spending (2021-June 2025); enrollment 7,400-9,175 against ~246,365 eligible.','confirmed','Covered in full in the Georgia card above.'],
+    ['HI','Hawaii','Expansion + Waiver',true,true,null,'none','Qualitative reporting describes long eligibility call-center wait times; the specific 193-minute figure used in this project’s source spec could not be verified.'],
+    ['ID','Idaho','Standard Expansion',true,false,null,'none',''],
+    ['IL','Illinois','Litigant',true,true,null,'none',''],
+    ['IN','Indiana','Standard Expansion',true,false,null,'none',''],
+    ['IA','Iowa','Early Adopter',true,false,'~32,000 projected coverage loss (Iowa Legislative Services Agency projection).','modeled','Enforcement begins December 1, 2026.'],
+    ['KS','Kansas','Non-Expansion',false,false,null,'none',''],
+    ['KY','Kentucky','Litigant',true,true,null,'none','Joined the coalition via the Governor rather than the Attorney General.'],
+    ['LA','Louisiana','Standard Expansion',true,false,null,'none',''],
+    ['ME','Maine','Litigant',true,true,null,'none',''],
+    ['MD','Maryland','Litigant',true,true,null,'none',''],
+    ['MA','Massachusetts','Litigant (lead) + Expansion&nbsp;+&nbsp;Waiver',true,true,null,'none','Named lead plaintiff in Commonwealth of Massachusetts et al. v. Oz. Also one of five jurisdictions with an individual mandate penalty (income/age-tiered).'],
+    ['MI','Michigan','Litigant',true,true,null,'none',''],
+    ['MN','Minnesota','Litigant',true,true,null,'none',''],
+    ['MS','Mississippi','Non-Expansion',false,false,null,'none',''],
+    ['MO','Missouri','Standard Expansion',true,false,null,'none','Cited in reporting as having improved eligibility-processing performance after an eligibility-office staffing increase.'],
+    ['MT','Montana','Early Adopter',true,false,'~13,000 adults (~18% of the expansion population) — Montana DPHHS estimate.','confirmed','Covered in full in the Montana card above.'],
+    ['NE','Nebraska','Early Adopter',true,false,'~200 in the first disenrollment round (state Medicaid director estimate, week of July 31, 2026). Advocates separately project 20,000-40,000 eventually.','confirmed','First state in the nation to disenroll under the new requirement.'],
+    ['NV','Nevada','Litigant',true,true,null,'none',''],
+    ['NH','New Hampshire','Standard Expansion',true,false,null,'none',''],
+    ['NJ','New Jersey','Litigant',true,true,null,'none','One of five jurisdictions with an individual mandate penalty (~$695/adult plus 2.5% of income).'],
+    ['NM','New Mexico','Litigant',true,true,null,'none',''],
+    ['NY','New York','Litigant + Expansion&nbsp;+&nbsp;Waiver',true,true,null,'none',''],
+    ['NC','North Carolina','Litigant',true,true,null,'none',''],
+    ['ND','North Dakota','Administratively Overwhelmed',true,false,'ND HHS estimates only 5,000-7,000 of ~23,000 expansion members will be affected — nearly half pre-qualify for an exemption. Pending-renewal share rose from 11.2% (Q4 2025) to 24.8% (Q1 2026); 69.3% of applicants waited &gt;30 days.','confirmed','The clearest documented case of eligibility-system strain building ahead of enforcement.'],
+    ['OH','Ohio','Standard Expansion',true,false,null,'none',''],
+    ['OK','Oklahoma','Standard Expansion',true,false,null,'none',''],
+    ['OR','Oregon','Litigant + Expansion&nbsp;+&nbsp;Waiver',true,true,null,'none',''],
+    ['PA','Pennsylvania','Litigant',true,true,null,'none','Joined the coalition via the Governor rather than the Attorney General.'],
+    ['RI','Rhode Island','Litigant',true,true,null,'none','One of five jurisdictions with an individual mandate penalty ($695/adult, $2,085 cap).'],
+    ['SC','South Carolina','Non-Expansion',false,false,null,'none',''],
+    ['SD','South Dakota','Standard Expansion',true,false,null,'none',''],
+    ['TN','Tennessee','Waiver-Only / Non-Expansion',false,false,null,'none','CMS identified §1115 waiver enrollees (parents at or below the federal poverty level) as subject to the requirement. No verified state coverage-loss figure located.'],
+    ['TX','Texas','Non-Expansion',false,false,'Medicaid application backlog grew from ~1,600 to 210,000+ (Jan-Aug 2026); on-time processing fell from &gt;90% to 62%.','confirmed','Texas never adopted expansion, so it has no population subject to the work requirement — its backlog is attributed primarily to SNAP verification changes and 6-month redeterminations, not work-requirement enforcement.'],
+    ['UT','Utah','Expansion + Waiver',true,false,null,'none',''],
+    ['VT','Vermont','Litigant',true,true,null,'none','Requires coverage reporting but imposes no financial penalty.'],
+    ['VA','Virginia','Litigant',true,true,null,'none',''],
+    ['WA','Washington','Litigant',true,true,null,'none',''],
+    ['WV','West Virginia','Standard Expansion',true,false,null,'none',''],
+    ['WI','Wisconsin','Waiver-Only / Non-Expansion',false,true,null,'none','New applicants subject from January 1, 2027; current members at their next renewal. Non-expansion, but a §1115 waiver population (income at or below the poverty level) is covered.'],
+    ['WY','Wyoming','Non-Expansion',false,false,null,'none','']
+  ];
+
+  var GRADE_TEXT = { confirmed: 'Confirmed', modeled: 'Modeled', none: 'No verified figure' };
+
+  function esc(s) {
+    return String(s).replace(/&(?!nbsp;|amp;|gt;|lt;|#)/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+  }
+
+  function field(label, value) {
+    return '<div class="sp-state-field"><div class="sp-state-label">' + label +
+           '</div><div class="sp-state-value">' + value + '</div></div>';
+  }
+
+  function render(code) {
+    var out = document.getElementById('sp-state-output');
+    if (!out) return;
+    var row = null;
+    for (var i = 0; i < S.length; i++) { if (S[i][0] === code) { row = S[i]; break; } }
+    if (!row) { out.innerHTML = ''; return; }
+
+    var name = row[1], cat = row[2], exp = row[3], lit = row[4],
+        est = row[5], grade = row[6], note = row[7];
+
+    var timeline = NATIONAL;
+    if (code === 'MT') timeline = 'July 1, 2026 start; first disenrollment wave Dec 31, 2026';
+    else if (code === 'NE') timeline = 'First disenrollments week of July 31, 2026';
+    else if (code === 'IA') timeline = 'December 1, 2026';
+    else if (code === 'AR') timeline = 'July 1, 2026 start; enforcement delayed to January 2027';
+    else if (code === 'WI') timeline = 'Jan 1, 2027 for new applicants; current members at next renewal';
+    else if (!exp) timeline = 'Not applicable to a general expansion population — see note';
+
+    var gradeClass = grade === 'confirmed' ? 'sp-grade-confirmed'
+                   : grade === 'modeled' ? 'sp-grade-modeled' : 'sp-grade-none';
+    var estHtml = est
+      ? esc(est) + ' <span class="sp-grade ' + gradeClass + '">' + GRADE_TEXT[grade] + '</span>'
+      : '<em>No verified state-specific coverage-loss estimate located for this state in this research pass.</em> ' +
+        '<span class="sp-grade sp-grade-none">' + GRADE_TEXT.none + '</span>';
+
+    var html = '<div class="sp-state-grid">' +
+      field('Category', esc(cat)) +
+      field('Medicaid expansion', exp ? 'Adopted ACA expansion' : 'Did <strong>not</strong> adopt ACA expansion') +
+      field('Work-requirement timeline', esc(timeline)) +
+      field('Litigation posture', lit
+        ? 'Plaintiff in <em>Commonwealth of Massachusetts et al. v. Oz</em> (25 states + DC). Preliminary injunction denied July 29, 2026 — the rule remains in effect while litigation continues.'
+        : 'Not a plaintiff in <em>Commonwealth of Massachusetts et al. v. Oz</em>.') +
+      field('Verified coverage-loss estimate', estHtml) +
+      '</div>';
+
+    if (note) {
+      html += '<p class="ref-note" style="margin-top:12px;">' + esc(note) + '</p>';
+    }
+    html += '<p class="ref-note" style="margin-top:8px;">Check for newer state figures: ' +
+      '<a href="' + TRACKERS.kff.url + '" target="_blank" rel="noopener">' + TRACKERS.kff.label + '</a> &middot; ' +
+      '<a href="' + TRACKERS.ccf.url + '" target="_blank" rel="noopener">' + TRACKERS.ccf.label + '</a>.</p>';
+
+    out.innerHTML = html;
+  }
+
+  function init() {
+    var sel = document.getElementById('sp-state-select');
+    if (!sel || sel.options.length) return;
+    var opts = ['<option value="">— Select —</option>'];
+    for (var i = 0; i < S.length; i++) {
+      opts.push('<option value="' + S[i][0] + '">' + S[i][1].replace(/&nbsp;/g, ' ') + '</option>');
+    }
+    sel.innerHTML = opts.join('');
+    sel.addEventListener('change', function () { render(this.value); });
+    sel.value = 'ND';
+    render('ND');
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+  } else {
+    init();
+  }
+})();
+</script>
 </div>
 
 <!-- ===== Inline Data ===== -->
