@@ -43,21 +43,23 @@ healthcare_ref_materials/
 │   ├── ontology.js             # Force-directed ontology graph (D3 v7)
 │   ├── reimbursement.js        # Swimlane timeline visualization (D3 v7)
 │   ├── taxonomy.js             # Dataset table with filters, sort, CSV export
+│   ├── analytical.js           # Analytical Stacks card grid (filters, expand/collapse)
 │   └── app.js                  # Tab controller and initialization
 ├── data/
-│   ├── ontology_nodes.json     # 38 nodes: legislation, agency, program, model, rule
-│   ├── ontology_edges.json     # 51 directed relationships
-│   ├── company_nodes.json      # 111 nodes: payer, provider, pharma, hit, analytics, govt, digital, ai_gov, emergent
-│   ├── company_edges.json      # 163 directed relationships (hier, serves, partner, funds, tension, cloud_ehr_partnership, regulates, certifies, sets_voluntary_standard_for, provides_internal_governance_for)
+│   ├── ontology_nodes.json     # 39 nodes: legislation, agency, program, model, rule
+│   ├── ontology_edges.json     # 54 directed relationships
+│   ├── company_nodes.json      # 117 nodes: payer, provider, pharma, hit, analytics, govt, digital, ai_gov, emergent
+│   ├── company_edges.json      # 170 directed relationships (hier, serves, partner, funds, tension, cloud_ehr_partnership, regulates, certifies, sets_voluntary_standard_for, provides_internal_governance_for)
 │   ├── top_shifts.json         # 6 active policy shifts with catalysts and implications
-│   ├── cmmi_models.json        # 22 CMMI models with start/end dates (6 official categories)
+│   ├── cmmi_models.json        # 23 CMMI models with start/end dates (6 official categories)
 │   ├── service_types.json      # 12 service types with fee schedules
-│   └── datasets.json           # 23 CMS and public research datasets (incl. Drug/Formulary)
+│   ├── datasets.json           # 26 CMS and public research datasets (incl. Drug/Formulary, T-MSIS/TAF, HRSA UDS, CA HCAI)
+│   └── analytical_tasks.json   # 14 analysis task types backing the Analytical Stacks tab
 ├── cli/
 │   └── update.py               # Phased update CLI (see below)
 ├── special-topics/
 │   └── bay-area-navigation.html # Standalone companion page — Bay Area org risk rankings, county breakdown, externality cost reference, navigator action framework (linked from Tab 5)
-└── project_specs/              # Original specification documents
+└── project_specs/              # Spec/planning working files (not tracked in this repo)
 ```
 
 ---
@@ -68,7 +70,7 @@ The Ontology tab contains two switchable force-directed graphs and a Top Shifts 
 
 ### Legislative Map
 
-**38 nodes across 5 categories:**
+**39 nodes across 5 categories:**
 
 | Category | Color | Examples |
 |----------|-------|---------|
@@ -80,7 +82,7 @@ The Ontology tab contains two switchable force-directed graphs and a Top Shifts 
 
 ### Payer & Company Map
 
-**111 nodes across 11 categories:**
+**117 nodes across 11 categories:**
 
 | Category | Color | Examples |
 |----------|-------|---------|
@@ -111,9 +113,9 @@ Six active shifts displayed as cards below the graphs, each with a trend rating,
 | 3 | CMS-0057-F Prior Auth APIs — Jan 2027 Deadline | Critical |
 | 4 | MA Risk Adjustment Tightening (HCC V28 + RADV) | Critical |
 | 5 | TEAM Model — Mandatory Episode Accountability | Rising |
-| 6 | AI Governance Fragmentation — Three Regimes, No Reconciliation | Rising |
+| 6 | AI Governance Fragmentation — Federal Floor Contracts as Voluntary Regimes Expand | Rising |
 
-> The #1 shift links directly to the new **Special Topics: OBBBA** tab for the full state-by-state breakdown. The MIPS Sunset shift was retired to make room (its content overlaps the Reimbursement Roadmap tab's QPP/MIPS coverage) — see the [implementation guide](project_specs/V0%20Specs/OBBBA_Special_Topics_Implementation_Guide.md) for the rationale.
+> The #1 shift links directly to the new **Special Topics: OBBBA** tab for the full state-by-state breakdown. The MIPS Sunset shift was retired to make room (its content overlaps the Reimbursement Roadmap tab's QPP/MIPS coverage).
 
 **Interactions (both graphs):**
 - Pan and zoom the graph canvas
@@ -161,19 +163,19 @@ This structure lets you see program eligibility overlap — when multiple models
 | State & Community-Based Models | Dark teal (#264653) |
 | Statutory Demonstrations and Other Projects | Amber (#f4a261) |
 
-**22 CMMI models** (16 original + 6 new): TEAM, MA Value-Based Insurance Design Model, Enhanced Medication Therapy Management, State Innovation Models, Financial Alignment Initiative, and PACE Innovation. Each model row shows the program's full active date range. Ended models display dashed borders. Scroll vertically to see all service types. Hover a bar for program details including CMMI category, start/end dates, and description.
+**23 CMMI models** (16 original + 6 new + LEAD, ACO REACH's successor, added Sept 2026): TEAM, MA Value-Based Insurance Design Model, Enhanced Medication Therapy Management, State Innovation Models, Financial Alignment Initiative, PACE Innovation, and LEAD. Each model row shows the program's full active date range. Ended models display dashed borders. Scroll vertically to see all service types. Hover a bar for program details including CMMI category, start/end dates, and description.
 
 ---
 
 ## Tab 3 — Data Taxonomy
 
-**23 datasets** across 6 categories, filterable by name, category, and payer:
+**26 datasets** across 6 categories, filterable by name, category, and payer:
 
 | Category | Datasets |
 |----------|---------|
-| Claims | Medicare Carrier, MEDPAR, Outpatient, HH, Hospice, DME, MA Encounter, Part D, HCUP NIS |
+| Claims | Medicare Carrier, MEDPAR, Outpatient, HH, Hospice, DME, MA Encounter, Part D, HCUP NIS, T-MSIS/TAF |
 | Enrollment | MBSF, CCW Chronic Condition Flags |
-| Provider | POS File, HCRIS Cost Reports, MIPS Performance, ACO Public Data, ARF |
+| Provider | POS File, HCRIS Cost Reports, MIPS Performance, ACO Public Data, ARF, HRSA UDS, CA HCAI Hospital Financial Data |
 | Survey | MCBS, MEPS, NHANES |
 | Synthetic | CMS SynPUF |
 | Drug/Formulary | Part D Prescriber PUF, Medicaid NADAC, Medicaid Drug Rebate Program / SDUD |
@@ -198,7 +200,7 @@ A standalone static reference deep-dive on the One Big Beautiful Bill Act (H.R. 
 
 **Cross-links:** The Ontology tab's #1 Top Shift links here; the Payer & Company Map gained an `obbba_c` legislation node plus `cbo`, `kff`, `georgetown_ccf`, `ga_dch`, and `rhtf_prog` nodes documenting the national-context entities this tab draws on.
 
-**Sourcing & fact-check trail:** every figure in this tab and its Bay Area companion page was run through an independent, primary-source verification pass (or explicitly flagged where it couldn't be confirmed) rather than published on first draft. The full build log — what was verified, what was corrected, and what's still open — is in [`project_specs/V0 Specs/OBBBA_Special_Topics_Implementation_Guide.md`](<project_specs/V0 Specs/OBBBA_Special_Topics_Implementation_Guide.md>).
+**Sourcing & fact-check trail:** every figure in this tab and its Bay Area companion page was run through an independent, primary-source verification pass (or explicitly flagged where it couldn't be confirmed) rather than published on first draft, across several audit rounds. The build log is kept locally in `project_specs/` (not tracked in this repo).
 
 ---
 
@@ -269,7 +271,7 @@ Each JSON file has a corresponding `window.__XXX__` variable embedded in `index.
 |-------|--------------|
 | Legislation | OBBBA / H.R. 1 (P.L. 119-21, signed July 4, 2025 — most recent major law) |
 | CMMI Models | August 2026 |
-| Fee Schedules | CY/FY 2025 Final Rules |
+| Fee Schedules | CY/FY 2026 Final Rules (PFS includes OBBBA's one-year 2.5% payment increase) |
 | Datasets | September 2026 |
 | Payer & Company Map | September 2026 (hospital systems, interoperability/RWD, cloud/EHR partnerships, AI governance stakeholders, OBBBA national-context entities) |
 | Special Topics: OBBBA (Tab 5) | September 2026 |

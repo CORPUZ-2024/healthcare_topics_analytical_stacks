@@ -28,7 +28,7 @@
     "name": "ACO REACH Model",
     "category": "Accountable Care Models",
     "startDate": "2023-01-01",
-    "endDate": null,
+    "endDate": "2026-12-31",
     "description": "Successor to the Global and Professional Direct Contracting Model. ACOs accept prospective attribution and financial accountability (Professional or Global risk) for Medicare FFS beneficiaries, with mandatory Health Equity Plans."
   },
   {
@@ -44,7 +44,7 @@
     "name": "Primary Care First",
     "category": "Accountable Care Models",
     "startDate": "2021-01-01",
-    "endDate": null,
+    "endDate": "2025-12-31",
     "description": "CMMI model offering a flat primary care visit fee, population-based payment, and performance-based adjustments for primary care practices ready to accept accountability for total cost of care."
   },
   {
@@ -52,7 +52,7 @@
     "name": "Making Care Primary",
     "category": "Accountable Care Models",
     "startDate": "2024-07-01",
-    "endDate": null,
+    "endDate": "2025-06-30",
     "description": "Ten-year CMMI primary care model in 8 states with a graduated pathway toward prospective total cost of care accountability. Focuses on care management, behavioral health integration, and specialist partnerships."
   },
   {
@@ -133,7 +133,7 @@
     "category": "Disease-Specific & Episode-Based Models",
     "startDate": "2026-01-01",
     "endDate": null,
-    "description": "Mandatory episode-based payment model for five surgical procedures: lower extremity joint replacement, surgical hip femur fracture treatment, spinal fusion, coronary artery bypass graft, and major bowel procedure. Hospitals in selected geographic areas are required to participate. 90-day episode includes all related post-acute care."
+    "description": "Mandatory episode-based payment model for five surgical procedures: lower extremity joint replacement, surgical hip femur fracture treatment, spinal fusion, coronary artery bypass graft, and major bowel procedure. Hospitals in selected geographic areas are required to participate (721 hospitals, 188 metro areas). 30-day post-discharge episode window — shorter than CJR/BPCI Advanced's 90-day window by design."
   },
   {
     "id": "VBID",
@@ -174,5 +174,13 @@
     "startDate": "2017-01-01",
     "endDate": null,
     "description": "Statutory demonstration expanding PACE (Program of All-Inclusive Care for the Elderly) to new populations and settings. Tests PACE-like models of comprehensive, integrated care for frail elderly individuals who do not yet qualify for nursing home level of care."
+  },
+  {
+    "id": "LEAD",
+    "name": "ACO Long-Term Enhanced Accountable Care Organization Design (LEAD)",
+    "category": "Accountable Care Models",
+    "startDate": "2027-01-01",
+    "endDate": "2036-12-31",
+    "description": "CMMI model (2027-2036) succeeding ACO REACH, which ends Dec 31, 2026. RFA released March 31, 2026. Fixed 10-year term structured to give ACOs a longer runway for total-cost-of-care accountability than REACH's shorter cycle offered."
   }
 ]

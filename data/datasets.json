@@ -5,9 +5,16 @@
     "category": "Claims",
     "years": "1991-present",
     "unit": "Claim line",
-    "payers": ["Medicare FFS"],
+    "payers": [
+      "Medicare FFS"
+    ],
     "states": "All",
-    "linkageIds": ["BENE_ID", "CLM_ID", "NPI", "HCPCS_CD"]
+    "linkageIds": [
+      "BENE_ID",
+      "CLM_ID",
+      "NPI",
+      "HCPCS_CD"
+    ]
   },
   {
     "name": "Medicare MEDPAR (Inpatient) File",
@@ -15,9 +22,15 @@
     "category": "Claims",
     "years": "1984-present",
     "unit": "Stay",
-    "payers": ["Medicare FFS"],
+    "payers": [
+      "Medicare FFS"
+    ],
     "states": "All",
-    "linkageIds": ["BENE_ID", "MEDPAR_ID", "DRG_CD"]
+    "linkageIds": [
+      "BENE_ID",
+      "MEDPAR_ID",
+      "DRG_CD"
+    ]
   },
   {
     "name": "Medicare Outpatient Claims",
@@ -25,9 +38,15 @@
     "category": "Claims",
     "years": "1991-present",
     "unit": "Claim",
-    "payers": ["Medicare FFS"],
+    "payers": [
+      "Medicare FFS"
+    ],
     "states": "All",
-    "linkageIds": ["BENE_ID", "CLM_ID", "REV_CNTR"]
+    "linkageIds": [
+      "BENE_ID",
+      "CLM_ID",
+      "REV_CNTR"
+    ]
   },
   {
     "name": "Home Health Claims",
@@ -35,9 +54,15 @@
     "category": "Claims",
     "years": "1991-present",
     "unit": "Episode",
-    "payers": ["Medicare FFS"],
+    "payers": [
+      "Medicare FFS"
+    ],
     "states": "All",
-    "linkageIds": ["BENE_ID", "CLM_ID", "HHA_ID"]
+    "linkageIds": [
+      "BENE_ID",
+      "CLM_ID",
+      "HHA_ID"
+    ]
   },
   {
     "name": "Hospice Claims",
@@ -45,9 +70,14 @@
     "category": "Claims",
     "years": "1991-present",
     "unit": "Claim",
-    "payers": ["Medicare FFS"],
+    "payers": [
+      "Medicare FFS"
+    ],
     "states": "All",
-    "linkageIds": ["BENE_ID", "CLM_ID"]
+    "linkageIds": [
+      "BENE_ID",
+      "CLM_ID"
+    ]
   },
   {
     "name": "DME Claims",
@@ -55,9 +85,15 @@
     "category": "Claims",
     "years": "1991-present",
     "unit": "Claim",
-    "payers": ["Medicare FFS"],
+    "payers": [
+      "Medicare FFS"
+    ],
     "states": "All",
-    "linkageIds": ["BENE_ID", "CLM_ID", "HCPCS_CD"]
+    "linkageIds": [
+      "BENE_ID",
+      "CLM_ID",
+      "HCPCS_CD"
+    ]
   },
   {
     "name": "Medicare Advantage Encounter Data",
@@ -65,9 +101,15 @@
     "category": "Claims",
     "years": "2012-present",
     "unit": "Encounter",
-    "payers": ["Medicare Advantage"],
+    "payers": [
+      "Medicare Advantage"
+    ],
     "states": "All",
-    "linkageIds": ["BENE_ID", "CLM_ID", "PLAN_ID"]
+    "linkageIds": [
+      "BENE_ID",
+      "CLM_ID",
+      "PLAN_ID"
+    ]
   },
   {
     "name": "Medicare Beneficiary Summary File (MBSF)",
@@ -75,9 +117,15 @@
     "category": "Enrollment",
     "years": "1991-present",
     "unit": "Beneficiary-year",
-    "payers": ["Medicare FFS", "Medicare Advantage"],
+    "payers": [
+      "Medicare FFS",
+      "Medicare Advantage"
+    ],
     "states": "All",
-    "linkageIds": ["BENE_ID", "HICNO"]
+    "linkageIds": [
+      "BENE_ID",
+      "HICNO"
+    ]
   },
   {
     "name": "Part D Prescribing Data",
@@ -85,9 +133,15 @@
     "category": "Claims",
     "years": "2006-present",
     "unit": "Prescription event",
-    "payers": ["Medicare Part D"],
+    "payers": [
+      "Medicare Part D"
+    ],
     "states": "All",
-    "linkageIds": ["BENE_ID", "PRSCRBR_NPI", "PROD_SRVC_ID"]
+    "linkageIds": [
+      "BENE_ID",
+      "PRSCRBR_NPI",
+      "PROD_SRVC_ID"
+    ]
   },
   {
     "name": "CMS Chronic Conditions Warehouse (CCW) Flags",
@@ -95,9 +149,13 @@
     "category": "Enrollment",
     "years": "1999-present",
     "unit": "Beneficiary-year",
-    "payers": ["Medicare FFS"],
+    "payers": [
+      "Medicare FFS"
+    ],
     "states": "All",
-    "linkageIds": ["BENE_ID"]
+    "linkageIds": [
+      "BENE_ID"
+    ]
   },
   {
     "name": "Provider of Services (POS) File",
@@ -105,9 +163,14 @@
     "category": "Provider",
     "years": "1984-present",
     "unit": "Provider",
-    "payers": ["All"],
+    "payers": [
+      "All"
+    ],
     "states": "All",
-    "linkageIds": ["PRVDR_NUM", "NPI"]
+    "linkageIds": [
+      "PRVDR_NUM",
+      "NPI"
+    ]
   },
   {
     "name": "Healthcare Cost Report Information System (HCRIS)",
@@ -115,9 +178,14 @@
     "category": "Provider",
     "years": "1994-present",
     "unit": "Facility-year",
-    "payers": ["All"],
+    "payers": [
+      "All"
+    ],
     "states": "All",
-    "linkageIds": ["PRVDR_NUM", "RPT_REC_NUM"]
+    "linkageIds": [
+      "PRVDR_NUM",
+      "RPT_REC_NUM"
+    ]
   },
   {
     "name": "MIPS Performance Data",
@@ -125,9 +193,14 @@
     "category": "Provider",
     "years": "2017-present",
     "unit": "Clinician",
-    "payers": ["Medicare"],
+    "payers": [
+      "Medicare"
+    ],
     "states": "All",
-    "linkageIds": ["NPI", "TIN"]
+    "linkageIds": [
+      "NPI",
+      "TIN"
+    ]
   },
   {
     "name": "ACO Program Public Data",
@@ -135,9 +208,14 @@
     "category": "Provider",
     "years": "2013-present",
     "unit": "ACO",
-    "payers": ["Medicare FFS"],
+    "payers": [
+      "Medicare FFS"
+    ],
     "states": "All",
-    "linkageIds": ["ACO_ID", "NPI"]
+    "linkageIds": [
+      "ACO_ID",
+      "NPI"
+    ]
   },
   {
     "name": "Area Health Resources File (ARF)",
@@ -145,9 +223,14 @@
     "category": "Provider",
     "years": "1990-present",
     "unit": "County",
-    "payers": ["All"],
+    "payers": [
+      "All"
+    ],
     "states": "All",
-    "linkageIds": ["FIPS_CD", "COUNTY_CD"]
+    "linkageIds": [
+      "FIPS_CD",
+      "COUNTY_CD"
+    ]
   },
   {
     "name": "Medicare Current Beneficiary Survey (MCBS)",
@@ -155,9 +238,14 @@
     "category": "Survey",
     "years": "1991-present",
     "unit": "Beneficiary",
-    "payers": ["Medicare FFS", "Medicare Advantage"],
+    "payers": [
+      "Medicare FFS",
+      "Medicare Advantage"
+    ],
     "states": "All",
-    "linkageIds": ["BASEID"]
+    "linkageIds": [
+      "BASEID"
+    ]
   },
   {
     "name": "Medical Expenditure Panel Survey (MEPS)",
@@ -165,9 +253,14 @@
     "category": "Survey",
     "years": "1996-present",
     "unit": "Person",
-    "payers": ["All"],
+    "payers": [
+      "All"
+    ],
     "states": "All",
-    "linkageIds": ["DUPERSID", "PANEL"]
+    "linkageIds": [
+      "DUPERSID",
+      "PANEL"
+    ]
   },
   {
     "name": "National Health and Nutrition Examination Survey (NHANES)",
@@ -175,9 +268,13 @@
     "category": "Survey",
     "years": "1988-present",
     "unit": "Person",
-    "payers": ["All"],
+    "payers": [
+      "All"
+    ],
     "states": "All",
-    "linkageIds": ["SEQN"]
+    "linkageIds": [
+      "SEQN"
+    ]
   },
   {
     "name": "HCUP National Inpatient Sample (NIS)",
@@ -185,9 +282,14 @@
     "category": "Claims",
     "years": "1988-present",
     "unit": "Discharge",
-    "payers": ["All payers"],
+    "payers": [
+      "All payers"
+    ],
     "states": "All",
-    "linkageIds": ["KEY_NIS", "HOSP_NIS"]
+    "linkageIds": [
+      "KEY_NIS",
+      "HOSP_NIS"
+    ]
   },
   {
     "name": "CMS Synthetic Public Use Files (SynPUF)",
@@ -195,9 +297,13 @@
     "category": "Synthetic",
     "years": "2008-2010",
     "unit": "Beneficiary",
-    "payers": ["Medicare FFS"],
+    "payers": [
+      "Medicare FFS"
+    ],
     "states": "All",
-    "linkageIds": ["DESYNPUF_ID"]
+    "linkageIds": [
+      "DESYNPUF_ID"
+    ]
   },
   {
     "name": "Medicare Part D Prescriber Public Use File",
@@ -205,13 +311,28 @@
     "category": "Drug/Formulary",
     "years": "2013-present",
     "unit": "Prescriber-drug-year",
-    "payers": ["Medicare Part D"],
+    "payers": [
+      "Medicare Part D"
+    ],
     "states": "All",
-    "linkageIds": ["NPI", "BRND_NAME", "GNRC_NAME"],
+    "linkageIds": [
+      "NPI",
+      "BRND_NAME",
+      "GNRC_NAME"
+    ],
     "use_case_by_stakeholder": [
-      { "stakeholder_type": "Payer/PBM", "intent": "formulary tier and utilization management design" },
-      { "stakeholder_type": "Pharma manufacturer", "intent": "post-negotiation prescribing-pattern monitoring" },
-      { "stakeholder_type": "Policy researcher", "intent": "IRA drug price negotiation impact evaluation" }
+      {
+        "stakeholder_type": "Payer/PBM",
+        "intent": "formulary tier and utilization management design"
+      },
+      {
+        "stakeholder_type": "Pharma manufacturer",
+        "intent": "post-negotiation prescribing-pattern monitoring"
+      },
+      {
+        "stakeholder_type": "Policy researcher",
+        "intent": "IRA drug price negotiation impact evaluation"
+      }
     ]
   },
   {
@@ -220,12 +341,22 @@
     "category": "Drug/Formulary",
     "years": "2013-present",
     "unit": "NDC-week",
-    "payers": ["Medicaid"],
+    "payers": [
+      "Medicaid"
+    ],
     "states": "All",
-    "linkageIds": ["NDC"],
+    "linkageIds": [
+      "NDC"
+    ],
     "use_case_by_stakeholder": [
-      { "stakeholder_type": "State Medicaid agency", "intent": "pharmacy reimbursement benchmark-setting" },
-      { "stakeholder_type": "PBM", "intent": "acquisition-cost-based contract auditing" }
+      {
+        "stakeholder_type": "State Medicaid agency",
+        "intent": "pharmacy reimbursement benchmark-setting"
+      },
+      {
+        "stakeholder_type": "PBM",
+        "intent": "acquisition-cost-based contract auditing"
+      }
     ]
   },
   {
@@ -234,13 +365,82 @@
     "category": "Drug/Formulary",
     "years": "1991-present",
     "unit": "NDC-state-quarter",
-    "payers": ["Medicaid"],
+    "payers": [
+      "Medicaid"
+    ],
     "states": "All",
-    "linkageIds": ["NDC", "LABELER_CODE"],
+    "linkageIds": [
+      "NDC",
+      "LABELER_CODE"
+    ],
     "use_case_by_stakeholder": [
-      { "stakeholder_type": "Pharma manufacturer", "intent": "rebate liability reconciliation" },
-      { "stakeholder_type": "State Medicaid agency", "intent": "drug spend and rebate collection tracking" },
-      { "stakeholder_type": "Policy researcher", "intent": "cross-state Medicaid drug spending comparison" }
+      {
+        "stakeholder_type": "Pharma manufacturer",
+        "intent": "rebate liability reconciliation"
+      },
+      {
+        "stakeholder_type": "State Medicaid agency",
+        "intent": "drug spend and rebate collection tracking"
+      },
+      {
+        "stakeholder_type": "Policy researcher",
+        "intent": "cross-state Medicaid drug spending comparison"
+      }
+    ]
+  },
+  {
+    "name": "Transformed Medicaid Statistical Information System (T-MSIS / TAF)",
+    "description": "CMS's national administrative claims and eligibility data source for Medicaid and CHIP across all states, delivered to researchers as the Medicaid/CHIP TAF Analytic Files. The authoritative source for state-level Medicaid eligibility, enrollment, and utilization counts — the primary citation this project should use for OBBBA work-requirement coverage-loss figures rather than secondary news estimates where TAF data is available.",
+    "category": "Claims",
+    "years": "2014-present (TAF); T-MSIS since 2011",
+    "unit": "Claim / enrollment record",
+    "payers": [
+      "Medicaid",
+      "CHIP"
+    ],
+    "states": "All",
+    "linkageIds": [
+      "MSIS_ID",
+      "BENE_ID (CCW-linked)",
+      "STATE_CD"
+    ]
+  },
+  {
+    "name": "HRSA Uniform Data System (UDS)",
+    "description": "Annual, federally-mandated reporting by every HRSA-funded Federally Qualified Health Center (FQHC), covering patient demographics, payer mix (including Medicaid share), services provided, staffing, costs, and clinical quality measures at the individual health-center level. The primary source for FQHC-level payer-mix and patient-count figures — should replace org-level [est.] figures in analyses like the Bay Area companion page wherever a center's UDS filing is available.",
+    "category": "Provider",
+    "years": "1996-present",
+    "unit": "Health-center-year",
+    "payers": [
+      "Medicaid",
+      "Medicare",
+      "Uninsured",
+      "Other"
+    ],
+    "states": "All",
+    "linkageIds": [
+      "BHCMISID",
+      "Grant Number"
+    ]
+  },
+  {
+    "name": "California Health Care Almanac / HCAI Hospital Financial Data",
+    "description": "California Department of Health Care Access and Information (HCAI, formerly OSHPD) annual hospital financial disclosure data — utilization, payer mix, revenue, and uncompensated care by facility. The primary source for California-specific hospital payer-mix and financial-exposure figures (e.g. Bay Area safety-net hospital analysis) in place of modeled estimates.",
+    "category": "Provider",
+    "years": "1996-present",
+    "unit": "Hospital-year",
+    "payers": [
+      "Medi-Cal",
+      "Medicare",
+      "Commercial",
+      "Uninsured"
+    ],
+    "states": [
+      "CA"
+    ],
+    "linkageIds": [
+      "OSHPD_ID",
+      "Facility Number"
     ]
   }
 ]
