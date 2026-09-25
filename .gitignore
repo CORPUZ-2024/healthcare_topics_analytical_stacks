@@ -1,0 +1,5 @@
+# Local working notes and specs — not part of the published reference material
+project_specs/
+
+# Claude Code local session state
+.claude/

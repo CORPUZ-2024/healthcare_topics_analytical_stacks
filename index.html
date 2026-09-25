@@ -469,6 +469,162 @@
       </div>
 
     </div><!-- /ref-section B -->
+
+    <!-- ---- Section C: Commonly Conflated Distinctions ---- -->
+    <div class="ref-section">
+      <h3 class="ref-section-title">Commonly Conflated Distinctions</h3>
+      <p class="ref-section-desc">Pairs of facts that are each individually true but describe different things, and are routinely merged into a single wrong statement. Every entry below is a conflation that was actually found and corrected in this repository's own content — they are recorded here because the failure mode is a reader's as much as an author's: the merged version is plausible, internally consistent, and wrong.</p>
+
+      <!-- Payment models & episodes -->
+      <div class="ref-block">
+        <div class="ref-block-title">Payment Models &amp; Episodes</div>
+        <div class="ref-table-wrap">
+          <table class="ref-table">
+            <thead>
+              <tr>
+                <th class="ref-feature-col">Conflated pair</th>
+                <th>What each one actually is</th>
+                <th>The error the merge produces</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="ref-feature-col"><strong>Episode window: TEAM vs BPCI-A / CJR</strong></td>
+                <td><strong>TEAM</strong> uses a <strong>30-day</strong> post-discharge window. <strong>BPCI Advanced</strong> and <strong>CJR</strong> use <strong>90 days</strong>.</td>
+                <td>Treating 90 days as the universal bundled-payment default, then naming TEAM as the example — attributing the wrong window to the one model still operating.</td>
+              </tr>
+              <tr>
+                <td class="ref-feature-col"><strong>HHVBP: original model vs expanded program</strong></td>
+                <td>The <strong>CMMI model</strong> ran in 9 states and <strong>ended 2021-12-31</strong>. The <strong>expanded HHVBP</strong> is a separate nationwide program, permanent from <strong>2023</strong>.</td>
+                <td>Showing the CMMI model as still running because the nationwide program is. They are not the same entity, and only one has an end date.</td>
+              </tr>
+              <tr>
+                <td class="ref-feature-col"><strong>ACO REACH's predecessor</strong></td>
+                <td>REACH replaced <strong>Global and Professional Direct Contracting (GPDC)</strong>. <strong>MSSP</strong> ran in parallel throughout and still exists.</td>
+                <td>Describing REACH as the successor to MSSP, which implies MSSP ended. This produced a graph edge that contradicted its own node description.</td>
+              </tr>
+              <tr>
+                <td class="ref-feature-col"><strong>DSH adjustment percentage vs Medicaid inpatient day share</strong></td>
+                <td>The <strong>11.75% cap</strong> is the <strong>DSH adjustment percentage</strong> — a payment <em>output</em> of the formula. Medicaid inpatient days are an <em>input</em> to it.</td>
+                <td>Reporting the cap as if it limited Medicaid patient volume rather than the payment adjustment. Different quantity, different units.</td>
+              </tr>
+              <tr>
+                <td class="ref-feature-col"><strong>Metropolitan area vs CBSA</strong></td>
+                <td>TEAM's <strong>188</strong> geographies are <strong>Core-Based Statistical Areas</strong>, which include <strong>micropolitan</strong> as well as metropolitan areas.</td>
+                <td>Saying "188 metro areas" understates the rural and small-town reach of a mandatory model.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Policy, coverage & statute -->
+      <div class="ref-block">
+        <div class="ref-block-title">Policy, Coverage &amp; Statute</div>
+        <div class="ref-table-wrap">
+          <table class="ref-table">
+            <thead>
+              <tr>
+                <th class="ref-feature-col">Conflated pair</th>
+                <th>What each one actually is</th>
+                <th>The error the merge produces</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="ref-feature-col"><strong>OBBBA §71109 vs §71301 / §71302</strong></td>
+                <td><strong>§71109</strong> narrows <em>immigrant eligibility</em> (effective Oct 1, 2026). <strong>§71301/§71302</strong> impose <em>work and community-engagement requirements</em>.</td>
+                <td>Attributing coverage losses among refugees and asylees to work requirements, or vice versa. Different provisions, different populations, different effective dates.</td>
+              </tr>
+              <tr>
+                <td class="ref-feature-col"><strong>RADV rule finalized vs in force</strong></td>
+                <td>The extrapolation rule was <strong>finalized in January 2023</strong>. It was <strong>vacated</strong> by the Northern District of Texas on <strong>September 25, 2025</strong>; appeal pending.</td>
+                <td>Describing extrapolated RADV recovery as settled methodology. "Finalized" and "currently enforceable" stopped being the same thing.</td>
+              </tr>
+              <tr>
+                <td class="ref-feature-col"><strong>Current Medicaid enrollment vs unwinding-era peak</strong></td>
+                <td>Roughly <strong>73.5M</strong> as of May 2026. The frequently-quoted <strong>~94M</strong> is the continuous-enrollment peak, before the 2023–24 unwinding.</td>
+                <td>Using the peak as a current denominator inflates every coverage-loss percentage computed against it.</td>
+              </tr>
+              <tr>
+                <td class="ref-feature-col"><strong>Georgia Pathways vs full expansion population</strong></td>
+                <td><strong>~240,000–250,000</strong> is the Pathways-specific estimate. <strong>~447,000–536,000</strong> is the full-expansion eligible population.</td>
+                <td>Mixing the two produces a coverage-gap figure that matches no published source. A precise-looking number with no traceable origin is worse than an honest range.</td>
+              </tr>
+              <tr>
+                <td class="ref-feature-col"><strong>Waiver-dependent vs regulation-authorized Community Supports</strong></td>
+                <td>Under CalAIM, <strong>12 of 14</strong> Community Supports are authorized by <strong>42 CFR §438.3(e)(2)</strong>, independent of the waiver. Only <strong>2</strong> depend on it.</td>
+                <td>Treating all ILOS services as waiver-contingent overstates what a non-renewal would eliminate.</td>
+              </tr>
+              <tr>
+                <td class="ref-feature-col"><strong>FDA PCCP: draft vs final guidance</strong></td>
+                <td>Draft guidance issued <strong>April 2023</strong>; final guidance <strong>December 3, 2024</strong>.</td>
+                <td>Citing an intermediate date (this repo had "August 2025") as the effective one, in two separate files, neither of which was corrected when the other was.</td>
+              </tr>
+              <tr>
+                <td class="ref-feature-col"><strong>Partnership announced vs guidance issued</strong></td>
+                <td>Joint Commission and CHAI announced their partnership in <strong>June 2025</strong>; the first joint guidance followed <strong>September 17, 2025</strong>.</td>
+                <td>Collapsing the two into one date makes an agreement look like a published standard.</td>
+              </tr>
+              <tr>
+                <td class="ref-feature-col"><strong>QHIN designation vs CMS-Aligned Network pledge</strong></td>
+                <td>TEFCA <strong>QHIN designation</strong> is a formal ONC/ASTP status. The <strong>CMS-Aligned Network</strong> pledge is a separate voluntary commitment.</td>
+                <td>Assuming one implies the other. An organization can hold either, both, or neither — which is why they are tracked as independent fields here.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Data & method -->
+      <div class="ref-block">
+        <div class="ref-block-title">Data &amp; Method</div>
+        <div class="ref-table-wrap">
+          <table class="ref-table">
+            <thead>
+              <tr>
+                <th class="ref-feature-col">Conflated pair</th>
+                <th>What each one actually is</th>
+                <th>The error the merge produces</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="ref-feature-col"><strong>ICD-10-CM vs ICD-10-PCS</strong></td>
+                <td><strong>CM</strong> codes diagnoses in every setting. <strong>PCS</strong> codes procedures <strong>on inpatient claims only</strong>.</td>
+                <td>Describing institutional claims as PCS-coded generally. Institutional <em>outpatient</em> (13x) carries HCPCS, like professional claims.</td>
+              </tr>
+              <tr>
+                <td class="ref-feature-col"><strong>MBI vs HICN</strong></td>
+                <td>The <strong>MBI</strong> replaced the <strong>HICN</strong> in 2018. Files spanning the transition may carry either.</td>
+                <td>Writing a linkage plan against <code>HICNO</code> for a current-year extract, where the variable no longer appears.</td>
+              </tr>
+              <tr>
+                <td class="ref-feature-col"><strong>Wilson vs Clopper-Pearson interval</strong></td>
+                <td>For 2 of 5, <strong>Wilson</strong> gives roughly <strong>12%–77%</strong>; <strong>Clopper-Pearson</strong> is wider, near 7%–85%.</td>
+                <td>Labeling one interval and reporting the other's bounds — the stated method and the stated numbers disagree, and only one can be checked.</td>
+              </tr>
+              <tr>
+                <td class="ref-feature-col"><strong>Estimating propensity scores vs matching on them</strong></td>
+                <td><strong>scikit-learn</strong> estimates the scores. <strong>econml</strong> does doubly-robust and heterogeneous-effect estimation. <em>Neither performs the matching step.</em></td>
+                <td>Naming a stack that cannot execute the design it claims to implement.</td>
+              </tr>
+              <tr>
+                <td class="ref-feature-col"><strong>HCC V28 vs V24</strong></td>
+                <td>V28 removes about <strong>2,294</strong> codes, moves from <strong>86 to 115</strong> categories, and adds constraining. 2026 is the first <strong>100% V28</strong> year.</td>
+                <td>Quoting a round "~2,000 codes" and omitting the structural changes, which understates the year-over-year RAF discontinuity.</td>
+              </tr>
+              <tr>
+                <td class="ref-feature-col"><strong>IRF payment: CMG vs DRG</strong></td>
+                <td>Inpatient rehabilitation facilities are paid by <strong>Case-Mix Group</strong> via HIPPS codes — not by MS-DRG.</td>
+                <td>Applying acute-care grouping logic to post-acute episodes, which silently misprices the largest component of a 90-day bundle.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+    </div><!-- /ref-section C -->
   </div><!-- /taxonomy-reference -->
 </div>
 
@@ -641,7 +797,7 @@
       <div class="ref-deepdive-card">
         <div class="ref-deepdive-title">Immigrant Eligibility Changes</div>
         <ul>
-          <li><strong>§71109 — narrows Medicaid eligibility for lawfully present immigrants:</strong> The Medicaid-side companion to §71301/§71302 below — moves an estimated ~200,000 Californians from full-scope to partial-scope (emergency-only) Medi-Cal, per UC Berkeley Labor Center. This is the provision that drives FQHC/safety-net revenue exposure for immigrant-heavy caseloads, distinct from the marketplace-subsidy provisions below.</li>
+          <li><strong>§71109 — narrows Medicaid eligibility for lawfully present immigrants:</strong> The Medicaid-side companion to §71301/§71302 below — effective October 1, 2026, it restricts federal Medicaid reimbursement to citizens, lawful permanent residents, Cuban/Haitian entrants and COFA migrants — ending federal eligibility for refugees, asylees, parolees and trafficking victims. UC Berkeley Labor Center attributes ~200,000 Californians losing federally-funded full-scope Medi-Cal specifically to the refugee and asylee categories. This is the provision that drives FQHC/safety-net revenue exposure for immigrant-heavy caseloads, distinct from the marketplace-subsidy provisions below.</li>
           <li><strong>§71302 — five-year rule (marketplace, not Medicaid):</strong> Eliminates ACA premium tax credit (PTC) eligibility for lawfully present immigrants below 100% FPL who are ineligible for Medicaid because of immigration status (including those in their first 5 years in the U.S.). Effective for tax years after December 31, 2025 — already in effect. Affects Covered California marketplace subsidies, not Medi-Cal.</li>
           <li><strong>§71301 — narrowed "eligible alien" definition (marketplace, not Medicaid):</strong> Restricts PTC-eligible immigration categories to lawful permanent residents, Cuban/Haitian entrants, and COFA migrants. Refugees, asylees, and Temporary Protected Status holders lose PTC eligibility entirely. Effective January 1, 2027.</li>
         </ul>
@@ -690,7 +846,7 @@
             <td>GA (verified); TN, WI (cited in prior tracking, not independently re-verified this pass)</td>
             <td>Non-expansion states running (or considering) standalone work-requirement waivers</td>
             <td>Vendor-heavy eligibility-system spending over direct care</td>
-            <td>GA: ~7,400-9,175 enrolled vs. ~246,365 eligible (missed its own ~25,000 first-year target, per GAO)</td>
+            <td>GA: ~7,400-9,175 enrolled vs. a Pathways-eligible population commonly cited at ~240,000-250,000 (missed its own ~25,000 first-year target, per GAO)</td>
             <td>GA: $54.2M administrative vs. $26.1M care spending since 2021 (GAO, Sept 2025)</td>
             <td><span style="background:#2a9d8f;color:#fff;padding:2px 8px;border-radius:4px;font-size:0.75rem;font-weight:700;">Confirmed</span> (GA) / <span style="background:#f4a261;color:#3a2a00;padding:2px 8px;border-radius:4px;font-size:0.75rem;font-weight:700;">Modeled</span> (TN, WI)</td>
           </tr>
@@ -926,7 +1082,7 @@
         <ul>
           <li><strong>Exposure:</strong> Pathways to Coverage has run since July 2023 — two-plus years before OBBBA's national requirement — and was extended through Dec 31, 2026 despite its own cost findings.</li>
           <li><strong>Action plan:</strong> State and federal government (the Trump administration extended the program in Sept 2025) have doubled down rather than restructured, despite the GAO's admin-cost findings.</li>
-          <li><strong>Strengths vs. weaknesses:</strong> GA is the only state with real multi-year operational data on a Medicaid work-requirement program — genuinely useful evidence as CMS designs the national rollout (strength) — but GAO documented a 2:1 admin-to-care spending ratio (<a href="https://www.gao.gov/assets/gao-25-108160.pdf" target="_blank" rel="noopener">GAO-25-108160</a>: $54.2M vs. $26.1M, 2021-June 2025, ~88% federally funded) and enrollment has run far below target (7,400-9,175 vs. ~246,365 eligible, missing even its own ~25,000 first-year goal per GAO) (weakness). Deloitte's $27M Pathways marketing contract (grown from an initial $10.7M award) produced enrollment still under 3% of the ~246,365 eligible even after the campaign ran.</li>
+          <li><strong>Strengths vs. weaknesses:</strong> GA is the only state with real multi-year operational data on a Medicaid work-requirement program — genuinely useful evidence as CMS designs the national rollout (strength) — but GAO documented a 2:1 admin-to-care spending ratio (<a href="https://www.gao.gov/assets/gao-25-108160.pdf" target="_blank" rel="noopener">GAO-25-108160</a>: $54.2M vs. $26.2M, FY2021 through Q2 FY2025 (ending March 2025), ~88% federally funded) and enrollment has run far below target (7,400-9,175 vs. a Pathways-eligible population commonly cited at ~240,000-250,000, missing even its own ~25,000 first-year goal per GAO) (weakness). Deloitte's $27M Pathways marketing contract (grown from an initial $10.7M award) produced enrollment still under 3% of the a Pathways-eligible population commonly cited at ~240,000-250,000 even after the campaign ran.</li>
           <li><strong>Tipping point:</strong> The Dec 31, 2026 extension deadline — if Pathways is folded into the 2027 national framework rather than renewed standalone, GA's cost structure becomes either the template CMS exports or the cautionary tale other states cite to avoid it.</li>
           <li><strong>Cost-shift cascade:</strong> The federal government has covered ~88% of Pathways' administrative spend to date, so the "vendor spending &gt; care" pattern has so far been a federal cost, not a Georgia one — that changes if OBBBA's national framework shifts more administrative burden onto states. The 2:1 admin-to-care ratio is also front-loaded, not a steady state: the administrative share fell from 96.5% of spend in FY2023 to 58.8% in FY2024 as the initial system buildout cost was absorbed — a caution against extrapolating GA's early ratio flatly onto the national rollout's steady-state cost.</li>
           <li><strong>Incentive structure:</strong> State political incentive to preserve Pathways as proof-of-concept for work requirements nationally, even as its own numbers argue against the model's cost-effectiveness.</li>
@@ -1142,7 +1298,7 @@
     ['DE','Delaware','expansion',true,true,null,'none','','Delaware Division of Medicaid &amp; Medical Assistance'],
     ['DC','District of Columbia','expansion',true,true,null,'none','One of five jurisdictions with its own individual mandate penalty ($795/adult, 2025 amount — roughly $100 higher than NJ/RI).','DC Dept. of Health Care Finance'],
     ['FL','Florida','nonexp',false,false,null,'none','','Florida Agency for Health Care Administration (AHCA)'],
-    ['GA','Georgia','waiver',false,false,'GAO: $54.2M administrative vs. $26.1M care spending (2021-June 2025); enrollment 7,400-9,175 against ~246,365 eligible.','confirmed','Covered in full in the Georgia card above.','Georgia Dept. of Community Health (DCH)'],
+    ['GA','Georgia','waiver',false,false,'GAO: $54.2M administrative vs. $26.1M care spending (2021-June 2025); enrollment 7,400-9,175 against a Pathways-eligible population commonly cited at ~240,000-250,000.','confirmed','Covered in full in the Georgia card above.','Georgia Dept. of Community Health (DCH)'],
     ['HI','Hawaii','expwaiver',true,true,null,'none','Qualitative reporting describes long eligibility call-center wait times; the specific 193-minute figure used in this project’s source spec could not be verified and is not repeated here.','Hawaii Med-QUEST Division (DHS)'],
     ['ID','Idaho','expansion',true,false,null,'none','','Idaho Division of Medicaid'],
     ['IL','Illinois','expansion',true,true,null,'none','','Illinois Dept. of Healthcare &amp; Family Services'],
@@ -1562,7 +1718,7 @@ window.__NODES__ = [
     "category": "program",
     "ptype": "Federal Program",
     "enacted": null,
-    "description": "Private health plan alternative to traditional Medicare (Parts A and B) established under the Medicare Modernization Act of 2003. Plans receive risk-adjusted capitation payments from CMS. Enrollment exceeds 30 million (over 50% of Medicare beneficiaries as of 2024).",
+    "description": "Private health plan alternative to traditional Medicare (Parts A and B) established under the Medicare Modernization Act of 2003. Plans receive risk-adjusted capitation payments from CMS. Enrollment is approximately 35 million — about 55% of Medicare beneficiaries as of February 2026.",
     "links": [
       {
         "label": "CMS Medicare Advantage",
@@ -1590,7 +1746,7 @@ window.__NODES__ = [
     "category": "program",
     "ptype": "Federal-State Program",
     "enacted": null,
-    "description": "Joint federal-state means-tested health coverage for low-income individuals including children, pregnant women, elderly adults, and people with disabilities. ACA expanded eligibility to adults up to 138% FPL; as of 2024, 40 states plus DC have adopted expansion. Over 80 million enrollees.",
+    "description": "Joint federal-state means-tested health coverage for low-income individuals including children, pregnant women, elderly adults, and people with disabilities. ACA expanded eligibility to adults up to 138% FPL; 40 states plus DC have adopted expansion. Enrollment was approximately 73.5 million across Medicaid and CHIP as of May 2026, down from an unwinding-era peak above 90 million.",
     "links": [
       {
         "label": "CMS Medicaid",
@@ -1636,7 +1792,7 @@ window.__NODES__ = [
     "category": "program",
     "ptype": "Medicare Payment Track",
     "enacted": null,
-    "description": "QPP track for eligible clinicians not in Advanced APMs. Performance scored across four categories: Quality, Improvement Activities, Promoting Interoperability, and Cost. Final score determines a positive or negative payment adjustment (up to ±9% in 2024) applied two years later.",
+    "description": "QPP track for eligible clinicians not in Advanced APMs. Performance scored across four categories: Quality, Improvement Activities, Promoting Interoperability, and Cost. Final score determines a positive or negative payment adjustment (statutory maximum ±9%) applied two years later.",
     "links": [
       {
         "label": "CMS MIPS Overview",
@@ -1650,7 +1806,7 @@ window.__NODES__ = [
     "category": "program",
     "ptype": "Medicare Payment Track",
     "enacted": null,
-    "description": "QPP track for clinicians bearing nominal financial risk through CMS-designated Advanced APMs (e.g., ACO REACH, MSSP Enhanced track, PCF). Qualifying APM Participants (QPs) receive a 5% incentive bonus through 2024, then higher fee schedule updates.",
+    "description": "QPP track for clinicians bearing nominal financial risk through CMS-designated Advanced APMs (e.g., ACO REACH, MSSP Enhanced track, PCF). Qualifying APM Participants (QPs) received a 5% incentive bonus through performance year 2022 (paid 2024); the bonus was subsequently extended at reduced rates before converting to higher fee-schedule updates.",
     "links": [
       {
         "label": "CMS Advanced APMs",
@@ -1734,7 +1890,7 @@ window.__NODES__ = [
     "category": "model",
     "ptype": "CMMI Model",
     "enacted": null,
-    "description": "CMMI primary care model (2024–) designed for primary care practices in eight states. Builds on MSSP and prior primary care models with a graduated 10-year pathway toward prospective total cost of care accountability. Focuses on care management, behavioral health integration, and specialist partnerships.",
+    "description": "CMMI primary care model (2024–2025; terminated early, ended June 30, 2025) designed for primary care practices in eight states. Builds on MSSP and prior primary care models with a graduated 10-year pathway toward prospective total cost of care accountability. Focuses on care management, behavioral health integration, and specialist partnerships.",
     "links": [
       {
         "label": "CMMI Making Care Primary",
@@ -1939,7 +2095,7 @@ window.__EDGES__ = [
   {
     "source": "CMMI",
     "target": "MCP",
-    "label": "administers"
+    "label": "administered"
   },
   {
     "source": "CMMI",
@@ -1964,7 +2120,7 @@ window.__EDGES__ = [
   {
     "source": "CMMI",
     "target": "PCF",
-    "label": "administers"
+    "label": "administered"
   },
   {
     "source": "CMMI",
@@ -2077,11 +2233,6 @@ window.__EDGES__ = [
     "label": "governs ESRD payment"
   },
   {
-    "source": "ACO_REACH",
-    "target": "MSSP",
-    "label": "successor to"
-  },
-  {
     "source": "EOM",
     "target": "OCM",
     "label": "successor to"
@@ -2092,19 +2243,9 @@ window.__EDGES__ = [
     "label": "builds on"
   },
   {
-    "source": "MIPS",
-    "target": "QPP",
-    "label": "track within"
-  },
-  {
     "source": "AdvAPM",
     "target": "MSSP",
     "label": "pathway includes"
-  },
-  {
-    "source": "MSSP",
-    "target": "ACA",
-    "label": "authorized by"
   },
   {
     "source": "PACE",
@@ -2132,16 +2273,6 @@ window.__EDGES__ = [
     "label": "enhanced funding"
   },
   {
-    "source": "HRSA",
-    "target": "PACE",
-    "label": "coordinates"
-  },
-  {
-    "source": "AHRQ",
-    "target": "QPP",
-    "label": "research supports"
-  },
-  {
     "source": "OBBBA2025",
     "target": "Medicaid",
     "label": "imposes work requirements & provider tax caps on"
@@ -2155,6 +2286,16 @@ window.__EDGES__ = [
     "source": "OBBBA2025",
     "target": "ACA",
     "label": "narrows marketplace subsidy eligibility under"
+  },
+  {
+    "source": "ACA",
+    "target": "HRSA",
+    "label": "established Community Health Center Fund (§10503)"
+  },
+  {
+    "source": "AHRQ",
+    "target": "MIPS",
+    "label": "develops CAHPS instruments used in patient-experience scoring"
   }
 ];
 
@@ -2200,7 +2341,7 @@ window.__COMPANY_NODES__ = [
     "id": "ma_prog",
     "name": "Medicare Advantage",
     "category": "program",
-    "description": "Part C managed care. ~33M enrollees. Funded via risk-adjusted capitation (HCC V28). RADV audits verify coding accuracy. HRRP, VBP penalties do not apply — separate quality bonus system."
+    "description": "Part C managed care. ~35M enrollees (about 55% of Medicare beneficiaries, Feb 2026). Funded via risk-adjusted capitation (HCC V28). RADV audits verify coding accuracy. HRRP, VBP penalties do not apply — separate quality bonus system."
   },
   {
     "id": "medicaid_prog",
@@ -2230,7 +2371,7 @@ window.__COMPANY_NODES__ = [
     "id": "team_prog",
     "name": "TEAM Model",
     "category": "program",
-    "description": "Transforming Episode Accountability Model. Mandatory bundled payment for surgical episodes (joint replacement, CABG, spinal fusion) at 721 hospitals across 188 metro areas (revised down from the original 741-hospital 2024 list, e.g. excluding IHS/Tribal hospitals not paid under OPPS). Runs Jan 1, 2026 - Dec 31, 2030, monitored under an Acumen LLC implementation/monitoring contract; AHA is lobbying CMS/Congress to make participation voluntary."
+    "description": "Transforming Episode Accountability Model. Mandatory bundled payment for five surgical episode types (lower-extremity joint replacement, surgical hip/femur fracture treatment, spinal fusion, CABG, and major bowel procedure) at 721 hospitals across 188 core-based statistical areas (CBSAs, which include micropolitan as well as metropolitan areas) (revised down from the original 741-hospital 2024 list, e.g. excluding IHS/Tribal hospitals not paid under OPPS). Runs Jan 1, 2026 - Dec 31, 2030, monitored under an Acumen LLC implementation/monitoring contract; AHA is lobbying CMS/Congress to make participation voluntary. Episodes use a 30-day post-discharge accountability window, shorter than CJR/BPCI Advanced’s 90-day window."
   },
   {
     "id": "cms0057_prog",
@@ -2260,7 +2401,7 @@ window.__COMPANY_NODES__ = [
     "id": "hcc_prog",
     "name": "MA Risk Adjustment (HCC V28 / RADV)",
     "category": "program",
-    "description": "HCC V28 transition reduces average MA risk scores — revenue headwind for plans. RADV chart-level audits verify HCC coding accuracy. DOJ scrutiny of upcoding practices intensifying. CMS extrapolation methodology finalized."
+    "description": "HCC V28 transition reduces average MA risk scores — revenue headwind for plans. RADV chart-level audits verify HCC coding accuracy. DOJ scrutiny of upcoding practices intensifying. CMS’s 2023 RADV extrapolation rule was vacated by the Northern District of Texas (Humana v. Becerra, Sept. 25, 2025); the government’s appeal is pending at the Fifth Circuit (No. 25-11293), so extrapolation authority is not currently in effect."
   },
   {
     "id": "scan",
@@ -2542,7 +2683,7 @@ window.__COMPANY_NODES__ = [
     "id": "ga_dch",
     "name": "Georgia Dept of Community Health (DCH)",
     "category": "govt",
-    "description": "Administers Georgia Pathways to Coverage, the nation's only Medicaid work-requirement program predating OBBBA (live since July 2023, extended through Dec 31, 2026). A GAO report (Sept 2025) found the program spent $54.2M on administration vs. $26.1M on care since 2021, while enrollment (~7,400-9,175 through 2025-2026) has run far below the ~246,365-eligible target — widely cited as a preview of national OBBBA work-requirement rollout risk."
+    "description": "Administers Georgia Pathways to Coverage, the nation's only Medicaid work-requirement program predating OBBBA (live since July 2023, extended through Dec 31, 2026). A GAO report (Sept 2025) found the program spent $54.2M on administration vs. $26.2M on care, FY2021 through Q2 FY2025, while enrollment (~7,400-9,175 through 2025-2026) has run far below the ~240,000-250,000-eligible target — widely cited as a preview of national OBBBA work-requirement rollout risk."
   },
   {
     "id": "hca",
@@ -2769,7 +2910,7 @@ window.__COMPANY_NODES__ = [
     "id": "fda_dhcoe",
     "name": "FDA Digital Health Center of Excellence",
     "category": "ai_gov",
-    "description": "CDRH center issuing AI lifecycle and Predetermined Change Control Plan (PCCP) guidance — finalized Aug 2025 — the first formal mechanism letting a cleared AI device update itself within a pre-authorized envelope rather than requiring a new submission for every model refresh. Runs the Digital Health Advisory Committee."
+    "description": "CDRH center issuing AI lifecycle and Predetermined Change Control Plan (PCCP) guidance — finalized December 3, 2024 — the first formal mechanism letting a cleared AI device update itself within a pre-authorized envelope rather than requiring a new submission for every model refresh. Runs the Digital Health Advisory Committee."
   },
   {
     "id": "fda_dhac",
@@ -2781,13 +2922,13 @@ window.__COMPANY_NODES__ = [
     "id": "onc_astp",
     "name": "ONC / ASTP",
     "category": "ai_gov",
-    "description": "HHS office whose HTI-1 rule (effective Jan 1, 2025) requires certified EHRs to expose 31 source-attribute transparency fields for predictive decision-support tools — mandatory, but narrower in reach than CHAI's model-card approach since it only covers algorithms deployed through certified EHRs."
+    "description": "HHS office whose HTI-1 rule (effective Jan 1, 2025) requires certified EHRs to expose 31 source-attribute transparency fields for predictive decision-support tools — mandatory, but narrower in reach than CHAI's model-card approach since it only covers algorithms deployed through certified EHRs. Status is unsettled: ASTP/ONC’s HTI-5 proposed rule (published January 2026, comment period closed February 27, 2026) would REMOVE these source-attribute and risk-management requirements from the certification program. Not finalized as of September 2026."
   },
   {
     "id": "joint_commission",
     "name": "The Joint Commission",
     "category": "ai_gov",
-    "description": "Hospital accreditor that partnered with CHAI in Sept 2025 on Responsible Use of AI guidance and is planning a voluntary AI certification track for its 22,000+ accredited organizations."
+    "description": "Hospital accreditor that entered a strategic partnership with CHAI in June 2025 and released the first joint guidance (Responsible Use of AI in Healthcare) on September 17, 2025 on Responsible Use of AI guidance and is planning a voluntary AI certification track for its 22,000+ accredited organizations."
   },
   {
     "id": "duke_ai_gov",
@@ -3649,8 +3790,8 @@ window.__COMPANY_EDGES__ = [
   {
     "source": "google_cloud",
     "target": "cms0057_prog",
-    "label": "FHIR-native Healthcare API + Vertex AI engagements",
-    "type": "cloud_ehr_partnership",
+    "label": "cloud infrastructure for FHIR API buildout under the rule",
+    "type": "serves",
     "relationship_type": "emerging"
   },
   {
@@ -3663,8 +3804,8 @@ window.__COMPANY_EDGES__ = [
   {
     "source": "aws",
     "target": "cms0057_prog",
-    "label": "HealthLake FHIR-native storage; broad marketplace integrations",
-    "type": "cloud_ehr_partnership",
+    "label": "cloud infrastructure for FHIR API buildout under the rule",
+    "type": "serves",
     "relationship_type": "emerging"
   },
   {
@@ -3705,8 +3846,8 @@ window.__COMPANY_EDGES__ = [
   {
     "source": "chai",
     "target": "joint_commission",
-    "label": "Responsible Use of AI guidance partnership (Sept 2025)",
-    "type": "sets_voluntary_standard_for",
+    "label": "joint guidance partnership (strategic partnership June 2025; first joint guidance Sept 17, 2025)",
+    "type": "partner",
     "relationship_type": "direct"
   },
   {
@@ -3741,7 +3882,7 @@ window.__COMPANY_EDGES__ = [
     "source": "chai",
     "target": "mayo_clinic",
     "label": "CHAI member",
-    "type": "sets_voluntary_standard_for",
+    "type": "partner",
     "relationship_type": "direct"
   },
   {
@@ -3947,15 +4088,7 @@ window.__COMPANY_EDGES__ = [
     "label": "regulatory clarity gap for continuously-learning AI",
     "type": "tension",
     "tension_flag": true,
-    "tension_note": "FDA's PCCP framework (finalized Aug 2025) allows pre-authorized model updates but doesn't fully resolve continuous-learning oversight, while CHAI-certified assurance providers like ModelOp push a recurring-validation model — the two sides disagree on where post-market monitoring authority should sit."
-  },
-  {
-    "source": "chai",
-    "target": "ma_prog",
-    "label": "AI-enabled tool reimbursement pathway",
-    "type": "tension",
-    "tension_flag": true,
-    "tension_note": "CHAI-certified AI tools generate cost/quality claims but currently lack a defined CMS reimbursement pathway distinct from existing fee-for-service or MA supplemental-benefit mechanisms — vendors and CMS have not converged on how AI-enabled care should be paid for."
+    "tension_note": "FDA's PCCP framework (finalized December 2024) allows pre-authorized model updates but doesn't fully resolve continuous-learning oversight, while CHAI-certified assurance providers like ModelOp push a recurring-validation model — the two sides disagree on where post-market monitoring authority should sit."
   },
   {
     "source": "aha",
@@ -4011,10 +4144,29 @@ window.__COMPANY_EDGES__ = [
   {
     "source": "obbba_c",
     "target": "ca_dhcs",
-    "label": "medically-frail exemption rule dispute",
-    "type": "tension",
-    "tension_flag": true,
-    "tension_note": "A 25-state-and-DC coalition (Massachusetts is the named lead plaintiff; CA AG Bonta and 22 other state AGs plus 2 governors are co-plaintiffs) sued HHS/CMS (Commonwealth of Massachusetts et al. v. Oz, filed June 29, 2026) arguing the interim final rule's narrowed 'medically frail' exemption definition unlawfully strips Congress's protections for medically vulnerable Medicaid enrollees; CMS defends the rule as a valid interpretation of OBBBA's statutory text, and a federal judge denied the coalition's preliminary injunction on July 29, 2026, so the rule remains in effect while litigation continues.",
+    "label": "work-requirement obligations fall to state Medicaid agencies",
+    "type": "hier",
+    "relationship_type": "direct"
+  },
+  {
+    "source": "oracle_health",
+    "target": "oracle_hin",
+    "label": "operates the Oracle Health Information Network on its own cloud after the 2022 Cerner acquisition",
+    "type": "hier",
+    "relationship_type": "direct"
+  },
+  {
+    "source": "dosespotco",
+    "target": "surescripts",
+    "label": "e-prescribing transactions route through the national network",
+    "type": "serves",
+    "relationship_type": "direct"
+  },
+  {
+    "source": "ca_dph",
+    "target": "cdc",
+    "label": "population health surveillance reporting",
+    "type": "partner",
     "relationship_type": "direct"
   }
 ];
@@ -4029,7 +4181,7 @@ window.__TOP_SHIFTS__ = [
     "activeNode": "One Big Beautiful Bill Act (H.R. 1 / P.L. 119-21)",
     "catalyst": "P.L. 119-21, signed July 4, 2025, mandates 80 hrs/month Medicaid work requirements for the ACA expansion population across 40 states + DC by Jan 1, 2027 (CMS interim final rule, June 1, 2026); several states are implementing earlier on their own timelines. It lands the same year the separate, IRA-era enhanced ACA premium tax credits expired (Dec 31, 2025, unrenewed by Congress) — subsidized marketplace enrollees' average annual premium roughly doubled, from $888 to $1,904. CBO projects ~10M combined coverage losses by 2034. A 25-state-and-DC coalition (Massachusetts leads; CA is a co-plaintiff) is suing CMS (Commonwealth of Massachusetts et al. v. Oz, filed June 29, 2026) over the rule's narrowed 'medically frail' exemption — a federal judge denied the coalition's preliminary injunction on July 29, 2026, so the rule remains in effect while litigation continues. <a onclick=\"var b=document.querySelector('.tab-btn[data-tab=&quot;special&quot;]'); if(b) b.click();\" style=\"cursor:pointer;color:#00b4d8;text-decoration:underline;font-weight:600;\">Full state-by-state breakdown and case studies: Special Topics: Access &amp; Cost under OBBBA →</a>",
     "implications": [
-      "Georgia Pathways to Coverage (GA Dept of Community Health) is the cautionary preview: GAO found $54.2M spent on admin vs. $26.1M on care since 2021, with enrollment still far below the ~246,365-eligible target",
+      "Georgia Pathways to Coverage (GA Dept of Community Health) is the cautionary preview: GAO found $54.2M spent on admin vs. $26.2M on care, FY2021-Q2 FY2025, with enrollment still far below the ~240,000-250,000-eligible target",
       "Rural hospitals and FQHCs face compounding pressure from coverage loss plus provider-tax/state-directed-payment caps — the $50B Rural Health Transformation Fund is widely expected not to fully offset losses",
       "Medi-Cal plans (San Francisco Health Plan, Partnership HealthPlan of CA) and similar Medicaid MCOs nationally face semi-annual redetermination cycles and rising administrative costs as CA alone estimates up to 3.4M Medi-Cal members at risk",
       "CBO, KFF, and Georgetown University's Center for Children and Families (CCF) become the reference infrastructure most states and hospital associations cite for coverage-loss and state-readiness tracking",
@@ -4088,7 +4240,7 @@ window.__TOP_SHIFTS__ = [
     "trend": "rising",
     "title": "TEAM Model — Mandatory Episode Accountability",
     "activeNode": "TEAM Model",
-    "catalyst": "CMS mandatory bundled payment model for 5 surgical episode types (joint replacement, hip femur fracture, spinal fusion, CABG, major bowel procedure) at 721 hospitals across 188 metro areas. No opt-out. Not the first mandatory CMMI model since CJR — ESRD Treatment Choices (2021-2025) was also mandatory. Episodes use a 30-day post-discharge window, shorter than CJR/BPCI Advanced's 90-day window.",
+    "catalyst": "CMS mandatory bundled payment model for 5 surgical episode types (joint replacement, hip femur fracture, spinal fusion, CABG, major bowel procedure) at 741 hospitals across 188 core-based statistical areas (CBSAs — which include micropolitan as well as metropolitan areas). No opt-out. Not the first mandatory CMMI model since CJR — ESRD Treatment Choices (2021-2025) was also mandatory. Episodes use a 30-day post-discharge window, shorter than CJR/BPCI Advanced's 90-day window.",
     "implications": [
       "AdventHealth and other large health systems in selected markets face direct episode risk",
       "Post-acute referral network optimization becomes a financial imperative — SNF and HH quality differentiation is now contractual",
@@ -4103,7 +4255,7 @@ window.__TOP_SHIFTS__ = [
     "trend": "rising",
     "title": "AI Governance Fragmentation — Federal Floor Contracts as Voluntary Regimes Expand",
     "activeNode": "Coalition for Health AI (CHAI)",
-    "catalyst": "FDA finalized PCCP guidance (Dec 2024) for continuously-learning AI devices; ONC/ASTP proposed HTI-5 (Jan 2026, comment period closed Feb 27, 2026) to remove AI \"model card\"/transparency requirements added by HTI-1 — a deregulatory reversal, not an expansion, of the federal mandatory leg. CHAI's model-card registry (3,000+ members) partnered with the Joint Commission (Sept 2025) on a certification track for 22,000+ accredited healthcare organizations. The mandatory federal floor is contracting while voluntary (CHAI/TJC) and state-level regimes proliferate without reconciliation.",
+    "catalyst": "FDA finalized PCCP guidance (Dec 2024) for continuously-learning AI devices; ONC/ASTP proposed HTI-5 (Jan 2026, comment period closed Feb 27, 2026) to remove AI \"model card\"/transparency requirements added by HTI-1 — a deregulatory reversal, not an expansion, of the federal mandatory leg. CHAI's model-card registry (3,000+ members) entered a strategic partnership with the Joint Commission (June 2025, first joint guidance Sept 17, 2025) on a certification track for 22,000+ accredited healthcare organizations. The mandatory federal floor is contracting while voluntary (CHAI/TJC) and state-level regimes proliferate without reconciliation.",
     "implications": [
       "Health systems (Kaiser, Providence, Cleveland Clinic) face a shifting patchwork rather than a stable set of obligations — ONC's mandatory AI transparency requirement may not survive HTI-5",
       "ModelOp and other CHAI-certified assurance providers compete to operationalize recurring model validation as the de facto trust layer, increasingly by default rather than backstopping a federal floor",
@@ -4120,12 +4272,17 @@ window.__SERVICE_TYPES__ = [
     "name": "Inpatient Hospital",
     "description": "Acute inpatient care paid under IPPS using DRGs. Subject to mandatory Hospital VBP, HRRP, and HAC reduction payment adjustments.",
     "feeSchedule": "IPPS",
-    "valueBasedModels": ["Hospital Value-Based Purchasing (VBP)", "Hospital Readmissions Reduction Program (HRRP)", "Hospital-Acquired Condition (HAC) Reduction"],
+    "valueBasedModels": [
+      "Hospital Value-Based Purchasing (VBP)",
+      "Hospital Readmissions Reduction Program (HRRP)",
+      "Hospital-Acquired Condition (HAC) Reduction"
+    ],
     "innovationModels": [
       "Medicare Shared Savings Program",
       "Pioneer ACO Model",
       "Next Generation ACO Model",
       "ACO REACH Model",
+      "ACO Long-Term Enhanced Accountable Care Organization Design (LEAD)",
       "BPCI Advanced",
       "Comprehensive Care for Joint Replacement",
       "Transforming Episode Accountability Model"
@@ -4135,11 +4292,14 @@ window.__SERVICE_TYPES__ = [
     "name": "Outpatient Hospital",
     "description": "Hospital outpatient and ASC services paid under OPPS/ASC fee schedule using Ambulatory Payment Classifications.",
     "feeSchedule": "OPPS / ASC",
-    "valueBasedModels": ["Ambulatory Surgical Center Quality Reporting"],
+    "valueBasedModels": [
+      "Ambulatory Surgical Center Quality Reporting"
+    ],
     "innovationModels": [
       "Medicare Shared Savings Program",
       "Next Generation ACO Model",
       "ACO REACH Model",
+      "ACO Long-Term Enhanced Accountable Care Organization Design (LEAD)",
       "BPCI Advanced",
       "Enhancing Oncology Model",
       "Oncology Care Model"
@@ -4149,12 +4309,16 @@ window.__SERVICE_TYPES__ = [
     "name": "Physician / Professional Services",
     "description": "Physician and eligible professional services paid under the PFS. Subject to QPP (MIPS or Advanced APM) payment adjustments.",
     "feeSchedule": "Physician Fee Schedule (PFS)",
-    "valueBasedModels": ["MIPS", "Advanced APMs"],
+    "valueBasedModels": [
+      "MIPS",
+      "Advanced APMs"
+    ],
     "innovationModels": [
       "Medicare Shared Savings Program",
       "Pioneer ACO Model",
       "Next Generation ACO Model",
       "ACO REACH Model",
+      "ACO Long-Term Enhanced Accountable Care Organization Design (LEAD)",
       "Comprehensive Primary Care Plus",
       "Primary Care First",
       "Making Care Primary",
@@ -4171,11 +4335,14 @@ window.__SERVICE_TYPES__ = [
     "name": "Skilled Nursing Facility",
     "description": "Post-acute SNF care paid under SNF PPS (PDPM). Subject to SNF VBP payment adjustments. Eligible as downstream episode participant for surgical and medical bundles.",
     "feeSchedule": "SNF PPS (PDPM)",
-    "valueBasedModels": ["SNF Value-Based Purchasing (SNFVBP)"],
+    "valueBasedModels": [
+      "SNF Value-Based Purchasing (SNFVBP)"
+    ],
     "innovationModels": [
       "Medicare Shared Savings Program",
       "Next Generation ACO Model",
       "ACO REACH Model",
+      "ACO Long-Term Enhanced Accountable Care Organization Design (LEAD)",
       "BPCI Advanced",
       "Comprehensive Care for Joint Replacement",
       "Transforming Episode Accountability Model"
@@ -4185,15 +4352,17 @@ window.__SERVICE_TYPES__ = [
     "name": "Home Health",
     "description": "Skilled home health services paid under HH PPS (PDGM). Subject to HHVBP quality-linked payment adjustments nationally since 2022.",
     "feeSchedule": "HH PPS (PDGM)",
-    "valueBasedModels": ["Home Health Value-Based Purchasing (HHVBP)"],
+    "valueBasedModels": [
+      "Home Health Value-Based Purchasing (HHVBP)"
+    ],
     "innovationModels": [
       "Medicare Shared Savings Program",
       "Next Generation ACO Model",
       "ACO REACH Model",
+      "ACO Long-Term Enhanced Accountable Care Organization Design (LEAD)",
       "BPCI Advanced",
       "Comprehensive Care for Joint Replacement",
       "Transforming Episode Accountability Model",
-      "Home Health Value-Based Purchasing",
       "Guiding an Improved Dementia Experience"
     ]
   },
@@ -4201,10 +4370,13 @@ window.__SERVICE_TYPES__ = [
     "name": "Hospice",
     "description": "Palliative per-diem care for beneficiaries with a terminal prognosis of ≤6 months. Hospice spending included in ACO benchmark expenditures.",
     "feeSchedule": "Hospice Per Diem",
-    "valueBasedModels": ["Hospice Quality Reporting Program"],
+    "valueBasedModels": [
+      "Hospice Quality Reporting Program"
+    ],
     "innovationModels": [
       "Medicare Shared Savings Program",
       "ACO REACH Model",
+      "ACO Long-Term Enhanced Accountable Care Organization Design (LEAD)",
       "Guiding an Improved Dementia Experience",
       "Financial Alignment Initiative"
     ]
@@ -4213,10 +4385,13 @@ window.__SERVICE_TYPES__ = [
     "name": "Inpatient Rehabilitation Facility",
     "description": "Intensive inpatient rehab paid under IRF PPS using Case-Mix Groups. Eligible as downstream participant in surgical episode bundles.",
     "feeSchedule": "IRF PPS",
-    "valueBasedModels": ["IRF Quality Reporting Program"],
+    "valueBasedModels": [
+      "IRF Quality Reporting Program"
+    ],
     "innovationModels": [
       "Medicare Shared Savings Program",
       "ACO REACH Model",
+      "ACO Long-Term Enhanced Accountable Care Organization Design (LEAD)",
       "BPCI Advanced",
       "Comprehensive Care for Joint Replacement",
       "Transforming Episode Accountability Model"
@@ -4226,12 +4401,14 @@ window.__SERVICE_TYPES__ = [
     "name": "End-Stage Renal Disease",
     "description": "Dialysis services paid under ESRD PPS as a bundled per-treatment rate. Home dialysis encouraged through expanded coverage and transitional add-on payments.",
     "feeSchedule": "ESRD PPS",
-    "valueBasedModels": ["ESRD Quality Incentive Program (QIP)"],
+    "valueBasedModels": [
+      "ESRD Quality Incentive Program (QIP)"
+    ],
     "innovationModels": [
       "Medicare Shared Savings Program",
       "ACO REACH Model",
+      "ACO Long-Term Enhanced Accountable Care Organization Design (LEAD)",
       "BPCI Advanced",
-      "Enhancing Oncology Model",
       "Financial Alignment Initiative"
     ]
   },
@@ -4239,10 +4416,13 @@ window.__SERVICE_TYPES__ = [
     "name": "Oncology",
     "description": "Cancer diagnosis, treatment, and management paid under PFS (with Part B drug buy-and-bill) or Part D. Oncology practices subject to MIPS oncology specialty set.",
     "feeSchedule": "PFS + Part B Drug Buy-and-Bill",
-    "valueBasedModels": ["MIPS Oncology Specialty Measure Set"],
+    "valueBasedModels": [
+      "MIPS Oncology Specialty Measure Set"
+    ],
     "innovationModels": [
       "Medicare Shared Savings Program",
       "ACO REACH Model",
+      "ACO Long-Term Enhanced Accountable Care Organization Design (LEAD)",
       "Oncology Care Model",
       "Enhancing Oncology Model",
       "BPCI Advanced"
@@ -4252,10 +4432,13 @@ window.__SERVICE_TYPES__ = [
     "name": "Behavioral Health",
     "description": "Mental health and SUD services paid under PFS. Mental Health Parity applies to MA and Medicaid managed care. OTP Medicare bundled payment for opioid treatment.",
     "feeSchedule": "Physician Fee Schedule (PFS)",
-    "valueBasedModels": ["MIPS Behavioral Health Specialty Set"],
+    "valueBasedModels": [
+      "MIPS Behavioral Health Specialty Set"
+    ],
     "innovationModels": [
       "Medicare Shared Savings Program",
       "ACO REACH Model",
+      "ACO Long-Term Enhanced Accountable Care Organization Design (LEAD)",
       "Making Care Primary",
       "Innovation in Behavioral Health",
       "Value in Opioid Use Disorder Treatment"
@@ -4265,10 +4448,13 @@ window.__SERVICE_TYPES__ = [
     "name": "Medicare Advantage / Health Plan",
     "description": "Medicare Advantage (Part C) managed care plans receive risk-adjusted capitation payments per enrollee. Plans take on full insurance risk for Medicare benefits.",
     "feeSchedule": "Risk-Adjusted Capitation (HCC V28)",
-    "valueBasedModels": ["MA Quality Bonus Program", "RADV Audit"],
+    "valueBasedModels": [
+      "MA Quality Bonus Program",
+      "RADV Audit"
+    ],
     "innovationModels": [
       "MA Value-Based Insurance Design Model",
-      "States Advancing All-Payer Health Equity Approaches",
+      "Achieving Healthcare Efficiency through Accountable Design (AHEAD)",
       "Financial Alignment Initiative"
     ]
   },
@@ -4276,7 +4462,10 @@ window.__SERVICE_TYPES__ = [
     "name": "Prescription Drug (Part D)",
     "description": "Outpatient prescription drug benefit administered by private Part D plan sponsors. IRA 2022 created Medicare Drug Price Negotiation, out-of-pocket cap, and manufacturer rebate rules.",
     "feeSchedule": "Part D Negotiated Rates / DIR",
-    "valueBasedModels": ["IRA Drug Price Negotiation", "Low Income Subsidy (LIS)"],
+    "valueBasedModels": [
+      "IRA Drug Price Negotiation",
+      "Low Income Subsidy (LIS)"
+    ],
     "innovationModels": [
       "Enhanced Medication Therapy Management",
       "MA Value-Based Insurance Design Model"
@@ -4348,16 +4537,16 @@ window.__CMMI_MODELS__ = [
     "name": "BPCI Advanced",
     "category": "Disease-Specific & Episode-Based Models",
     "startDate": "2018-10-01",
-    "endDate": null,
-    "description": "Episode-based payment model for 90-day clinical episodes triggered by inpatient hospitalization. Participants — hospitals or physician group practices — are accountable for quality and cost across 32 clinical episode types."
+    "endDate": "2025-12-31",
+    "description": "Episode-based payment model for 90-day clinical episodes triggered by inpatient hospitalization. Participants — hospitals or physician group practices — are accountable for quality and cost across 32 clinical episode types. Ran eight model years and concluded December 31, 2025."
   },
   {
     "id": "CJR",
     "name": "Comprehensive Care for Joint Replacement",
     "category": "Disease-Specific & Episode-Based Models",
     "startDate": "2016-04-01",
-    "endDate": null,
-    "description": "Mandatory-then-voluntary episode payment model for hip and knee replacement surgeries. Hospitals bear upside and downside risk for the 90-day post-discharge episode. Initially mandatory in selected markets."
+    "endDate": "2024-12-31",
+    "description": "Mandatory-then-voluntary episode payment model for hip and knee replacement surgeries. Hospitals bear upside and downside risk for the 90-day post-discharge episode. Initially mandatory in selected markets. Concluded December 31, 2024 after its final performance year."
   },
   {
     "id": "OCM",
@@ -4372,23 +4561,23 @@ window.__CMMI_MODELS__ = [
     "name": "Enhancing Oncology Model",
     "category": "Disease-Specific & Episode-Based Models",
     "startDate": "2023-07-01",
-    "endDate": null,
-    "description": "Successor to OCM. Oncology practices assume downside risk for 6-month chemotherapy episodes across 7 cancer types. Incorporates health equity screening requirements, care management payments, and mandatory downside risk."
+    "endDate": "2030-06-30",
+    "description": "Successor to OCM. Oncology practices assume downside risk for 6-month chemotherapy episodes across 7 cancer types. Incorporates health equity screening requirements, care management payments, and mandatory downside risk. Extended through June 30, 2030."
   },
   {
     "id": "HHVBP",
     "name": "Home Health Value-Based Purchasing",
     "category": "Disease-Specific & Episode-Based Models",
     "startDate": "2016-01-01",
-    "endDate": null,
-    "description": "Model tying a portion of home health agency payment to quality performance. Originally piloted in 9 states, expanded nationally in 2022. Agencies can earn up to +5% or face up to -5% payment adjustments based on quality scores."
+    "endDate": "2021-12-31",
+    "description": "Model tying a portion of home health agency payment to quality performance. Originally piloted in 9 states, expanded nationally in 2022. Agencies can earn up to +5% or face up to -5% payment adjustments based on quality scores. NOTE: this is the ORIGINAL nine-state model, which ended December 31, 2021. The nationwide \"expanded HHVBP\" operating since 2023 is a separate, permanent program — not this model."
   },
   {
     "id": "GUIDE",
     "name": "Guiding an Improved Dementia Experience",
     "category": "Disease-Specific & Episode-Based Models",
     "startDate": "2024-07-01",
-    "endDate": null,
+    "endDate": "2032-06-30",
     "description": "CMMI model supporting individuals with dementia and their caregivers. Participants provide interdisciplinary care navigation, 24/7 access, and respite care. Monthly per-beneficiary-per-month payments fund model infrastructure."
   },
   {
@@ -4396,24 +4585,24 @@ window.__CMMI_MODELS__ = [
     "name": "Value in Opioid Use Disorder Treatment",
     "category": "Disease-Specific & Episode-Based Models",
     "startDate": "2021-01-01",
-    "endDate": null,
-    "description": "CMMI model testing episode-based payment for opioid use disorder treatment, bundling all services for a 6-month episode. Aims to expand access to evidence-based medication-assisted treatment (MAT)."
+    "endDate": "2024-12-31",
+    "description": "CMMI model testing episode-based payment for opioid use disorder treatment, bundling all services for a 6-month episode. Aims to expand access to evidence-based medication-assisted treatment (MAT). Four-year demonstration scheduled through December 2024."
   },
   {
     "id": "IBH",
     "name": "Innovation in Behavioral Health",
     "category": "Disease-Specific & Episode-Based Models",
     "startDate": "2024-01-01",
-    "endDate": null,
+    "endDate": "2032-12-31",
     "description": "CMMI model integrating physical health services into community behavioral health settings. Practices receive infrastructure and per-member-per-month payments to screen and coordinate care for Medicare and Medicaid beneficiaries."
   },
   {
     "id": "AHEAD",
-    "name": "States Advancing All-Payer Health Equity Approaches",
+    "name": "Achieving Healthcare Efficiency through Accountable Design (AHEAD)",
     "category": "State & Community-Based Models",
     "startDate": "2024-01-01",
-    "endDate": null,
-    "description": "State-level CMMI model testing all-payer total cost of care approaches. States implement population-based payments spanning Medicare, Medicaid, and commercial payers, with explicit health equity goals."
+    "endDate": "2035-12-31",
+    "description": "State-level CMMI model testing all-payer total cost of care approaches. States implement population-based payments spanning Medicare, Medicaid, and commercial payers, with explicit health equity goals. CMS renamed the model in September 2025 from \"States Advancing All-Payer Health Equity Approaches\"; the AHEAD acronym was retained."
   },
   {
     "id": "TEAM",
@@ -4428,8 +4617,8 @@ window.__CMMI_MODELS__ = [
     "name": "MA Value-Based Insurance Design Model",
     "category": "Health Plan Models",
     "startDate": "2017-01-01",
-    "endDate": null,
-    "description": "Tests whether Medicare Advantage plans can use health-condition-specific cost-sharing structures and supplemental benefits to improve care quality and reduce costs. Participating MA plans can offer targeted reduced cost-sharing for high-value services for chronically ill enrollees."
+    "endDate": "2025-12-31",
+    "description": "Tests whether Medicare Advantage plans can use health-condition-specific cost-sharing structures and supplemental benefits to improve care quality and reduce costs. Participating MA plans can offer targeted reduced cost-sharing for high-value services for chronically ill enrollees. CMS ended the model after CY2025, citing excess costs to Medicare."
   },
   {
     "id": "EnhancedMTM",
@@ -4470,6 +4659,14 @@ window.__CMMI_MODELS__ = [
     "startDate": "2027-01-01",
     "endDate": "2036-12-31",
     "description": "CMMI model (2027-2036) succeeding ACO REACH, which ends Dec 31, 2026. RFA released March 31, 2026. Fixed 10-year term structured to give ACOs a longer runway for total-cost-of-care accountability than REACH's shorter cycle offered."
+  },
+  {
+    "id": "CJR_X",
+    "name": "Comprehensive Care for Joint Replacement Expanded (CJR-X)",
+    "category": "Disease-Specific & Episode-Based Models",
+    "startDate": "2028-01-01",
+    "endDate": null,
+    "description": "Mandatory nationwide successor to CJR, which ended December 31, 2024. Extends episode accountability for lower-extremity joint replacement beyond the original 34 metropolitan areas to national scope beginning January 1, 2028."
   }
 ]
 ;
@@ -4538,7 +4735,7 @@ window.__DATASETS__ = [
     "linkageIds": [
       "BENE_ID",
       "CLM_ID",
-      "HHA_ID"
+      "PRVDR_NUM"
     ]
   },
   {
@@ -4590,7 +4787,7 @@ window.__DATASETS__ = [
   },
   {
     "name": "Medicare Beneficiary Summary File (MBSF)",
-    "description": "Annual beneficiary-level enrollment and demographic file for all Medicare beneficiaries. Contains monthly enrollment by part (A, B, C, D), chronic condition flags (CCW), HMO indicators, county/state FIPS codes, race/ethnicity, and date of death. Essential denominator file for Medicare research.",
+    "description": "Annual beneficiary-level enrollment and demographic file for all Medicare beneficiaries. Contains monthly enrollment by part (A, B, C, D), chronic condition flags (CCW), HMO indicators, county/state FIPS codes, race/ethnicity, and date of death. Essential denominator file for Medicare research. Note: the HIC number (HICNO) was replaced by the Medicare Beneficiary Identifier (MBI) beginning in 2018.",
     "category": "Enrollment",
     "years": "1991-present",
     "unit": "Beneficiary-year",
@@ -4601,7 +4798,7 @@ window.__DATASETS__ = [
     "states": "All",
     "linkageIds": [
       "BENE_ID",
-      "HICNO"
+      "MBI"
     ]
   },
   {
@@ -4884,7 +5081,7 @@ window.__DATASETS__ = [
   },
   {
     "name": "HRSA Uniform Data System (UDS)",
-    "description": "Annual, federally-mandated reporting by every HRSA-funded Federally Qualified Health Center (FQHC), covering patient demographics, payer mix (including Medicaid share), services provided, staffing, costs, and clinical quality measures at the individual health-center level. The primary source for FQHC-level payer-mix and patient-count figures — should replace org-level [est.] figures in analyses like the Bay Area companion page wherever a center's UDS filing is available.",
+    "description": "Annual, federally-mandated reporting by every HRSA Health Center Program awardee and look-alike (FQHCs and FQHC Look-Alikes), covering patient demographics, payer mix (including Medicaid share), services provided, staffing, costs, and clinical quality measures at the individual health-center level. The primary source for FQHC-level payer-mix and patient-count figures — should replace org-level [est.] figures in analyses like the Bay Area companion page wherever a center's UDS filing is available.",
     "category": "Provider",
     "years": "1996-present",
     "unit": "Health-center-year",

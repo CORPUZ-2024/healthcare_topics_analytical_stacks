@@ -19,7 +19,7 @@
         "ACO attributed population summary: member count, age/sex/dual-eligible distribution, HCC risk score decile breakdown, and total attributed spend by service category (Part A vs. B vs. D)."
       ],
       "caveats": [
-        "Institutional (UB-04/837I) and professional (CMS-1500/837P) claims must be characterized separately before any cross-part rollup — they have different claim grains, coding systems (ICD-10-PCS vs. HCPCS/CPT), and setting indicators (TOB vs. POS). Summing CLM_PMT_AMT across Part A and Part B without distinguishing claim type misallocates cost.",
+        "Institutional (UB-04/837I) and professional (CMS-1500/837P) claims must be characterized separately before any cross-part rollup — they have different claim grains, coding systems (ICD-10-PCS appears on INPATIENT institutional claims only; institutional outpatient (13x) and professional claims both carry HCPCS/CPT), and setting indicators (TOB vs. POS). Summing CLM_PMT_AMT across Part A and Part B without distinguishing claim type misallocates cost.",
         "A BENE_ID appearing in multiple Part files does not mean the beneficiary received all those services independently — the same individual appears in FFS claims (A/B), MA encounters (C), and Part D PDEs (D). Deduplication and attribution logic must be defined relative to the specific analytic question before counting.",
         "Low volume in trailing months almost always reflects claims runout lag, not a true utilization decline. Confirm the expected data completeness date (complete_through or suspected_incomplete_through from the source metadata) before interpreting any trailing-period suppression as a care pattern."
       ]
@@ -46,7 +46,7 @@
         "Denominator definition is everything — HEDIS denominators have specific continuous enrollment criteria, exclusion logic (e.g., hospice enrollment, conflicting diagnoses), and look-back windows. An incorrectly built denominator invalidates the rate regardless of how correctly the numerator is coded.",
         "Hybrid measures (combining administrative claims with medical record review) and administrative measures are not interchangeable. Hybrid measures generally produce higher rates because chart review captures documented care that doesn't appear in claims. Mixing methodologies across periods or populations produces spurious trend signals.",
         "Wilson score CI assumes independence across observations. For member-months where the same member contributes multiple months, this assumption fails — the CI will be artificially narrow. Use member-level rather than member-month-level as the denominator unit when repeated-measures correlation is a concern.",
-        "Results below stability_min=30 still compute numerically but should never appear in comparative rankings or public-facing reports. A rate of 2/5 (40%) and a rate of 20/50 (40%) are not equivalent analytically — the former has a CI spanning roughly 7%–85%."
+        "Results below stability_min=30 still compute numerically but should never appear in comparative rankings or public-facing reports. A rate of 2/5 (40%) and a rate of 20/50 (40%) are not equivalent analytically — the former has a Wilson CI spanning roughly 12%–77%."
       ]
     },
     {
@@ -104,7 +104,7 @@
       "name": "COMPARISON",
       "status": "built",
       "statusNote": "",
-      "techStack": "scipy.stats (ttest_ind, mannwhitneyu, chi2_contingency) for tests; statsmodels (TTestIndPower / NormalIndPower) for power calculation.",
+      "techStack": "scipy.stats (ttest_ind, mannwhitneyu, chi2_contingency, fisher_exact, barnard_exact) for tests; statsmodels (TTestIndPower / NormalIndPower) for power calculation.",
       "analyticalStack": "Two-group hypothesis testing: Welch's t-test (default, unequal variance), Mann-Whitney U (non-normal), chi-square (categorical). Power/MDE reported alongside p-value so underpowered comparisons are visible.",
       "dataVolume": "Two arms, 100–100K observations each. Below ~30 per arm the test runs but ANL-002 flags sample size.",
       "inputGrain": "Any unit with a binary or categorical group assignment (pre/post period, intervention/control cohort, plan A vs B)",
@@ -137,7 +137,7 @@
       "modulesTouched": "core/analysis/{base,regression,complexity_monitor}",
       "useCases": [
         "30-day readmission risk modeling using logistic regression with HCC-mapped diagnosis categories, age/sex/dual-eligibility covariates, and facility fixed effects for hospital VBP performance prediction.",
-        "Total cost of care prediction with Poisson or Gamma GLM for ACO benchmark development, using HCC risk score, chronic condition flags from CCW, and prior-year spend as predictors.",
+        "Total cost of care prediction with a Gamma GLM and log link (cost is continuous and right-skewed; reserve Poisson for counts, or invoke Poisson pseudo-maximum-likelihood explicitly if using it on cost) for ACO benchmark development, using HCC risk score, chronic condition flags from CCW, and prior-year spend as predictors.",
         "Quality measure performance prediction for MIPS APM scoring, using OLS to identify provider characteristics (NPI specialty, rural/urban designation, panel size) associated with measure rate variation.",
         "ESRD transition-to-home-dialysis rate modeling: logistic regression on patient characteristics to understand which populations are least likely to transition, informing CMMI model targeting."
       ],
@@ -169,8 +169,9 @@
       "caveats": [
         "The HCC V28 transition uses a blend of V24 and V28 scores during 2024–2026 (33% V28 in 2024, 67% V28 in 2025, 100% V28 in 2026). Applying either model in isolation produces a score that does not match CMS's blended calculation during the transition period.",
         "Both the normalization factor and the coding intensity factor from the annual CMS Rate Announcement must be applied. The normalization factor ensures scores are calibrated to the FFS reference population; the coding intensity factor adjusts for the systematic difference in diagnosis coding completeness between MA and FFS. Omitting either produces a RAF that will not reconcile to CMS's payment calculation.",
-        "V28 explicitly removes approximately 2,000 ICD-10 codes that were previously HCC-eligible — many in categories historically associated with upcoding (e.g., some major depression and diabetes complication codes). Populations relying heavily on these codes will see RAF declines that reflect coding artifact removal, not true health status improvement. Trend comparisons across the V24/V28 boundary are not apples-to-apples.",
-        "MA encounter data has historically had lower diagnosis capture completeness than Medicare FFS claims, creating systematically lower RAF scores for MA populations analyzed from encounter data vs. FFS claims data for equivalent health status. Adjusting for this gap requires the supplemental data (chart review, lab results) that MA plans submit alongside encounter data."
+        "V28 explicitly removes approximately 2,294 ICD-10 codes (and adds 268), cutting mapped codes from 9,797 to 7,770 that were previously HCC-eligible — many in categories historically associated with upcoding (e.g., some major depression and diabetes complication codes). Populations relying heavily on these codes will see RAF declines that reflect coding artifact removal, not true health status improvement. Trend comparisons across the V24/V28 boundary are not apples-to-apples.",
+        "MA encounter data has historically had lower diagnosis capture completeness than Medicare FFS claims, creating systematically lower RAF scores for MA populations analyzed from encounter data vs. FFS claims data for equivalent health status. Adjusting for this gap requires the supplemental data (chart review, lab results) that MA plans submit alongside encounter data.",
+        "V28’s two most consequential structural changes are often missed: the count of payment HCC categories rose from 86 to 115, and CMS introduced CONSTRAINING — related HCCs are forced to share a coefficient, so (for example) diabetes with and without complications now carry identical weight. For RAF modeling these matter more than the code deletions."
       ]
     },
     {
@@ -203,7 +204,7 @@
       "name": "PROVIDER_PROFILE",
       "status": "specified",
       "statusNote": "v2.1 — added, config specified (Opus-gated)",
-      "techStack": "pandas + scipy.stats (beta-binomial shrinkage) or statsmodels MixedLM for alternative reliability method + matplotlib chart_funnel (v2.1 addition).",
+      "techStack": "pandas + scipy.stats (supplies the betabinom DISTRIBUTION only — empirical-Bayes shrinkage must be hand-rolled or done via statsmodels MixedLM) or statsmodels MixedLM for alternative reliability method + matplotlib chart_funnel (v2.1 addition).",
       "analyticalStack": "Indirect standardization (observed/expected ratio) with reliability adjustment (empirical Bayes shrinkage toward population mean, weighted by panel size). Funnel plot control limits (95%/99.8% by default) rather than a simple ranked list.",
       "dataVolume": "50–5,000 providers, each with a panel of 10–2,000 attributed members/episodes. Panels under min_panel_cnt (default 30) excluded from ranking.",
       "inputGrain": "Outcome events attributed to a provider/TIN unit",
@@ -288,9 +289,9 @@
         "Oncology care episode construction for EOM performance analysis — defining 6-month chemotherapy episodes anchored on initiating chemotherapy claims and attributing all cancer-related Part A/B costs."
       ],
       "caveats": [
-        "Trigger event definition is everything. A difference of 30 vs. 90 days in the post-discharge attribution window can change episode count by 20–30% and shift attributed cost substantially. Define the inclusion/exclusion rules explicitly in configuration, not in code, so they are auditable.",
-        "Post-acute care attribution across TOB types requires explicit inclusion logic. SNF claims (TOB 21x), home health episodes (TOB 32x), and IRF stays (TOB 11x with qualifying DRGs) each use different claim structures. An episode construction that only follows inpatient TOB 11x claims will miss 30–50% of post-acute cost in surgical episodes.",
-        "Readmission-within-episode vs. readmission-as-separate-episode is a common double-counting error. If an unplanned readmission occurs within the 90-day episode window, it should be attributed to the original episode, not opened as a new trigger. Failure to enforce this rule inflates episode count and deflates average episode cost."
+        "Trigger event definition is everything. The post-discharge attribution window is set by the model, not chosen freely — BPCI Advanced and CJR use 90 days, TEAM uses 30. A difference of 30 vs. 90 days can change episode count by 20–30% and shift attributed cost substantially. Define the inclusion/exclusion rules explicitly in configuration, not in code, so they are auditable.",
+        "Post-acute care attribution across TOB types requires explicit inclusion logic. SNF claims (TOB 21x), home health episodes (TOB 32x), and IRF stays (TOB 11x, paid by Case-Mix Group via HIPPS rate codes on revenue code 0024 — not by DRG) each use different claim structures. An episode construction that only follows inpatient TOB 11x claims will miss 30–50% of post-acute cost in surgical episodes.",
+        "Readmission-within-episode vs. readmission-as-separate-episode is a common double-counting error. If an unplanned readmission occurs within the episode window (90 days for BPCI Advanced/CJR, 30 for TEAM), it should be attributed to the original episode, not opened as a new trigger. Failure to enforce this rule inflates episode count and deflates average episode cost."
       ]
     },
     {
@@ -312,7 +313,7 @@
       ],
       "caveats": [
         "Forecasting from runout-affected trailing periods without adjustment projects a systematically downward-biased trend. The model observes a declining tail that is data artifact, not utilization reality, and extrapolates that decline into the forecast horizon. Always confirm complete_through before setting the training period end date.",
-        "COVID creates a structural break (2020–2021 utilization collapse, 2022 rebound) that standard ARIMA handles poorly without explicit exogenous intervention variables. A model trained on 2017–2024 data that ignores COVID will have distorted seasonal and trend coefficients because the most anomalous years are also the most recent ones.",
+        "COVID creates a structural break (2020–2021 utilization collapse, 2022 rebound) that standard ARIMA handles poorly without explicit exogenous intervention variables. A model trained on 2017–2024 data that ignores COVID will have distorted seasonal and trend coefficients because the anomalous years sit inside the training window and the model has no way to distinguish a one-off shock from a recurring seasonal pattern.",
         "Healthcare utilization has strong and consistent seasonality: flu season (Q1 inpatient spike), plan year deductible resets (Q1 suppression of elective care), Q4 utilization acceleration as deductibles are met. Plain ARIMA without a seasonal component will miss this pattern; SARIMAX with an explicit seasonal period is required for reliable forecasts."
       ]
     },
@@ -322,7 +323,7 @@
       "name": "CAUSAL",
       "status": "deferred",
       "statusNote": "v1.1 — deferred, enum value reserved",
-      "techStack": "statsmodels for DiD (as regression with interaction term) and linearmodels/hand-rolled implementation for two-way fixed effects. scikit-learn or econml for propensity score matching.",
+      "techStack": "statsmodels for DiD (as regression with interaction term) and linearmodels/hand-rolled implementation for two-way fixed effects. scikit-learn to ESTIMATE propensity scores (it implements no matching routine) paired with causalinference/psmpy or DoWhy for the matching step; econml for doubly-robust and heterogeneous-effect estimation rather than classic matching.",
       "analyticalStack": "Difference-in-differences (parallel-trends assumption must be checked with pre-period trend comparison — required diagnostic, not optional) and propensity score matching (balance diagnostics: standardized mean difference pre/post match — reported alongside the treatment effect estimate).",
       "dataVolume": "Panel data: treatment and control groups across multiple pre/post periods. Credible DiD minimum: dozens of units per arm across 4+ periods. PSM needs control pool 3–10× the treated N.",
       "inputGrain": "Unit × period panel with a treatment indicator and outcome at each period",
@@ -344,10 +345,22 @@
   "crossCutting": {
     "sharedFloor": "pandas, numpy, pyarrow (parquet I/O), pyyaml + jsonschema (config), matplotlib (all chart_* modules), pytest (all test tiers)",
     "libraries": [
-      {"lib": "scipy.stats", "tasks": "rate_measure (Wilson CI), comparison (hypothesis tests), provider_profile (beta-binomial)"},
-      {"lib": "statsmodels", "tasks": "regression (OLS/GLM/VIF), comparison (power), provider_profile (MixedLM alt.), forecast (ARIMA), causal (DiD/fixed effects)"},
-      {"lib": "scikit-learn", "tasks": "segmentation (KMeans), causal (PSM alternative) [v1.1]"},
-      {"lib": "prophet", "tasks": "forecast — optional alternative to statsmodels SARIMAX [v1.1, heaviest single dependency]"}
+      {
+        "lib": "scipy.stats",
+        "tasks": "rate_measure (Wilson CI), comparison (hypothesis tests), provider_profile (beta-binomial)"
+      },
+      {
+        "lib": "statsmodels",
+        "tasks": "regression (OLS/GLM/VIF), comparison (power), provider_profile (MixedLM alt.), forecast (ARIMA), causal (DiD/fixed effects)"
+      },
+      {
+        "lib": "scikit-learn",
+        "tasks": "segmentation (KMeans), causal (PSM alternative) [v1.1]"
+      },
+      {
+        "lib": "prophet",
+        "tasks": "forecast — optional alternative to statsmodels SARIMAX [v1.1, heaviest single dependency]"
+      }
     ],
     "platformNote": "Platform dependency is orthogonal to analysis_type. Any task can run against a flat file or a platform-adapted source. GROUP BY / JOIN work is pushed to the warehouse via sql_templates (Snowflake/BigQuery) for large sources, or done in pandas after a chunked pull for anything that fits in memory locally. The analyzer code itself is identical either way."
   }

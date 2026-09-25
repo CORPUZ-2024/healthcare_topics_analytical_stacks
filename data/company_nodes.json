@@ -1,134 +1,735 @@
 [
-  {"id":"aca_c","name":"ACA §3021/3022","category":"legislation","description":"Created CMMI (§3021) and MSSP (§3022). Expanded Medicaid and established ACA marketplace plans. Foundation for value-based care architecture."},
-  {"id":"macra_c","name":"MACRA 2015","category":"legislation","description":"Repealed SGR. Created QPP (MIPS + Advanced APMs). Sets physician Medicare payment adjustments for most clinicians."},
-  {"id":"ira_c","name":"Inflation Reduction Act 2022","category":"legislation","description":"Created Medicare Drug Price Negotiation Program. Cycle 1 (10 drugs) live Jan 2026. Cycle 3 underway — first Part B drugs and renegotiations, prices effective 2028."},
-  {"id":"hitech_c","name":"HITECH Act 2009","category":"legislation","description":"$19B+ for EHR adoption. Created ONC. Foundation for today's health IT infrastructure and eventual API mandates."},
-  {"id":"cures_c","name":"21st Century Cures Act 2016","category":"legislation","description":"Granted ONC interoperability authority. Created FDA RWE Program. Prohibits information blocking. Directly upstream of CMS-0057-F."},
-  {"id":"obbba_c","name":"One Big Beautiful Bill Act (H.R. 1 / P.L. 119-21)","category":"legislation","description":"Signed July 4, 2025. Mandates Medicaid community-engagement (work) requirements for the ACA expansion population (80 hrs/month, effective by Jan 1, 2027; several states implementing earlier on state-level timelines), narrows ACA marketplace subsidy eligibility for lawfully present immigrants, phases down state provider taxes and caps state-directed payments, and creates the $50B Rural Health Transformation Fund. Compounds with the separate, coincidentally-timed expiration of IRA-era enhanced ACA premium tax credits (Dec 31, 2025) to reshape coverage and cost for 2026 onward."},
-
-  {"id":"ma_prog","name":"Medicare Advantage","category":"program","description":"Part C managed care. ~33M enrollees. Funded via risk-adjusted capitation (HCC V28). RADV audits verify coding accuracy. HRRP, VBP penalties do not apply — separate quality bonus system."},
-  {"id":"medicaid_prog","name":"Medicaid / CHIP","category":"program","description":"State-federal means-tested coverage. Managed care dominates in most states. CMS-0057-F prior auth API mandate applies to Medicaid MCOs. ARP 2021 enhanced federal match still active in many states. Subject to OBBBA work requirements (expansion population) and provider-tax/state-directed-payment caps effective 2027 onward."},
-  {"id":"rhtf_prog","name":"Rural Health Transformation Fund","category":"program","description":"OBBBA-created $50B fund (FY2026-2030) distributed to states via CMS-approved transformation blueprints. Intended to partially offset rural provider revenue losses from provider-tax/SDP caps and Medicaid work-requirement coverage loss; analysts (Rural Health Association, hospital associations) widely note it will not fully offset those losses."},
-  {"id":"qpp_prog","name":"QPP / MIPS","category":"program","description":"Quality Payment Program. MIPS scores clinicians 1-100 across four categories; adjusts Part B payment two years later. CMS has proposed sunsetting traditional MIPS beginning the 2029 performance year — accelerating Advanced APM pressure."},
-  {"id":"mssp_prog","name":"Medicare Shared Savings Program (MSSP)","category":"program","description":"CMS ACO program authorized by ACA §3022. Grew to 511 ACOs covering 12.6M beneficiaries for PY2026 (up from 476) — the largest share of Traditional Medicare ever in an ACO. ACOs share savings (or losses) against a spending benchmark; PY2024 (most recently reconciled) shared savings totaled $4.1B, with $2.5B net to Medicare."},
-  {"id":"team_prog","name":"TEAM Model","category":"program","description":"Transforming Episode Accountability Model. Mandatory bundled payment for surgical episodes (joint replacement, CABG, spinal fusion) at 721 hospitals across 188 metro areas (revised down from the original 741-hospital 2024 list, e.g. excluding IHS/Tribal hospitals not paid under OPPS). Runs Jan 1, 2026 - Dec 31, 2030, monitored under an Acumen LLC implementation/monitoring contract; AHA is lobbying CMS/Congress to make participation voluntary."},
-  {"id":"cms0057_prog","name":"CMS-0057-F","category":"program","description":"Interoperability and Prior Authorization final rule. Mandates four FHIR APIs for MA, Medicaid MCOs, and ACA marketplace plans. Jan 2027 compliance deadline. Reduces prior auth turnaround from weeks to days."},
-  {"id":"ira_drug_prog","name":"Drug Price Negotiation","category":"program","description":"IRA Medicare Drug Price Negotiation Program. Cycle 1: 10 drugs, Jan 2026 prices, 38-79% discounts, ~8.8M Part D enrollees affected. Cycle 2: 15 drugs (incl. GLP-1s Ozempic/Wegovy) effective 2027. Cycle 3: 15 more selected Jan 2026 for 2028, including first Part B drugs and first renegotiations. Across all 40 drugs selected to date, KFF estimates $125B of the roughly $350B (36%) in 2024 Medicare Part B+D drug spending is represented."},
-  {"id":"esrd_prog","name":"ESRD / Kidney Care Programs","category":"program","description":"ESRD QIP, Kidney Care Choices (KCC), and Comprehensive Kidney Care Contracting (CKCC). Mandatory ESRD QIP penalizes poor performers. KCC/CKCC are voluntary CMMI value-based models for kidney disease."},
-  {"id":"pac_prog","name":"PAC Quality Reporting","category":"program","description":"Post-Acute Care QRP. Standardized assessment data across SNF (MDS 3.0), IRF (IRF-PAI), and LTCH (LTCH CARE). Required under IMPACT Act 2014. Drives SNF VBP payment adjustments."},
-  {"id":"hcc_prog","name":"MA Risk Adjustment (HCC V28 / RADV)","category":"program","description":"HCC V28 transition reduces average MA risk scores — revenue headwind for plans. RADV chart-level audits verify HCC coding accuracy. DOJ scrutiny of upcoding practices intensifying. CMS extrapolation methodology finalized."},
-
-  {"id":"scan","name":"SCAN Health Plan","category":"payer","description":"California-focused Medicare Advantage plan. One of the oldest nonprofit MA plans. Operates primarily in Southern California. Subject to HCC V28 transition and RADV audits."},
-  {"id":"alignment","name":"Alignment Health","category":"payer","description":"Value-based Medicare Advantage plan with owned provider network. Asset-light + asset-heavy hybrid model. Operates MA plans in CA, TX, NC, AZ. Deep capitation risk with downstream provider partners."},
-  {"id":"oscar","name":"Oscar Health","category":"payer","description":"Tech-forward health insurer operating ACA marketplace and Medicare Advantage plans. Uses AI for care navigation and prior auth. Heavy FHIR investment. CMS-0057-F compliance infrastructure already being built."},
-  {"id":"covca","name":"Covered California","category":"payer","description":"California's ACA marketplace administrator. Coordinates with Medi-Cal (CA Medicaid) on dual-eligible enrollment. Sets plan participation standards and quality requirements for marketplace issuers."},
-  {"id":"partnerhp","name":"Partnership HealthPlan of CA","category":"payer","description":"Medi-Cal (California Medicaid) managed care plan covering northern California. Subject to CMS-0057-F Medicaid MCO prior auth API mandate. Coordinates closely with CA DHCS."},
-  {"id":"sfhp","name":"San Francisco Health Plan","category":"payer","description":"San Francisco's Medi-Cal managed care plan. Serves Medi-Cal and Healthy SF members. Subject to CMS-0057-F Medicaid MCO API mandate. Strong community health worker integration."},
-  {"id":"capital_rx","name":"Capital Rx","category":"payer","description":"Full-service PBM focused on transparent pricing and drug cost management. Serves health plans including government programs. Positioned as disruptor to legacy PBM model. IRA drug pricing changes affect formulary strategy."},
-  {"id":"included","name":"Included Health","category":"payer","description":"Virtual care and health navigation platform embedded in employer and health plan benefits. Connects members to in-network specialists. Partnered with MA plans for supplemental navigation benefits."},
-
-  {"id":"privia","name":"Privia Health","category":"provider","description":"Physician group management and VBC enablement company. Supports independent physicians participating in MIPS and Advanced APMs. ACO REACH and MSSP participation. National footprint across multiple specialties."},
-  {"id":"astrana","name":"Astrana Health","category":"provider","description":"Provider-network VBC enablement. Manages ACO REACH-eligible networks and MA capitation risk. California-centered with national expansion. Deep risk-bearing capability at the IPA level."},
-  {"id":"davita","name":"DaVita Kidney Care","category":"provider","description":"Largest US dialysis provider. Dominant in ESRD QIP compliance. Participates in CKCC and KCC value-based kidney care models. IRA drug pricing affects Sensipar/Parsabiv which treats ESRD complications."},
-  {"id":"strive","name":"Strive Health","category":"provider","description":"Kidney-focused value-based care company. Participates in CKCC Graduated and Global Risk tracks. Works with nephrologists on CKD-to-ESRD transition management. Competes and coordinates with DaVita."},
-  {"id":"omada","name":"Omada Health","category":"provider","description":"Digital therapeutics company for diabetes prevention and management, hypertension, and musculoskeletal health. Covered under Medicare Advantage supplemental benefits and employer plans. Outcomes data feeds MIPS quality measures."},
-  {"id":"hinge","name":"Hinge Health","category":"provider","description":"Digital musculoskeletal (MSK) health company. Covered under MA supplemental benefits and employer contracts. Expanding into surgical decision support (TEAM model adjacent). Outcomes published in peer-reviewed journals."},
-  {"id":"august","name":"August Health","category":"provider","description":"Digital care management platform for skilled nursing facilities (SNFs). Streamlines PAC QRP reporting, PDPM documentation, and care transitions. Directly serves the PAC quality reporting mandate."},
-  {"id":"adventhealth","name":"AdventHealth","category":"provider","description":"Large faith-based nonprofit health system (50+ hospitals). Operates in TEAM model-eligible markets. Subject to Hospital VBP, HRRP, and HAC reduction programs. SNF and home health affiliates under PAC QRP."},
-
-  {"id":"epic","name":"Epic","category":"hit","description":"Dominant EHR vendor (~35% of US hospital beds). Must implement CMS-0057-F FHIR APIs. Central to TEFCA exchange. Prior auth API compliance dependent on Epic's implementation roadmap."},
-  {"id":"redox","name":"Redox","category":"hit","description":"Healthcare integration platform. Middleware connecting EHRs (including Epic) to digital health apps and payer systems. Key infrastructure for CMS-0057-F API compliance for smaller health systems."},
-  {"id":"smile","name":"Smile Digital Health","category":"hit","description":"FHIR server infrastructure company. Powers FHIR implementations for health systems and payers. Core technical layer for CMS-0057-F Patient Access and Provider Directory APIs."},
-  {"id":"notable","name":"Notable","category":"hit","description":"AI-powered clinical automation platform. Automates clinical documentation, prior authorization, and patient intake workflows. Positioned to benefit from CMS-0057-F volume shift in prior auth processing."},
-  {"id":"dosespotco","name":"DoseSpot","category":"hit","description":"E-prescribing platform. Relevant to OTP (Opioid Treatment Programs) Medicare bundled payment for buprenorphine prescribing. PDMP integration and controlled substance e-prescribing infrastructure."},
-
-  {"id":"abbvie_c","name":"AbbVie","category":"pharma","description":"Imbruvica (ibrutinib) selected in IRA Cycle 1 drug negotiation — 38% discount from list price. Revenue impact: ~$3B annual Medicare revenue reduction. Accelerating pipeline diversification post-Humira biosimilar competition."},
-  {"id":"merck_c","name":"Merck","category":"pharma","description":"Januvia/Janumet selected in IRA Cycle 1. Also has Keytruda (pembrolizumab) expected in future IRA cycles — largest revenue-at-risk drug in Medicare. Major Part B drug target."},
-  {"id":"amgen_c","name":"Amgen","category":"pharma","description":"Enbrel selected in IRA Cycle 1. Biosimilar competition and IRA negotiation creating dual pressure. Repatha (evolocumab) is a potential future IRA target. Significant Medicare Part D exposure."},
-  {"id":"roche_c","name":"Roche / Genentech","category":"pharma","description":"Major Part B drug exposure (Herceptin biosimilar, Avastin, Tecentriq). IRA Cycle 3 includes first Part B drugs — Roche/Genentech directly in scope. FDA RWE submissions for label expansions."},
-  {"id":"gsk_c","name":"GSK","category":"pharma","description":"Farxiga (dapagliflozin, co-developed) and pipeline drugs face IRA negotiation exposure. Active in respiratory (Breo, Nucala). FDA RWE submissions for post-approval effectiveness evidence."},
-  {"id":"vertex_c","name":"Vertex Pharmaceuticals","category":"pharma","description":"Trikafta/Kaftrio (elexacaftor/tezacaftor/ivacaftor) is a potential high-profile future IRA target given its price and Medicare utilization. Also developing CRISPR-based therapies (partnered with CRISPR Therapeutics). Rare disease pricing model under IRA scrutiny."},
-  {"id":"unitedthera","name":"United Therapeutics","category":"pharma","description":"Pulmonary arterial hypertension (Tyvaso, Orenitram) and rare lung disease drugs. Tyvaso DPI (inhaled treprostinil) is a high-cost Medicare Part D and Part B drug. Future IRA negotiation candidate. Lung transplant innovation via xenotransplantation (eGenesis partnership-adjacent)."},
-  {"id":"connrx","name":"ConnectiveRx","category":"pharma","description":"Patient access and affordability programs (copay assistance, prior auth support, hub services). IRA's Part D redesign (out-of-pocket cap) and manufacturer price concession rules directly reshape their copay card programs."},
-  {"id":"amazon_pharm","name":"Amazon Pharmacy","category":"pharma","description":"Retail pharmacy disruptor. Partners with MA plans and PBMs for prescription delivery. IRA price transparency and generic drug pricing align with Amazon's low-cost positioning. RxPass subscription for generics."},
-  {"id":"eversana","name":"EVERSANA","category":"pharma","description":"Pharma commercialization and market access company. Manages patient access programs, field reimbursement, and hub services for specialty drugs. IRA price negotiation results restructure their clients' market access strategies."},
-  {"id":"certara_c","name":"Certara","category":"pharma","description":"Drug development decision science. Biosimulation, regulatory submissions, and pharmacometric modeling. FDA RWE Program expands the evidence types they help clients generate and submit."},
-
-  {"id":"tempus","name":"Tempus AI","category":"analytics","description":"AI-driven clinical data platform. Genomic sequencing plus de-identified clinical records. FDA RWE submissions and real-world evidence generation for oncology. Also generates MIPS quality data for oncology practices."},
-  {"id":"guardant","name":"Guardant Health","category":"analytics","description":"Liquid biopsy (circulating tumor DNA). Medicare coverage for SHIELD colorectal cancer screening test. FDA-approved companion diagnostics relevant to IRA negotiation cycle drugs (e.g. Keytruda)."},
-  {"id":"genedx","name":"GeneDx","category":"analytics","description":"Genomic testing company specializing in rare disease and pediatric genetics. NIH research partnerships. FDA RWE data source for rare disease drug development. Exome and genome sequencing at scale."},
-  {"id":"rti","name":"RTI International","category":"analytics","description":"CMS research and evaluation contractor. Runs QPP evaluation, ACO REACH evaluation, and post-acute care research. Direct producer of CMS program performance data. Major government contract holder."},
-  {"id":"kff","name":"KFF (Kaiser Family Foundation)","category":"analytics","description":"Independent health policy research organization. Maintains the most widely cited OBBBA Medicaid work-requirement 1115-waiver implementation tracker and the ACA enhanced-subsidy-expiration premium calculator used across state and national impact analysis."},
-  {"id":"georgetown_ccf","name":"Georgetown University Center for Children and Families (CCF)","category":"analytics","description":"Publishes the H.R. 1 Readiness Tracker assessing state Medicaid eligibility-system capacity ahead of the January 2027 national work-requirement deadline. Widely cited by state hospital associations and Medicaid directors on administrative-burden risk."},
-  {"id":"google_health","name":"Google for Health","category":"analytics","description":"Google's healthcare division. Health data search, imaging AI (DeepMind AlphaFold/Med-Gemini), and health information infrastructure. EHR integration via FHIR APIs. CMS-0057-F compliance creates expanded API ecosystem Google can access."},
-  {"id":"chai","name":"Coalition for Health AI (CHAI)","category":"analytics","description":"Multi-stakeholder body (health systems, payers, tech companies, government) developing AI governance frameworks for healthcare. Addresses AI use in prior auth, clinical decision support, and quality measurement — all touched by CMS programs."},
-  {"id":"anthropic_c","name":"Anthropic","category":"analytics","description":"AI safety and applied AI company. Claude models used in clinical documentation, coding assistance, and prior auth automation. Contributes AI safety frameworks referenced by CHAI and ONC health AI guidance."},
-
-  {"id":"nih_c","name":"National Institutes of Health","category":"govt","description":"Primary federal basic and clinical research funder. NIH-funded research underpins FDA regulatory submissions and IRA drug price justification arguments. All-of-Us program generates RWE-grade real-world health data."},
-  {"id":"cdc","name":"CDC","category":"govt","description":"Tracks population health metrics used in CMS quality program benchmarking. NHSN (National Healthcare Safety Network) is the source for hospital-acquired infection measures in Hospital VBP and HAC programs."},
-  {"id":"ca_dhcs","name":"CA Dept of Health Care Services","category":"govt","description":"Administers California Medicaid (Medi-Cal) — largest state Medicaid program in US. Contracts with Partnership HealthPlan, SFHP, and other Medi-Cal MCOs. Implements CMS-0057-F Medicaid MCO requirements at state level."},
-  {"id":"ca_dph","name":"CA Dept of Public Health","category":"govt","description":"California's public health agency. Coordinates with CDC on population health surveillance. Interacts with health systems and plans on reportable disease, immunization, and public health emergency response."},
-  {"id":"cbo","name":"Congressional Budget Office (CBO)","category":"govt","description":"Nonpartisan federal scorekeeper. Produced the ~10M-coverage-loss-by-2034 estimate for OBBBA's Medicaid/marketplace provisions that anchors most state and national OBBBA impact analysis."},
-  {"id":"ga_dch","name":"Georgia Dept of Community Health (DCH)","category":"govt","description":"Administers Georgia Pathways to Coverage, the nation's only Medicaid work-requirement program predating OBBBA (live since July 2023, extended through Dec 31, 2026). A GAO report (Sept 2025) found the program spent $54.2M on administration vs. $26.1M on care since 2021, while enrollment (~7,400-9,175 through 2025-2026) has run far below the ~246,365-eligible target — widely cited as a preview of national OBBBA work-requirement rollout risk."},
-
-  {"id":"hca","name":"HCA Healthcare","category":"provider","description":"For-profit hospital system, the largest in the US by hospital count (~223 facilities, as of 2025-2026). A mandatory TEAM model participant at eligible hospitals; the sector's most prominent for-profit outlier in an otherwise nonprofit-dominated landscape."},
-  {"id":"kaiser","name":"Kaiser Permanente","category":"provider","description":"Nonprofit integrated payer-provider system; largest US health system by revenue ($127.7B FY2025, though the figure blends health-plan premiums with care delivery). Consolidated Epic onto Microsoft Azure in 2025 and is a CHAI model-card registry launch partner."},
-  {"id":"commonspirit","name":"CommonSpirit Health","category":"provider","description":"Nonprofit Catholic health system formed by the 2019 CHI-Dignity Health merger; the largest US system by facility affiliations, as of 2025-2026."},
-  {"id":"ascension","name":"Ascension","category":"provider","description":"Nonprofit Catholic health system operating roughly 2,927 facilities across 16 states, as of 2025-2026."},
-  {"id":"providence","name":"Providence","category":"provider","description":"Nonprofit health system; signed the CMS Interoperability Framework pledge in July 2025 and is a CHAI model-card registry launch partner alongside Cleveland Clinic and Kaiser."},
-  {"id":"trinity_health","name":"Trinity Health","category":"provider","description":"Nonprofit multi-state Catholic health system, as of 2025-2026."},
-  {"id":"advocate_health","name":"Advocate Health","category":"provider","description":"Nonprofit health system formed by the 2022 merger of Advocate Aurora Health and Atrium Health, spanning the Midwest and Southeast."},
-  {"id":"mayo_clinic","name":"Mayo Clinic","category":"provider","description":"Nonprofit academic health system; publishes an internal responsible-AI framework (Mayo Clinic Proceedings: Digital Health) and is a CHAI member as of 2025-2026."},
-  {"id":"cleveland_clinic","name":"Cleveland Clinic","category":"provider","description":"Nonprofit academic health system and a CHAI model-card registry launch partner (Feb 2025), alongside Providence and Kaiser."},
-  {"id":"mgb","name":"Mass General Brigham","category":"provider","description":"Nonprofit multi-state academic health system based in Massachusetts."},
-  {"id":"intermountain","name":"Intermountain Health","category":"provider","description":"Nonprofit health system integrated with its own SelectHealth insurance plan; signed the CMS Interoperability Framework pledge in July 2025."},
-  {"id":"northwell","name":"Northwell Health","category":"provider","description":"Nonprofit health system and New York State's largest, as of 2025-2026."},
-  {"id":"mount_sinai","name":"Mount Sinai Health System","category":"provider","description":"Nonprofit academic health system; runs the largest production instance of Epic on Microsoft Azure of any health system, as of 2025-2026."},
-
-  {"id":"datavant","name":"Datavant","category":"analytics","description":"Health-data tokenization and de-identification company; acquired Aetion (closed Jul 2025) to add causal-inference RWE capability. Pledged to the CMS-Aligned Network in Jul 2025 but holds no TEFCA QHIN designation — its tokenization infrastructure runs atop Databricks (a Marketplace launch partner) and AWS Marketplace.","qhin_designated":false,"cms_aligned_network":true},
-  {"id":"aetion","name":"Aetion","category":"analytics","description":"Causal-inference real-world-evidence platform; now a Datavant subsidiary (Life Sciences business) following the 2025 acquisition. Its RWE methods are accepted by both FDA and EMA for regulatory submissions.","qhin_designated":false,"cms_aligned_network":false},
-  {"id":"truveta","name":"Truveta","category":"analytics","description":"Health-system-owned EHR data collective; described as an emerging source for FDA regulatory use following 2025 FDA real-world-evidence guidance, as of 2025-2026.","qhin_designated":false,"cms_aligned_network":false},
-  {"id":"komodo","name":"Komodo Health","category":"analytics","description":"All-payer claims data platform particularly strong for rare-disease epidemiology research.","qhin_designated":false,"cms_aligned_network":false},
-  {"id":"iqvia","name":"IQVIA","category":"analytics","description":"The largest real-world-data vendor by scale and the RWD source most used for FDA regulatory submissions, as of 2025-2026.","qhin_designated":false,"cms_aligned_network":false},
-  {"id":"flatiron","name":"Flatiron Health","category":"analytics","description":"Roche-owned oncology-EHR data company; its data has become a de facto standard for oncology real-world evidence.","qhin_designated":false,"cms_aligned_network":false},
-  {"id":"trinetx","name":"TriNetX","category":"analytics","description":"Federated real-world-data network spanning 200M+ patients across 170 organizations and 20+ countries (as of Dec 2025) — the most-cited RWD source by volume in this ecosystem.","qhin_designated":false,"cms_aligned_network":false},
-  {"id":"healthverity","name":"HealthVerity","category":"analytics","description":"Commercial real-world-data vendor in the process of acquiring Symphony Health, as of 2025-2026.","qhin_designated":false,"cms_aligned_network":false},
-  {"id":"health_gorilla","name":"Health Gorilla","category":"hit","description":"The first dual-designated TEFCA QHIN and California QHIO, and an early adopter of the CMS-Aligned Network.","qhin_designated":true,"cms_aligned_network":true},
-  {"id":"commonwell","name":"CommonWell Health Alliance","category":"hit","description":"TEFCA-designated Qualified Health Information Network (QHIN).","qhin_designated":true,"cms_aligned_network":false},
-  {"id":"ehealth_exchange","name":"eHealth Exchange","category":"hit","description":"TEFCA-designated Qualified Health Information Network (QHIN).","qhin_designated":true,"cms_aligned_network":false},
-  {"id":"surescripts","name":"Surescripts","category":"hit","description":"TEFCA-designated QHIN as of April 2025.","qhin_designated":true,"cms_aligned_network":false},
-  {"id":"oracle_hin","name":"Oracle Health Information Network","category":"hit","description":"TEFCA-designated QHIN as of November 20, 2025 — a distinct entity from Oracle Health's cloud/EHR business.","qhin_designated":true,"cms_aligned_network":false},
-  {"id":"particle_health","name":"Particle Health","category":"analytics","description":"Health-data exchange and RWD layer; an emerging player not currently designated as a TEFCA QHIN.","qhin_designated":false,"cms_aligned_network":false},
-
-  {"id":"azure","name":"Microsoft Azure","category":"digital","description":"Cloud platform behind the deepest cloud-EHR partnership in the sector — Epic has run on Azure since 2020, expanded to Azure OpenAI integration in 2023, and was showcased at Microsoft Ignite 2025 for ambient documentation, patient chatbots, and prior-authorization workflows at sites like Ochsner and Denver Health."},
-  {"id":"oracle_health","name":"Oracle Health","category":"digital","description":"EHR business built on the 2022 Cerner acquisition; rebuilt its next-generation EHR natively on Oracle Cloud Infrastructure in 2025, rather than partnering with an independent EHR vendor the way Microsoft does with Epic. A 2025 security incident affected legacy Cerner-era migration environments.","transitional":true},
-  {"id":"google_cloud","name":"Google Cloud","category":"digital","description":"Cloud vendor with a distributed set of FHIR-native Healthcare API and Vertex AI engagements across health systems — not anchored to one flagship EHR partnership the way Azure and Oracle Cloud are."},
-  {"id":"aws","name":"AWS","category":"digital","description":"Cloud vendor offering HealthLake (FHIR-native storage) and Clean Rooms (which powers Datavant Connect), with broad marketplace integrations rather than one named EHR partner."},
-
-  {"id":"fda","name":"U.S. Food and Drug Administration","category":"govt","description":"Federal agency exercising mandatory device-level regulation over AI-enabled medical software, operating in parallel with ONC's narrower EHR-transparency rule and CHAI's voluntary assurance ecosystem."},
-  {"id":"fda_dhcoe","name":"FDA Digital Health Center of Excellence","category":"ai_gov","description":"CDRH center issuing AI lifecycle and Predetermined Change Control Plan (PCCP) guidance — finalized Aug 2025 — the first formal mechanism letting a cleared AI device update itself within a pre-authorized envelope rather than requiring a new submission for every model refresh. Runs the Digital Health Advisory Committee."},
-  {"id":"fda_dhac","name":"FDA Digital Health Advisory Committee","category":"ai_gov","description":"FDA advisory committee on AI-enabled devices; held its inaugural meeting in Nov 2024 and a second in Nov 2025."},
-  {"id":"onc_astp","name":"ONC / ASTP","category":"ai_gov","description":"HHS office whose HTI-1 rule (effective Jan 1, 2025) requires certified EHRs to expose 31 source-attribute transparency fields for predictive decision-support tools — mandatory, but narrower in reach than CHAI's model-card approach since it only covers algorithms deployed through certified EHRs."},
-  {"id":"joint_commission","name":"The Joint Commission","category":"ai_gov","description":"Hospital accreditor that partnered with CHAI in Sept 2025 on Responsible Use of AI guidance and is planning a voluntary AI certification track for its 22,000+ accredited organizations."},
-  {"id":"duke_ai_gov","name":"Duke Health AI Evaluation & Governance Program","category":"ai_gov","description":"Provider-side AI governance program arguing (in Nature Medicine and JAMA, as of 2025-2026) that recurring local validation matters more than one-time external validation — a distinct governance philosophy from CHAI's registry-based transparency approach."},
-  {"id":"duke_margolis","name":"Duke-Margolis Institute","category":"ai_gov","description":"Health policy institute publishing AI governance policy analysis, as of 2025-2026."},
-  {"id":"nist","name":"NIST","category":"ai_gov","description":"Federal standards body maintaining the AI Risk Management Framework and its Generative AI Profile, referenced across FDA, ONC, and CHAI AI-governance work."},
-  {"id":"modelop","name":"ModelOp","category":"ai_gov","description":"CHAI-certified Assurance Resource Provider (designated Nov 2025), operationalizing recurring AI model validation and monitoring for health systems."},
-
-  {"id":"acumen_llc","name":"Acumen LLC","category":"analytics","description":"CMS research contractor holding the TEAM implementation/monitoring contract (~$56.6M total value, ~$13.6M obligated as of a January 2026 modification) plus a smaller CMS Innovation Center payment-standardization support contract."},
-  {"id":"mathematica","name":"Mathematica","category":"analytics","description":"CMS research contractor holding Behavioral Health Measures Development (BHIOMM) work, RMADA 2 evaluation task orders, and Drug Price Negotiation Program analyses."},
-  {"id":"yale_core","name":"Yale New Haven Health / CORE","category":"analytics","description":"CMS contractor developing the total-cost-of-care measure for the Innovation in Behavioral Health (IBH) Model."},
-
-  {"id":"aha","name":"American Hospital Association (AHA)","category":"provider","description":"National hospital trade association representing roughly 5,000 member hospitals; as of 2025-2026, actively lobbying CMS and Congress to make the TEAM bundled-payment model voluntary rather than mandatory."},
-
-  {"id":"aco_reach_prog","name":"ACO REACH","category":"program","description":"CMMI ACO model with 74 participants and 1.7M beneficiaries for PY2026; scheduled to conclude at the end of 2026 and be succeeded by the LEAD model in 2027."},
-  {"id":"lead_prog","name":"LEAD (Long-Term Enhanced ACO Design)","category":"program","description":"Successor ACO model to ACO REACH, launching in 2027."},
-  {"id":"cms_aligned_network_prog","name":"CMS Interoperability Framework / CMS-Aligned Network","category":"program","description":"Voluntary CMS interoperability initiative announced Jul 30, 2025 at a White House event with 60+ company pledges, layered on top of TEFCA. Unlike TEFCA's organization-to-organization exchange, its emphasis is getting data into patients' own apps (digital ID cards, Blue Button, Data at the Point of Care)."},
-  {"id":"tefca_prog","name":"TEFCA (Trusted Exchange Framework and Common Agreement)","category":"program","description":"QHIN-to-QHIN health data exchange framework built via the 21st Century Cures Act; distinct from — and predates — the CMS-Aligned Network."},
-  {"id":"ibh_prog","name":"Innovation in Behavioral Health (IBH) Model","category":"program","description":"8-year CMMI model (2025-2032) integrating physical health into community behavioral health settings. Cohort I (Michigan, New York, Oklahoma, South Carolina) began Jan 2025; Cohort II award notices are expected September 2026."},
-  {"id":"rmada3","name":"RMADA 3","category":"program","description":"CMS's ~$3.5B, 5-year model-design/evaluation contracting vehicle (17 companies), awarded July 2026, succeeding the ~$5B RMADA 2 — the mechanism through which most CMS model-evaluation contractor relationships now flow."},
-  {"id":"hosp_quality_prog","name":"Hospital IQR / HVBP / HRRP / HAC Reduction Programs","category":"program","description":"The mandatory, sequentially-stacked CMS hospital quality reporting and payment-adjustment programs (Inpatient Quality Reporting, Hospital Value-Based Purchasing, Hospital Readmissions Reduction, Hospital-Acquired Condition Reduction) that apply across nearly all acute-care hospitals."},
-
-  {"id":"opioid_special","name":"Opioid Response (Program Context)","category":"emergent","description":"The Consolidated Appropriations Act, 2024 made the mandatory Medicaid Medication for Opioid Use Disorder (MOUD) benefit permanent via CMS SMD #24-004 (Nov 19, 2024), reversing a September 2025 expiration date. No verified company-level node surfaced in this research pass — RTI International separately holds the CMS contract evaluating the opioid use disorder treatment demonstration.","weak_link":true},
-  {"id":"ed_special","name":"Emergency Department Innovation (Program Context)","category":"emergent","description":"The ET3 (Emergency Triage, Treat, and Transport) Model ended in December 2023 — over 90% of its interventions were treatment-in-place via telehealth — and is now historical context rather than an active program. No active company-level ED-innovation node surfaced in this research pass.","weak_link":true}
+  {
+    "id": "aca_c",
+    "name": "ACA §3021/3022",
+    "category": "legislation",
+    "description": "Created CMMI (§3021) and MSSP (§3022). Expanded Medicaid and established ACA marketplace plans. Foundation for value-based care architecture."
+  },
+  {
+    "id": "macra_c",
+    "name": "MACRA 2015",
+    "category": "legislation",
+    "description": "Repealed SGR. Created QPP (MIPS + Advanced APMs). Sets physician Medicare payment adjustments for most clinicians."
+  },
+  {
+    "id": "ira_c",
+    "name": "Inflation Reduction Act 2022",
+    "category": "legislation",
+    "description": "Created Medicare Drug Price Negotiation Program. Cycle 1 (10 drugs) live Jan 2026. Cycle 3 underway — first Part B drugs and renegotiations, prices effective 2028."
+  },
+  {
+    "id": "hitech_c",
+    "name": "HITECH Act 2009",
+    "category": "legislation",
+    "description": "$19B+ for EHR adoption. Created ONC. Foundation for today's health IT infrastructure and eventual API mandates."
+  },
+  {
+    "id": "cures_c",
+    "name": "21st Century Cures Act 2016",
+    "category": "legislation",
+    "description": "Granted ONC interoperability authority. Created FDA RWE Program. Prohibits information blocking. Directly upstream of CMS-0057-F."
+  },
+  {
+    "id": "obbba_c",
+    "name": "One Big Beautiful Bill Act (H.R. 1 / P.L. 119-21)",
+    "category": "legislation",
+    "description": "Signed July 4, 2025. Mandates Medicaid community-engagement (work) requirements for the ACA expansion population (80 hrs/month, effective by Jan 1, 2027; several states implementing earlier on state-level timelines), narrows ACA marketplace subsidy eligibility for lawfully present immigrants, phases down state provider taxes and caps state-directed payments, and creates the $50B Rural Health Transformation Fund. Compounds with the separate, coincidentally-timed expiration of IRA-era enhanced ACA premium tax credits (Dec 31, 2025) to reshape coverage and cost for 2026 onward."
+  },
+  {
+    "id": "ma_prog",
+    "name": "Medicare Advantage",
+    "category": "program",
+    "description": "Part C managed care. ~35M enrollees (about 55% of Medicare beneficiaries, Feb 2026). Funded via risk-adjusted capitation (HCC V28). RADV audits verify coding accuracy. HRRP, VBP penalties do not apply — separate quality bonus system."
+  },
+  {
+    "id": "medicaid_prog",
+    "name": "Medicaid / CHIP",
+    "category": "program",
+    "description": "State-federal means-tested coverage. Managed care dominates in most states. CMS-0057-F prior auth API mandate applies to Medicaid MCOs. ARP 2021 enhanced federal match still active in many states. Subject to OBBBA work requirements (expansion population) and provider-tax/state-directed-payment caps effective 2027 onward."
+  },
+  {
+    "id": "rhtf_prog",
+    "name": "Rural Health Transformation Fund",
+    "category": "program",
+    "description": "OBBBA-created $50B fund (FY2026-2030) distributed to states via CMS-approved transformation blueprints. Intended to partially offset rural provider revenue losses from provider-tax/SDP caps and Medicaid work-requirement coverage loss; analysts (Rural Health Association, hospital associations) widely note it will not fully offset those losses."
+  },
+  {
+    "id": "qpp_prog",
+    "name": "QPP / MIPS",
+    "category": "program",
+    "description": "Quality Payment Program. MIPS scores clinicians 1-100 across four categories; adjusts Part B payment two years later. CMS has proposed sunsetting traditional MIPS beginning the 2029 performance year — accelerating Advanced APM pressure."
+  },
+  {
+    "id": "mssp_prog",
+    "name": "Medicare Shared Savings Program (MSSP)",
+    "category": "program",
+    "description": "CMS ACO program authorized by ACA §3022. Grew to 511 ACOs covering 12.6M beneficiaries for PY2026 (up from 476) — the largest share of Traditional Medicare ever in an ACO. ACOs share savings (or losses) against a spending benchmark; PY2024 (most recently reconciled) shared savings totaled $4.1B, with $2.5B net to Medicare."
+  },
+  {
+    "id": "team_prog",
+    "name": "TEAM Model",
+    "category": "program",
+    "description": "Transforming Episode Accountability Model. Mandatory bundled payment for five surgical episode types (lower-extremity joint replacement, surgical hip/femur fracture treatment, spinal fusion, CABG, and major bowel procedure) at 721 hospitals across 188 core-based statistical areas (CBSAs, which include micropolitan as well as metropolitan areas) (revised down from the original 741-hospital 2024 list, e.g. excluding IHS/Tribal hospitals not paid under OPPS). Runs Jan 1, 2026 - Dec 31, 2030, monitored under an Acumen LLC implementation/monitoring contract; AHA is lobbying CMS/Congress to make participation voluntary. Episodes use a 30-day post-discharge accountability window, shorter than CJR/BPCI Advanced’s 90-day window."
+  },
+  {
+    "id": "cms0057_prog",
+    "name": "CMS-0057-F",
+    "category": "program",
+    "description": "Interoperability and Prior Authorization final rule. Mandates four FHIR APIs for MA, Medicaid MCOs, and ACA marketplace plans. Jan 2027 compliance deadline. Reduces prior auth turnaround from weeks to days."
+  },
+  {
+    "id": "ira_drug_prog",
+    "name": "Drug Price Negotiation",
+    "category": "program",
+    "description": "IRA Medicare Drug Price Negotiation Program. Cycle 1: 10 drugs, Jan 2026 prices, 38-79% discounts, ~8.8M Part D enrollees affected. Cycle 2: 15 drugs (incl. GLP-1s Ozempic/Wegovy) effective 2027. Cycle 3: 15 more selected Jan 2026 for 2028, including first Part B drugs and first renegotiations. Across all 40 drugs selected to date, KFF estimates $125B of the roughly $350B (36%) in 2024 Medicare Part B+D drug spending is represented."
+  },
+  {
+    "id": "esrd_prog",
+    "name": "ESRD / Kidney Care Programs",
+    "category": "program",
+    "description": "ESRD QIP, Kidney Care Choices (KCC), and Comprehensive Kidney Care Contracting (CKCC). Mandatory ESRD QIP penalizes poor performers. KCC/CKCC are voluntary CMMI value-based models for kidney disease."
+  },
+  {
+    "id": "pac_prog",
+    "name": "PAC Quality Reporting",
+    "category": "program",
+    "description": "Post-Acute Care QRP. Standardized assessment data across SNF (MDS 3.0), IRF (IRF-PAI), and LTCH (LTCH CARE). Required under IMPACT Act 2014. Drives SNF VBP payment adjustments."
+  },
+  {
+    "id": "hcc_prog",
+    "name": "MA Risk Adjustment (HCC V28 / RADV)",
+    "category": "program",
+    "description": "HCC V28 transition reduces average MA risk scores — revenue headwind for plans. RADV chart-level audits verify HCC coding accuracy. DOJ scrutiny of upcoding practices intensifying. CMS’s 2023 RADV extrapolation rule was vacated by the Northern District of Texas (Humana v. Becerra, Sept. 25, 2025); the government’s appeal is pending at the Fifth Circuit (No. 25-11293), so extrapolation authority is not currently in effect."
+  },
+  {
+    "id": "scan",
+    "name": "SCAN Health Plan",
+    "category": "payer",
+    "description": "California-focused Medicare Advantage plan. One of the oldest nonprofit MA plans. Operates primarily in Southern California. Subject to HCC V28 transition and RADV audits."
+  },
+  {
+    "id": "alignment",
+    "name": "Alignment Health",
+    "category": "payer",
+    "description": "Value-based Medicare Advantage plan with owned provider network. Asset-light + asset-heavy hybrid model. Operates MA plans in CA, TX, NC, AZ. Deep capitation risk with downstream provider partners."
+  },
+  {
+    "id": "oscar",
+    "name": "Oscar Health",
+    "category": "payer",
+    "description": "Tech-forward health insurer operating ACA marketplace and Medicare Advantage plans. Uses AI for care navigation and prior auth. Heavy FHIR investment. CMS-0057-F compliance infrastructure already being built."
+  },
+  {
+    "id": "covca",
+    "name": "Covered California",
+    "category": "payer",
+    "description": "California's ACA marketplace administrator. Coordinates with Medi-Cal (CA Medicaid) on dual-eligible enrollment. Sets plan participation standards and quality requirements for marketplace issuers."
+  },
+  {
+    "id": "partnerhp",
+    "name": "Partnership HealthPlan of CA",
+    "category": "payer",
+    "description": "Medi-Cal (California Medicaid) managed care plan covering northern California. Subject to CMS-0057-F Medicaid MCO prior auth API mandate. Coordinates closely with CA DHCS."
+  },
+  {
+    "id": "sfhp",
+    "name": "San Francisco Health Plan",
+    "category": "payer",
+    "description": "San Francisco's Medi-Cal managed care plan. Serves Medi-Cal and Healthy SF members. Subject to CMS-0057-F Medicaid MCO API mandate. Strong community health worker integration."
+  },
+  {
+    "id": "capital_rx",
+    "name": "Capital Rx",
+    "category": "payer",
+    "description": "Full-service PBM focused on transparent pricing and drug cost management. Serves health plans including government programs. Positioned as disruptor to legacy PBM model. IRA drug pricing changes affect formulary strategy."
+  },
+  {
+    "id": "included",
+    "name": "Included Health",
+    "category": "payer",
+    "description": "Virtual care and health navigation platform embedded in employer and health plan benefits. Connects members to in-network specialists. Partnered with MA plans for supplemental navigation benefits."
+  },
+  {
+    "id": "privia",
+    "name": "Privia Health",
+    "category": "provider",
+    "description": "Physician group management and VBC enablement company. Supports independent physicians participating in MIPS and Advanced APMs. ACO REACH and MSSP participation. National footprint across multiple specialties."
+  },
+  {
+    "id": "astrana",
+    "name": "Astrana Health",
+    "category": "provider",
+    "description": "Provider-network VBC enablement. Manages ACO REACH-eligible networks and MA capitation risk. California-centered with national expansion. Deep risk-bearing capability at the IPA level."
+  },
+  {
+    "id": "davita",
+    "name": "DaVita Kidney Care",
+    "category": "provider",
+    "description": "Largest US dialysis provider. Dominant in ESRD QIP compliance. Participates in CKCC and KCC value-based kidney care models. IRA drug pricing affects Sensipar/Parsabiv which treats ESRD complications."
+  },
+  {
+    "id": "strive",
+    "name": "Strive Health",
+    "category": "provider",
+    "description": "Kidney-focused value-based care company. Participates in CKCC Graduated and Global Risk tracks. Works with nephrologists on CKD-to-ESRD transition management. Competes and coordinates with DaVita."
+  },
+  {
+    "id": "omada",
+    "name": "Omada Health",
+    "category": "provider",
+    "description": "Digital therapeutics company for diabetes prevention and management, hypertension, and musculoskeletal health. Covered under Medicare Advantage supplemental benefits and employer plans. Outcomes data feeds MIPS quality measures."
+  },
+  {
+    "id": "hinge",
+    "name": "Hinge Health",
+    "category": "provider",
+    "description": "Digital musculoskeletal (MSK) health company. Covered under MA supplemental benefits and employer contracts. Expanding into surgical decision support (TEAM model adjacent). Outcomes published in peer-reviewed journals."
+  },
+  {
+    "id": "august",
+    "name": "August Health",
+    "category": "provider",
+    "description": "Digital care management platform for skilled nursing facilities (SNFs). Streamlines PAC QRP reporting, PDPM documentation, and care transitions. Directly serves the PAC quality reporting mandate."
+  },
+  {
+    "id": "adventhealth",
+    "name": "AdventHealth",
+    "category": "provider",
+    "description": "Large faith-based nonprofit health system (50+ hospitals). Operates in TEAM model-eligible markets. Subject to Hospital VBP, HRRP, and HAC reduction programs. SNF and home health affiliates under PAC QRP."
+  },
+  {
+    "id": "epic",
+    "name": "Epic",
+    "category": "hit",
+    "description": "Dominant EHR vendor (~35% of US hospital beds). Must implement CMS-0057-F FHIR APIs. Central to TEFCA exchange. Prior auth API compliance dependent on Epic's implementation roadmap."
+  },
+  {
+    "id": "redox",
+    "name": "Redox",
+    "category": "hit",
+    "description": "Healthcare integration platform. Middleware connecting EHRs (including Epic) to digital health apps and payer systems. Key infrastructure for CMS-0057-F API compliance for smaller health systems."
+  },
+  {
+    "id": "smile",
+    "name": "Smile Digital Health",
+    "category": "hit",
+    "description": "FHIR server infrastructure company. Powers FHIR implementations for health systems and payers. Core technical layer for CMS-0057-F Patient Access and Provider Directory APIs."
+  },
+  {
+    "id": "notable",
+    "name": "Notable",
+    "category": "hit",
+    "description": "AI-powered clinical automation platform. Automates clinical documentation, prior authorization, and patient intake workflows. Positioned to benefit from CMS-0057-F volume shift in prior auth processing."
+  },
+  {
+    "id": "dosespotco",
+    "name": "DoseSpot",
+    "category": "hit",
+    "description": "E-prescribing platform. Relevant to OTP (Opioid Treatment Programs) Medicare bundled payment for buprenorphine prescribing. PDMP integration and controlled substance e-prescribing infrastructure."
+  },
+  {
+    "id": "abbvie_c",
+    "name": "AbbVie",
+    "category": "pharma",
+    "description": "Imbruvica (ibrutinib) selected in IRA Cycle 1 drug negotiation — 38% discount from list price. Revenue impact: ~$3B annual Medicare revenue reduction. Accelerating pipeline diversification post-Humira biosimilar competition."
+  },
+  {
+    "id": "merck_c",
+    "name": "Merck",
+    "category": "pharma",
+    "description": "Januvia/Janumet selected in IRA Cycle 1. Also has Keytruda (pembrolizumab) expected in future IRA cycles — largest revenue-at-risk drug in Medicare. Major Part B drug target."
+  },
+  {
+    "id": "amgen_c",
+    "name": "Amgen",
+    "category": "pharma",
+    "description": "Enbrel selected in IRA Cycle 1. Biosimilar competition and IRA negotiation creating dual pressure. Repatha (evolocumab) is a potential future IRA target. Significant Medicare Part D exposure."
+  },
+  {
+    "id": "roche_c",
+    "name": "Roche / Genentech",
+    "category": "pharma",
+    "description": "Major Part B drug exposure (Herceptin biosimilar, Avastin, Tecentriq). IRA Cycle 3 includes first Part B drugs — Roche/Genentech directly in scope. FDA RWE submissions for label expansions."
+  },
+  {
+    "id": "gsk_c",
+    "name": "GSK",
+    "category": "pharma",
+    "description": "Farxiga (dapagliflozin, co-developed) and pipeline drugs face IRA negotiation exposure. Active in respiratory (Breo, Nucala). FDA RWE submissions for post-approval effectiveness evidence."
+  },
+  {
+    "id": "vertex_c",
+    "name": "Vertex Pharmaceuticals",
+    "category": "pharma",
+    "description": "Trikafta/Kaftrio (elexacaftor/tezacaftor/ivacaftor) is a potential high-profile future IRA target given its price and Medicare utilization. Also developing CRISPR-based therapies (partnered with CRISPR Therapeutics). Rare disease pricing model under IRA scrutiny."
+  },
+  {
+    "id": "unitedthera",
+    "name": "United Therapeutics",
+    "category": "pharma",
+    "description": "Pulmonary arterial hypertension (Tyvaso, Orenitram) and rare lung disease drugs. Tyvaso DPI (inhaled treprostinil) is a high-cost Medicare Part D and Part B drug. Future IRA negotiation candidate. Lung transplant innovation via xenotransplantation (eGenesis partnership-adjacent)."
+  },
+  {
+    "id": "connrx",
+    "name": "ConnectiveRx",
+    "category": "pharma",
+    "description": "Patient access and affordability programs (copay assistance, prior auth support, hub services). IRA's Part D redesign (out-of-pocket cap) and manufacturer price concession rules directly reshape their copay card programs."
+  },
+  {
+    "id": "amazon_pharm",
+    "name": "Amazon Pharmacy",
+    "category": "pharma",
+    "description": "Retail pharmacy disruptor. Partners with MA plans and PBMs for prescription delivery. IRA price transparency and generic drug pricing align with Amazon's low-cost positioning. RxPass subscription for generics."
+  },
+  {
+    "id": "eversana",
+    "name": "EVERSANA",
+    "category": "pharma",
+    "description": "Pharma commercialization and market access company. Manages patient access programs, field reimbursement, and hub services for specialty drugs. IRA price negotiation results restructure their clients' market access strategies."
+  },
+  {
+    "id": "certara_c",
+    "name": "Certara",
+    "category": "pharma",
+    "description": "Drug development decision science. Biosimulation, regulatory submissions, and pharmacometric modeling. FDA RWE Program expands the evidence types they help clients generate and submit."
+  },
+  {
+    "id": "tempus",
+    "name": "Tempus AI",
+    "category": "analytics",
+    "description": "AI-driven clinical data platform. Genomic sequencing plus de-identified clinical records. FDA RWE submissions and real-world evidence generation for oncology. Also generates MIPS quality data for oncology practices."
+  },
+  {
+    "id": "guardant",
+    "name": "Guardant Health",
+    "category": "analytics",
+    "description": "Liquid biopsy (circulating tumor DNA). Medicare coverage for SHIELD colorectal cancer screening test. FDA-approved companion diagnostics relevant to IRA negotiation cycle drugs (e.g. Keytruda)."
+  },
+  {
+    "id": "genedx",
+    "name": "GeneDx",
+    "category": "analytics",
+    "description": "Genomic testing company specializing in rare disease and pediatric genetics. NIH research partnerships. FDA RWE data source for rare disease drug development. Exome and genome sequencing at scale."
+  },
+  {
+    "id": "rti",
+    "name": "RTI International",
+    "category": "analytics",
+    "description": "CMS research and evaluation contractor. Runs QPP evaluation, ACO REACH evaluation, and post-acute care research. Direct producer of CMS program performance data. Major government contract holder."
+  },
+  {
+    "id": "kff",
+    "name": "KFF (Kaiser Family Foundation)",
+    "category": "analytics",
+    "description": "Independent health policy research organization. Maintains the most widely cited OBBBA Medicaid work-requirement 1115-waiver implementation tracker and the ACA enhanced-subsidy-expiration premium calculator used across state and national impact analysis."
+  },
+  {
+    "id": "georgetown_ccf",
+    "name": "Georgetown University Center for Children and Families (CCF)",
+    "category": "analytics",
+    "description": "Publishes the H.R. 1 Readiness Tracker assessing state Medicaid eligibility-system capacity ahead of the January 2027 national work-requirement deadline. Widely cited by state hospital associations and Medicaid directors on administrative-burden risk."
+  },
+  {
+    "id": "google_health",
+    "name": "Google for Health",
+    "category": "analytics",
+    "description": "Google's healthcare division. Health data search, imaging AI (DeepMind AlphaFold/Med-Gemini), and health information infrastructure. EHR integration via FHIR APIs. CMS-0057-F compliance creates expanded API ecosystem Google can access."
+  },
+  {
+    "id": "chai",
+    "name": "Coalition for Health AI (CHAI)",
+    "category": "analytics",
+    "description": "Multi-stakeholder body (health systems, payers, tech companies, government) developing AI governance frameworks for healthcare. Addresses AI use in prior auth, clinical decision support, and quality measurement — all touched by CMS programs."
+  },
+  {
+    "id": "anthropic_c",
+    "name": "Anthropic",
+    "category": "analytics",
+    "description": "AI safety and applied AI company. Claude models used in clinical documentation, coding assistance, and prior auth automation. Contributes AI safety frameworks referenced by CHAI and ONC health AI guidance."
+  },
+  {
+    "id": "nih_c",
+    "name": "National Institutes of Health",
+    "category": "govt",
+    "description": "Primary federal basic and clinical research funder. NIH-funded research underpins FDA regulatory submissions and IRA drug price justification arguments. All-of-Us program generates RWE-grade real-world health data."
+  },
+  {
+    "id": "cdc",
+    "name": "CDC",
+    "category": "govt",
+    "description": "Tracks population health metrics used in CMS quality program benchmarking. NHSN (National Healthcare Safety Network) is the source for hospital-acquired infection measures in Hospital VBP and HAC programs."
+  },
+  {
+    "id": "ca_dhcs",
+    "name": "CA Dept of Health Care Services",
+    "category": "govt",
+    "description": "Administers California Medicaid (Medi-Cal) — largest state Medicaid program in US. Contracts with Partnership HealthPlan, SFHP, and other Medi-Cal MCOs. Implements CMS-0057-F Medicaid MCO requirements at state level."
+  },
+  {
+    "id": "ca_dph",
+    "name": "CA Dept of Public Health",
+    "category": "govt",
+    "description": "California's public health agency. Coordinates with CDC on population health surveillance. Interacts with health systems and plans on reportable disease, immunization, and public health emergency response."
+  },
+  {
+    "id": "cbo",
+    "name": "Congressional Budget Office (CBO)",
+    "category": "govt",
+    "description": "Nonpartisan federal scorekeeper. Produced the ~10M-coverage-loss-by-2034 estimate for OBBBA's Medicaid/marketplace provisions that anchors most state and national OBBBA impact analysis."
+  },
+  {
+    "id": "ga_dch",
+    "name": "Georgia Dept of Community Health (DCH)",
+    "category": "govt",
+    "description": "Administers Georgia Pathways to Coverage, the nation's only Medicaid work-requirement program predating OBBBA (live since July 2023, extended through Dec 31, 2026). A GAO report (Sept 2025) found the program spent $54.2M on administration vs. $26.2M on care, FY2021 through Q2 FY2025, while enrollment (~7,400-9,175 through 2025-2026) has run far below the ~240,000-250,000-eligible target — widely cited as a preview of national OBBBA work-requirement rollout risk."
+  },
+  {
+    "id": "hca",
+    "name": "HCA Healthcare",
+    "category": "provider",
+    "description": "For-profit hospital system, the largest in the US by hospital count (~223 facilities, as of 2025-2026). A mandatory TEAM model participant at eligible hospitals; the sector's most prominent for-profit outlier in an otherwise nonprofit-dominated landscape."
+  },
+  {
+    "id": "kaiser",
+    "name": "Kaiser Permanente",
+    "category": "provider",
+    "description": "Nonprofit integrated payer-provider system; largest US health system by revenue ($127.7B FY2025, though the figure blends health-plan premiums with care delivery). Consolidated Epic onto Microsoft Azure in 2025 and is a CHAI model-card registry launch partner."
+  },
+  {
+    "id": "commonspirit",
+    "name": "CommonSpirit Health",
+    "category": "provider",
+    "description": "Nonprofit Catholic health system formed by the 2019 CHI-Dignity Health merger; the largest US system by facility affiliations, as of 2025-2026."
+  },
+  {
+    "id": "ascension",
+    "name": "Ascension",
+    "category": "provider",
+    "description": "Nonprofit Catholic health system operating roughly 2,927 facilities across 16 states, as of 2025-2026."
+  },
+  {
+    "id": "providence",
+    "name": "Providence",
+    "category": "provider",
+    "description": "Nonprofit health system; signed the CMS Interoperability Framework pledge in July 2025 and is a CHAI model-card registry launch partner alongside Cleveland Clinic and Kaiser."
+  },
+  {
+    "id": "trinity_health",
+    "name": "Trinity Health",
+    "category": "provider",
+    "description": "Nonprofit multi-state Catholic health system, as of 2025-2026."
+  },
+  {
+    "id": "advocate_health",
+    "name": "Advocate Health",
+    "category": "provider",
+    "description": "Nonprofit health system formed by the 2022 merger of Advocate Aurora Health and Atrium Health, spanning the Midwest and Southeast."
+  },
+  {
+    "id": "mayo_clinic",
+    "name": "Mayo Clinic",
+    "category": "provider",
+    "description": "Nonprofit academic health system; publishes an internal responsible-AI framework (Mayo Clinic Proceedings: Digital Health) and is a CHAI member as of 2025-2026."
+  },
+  {
+    "id": "cleveland_clinic",
+    "name": "Cleveland Clinic",
+    "category": "provider",
+    "description": "Nonprofit academic health system and a CHAI model-card registry launch partner (Feb 2025), alongside Providence and Kaiser."
+  },
+  {
+    "id": "mgb",
+    "name": "Mass General Brigham",
+    "category": "provider",
+    "description": "Nonprofit multi-state academic health system based in Massachusetts."
+  },
+  {
+    "id": "intermountain",
+    "name": "Intermountain Health",
+    "category": "provider",
+    "description": "Nonprofit health system integrated with its own SelectHealth insurance plan; signed the CMS Interoperability Framework pledge in July 2025."
+  },
+  {
+    "id": "northwell",
+    "name": "Northwell Health",
+    "category": "provider",
+    "description": "Nonprofit health system and New York State's largest, as of 2025-2026."
+  },
+  {
+    "id": "mount_sinai",
+    "name": "Mount Sinai Health System",
+    "category": "provider",
+    "description": "Nonprofit academic health system; runs the largest production instance of Epic on Microsoft Azure of any health system, as of 2025-2026."
+  },
+  {
+    "id": "datavant",
+    "name": "Datavant",
+    "category": "analytics",
+    "description": "Health-data tokenization and de-identification company; acquired Aetion (closed Jul 2025) to add causal-inference RWE capability. Pledged to the CMS-Aligned Network in Jul 2025 but holds no TEFCA QHIN designation — its tokenization infrastructure runs atop Databricks (a Marketplace launch partner) and AWS Marketplace.",
+    "qhin_designated": false,
+    "cms_aligned_network": true
+  },
+  {
+    "id": "aetion",
+    "name": "Aetion",
+    "category": "analytics",
+    "description": "Causal-inference real-world-evidence platform; now a Datavant subsidiary (Life Sciences business) following the 2025 acquisition. Its RWE methods are accepted by both FDA and EMA for regulatory submissions.",
+    "qhin_designated": false,
+    "cms_aligned_network": false
+  },
+  {
+    "id": "truveta",
+    "name": "Truveta",
+    "category": "analytics",
+    "description": "Health-system-owned EHR data collective; described as an emerging source for FDA regulatory use following 2025 FDA real-world-evidence guidance, as of 2025-2026.",
+    "qhin_designated": false,
+    "cms_aligned_network": false
+  },
+  {
+    "id": "komodo",
+    "name": "Komodo Health",
+    "category": "analytics",
+    "description": "All-payer claims data platform particularly strong for rare-disease epidemiology research.",
+    "qhin_designated": false,
+    "cms_aligned_network": false
+  },
+  {
+    "id": "iqvia",
+    "name": "IQVIA",
+    "category": "analytics",
+    "description": "The largest real-world-data vendor by scale and the RWD source most used for FDA regulatory submissions, as of 2025-2026.",
+    "qhin_designated": false,
+    "cms_aligned_network": false
+  },
+  {
+    "id": "flatiron",
+    "name": "Flatiron Health",
+    "category": "analytics",
+    "description": "Roche-owned oncology-EHR data company; its data has become a de facto standard for oncology real-world evidence.",
+    "qhin_designated": false,
+    "cms_aligned_network": false
+  },
+  {
+    "id": "trinetx",
+    "name": "TriNetX",
+    "category": "analytics",
+    "description": "Federated real-world-data network spanning 200M+ patients across 170 organizations and 20+ countries (as of Dec 2025) — the most-cited RWD source by volume in this ecosystem.",
+    "qhin_designated": false,
+    "cms_aligned_network": false
+  },
+  {
+    "id": "healthverity",
+    "name": "HealthVerity",
+    "category": "analytics",
+    "description": "Commercial real-world-data vendor in the process of acquiring Symphony Health, as of 2025-2026.",
+    "qhin_designated": false,
+    "cms_aligned_network": false
+  },
+  {
+    "id": "health_gorilla",
+    "name": "Health Gorilla",
+    "category": "hit",
+    "description": "The first dual-designated TEFCA QHIN and California QHIO, and an early adopter of the CMS-Aligned Network.",
+    "qhin_designated": true,
+    "cms_aligned_network": true
+  },
+  {
+    "id": "commonwell",
+    "name": "CommonWell Health Alliance",
+    "category": "hit",
+    "description": "TEFCA-designated Qualified Health Information Network (QHIN).",
+    "qhin_designated": true,
+    "cms_aligned_network": false
+  },
+  {
+    "id": "ehealth_exchange",
+    "name": "eHealth Exchange",
+    "category": "hit",
+    "description": "TEFCA-designated Qualified Health Information Network (QHIN).",
+    "qhin_designated": true,
+    "cms_aligned_network": false
+  },
+  {
+    "id": "surescripts",
+    "name": "Surescripts",
+    "category": "hit",
+    "description": "TEFCA-designated QHIN as of April 2025.",
+    "qhin_designated": true,
+    "cms_aligned_network": false
+  },
+  {
+    "id": "oracle_hin",
+    "name": "Oracle Health Information Network",
+    "category": "hit",
+    "description": "TEFCA-designated QHIN as of November 20, 2025 — a distinct entity from Oracle Health's cloud/EHR business.",
+    "qhin_designated": true,
+    "cms_aligned_network": false
+  },
+  {
+    "id": "particle_health",
+    "name": "Particle Health",
+    "category": "analytics",
+    "description": "Health-data exchange and RWD layer; an emerging player not currently designated as a TEFCA QHIN.",
+    "qhin_designated": false,
+    "cms_aligned_network": false
+  },
+  {
+    "id": "azure",
+    "name": "Microsoft Azure",
+    "category": "digital",
+    "description": "Cloud platform behind the deepest cloud-EHR partnership in the sector — Epic has run on Azure since 2020, expanded to Azure OpenAI integration in 2023, and was showcased at Microsoft Ignite 2025 for ambient documentation, patient chatbots, and prior-authorization workflows at sites like Ochsner and Denver Health."
+  },
+  {
+    "id": "oracle_health",
+    "name": "Oracle Health",
+    "category": "digital",
+    "description": "EHR business built on the 2022 Cerner acquisition; rebuilt its next-generation EHR natively on Oracle Cloud Infrastructure in 2025, rather than partnering with an independent EHR vendor the way Microsoft does with Epic. A 2025 security incident affected legacy Cerner-era migration environments.",
+    "transitional": true
+  },
+  {
+    "id": "google_cloud",
+    "name": "Google Cloud",
+    "category": "digital",
+    "description": "Cloud vendor with a distributed set of FHIR-native Healthcare API and Vertex AI engagements across health systems — not anchored to one flagship EHR partnership the way Azure and Oracle Cloud are."
+  },
+  {
+    "id": "aws",
+    "name": "AWS",
+    "category": "digital",
+    "description": "Cloud vendor offering HealthLake (FHIR-native storage) and Clean Rooms (which powers Datavant Connect), with broad marketplace integrations rather than one named EHR partner."
+  },
+  {
+    "id": "fda",
+    "name": "U.S. Food and Drug Administration",
+    "category": "govt",
+    "description": "Federal agency exercising mandatory device-level regulation over AI-enabled medical software, operating in parallel with ONC's narrower EHR-transparency rule and CHAI's voluntary assurance ecosystem."
+  },
+  {
+    "id": "fda_dhcoe",
+    "name": "FDA Digital Health Center of Excellence",
+    "category": "ai_gov",
+    "description": "CDRH center issuing AI lifecycle and Predetermined Change Control Plan (PCCP) guidance — finalized December 3, 2024 — the first formal mechanism letting a cleared AI device update itself within a pre-authorized envelope rather than requiring a new submission for every model refresh. Runs the Digital Health Advisory Committee."
+  },
+  {
+    "id": "fda_dhac",
+    "name": "FDA Digital Health Advisory Committee",
+    "category": "ai_gov",
+    "description": "FDA advisory committee on AI-enabled devices; held its inaugural meeting in Nov 2024 and a second in Nov 2025."
+  },
+  {
+    "id": "onc_astp",
+    "name": "ONC / ASTP",
+    "category": "ai_gov",
+    "description": "HHS office whose HTI-1 rule (effective Jan 1, 2025) requires certified EHRs to expose 31 source-attribute transparency fields for predictive decision-support tools — mandatory, but narrower in reach than CHAI's model-card approach since it only covers algorithms deployed through certified EHRs. Status is unsettled: ASTP/ONC’s HTI-5 proposed rule (published January 2026, comment period closed February 27, 2026) would REMOVE these source-attribute and risk-management requirements from the certification program. Not finalized as of September 2026."
+  },
+  {
+    "id": "joint_commission",
+    "name": "The Joint Commission",
+    "category": "ai_gov",
+    "description": "Hospital accreditor that entered a strategic partnership with CHAI in June 2025 and released the first joint guidance (Responsible Use of AI in Healthcare) on September 17, 2025 on Responsible Use of AI guidance and is planning a voluntary AI certification track for its 22,000+ accredited organizations."
+  },
+  {
+    "id": "duke_ai_gov",
+    "name": "Duke Health AI Evaluation & Governance Program",
+    "category": "ai_gov",
+    "description": "Provider-side AI governance program arguing (in Nature Medicine and JAMA, as of 2025-2026) that recurring local validation matters more than one-time external validation — a distinct governance philosophy from CHAI's registry-based transparency approach."
+  },
+  {
+    "id": "duke_margolis",
+    "name": "Duke-Margolis Institute",
+    "category": "ai_gov",
+    "description": "Health policy institute publishing AI governance policy analysis, as of 2025-2026."
+  },
+  {
+    "id": "nist",
+    "name": "NIST",
+    "category": "ai_gov",
+    "description": "Federal standards body maintaining the AI Risk Management Framework and its Generative AI Profile, referenced across FDA, ONC, and CHAI AI-governance work."
+  },
+  {
+    "id": "modelop",
+    "name": "ModelOp",
+    "category": "ai_gov",
+    "description": "CHAI-certified Assurance Resource Provider (designated Nov 2025), operationalizing recurring AI model validation and monitoring for health systems."
+  },
+  {
+    "id": "acumen_llc",
+    "name": "Acumen LLC",
+    "category": "analytics",
+    "description": "CMS research contractor holding the TEAM implementation/monitoring contract (~$56.6M total value, ~$13.6M obligated as of a January 2026 modification) plus a smaller CMS Innovation Center payment-standardization support contract."
+  },
+  {
+    "id": "mathematica",
+    "name": "Mathematica",
+    "category": "analytics",
+    "description": "CMS research contractor holding Behavioral Health Measures Development (BHIOMM) work, RMADA 2 evaluation task orders, and Drug Price Negotiation Program analyses."
+  },
+  {
+    "id": "yale_core",
+    "name": "Yale New Haven Health / CORE",
+    "category": "analytics",
+    "description": "CMS contractor developing the total-cost-of-care measure for the Innovation in Behavioral Health (IBH) Model."
+  },
+  {
+    "id": "aha",
+    "name": "American Hospital Association (AHA)",
+    "category": "provider",
+    "description": "National hospital trade association representing roughly 5,000 member hospitals; as of 2025-2026, actively lobbying CMS and Congress to make the TEAM bundled-payment model voluntary rather than mandatory."
+  },
+  {
+    "id": "aco_reach_prog",
+    "name": "ACO REACH",
+    "category": "program",
+    "description": "CMMI ACO model with 74 participants and 1.7M beneficiaries for PY2026; scheduled to conclude at the end of 2026 and be succeeded by the LEAD model in 2027."
+  },
+  {
+    "id": "lead_prog",
+    "name": "LEAD (Long-Term Enhanced ACO Design)",
+    "category": "program",
+    "description": "Successor ACO model to ACO REACH, launching in 2027."
+  },
+  {
+    "id": "cms_aligned_network_prog",
+    "name": "CMS Interoperability Framework / CMS-Aligned Network",
+    "category": "program",
+    "description": "Voluntary CMS interoperability initiative announced Jul 30, 2025 at a White House event with 60+ company pledges, layered on top of TEFCA. Unlike TEFCA's organization-to-organization exchange, its emphasis is getting data into patients' own apps (digital ID cards, Blue Button, Data at the Point of Care)."
+  },
+  {
+    "id": "tefca_prog",
+    "name": "TEFCA (Trusted Exchange Framework and Common Agreement)",
+    "category": "program",
+    "description": "QHIN-to-QHIN health data exchange framework built via the 21st Century Cures Act; distinct from — and predates — the CMS-Aligned Network."
+  },
+  {
+    "id": "ibh_prog",
+    "name": "Innovation in Behavioral Health (IBH) Model",
+    "category": "program",
+    "description": "8-year CMMI model (2025-2032) integrating physical health into community behavioral health settings. Cohort I (Michigan, New York, Oklahoma, South Carolina) began Jan 2025; Cohort II award notices are expected September 2026."
+  },
+  {
+    "id": "rmada3",
+    "name": "RMADA 3",
+    "category": "program",
+    "description": "CMS's ~$3.5B, 5-year model-design/evaluation contracting vehicle (17 companies), awarded July 2026, succeeding the ~$5B RMADA 2 — the mechanism through which most CMS model-evaluation contractor relationships now flow."
+  },
+  {
+    "id": "hosp_quality_prog",
+    "name": "Hospital IQR / HVBP / HRRP / HAC Reduction Programs",
+    "category": "program",
+    "description": "The mandatory, sequentially-stacked CMS hospital quality reporting and payment-adjustment programs (Inpatient Quality Reporting, Hospital Value-Based Purchasing, Hospital Readmissions Reduction, Hospital-Acquired Condition Reduction) that apply across nearly all acute-care hospitals."
+  },
+  {
+    "id": "opioid_special",
+    "name": "Opioid Response (Program Context)",
+    "category": "emergent",
+    "description": "The Consolidated Appropriations Act, 2024 made the mandatory Medicaid Medication for Opioid Use Disorder (MOUD) benefit permanent via CMS SMD #24-004 (Nov 19, 2024), reversing a September 2025 expiration date. No verified company-level node surfaced in this research pass — RTI International separately holds the CMS contract evaluating the opioid use disorder treatment demonstration.",
+    "weak_link": true
+  },
+  {
+    "id": "ed_special",
+    "name": "Emergency Department Innovation (Program Context)",
+    "category": "emergent",
+    "description": "The ET3 (Emergency Triage, Treat, and Transport) Model ended in December 2023 — over 90% of its interventions were treatment-in-place via telehealth — and is now historical context rather than an active program. No active company-level ED-innovation node surfaced in this research pass.",
+    "weak_link": true
+  }
 ]

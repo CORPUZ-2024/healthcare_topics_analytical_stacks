@@ -7,8 +7,14 @@
     "enacted": "2010-03-23",
     "description": "Landmark health reform law (P.L. 111-148) enacting comprehensive market reforms, mandating coverage, expanding Medicaid eligibility to 138% FPL, establishing state insurance exchanges, creating the Center for Medicare and Medicaid Innovation (CMMI), and authorizing the Medicare Shared Savings Program.",
     "links": [
-      { "label": "CMS ACA Overview", "url": "https://www.cms.gov/cciio/resources/fact-sheets-and-faqs/aca" },
-      { "label": "Full Text (GPO)", "url": "https://www.gpo.gov/fdsys/pkg/PLAW-111publ148/pdf/PLAW-111publ148.pdf" }
+      {
+        "label": "CMS ACA Overview",
+        "url": "https://www.cms.gov/cciio/resources/fact-sheets-and-faqs/aca"
+      },
+      {
+        "label": "Full Text (GPO)",
+        "url": "https://www.gpo.gov/fdsys/pkg/PLAW-111publ148/pdf/PLAW-111publ148.pdf"
+      }
     ]
   },
   {
@@ -19,8 +25,14 @@
     "enacted": "2015-04-16",
     "description": "P.L. 114-10 repealing the Sustainable Growth Rate (SGR) formula and establishing the Quality Payment Program (QPP), comprising two tracks: Merit-based Incentive Payment System (MIPS) and Advanced Alternative Payment Models (Advanced APMs).",
     "links": [
-      { "label": "CMS QPP Overview", "url": "https://www.cms.gov/medicare/quality-payment-program" },
-      { "label": "Full Text (GPO)", "url": "https://www.gpo.gov/fdsys/pkg/PLAW-114publ10/pdf/PLAW-114publ10.pdf" }
+      {
+        "label": "CMS QPP Overview",
+        "url": "https://www.cms.gov/medicare/quality-payment-program"
+      },
+      {
+        "label": "Full Text (GPO)",
+        "url": "https://www.gpo.gov/fdsys/pkg/PLAW-114publ10/pdf/PLAW-114publ10.pdf"
+      }
     ]
   },
   {
@@ -31,7 +43,10 @@
     "enacted": "2009-02-17",
     "description": "Title XIII of the American Recovery and Reinvestment Act (P.L. 111-5). Provided $27 billion in incentives for EHR adoption, strengthened HIPAA enforcement, empowered the Office of the National Coordinator for Health IT (ONC), and established Meaningful Use incentive programs under Medicare and Medicaid.",
     "links": [
-      { "label": "ONC HITECH Overview", "url": "https://www.healthit.gov/topic/laws-regulation-and-policy/health-it-legislation" }
+      {
+        "label": "ONC HITECH Overview",
+        "url": "https://www.healthit.gov/topic/laws-regulation-and-policy/health-it-legislation"
+      }
     ]
   },
   {
@@ -42,7 +57,10 @@
     "enacted": "1997-08-05",
     "description": "P.L. 105-33 creating the State Children's Health Insurance Program (SCHIP/CHIP), introducing Medicare+Choice (precursor to Medicare Advantage), and implementing prospective payment systems for home health and skilled nursing facilities.",
     "links": [
-      { "label": "CMS Historical Overview", "url": "https://www.cms.gov/medicare/payment/prospective-payment-systems" }
+      {
+        "label": "CMS Historical Overview",
+        "url": "https://www.cms.gov/medicare/payment/prospective-payment-systems"
+      }
     ]
   },
   {
@@ -53,8 +71,14 @@
     "enacted": "2003-12-08",
     "description": "Medicare Prescription Drug, Improvement, and Modernization Act (P.L. 108-173). Established Medicare Part D prescription drug benefit, reformed Medicare+Choice into Medicare Advantage (Part C), and created health savings accounts (HSAs).",
     "links": [
-      { "label": "CMS Part D Overview", "url": "https://www.cms.gov/medicare/prescription-drug-coverage" },
-      { "label": "CMS Medicare Advantage", "url": "https://www.cms.gov/medicare/health-plans/medicareadvtgspecratestats" }
+      {
+        "label": "CMS Part D Overview",
+        "url": "https://www.cms.gov/medicare/prescription-drug-coverage"
+      },
+      {
+        "label": "CMS Medicare Advantage",
+        "url": "https://www.cms.gov/medicare/health-plans/medicareadvtgspecratestats"
+      }
     ]
   },
   {
@@ -65,7 +89,10 @@
     "enacted": "2009-02-04",
     "description": "P.L. 111-3 reauthorizing and expanding the Children's Health Insurance Program (CHIP), providing $32.8 billion in additional funding, expanding eligibility, and establishing new quality measures and performance bonuses for states.",
     "links": [
-      { "label": "CMS CHIP Overview", "url": "https://www.cms.gov/medicare-medicaid-coordination/fraud-prevention/medicaid-integrity-education/provider-education-toolkits/downloads/chipra-overview.pdf" }
+      {
+        "label": "CMS CHIP Overview",
+        "url": "https://www.cms.gov/medicare-medicaid-coordination/fraud-prevention/medicaid-integrity-education/provider-education-toolkits/downloads/chipra-overview.pdf"
+      }
     ]
   },
   {
@@ -76,7 +103,10 @@
     "enacted": "2021-03-11",
     "description": "P.L. 117-2 COVID-19 relief legislation providing enhanced federal matching funds (FMAP) for Medicaid and CHIP, extending ACA marketplace subsidies, funding COBRA continuation coverage, and expanding Medicaid home- and community-based services.",
     "links": [
-      { "label": "CMS ARP Overview", "url": "https://www.cms.gov/newsroom/fact-sheets/american-rescue-plan-act-2021" }
+      {
+        "label": "CMS ARP Overview",
+        "url": "https://www.cms.gov/newsroom/fact-sheets/american-rescue-plan-act-2021"
+      }
     ]
   },
   {
@@ -87,8 +117,14 @@
     "enacted": "2022-08-16",
     "description": "P.L. 117-169 authorizing Medicare to negotiate drug prices directly with manufacturers (starting 2026), capping Medicare Part D out-of-pocket costs at $2,000/year, and extending ACA premium tax credits through plan year 2025. Those enhanced premium tax credits expired December 31, 2025 without congressional renewal, restoring the pre-2021 'subsidy cliff' at 400% FPL for ACA marketplace enrollees in 2026.",
     "links": [
-      { "label": "CMS Drug Negotiation", "url": "https://www.cms.gov/inflation-reduction-act" },
-      { "label": "CMS Part D Redesign", "url": "https://www.cms.gov/medicare/prescription-drug-coverage/part-d-drug-pricing" }
+      {
+        "label": "CMS Drug Negotiation",
+        "url": "https://www.cms.gov/inflation-reduction-act"
+      },
+      {
+        "label": "CMS Part D Redesign",
+        "url": "https://www.cms.gov/medicare/prescription-drug-coverage/part-d-drug-pricing"
+      }
     ]
   },
   {
@@ -99,9 +135,18 @@
     "enacted": "2025-07-04",
     "description": "P.L. 119-21 (H.R. 1) budget reconciliation law. Healthcare provisions: mandatory Medicaid community-engagement (work) requirements of 80 hrs/month for the ACA expansion population in the 40 expansion states + DC, effective by January 1, 2027 (CMS interim final rule published June 1, 2026; several states implementing on accelerated state-level timelines); restricts ACA marketplace premium tax credit eligibility for lawfully present immigrants (five-year waiting period for sub-100%-FPL immigrants effective for tax years after 2025; narrows the 'lawfully present' definition itself, excluding refugees/asylees/TPS holders, effective January 1, 2027); phases down state Medicaid provider taxes from 6% to 3.5% (expansion states, by 2032) and caps state-directed payments at 100%/110% of Medicare rates; and establishes a $50B Rural Health Transformation Fund (FY2026-2030) to partially offset provider revenue losses. CBO estimated approximately 10 million people losing Medicaid/marketplace coverage by 2034 from OBBBA's coverage provisions combined.",
     "links": [
-      { "label": "Full Text (P.L. 119-21)", "url": "https://www.congress.gov/bill/119th-congress/house-bill/1" },
-      { "label": "KFF: Tracking Work Requirements Implementation", "url": "https://www.kff.org/medicaid/medicaid-work-requirements-tracker-1115-waivers/" },
-      { "label": "Georgetown CCF: H.R. 1 Readiness Tracker", "url": "https://ccf.georgetown.edu/2026/08/24/h-r-1-readiness-tracker-update-strain-is-building-before-the-work-reporting-requirements-clock-starts/" }
+      {
+        "label": "Full Text (P.L. 119-21)",
+        "url": "https://www.congress.gov/bill/119th-congress/house-bill/1"
+      },
+      {
+        "label": "KFF: Tracking Work Requirements Implementation",
+        "url": "https://www.kff.org/medicaid/medicaid-work-requirements-tracker-1115-waivers/"
+      },
+      {
+        "label": "Georgetown CCF: H.R. 1 Readiness Tracker",
+        "url": "https://ccf.georgetown.edu/2026/08/24/h-r-1-readiness-tracker-update-strain-is-building-before-the-work-reporting-requirements-clock-starts/"
+      }
     ]
   },
   {
@@ -112,7 +157,10 @@
     "enacted": null,
     "description": "Federal agency within HHS administering Medicare, Medicaid, CHIP, PACE, and the Health Insurance Marketplace. CMS oversees over $1.5 trillion in annual expenditures and sets coverage, payment, and quality standards for the U.S. healthcare system.",
     "links": [
-      { "label": "CMS.gov", "url": "https://www.cms.gov" }
+      {
+        "label": "CMS.gov",
+        "url": "https://www.cms.gov"
+      }
     ]
   },
   {
@@ -123,7 +171,10 @@
     "enacted": null,
     "description": "Created by Section 3021 of the ACA, CMMI (the Innovation Center) tests innovative payment and service delivery models to reduce costs and improve quality for Medicare, Medicaid, and CHIP beneficiaries. CMMI operates within CMS.",
     "links": [
-      { "label": "CMS Innovation Center", "url": "https://innovation.cms.gov" }
+      {
+        "label": "CMS Innovation Center",
+        "url": "https://innovation.cms.gov"
+      }
     ]
   },
   {
@@ -134,7 +185,10 @@
     "enacted": null,
     "description": "HHS agency established by HITECH to coordinate nationwide health IT policy, standards, and EHR certification. ONC oversees the 21st Century Cures Act information blocking rules, the TEFCA interoperability framework, and the Health IT Certification Program.",
     "links": [
-      { "label": "HealthIT.gov", "url": "https://www.healthit.gov" }
+      {
+        "label": "HealthIT.gov",
+        "url": "https://www.healthit.gov"
+      }
     ]
   },
   {
@@ -145,7 +199,10 @@
     "enacted": null,
     "description": "HHS agency improving access to healthcare for underserved populations. HRSA administers the 340B Drug Pricing Program, Federally Qualified Health Centers (FQHCs), the National Health Service Corps, and coordinates with CMS on PACE program policy.",
     "links": [
-      { "label": "HRSA.gov", "url": "https://www.hrsa.gov" }
+      {
+        "label": "HRSA.gov",
+        "url": "https://www.hrsa.gov"
+      }
     ]
   },
   {
@@ -156,7 +213,10 @@
     "enacted": null,
     "description": "HHS agency producing evidence to make healthcare safer, higher quality, more accessible, equitable, and affordable. AHRQ supports research on clinical practice, technology assessment, healthcare cost and utilization (HCUP), and patient safety.",
     "links": [
-      { "label": "AHRQ.gov", "url": "https://www.ahrq.gov" }
+      {
+        "label": "AHRQ.gov",
+        "url": "https://www.ahrq.gov"
+      }
     ]
   },
   {
@@ -167,7 +227,10 @@
     "enacted": null,
     "description": "Covers inpatient hospital stays, skilled nursing facility care (post-acute), home health, and hospice. Financed primarily through payroll taxes. Payment to hospitals uses the Inpatient Prospective Payment System (IPPS) based on Diagnosis-Related Groups (DRGs).",
     "links": [
-      { "label": "CMS IPPS", "url": "https://www.cms.gov/medicare/payment/prospective-payment-systems/inpatient-hospitals" }
+      {
+        "label": "CMS IPPS",
+        "url": "https://www.cms.gov/medicare/payment/prospective-payment-systems/inpatient-hospitals"
+      }
     ]
   },
   {
@@ -178,7 +241,10 @@
     "enacted": null,
     "description": "Covers physician services, outpatient care, durable medical equipment, and preventive services. Financed through beneficiary premiums (25%) and general revenues (75%). Physician payment uses the Resource-Based Relative Value Scale (RBRVS) under the Physician Fee Schedule.",
     "links": [
-      { "label": "CMS Physician Fee Schedule", "url": "https://www.cms.gov/medicare/payment/physician-fee-schedule" }
+      {
+        "label": "CMS Physician Fee Schedule",
+        "url": "https://www.cms.gov/medicare/payment/physician-fee-schedule"
+      }
     ]
   },
   {
@@ -187,9 +253,12 @@
     "category": "program",
     "ptype": "Federal Program",
     "enacted": null,
-    "description": "Private health plan alternative to traditional Medicare (Parts A and B) established under the Medicare Modernization Act of 2003. Plans receive risk-adjusted capitation payments from CMS. Enrollment exceeds 30 million (over 50% of Medicare beneficiaries as of 2024).",
+    "description": "Private health plan alternative to traditional Medicare (Parts A and B) established under the Medicare Modernization Act of 2003. Plans receive risk-adjusted capitation payments from CMS. Enrollment is approximately 35 million — about 55% of Medicare beneficiaries as of February 2026.",
     "links": [
-      { "label": "CMS Medicare Advantage", "url": "https://www.cms.gov/medicare/health-plans/medicareadvtgspecratestats" }
+      {
+        "label": "CMS Medicare Advantage",
+        "url": "https://www.cms.gov/medicare/health-plans/medicareadvtgspecratestats"
+      }
     ]
   },
   {
@@ -200,7 +269,10 @@
     "enacted": null,
     "description": "Voluntary outpatient prescription drug benefit established by MMA 2003, delivered through private Prescription Drug Plans (PDPs) or Medicare Advantage Prescription Drug plans (MA-PDs). The IRA 2022 redesigned Part D with a $2,000 annual out-of-pocket cap effective 2025.",
     "links": [
-      { "label": "CMS Part D", "url": "https://www.cms.gov/medicare/prescription-drug-coverage" }
+      {
+        "label": "CMS Part D",
+        "url": "https://www.cms.gov/medicare/prescription-drug-coverage"
+      }
     ]
   },
   {
@@ -209,9 +281,12 @@
     "category": "program",
     "ptype": "Federal-State Program",
     "enacted": null,
-    "description": "Joint federal-state means-tested health coverage for low-income individuals including children, pregnant women, elderly adults, and people with disabilities. ACA expanded eligibility to adults up to 138% FPL; as of 2024, 40 states plus DC have adopted expansion. Over 80 million enrollees.",
+    "description": "Joint federal-state means-tested health coverage for low-income individuals including children, pregnant women, elderly adults, and people with disabilities. ACA expanded eligibility to adults up to 138% FPL; 40 states plus DC have adopted expansion. Enrollment was approximately 73.5 million across Medicaid and CHIP as of May 2026, down from an unwinding-era peak above 90 million.",
     "links": [
-      { "label": "CMS Medicaid", "url": "https://www.cms.gov/medicaid" }
+      {
+        "label": "CMS Medicaid",
+        "url": "https://www.cms.gov/medicaid"
+      }
     ]
   },
   {
@@ -222,7 +297,10 @@
     "enacted": null,
     "description": "Provides health coverage to children in families with incomes too high for Medicaid but who cannot afford private insurance. Created by BBA 1997, reauthorized by CHIPRA 2009. States may operate CHIP as a Medicaid expansion, separate program, or combination.",
     "links": [
-      { "label": "CMS CHIP", "url": "https://www.cms.gov/medicaid/chip" }
+      {
+        "label": "CMS CHIP",
+        "url": "https://www.cms.gov/medicaid/chip"
+      }
     ]
   },
   {
@@ -233,8 +311,14 @@
     "enacted": null,
     "description": "CMS physician payment reform program established by MACRA 2015 offering two tracks: MIPS (Merit-based Incentive Payment System) and Advanced APMs. QPP replaced the SGR-based sustainable growth rate formula and ties physician payment adjustments to quality and value.",
     "links": [
-      { "label": "CMS QPP", "url": "https://www.cms.gov/medicare/quality-payment-program" },
-      { "label": "QPP Resource Library", "url": "https://qpp.cms.gov" }
+      {
+        "label": "CMS QPP",
+        "url": "https://www.cms.gov/medicare/quality-payment-program"
+      },
+      {
+        "label": "QPP Resource Library",
+        "url": "https://qpp.cms.gov"
+      }
     ]
   },
   {
@@ -243,9 +327,12 @@
     "category": "program",
     "ptype": "Medicare Payment Track",
     "enacted": null,
-    "description": "QPP track for eligible clinicians not in Advanced APMs. Performance scored across four categories: Quality, Improvement Activities, Promoting Interoperability, and Cost. Final score determines a positive or negative payment adjustment (up to ±9% in 2024) applied two years later.",
+    "description": "QPP track for eligible clinicians not in Advanced APMs. Performance scored across four categories: Quality, Improvement Activities, Promoting Interoperability, and Cost. Final score determines a positive or negative payment adjustment (statutory maximum ±9%) applied two years later.",
     "links": [
-      { "label": "CMS MIPS Overview", "url": "https://www.cms.gov/medicare/quality-payment-program/merit-based-incentive-payment-system-mips" }
+      {
+        "label": "CMS MIPS Overview",
+        "url": "https://www.cms.gov/medicare/quality-payment-program/merit-based-incentive-payment-system-mips"
+      }
     ]
   },
   {
@@ -254,9 +341,12 @@
     "category": "program",
     "ptype": "Medicare Payment Track",
     "enacted": null,
-    "description": "QPP track for clinicians bearing nominal financial risk through CMS-designated Advanced APMs (e.g., ACO REACH, MSSP Enhanced track, PCF). Qualifying APM Participants (QPs) receive a 5% incentive bonus through 2024, then higher fee schedule updates.",
+    "description": "QPP track for clinicians bearing nominal financial risk through CMS-designated Advanced APMs (e.g., ACO REACH, MSSP Enhanced track, PCF). Qualifying APM Participants (QPs) received a 5% incentive bonus through performance year 2022 (paid 2024); the bonus was subsequently extended at reduced rates before converting to higher fee-schedule updates.",
     "links": [
-      { "label": "CMS Advanced APMs", "url": "https://www.cms.gov/medicare/quality-payment-program/advanced-apm" }
+      {
+        "label": "CMS Advanced APMs",
+        "url": "https://www.cms.gov/medicare/quality-payment-program/advanced-apm"
+      }
     ]
   },
   {
@@ -267,7 +357,10 @@
     "enacted": null,
     "description": "CMS program authorized by ACA Section 3022 allowing groups of providers to form Accountable Care Organizations (ACOs) to coordinate care for Medicare FFS beneficiaries. ACOs meeting quality benchmarks share in savings against a benchmark expenditure target. The BASIC and ENHANCED tracks offer varying risk levels.",
     "links": [
-      { "label": "CMS MSSP", "url": "https://www.cms.gov/medicare/payment/medicare-shared-savings-program" }
+      {
+        "label": "CMS MSSP",
+        "url": "https://www.cms.gov/medicare/payment/medicare-shared-savings-program"
+      }
     ]
   },
   {
@@ -278,7 +371,10 @@
     "enacted": null,
     "description": "Provides comprehensive medical and social services to community-dwelling elderly individuals (typically 55+) eligible for nursing home level of care. PACE organizations receive combined Medicare and Medicaid capitation payments. Established permanently under BBA 1997.",
     "links": [
-      { "label": "CMS PACE", "url": "https://www.cms.gov/medicare-medicaid-coordination/medicare-and-medicaid-coordination/medicare-medicaid-coordination-office/pace" }
+      {
+        "label": "CMS PACE",
+        "url": "https://www.cms.gov/medicare-medicaid-coordination/medicare-and-medicaid-coordination/medicare-medicaid-coordination-office/pace"
+      }
     ]
   },
   {
@@ -289,7 +385,10 @@
     "enacted": null,
     "description": "CMMI model (2023–) replacing the Global and Professional Direct Contracting Model. ACOs assume prospective attribution and financial risk for Medicare FFS beneficiaries, with an explicit health equity focus requiring a Health Equity Plan. Professional and Global risk tracks available.",
     "links": [
-      { "label": "CMMI ACO REACH", "url": "https://innovation.cms.gov/innovation-models/aco-reach" }
+      {
+        "label": "CMMI ACO REACH",
+        "url": "https://innovation.cms.gov/innovation-models/aco-reach"
+      }
     ]
   },
   {
@@ -300,7 +399,10 @@
     "enacted": null,
     "description": "CMMI episode-based payment model (2018–) where participant initiators accept financial accountability for quality and cost of care during a 90-day clinical episode triggered by inpatient hospitalization. Covers 32 clinical episode types.",
     "links": [
-      { "label": "CMMI BPCI Advanced", "url": "https://innovation.cms.gov/innovation-models/bpci-advanced" }
+      {
+        "label": "CMMI BPCI Advanced",
+        "url": "https://innovation.cms.gov/innovation-models/bpci-advanced"
+      }
     ]
   },
   {
@@ -311,7 +413,10 @@
     "enacted": null,
     "description": "CMMI specialty care model (2023–) successor to the Oncology Care Model. Physician practices accept downside risk for 6-month episodes of chemotherapy treatment across 7 cancer types. Incorporates health equity screening, care management payments, and performance-based risk.",
     "links": [
-      { "label": "CMMI EOM", "url": "https://innovation.cms.gov/innovation-models/enhancing-oncology-model" }
+      {
+        "label": "CMMI EOM",
+        "url": "https://innovation.cms.gov/innovation-models/enhancing-oncology-model"
+      }
     ]
   },
   {
@@ -320,9 +425,12 @@
     "category": "model",
     "ptype": "CMMI Model",
     "enacted": null,
-    "description": "CMMI primary care model (2024–) designed for primary care practices in eight states. Builds on MSSP and prior primary care models with a graduated 10-year pathway toward prospective total cost of care accountability. Focuses on care management, behavioral health integration, and specialist partnerships.",
+    "description": "CMMI primary care model (2024–2025; terminated early, ended June 30, 2025) designed for primary care practices in eight states. Builds on MSSP and prior primary care models with a graduated 10-year pathway toward prospective total cost of care accountability. Focuses on care management, behavioral health integration, and specialist partnerships.",
     "links": [
-      { "label": "CMMI Making Care Primary", "url": "https://innovation.cms.gov/innovation-models/making-care-primary" }
+      {
+        "label": "CMMI Making Care Primary",
+        "url": "https://innovation.cms.gov/innovation-models/making-care-primary"
+      }
     ]
   },
   {
@@ -333,7 +441,10 @@
     "enacted": null,
     "description": "CMMI model (2024–) supporting individuals with dementia and their caregivers through interdisciplinary care teams, care navigator services, and respite care. Participants receive per-beneficiary-per-month payments and can earn performance-based incentives.",
     "links": [
-      { "label": "CMMI GUIDE", "url": "https://innovation.cms.gov/innovation-models/guide" }
+      {
+        "label": "CMMI GUIDE",
+        "url": "https://innovation.cms.gov/innovation-models/guide"
+      }
     ]
   },
   {
@@ -344,7 +455,10 @@
     "enacted": null,
     "description": "CMMI state-level model (2024–) testing all-payer total cost of care approaches in Maryland, Vermont, Connecticut, New York, and other states. States implement population-based payment methodologies spanning Medicare, Medicaid, and commercial payers.",
     "links": [
-      { "label": "CMMI AHEAD", "url": "https://innovation.cms.gov/innovation-models/ahead" }
+      {
+        "label": "CMMI AHEAD",
+        "url": "https://innovation.cms.gov/innovation-models/ahead"
+      }
     ]
   },
   {
@@ -355,7 +469,10 @@
     "enacted": null,
     "description": "CMMI episode-based payment model (2016–) holding hospitals accountable for quality and cost of care for Medicare FFS patients undergoing hip or knee replacement surgery through a 90-day episode. Hospitals bear upside and downside financial risk relative to a target price.",
     "links": [
-      { "label": "CMMI CJR", "url": "https://innovation.cms.gov/innovation-models/cjr" }
+      {
+        "label": "CMMI CJR",
+        "url": "https://innovation.cms.gov/innovation-models/cjr"
+      }
     ]
   },
   {
@@ -366,7 +483,10 @@
     "enacted": null,
     "description": "CMMI specialty care model (2016–2022) for oncology practices. Practices received monthly enhanced oncology services payments and assumed performance-based risk for 6-month chemotherapy episodes. Predecessor to the Enhancing Oncology Model (EOM).",
     "links": [
-      { "label": "CMMI OCM", "url": "https://innovation.cms.gov/innovation-models/oncology-care" }
+      {
+        "label": "CMMI OCM",
+        "url": "https://innovation.cms.gov/innovation-models/oncology-care"
+      }
     ]
   },
   {
@@ -377,7 +497,10 @@
     "enacted": null,
     "description": "CMMI primary care model (2021–) offering a flat primary care visit fee, a population-based payment, and performance-based adjustments. Designed for independent and small primary care practices ready to accept accountability for total cost of care.",
     "links": [
-      { "label": "CMMI PCF", "url": "https://innovation.cms.gov/innovation-models/primary-care-first-model-options" }
+      {
+        "label": "CMMI PCF",
+        "url": "https://innovation.cms.gov/innovation-models/primary-care-first-model-options"
+      }
     ]
   },
   {
@@ -388,7 +511,10 @@
     "enacted": null,
     "description": "CMMI model (2024–) testing integration of physical health services into community behavioral health settings. Participating practices receive infrastructure payments and per-member-per-month payments to screen, treat, and coordinate care for Medicaid and Medicare beneficiaries with mental health/SUD conditions.",
     "links": [
-      { "label": "CMMI IBH", "url": "https://innovation.cms.gov/innovation-models/innovation-in-behavioral-health" }
+      {
+        "label": "CMMI IBH",
+        "url": "https://innovation.cms.gov/innovation-models/innovation-in-behavioral-health"
+      }
     ]
   },
   {
@@ -399,7 +525,10 @@
     "enacted": null,
     "description": "Annual CMS rulemaking updating IPPS payment rates, DRG weights, outlier thresholds, disproportionate share hospital (DSH) adjustments, quality reporting requirements (IQR), and value-based purchasing (VBP) program parameters for acute care hospitals. Published each August for the upcoming fiscal year.",
     "links": [
-      { "label": "CMS IPPS Rules", "url": "https://www.cms.gov/medicare/payment/prospective-payment-systems/inpatient-hospitals" }
+      {
+        "label": "CMS IPPS Rules",
+        "url": "https://www.cms.gov/medicare/payment/prospective-payment-systems/inpatient-hospitals"
+      }
     ]
   },
   {
@@ -410,7 +539,10 @@
     "enacted": null,
     "description": "Annual CMS rulemaking updating OPPS payment rates for hospital outpatient departments, ambulatory payment classifications (APCs), ASC payment rates, quality reporting requirements (OQR), and price transparency policies. Published each November for the upcoming calendar year.",
     "links": [
-      { "label": "CMS OPPS Rules", "url": "https://www.cms.gov/medicare/payment/prospective-payment-systems/hospital-outpatient" }
+      {
+        "label": "CMS OPPS Rules",
+        "url": "https://www.cms.gov/medicare/payment/prospective-payment-systems/hospital-outpatient"
+      }
     ]
   },
   {
@@ -421,7 +553,10 @@
     "enacted": null,
     "description": "Annual CMS rulemaking updating relative value units (RVUs), the conversion factor, geographic practice cost indices, and QPP/MIPS policies for physician and other practitioner services paid under the Medicare Physician Fee Schedule. Published each November for the upcoming calendar year.",
     "links": [
-      { "label": "CMS Physician Fee Schedule", "url": "https://www.cms.gov/medicare/payment/physician-fee-schedule" }
+      {
+        "label": "CMS Physician Fee Schedule",
+        "url": "https://www.cms.gov/medicare/payment/physician-fee-schedule"
+      }
     ]
   },
   {
@@ -432,7 +567,10 @@
     "enacted": null,
     "description": "Annual CMS rulemaking updating the ESRD PPS bundled payment rate for dialysis facilities, the ESRD Quality Incentive Program (QIP) measures and scoring, and policies related to home dialysis and transitional drug add-on payment adjustment (TDAPA). Published each November.",
     "links": [
-      { "label": "CMS ESRD PPS", "url": "https://www.cms.gov/medicare/payment/prospective-payment-systems/end-stage-renal-disease" }
+      {
+        "label": "CMS ESRD PPS",
+        "url": "https://www.cms.gov/medicare/payment/prospective-payment-systems/end-stage-renal-disease"
+      }
     ]
   }
 ]

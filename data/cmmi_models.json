@@ -60,16 +60,16 @@
     "name": "BPCI Advanced",
     "category": "Disease-Specific & Episode-Based Models",
     "startDate": "2018-10-01",
-    "endDate": null,
-    "description": "Episode-based payment model for 90-day clinical episodes triggered by inpatient hospitalization. Participants — hospitals or physician group practices — are accountable for quality and cost across 32 clinical episode types."
+    "endDate": "2025-12-31",
+    "description": "Episode-based payment model for 90-day clinical episodes triggered by inpatient hospitalization. Participants — hospitals or physician group practices — are accountable for quality and cost across 32 clinical episode types. Ran eight model years and concluded December 31, 2025."
   },
   {
     "id": "CJR",
     "name": "Comprehensive Care for Joint Replacement",
     "category": "Disease-Specific & Episode-Based Models",
     "startDate": "2016-04-01",
-    "endDate": null,
-    "description": "Mandatory-then-voluntary episode payment model for hip and knee replacement surgeries. Hospitals bear upside and downside risk for the 90-day post-discharge episode. Initially mandatory in selected markets."
+    "endDate": "2024-12-31",
+    "description": "Mandatory-then-voluntary episode payment model for hip and knee replacement surgeries. Hospitals bear upside and downside risk for the 90-day post-discharge episode. Initially mandatory in selected markets. Concluded December 31, 2024 after its final performance year."
   },
   {
     "id": "OCM",
@@ -84,23 +84,23 @@
     "name": "Enhancing Oncology Model",
     "category": "Disease-Specific & Episode-Based Models",
     "startDate": "2023-07-01",
-    "endDate": null,
-    "description": "Successor to OCM. Oncology practices assume downside risk for 6-month chemotherapy episodes across 7 cancer types. Incorporates health equity screening requirements, care management payments, and mandatory downside risk."
+    "endDate": "2030-06-30",
+    "description": "Successor to OCM. Oncology practices assume downside risk for 6-month chemotherapy episodes across 7 cancer types. Incorporates health equity screening requirements, care management payments, and mandatory downside risk. Extended through June 30, 2030."
   },
   {
     "id": "HHVBP",
     "name": "Home Health Value-Based Purchasing",
     "category": "Disease-Specific & Episode-Based Models",
     "startDate": "2016-01-01",
-    "endDate": null,
-    "description": "Model tying a portion of home health agency payment to quality performance. Originally piloted in 9 states, expanded nationally in 2022. Agencies can earn up to +5% or face up to -5% payment adjustments based on quality scores."
+    "endDate": "2021-12-31",
+    "description": "Model tying a portion of home health agency payment to quality performance. Originally piloted in 9 states, expanded nationally in 2022. Agencies can earn up to +5% or face up to -5% payment adjustments based on quality scores. NOTE: this is the ORIGINAL nine-state model, which ended December 31, 2021. The nationwide \"expanded HHVBP\" operating since 2023 is a separate, permanent program — not this model."
   },
   {
     "id": "GUIDE",
     "name": "Guiding an Improved Dementia Experience",
     "category": "Disease-Specific & Episode-Based Models",
     "startDate": "2024-07-01",
-    "endDate": null,
+    "endDate": "2032-06-30",
     "description": "CMMI model supporting individuals with dementia and their caregivers. Participants provide interdisciplinary care navigation, 24/7 access, and respite care. Monthly per-beneficiary-per-month payments fund model infrastructure."
   },
   {
@@ -108,24 +108,24 @@
     "name": "Value in Opioid Use Disorder Treatment",
     "category": "Disease-Specific & Episode-Based Models",
     "startDate": "2021-01-01",
-    "endDate": null,
-    "description": "CMMI model testing episode-based payment for opioid use disorder treatment, bundling all services for a 6-month episode. Aims to expand access to evidence-based medication-assisted treatment (MAT)."
+    "endDate": "2024-12-31",
+    "description": "CMMI model testing episode-based payment for opioid use disorder treatment, bundling all services for a 6-month episode. Aims to expand access to evidence-based medication-assisted treatment (MAT). Four-year demonstration scheduled through December 2024."
   },
   {
     "id": "IBH",
     "name": "Innovation in Behavioral Health",
     "category": "Disease-Specific & Episode-Based Models",
     "startDate": "2024-01-01",
-    "endDate": null,
+    "endDate": "2032-12-31",
     "description": "CMMI model integrating physical health services into community behavioral health settings. Practices receive infrastructure and per-member-per-month payments to screen and coordinate care for Medicare and Medicaid beneficiaries."
   },
   {
     "id": "AHEAD",
-    "name": "States Advancing All-Payer Health Equity Approaches",
+    "name": "Achieving Healthcare Efficiency through Accountable Design (AHEAD)",
     "category": "State & Community-Based Models",
     "startDate": "2024-01-01",
-    "endDate": null,
-    "description": "State-level CMMI model testing all-payer total cost of care approaches. States implement population-based payments spanning Medicare, Medicaid, and commercial payers, with explicit health equity goals."
+    "endDate": "2035-12-31",
+    "description": "State-level CMMI model testing all-payer total cost of care approaches. States implement population-based payments spanning Medicare, Medicaid, and commercial payers, with explicit health equity goals. CMS renamed the model in September 2025 from \"States Advancing All-Payer Health Equity Approaches\"; the AHEAD acronym was retained."
   },
   {
     "id": "TEAM",
@@ -140,8 +140,8 @@
     "name": "MA Value-Based Insurance Design Model",
     "category": "Health Plan Models",
     "startDate": "2017-01-01",
-    "endDate": null,
-    "description": "Tests whether Medicare Advantage plans can use health-condition-specific cost-sharing structures and supplemental benefits to improve care quality and reduce costs. Participating MA plans can offer targeted reduced cost-sharing for high-value services for chronically ill enrollees."
+    "endDate": "2025-12-31",
+    "description": "Tests whether Medicare Advantage plans can use health-condition-specific cost-sharing structures and supplemental benefits to improve care quality and reduce costs. Participating MA plans can offer targeted reduced cost-sharing for high-value services for chronically ill enrollees. CMS ended the model after CY2025, citing excess costs to Medicare."
   },
   {
     "id": "EnhancedMTM",
@@ -182,5 +182,13 @@
     "startDate": "2027-01-01",
     "endDate": "2036-12-31",
     "description": "CMMI model (2027-2036) succeeding ACO REACH, which ends Dec 31, 2026. RFA released March 31, 2026. Fixed 10-year term structured to give ACOs a longer runway for total-cost-of-care accountability than REACH's shorter cycle offered."
+  },
+  {
+    "id": "CJR_X",
+    "name": "Comprehensive Care for Joint Replacement Expanded (CJR-X)",
+    "category": "Disease-Specific & Episode-Based Models",
+    "startDate": "2028-01-01",
+    "endDate": null,
+    "description": "Mandatory nationwide successor to CJR, which ended December 31, 2024. Extends episode accountability for lower-extremity joint replacement beyond the original 34 metropolitan areas to national scope beginning January 1, 2028."
   }
 ]

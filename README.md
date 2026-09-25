@@ -183,6 +183,16 @@ This structure lets you see program eligibility overlap — when multiple models
 
 Each dataset shows: description, years covered, unit of observation, payer scope, and linkage variable IDs (e.g. `BENE_ID`, `NPI`, `CLM_ID`). Rows expand for full detail, including a **Use Case by Stakeholder** cross-tab (`use_case_by_stakeholder`) where present — who uses the dataset and for what intent, distinct from the dataset's category. Export to CSV available.
 
+Below the table sit three static reference sections (no backing JSON — edited directly in `index.html` under `<div id="taxonomy-reference">`):
+
+| Section | Covers |
+|---|---|
+| **A — Coding System Distinctions** | DRG / HCPCS / HCC / ICD / APC comparison across 8 dimensions, per-system deep dives, claim form and TOB reference |
+| **B — Important Variables & Cross-Program Linkage** | Variable availability across Parts A/B/C/D and Medicaid TAF, analytic domain cards, mini-glossary, quick starter list |
+| **C — Commonly Conflated Distinctions** | 19 pairs of individually-true facts that are routinely merged into one wrong statement — each with what the two things actually are and the specific error the merge produces |
+
+Section C is a byproduct of this repo's own audit history: every pair in it is a conflation that was found and corrected in this content, not a hypothetical. See [Verification Standard](#verification-standard) below.
+
 ---
 
 ## Tab 5 — Special Topics: Access & Cost under OBBBA
@@ -222,6 +232,8 @@ The full refresh protocol is defined in [`CLAUDE.md`](CLAUDE.md) at the repo roo
 
 | Step | Scope |
 |------|-------|
+| **00** | **Verification standard** — the evidence bar, the sweep rule, the error-pattern checklist, and the conflation register. Read before any content step |
+| **01** | **Model escalation check** — assess task complexity against 7 triggers; **notify the user out loud** if a stronger reasoning model is warranted. Re-run whenever scope grows mid-task |
 | 0 | Establish update baseline — check today vs. last freshness date; identify sources to search |
 | 1 | **Ontology — Legislative Map** (`ontology_nodes.json`, `ontology_edges.json`) |
 | 2 | **Ontology — Payer & Company Map** (`company_nodes.json`, `company_edges.json`) |
@@ -231,7 +243,7 @@ The full refresh protocol is defined in [`CLAUDE.md`](CLAUDE.md) at the repo roo
 | 6 | **Data Taxonomy** (`datasets.json`) — year ranges, new CMS/AHRQ dataset releases |
 | 7 | Sync all `window.__XXX__` inline blocks in `index.html` to match updated JSON files |
 | 8 | Update README freshness table |
-| 9 | Validate cross-references, commit, and push |
+| 9 | Validate and commit — **four gates**: cross-references, graph integrity, stale-status sweep, mirror equivalence |
 | 10 | **Special Topics: OBBBA** (Tab 5, static HTML + inline state dataset) — check CBO/KFF/Georgetown CCF tracking data, state case-study numbers, the any-state drill-down's per-state records, litigation status, and individual mandate penalty amounts; not covered by steps 1–9 |
 
 ### Design principle
@@ -273,6 +285,30 @@ Each JSON file has a corresponding `window.__XXX__` variable embedded in `index.
 
 ---
 
+## Verification Standard
+
+This content is policy reference material, so a plausible-sounding wrong date or figure is the main risk — not a broken build. [`CLAUDE.md`](CLAUDE.md) Step 00 defines the bar; the short version:
+
+**A claim is publishable when a named source can be pointed to that says that specific thing.** Not a source that says something adjacent, and not a figure derived by combining two sources that never combined it themselves.
+
+**The sweep rule.** A correction is not done when one file is fixed. The same fact lives in `data/*.json`, its inline mirror, static HTML in `index.html`, and the Bay Area companion page. Every correction is followed by a repo-wide search for the old value. Three separate facts in the September 2026 audit were wrong in two or three places each *because an earlier round had already corrected one of them.*
+
+**Precision is a claim.** `246,365` asserts a specific count from a specific source. If it cannot be traced, `~240,000–250,000` is more accurate, not less — a precise number with no origin is worse than an honest range, and this repo published one for two rounds before catching it.
+
+**Hedged language is not a substitute for editorial judgement.** A claim that failed verification does not become publishable by adding "reportedly". It comes out of the body text; where it is still worth recording, it goes in a separate excluded-claims register with the reason.
+
+### Model escalation
+
+Step 01 defines seven triggers — reasoning-chain depth, cross-file consistency burden, volume of independent claims, and similar — for recommending a stronger reasoning model. When one fires, the working model **notifies the user at that moment** rather than continuing quietly and noting it later.
+
+This exists because the provenance of verification was unrecoverable after the fact. Most content in this repo was verified under one model; a targeted re-check under a stronger one found errors in all four original tabs. **Changelog entries now record which model verified what** so that question can be answered without re-deriving it.
+
+### Where to find the audit trail
+
+[`changelog/`](changelog/) holds one entry per correction pass, each listing what was wrong, what it was changed to, and what was deliberately left unresolved. The most recent full audit is [`2026-09-25-second-round-audit-corrections.md`](changelog/2026-09-25-second-round-audit-corrections.md), which also documents the 10 recurring error patterns now encoded as a pre-flight checklist. Reader-facing conflations are surfaced in the app itself, in Tab 3 Section C.
+
+---
+
 ## Data Freshness
 
 | Layer | Current as of |
@@ -283,6 +319,7 @@ Each JSON file has a corresponding `window.__XXX__` variable embedded in `index.
 | Datasets | September 2026 |
 | Payer & Company Map | September 2026 (hospital systems, interoperability/RWD, cloud/EHR partnerships, AI governance stakeholders, OBBBA national-context entities) |
 | Special Topics: OBBBA (Tab 5) | September 2026 |
+| Last full verification pass | 2026-09-25 — Tabs 1–4 audited under Opus 5; see [changelog](changelog/2026-09-25-second-round-audit-corrections.md) |
 
 **Sources:** CMS.gov, CMMI, Federal Register, ResDAC, AHRQ HCUP, NIH, CDC, Becker's Hospital Review, KFF, Sequoia Project, FDA, ONC/ASTP, CHAI, The Joint Commission, CBO, Georgetown University Center for Children and Families, GAO, California DHCS, California DOJ, California LAO, California Health Care Foundation (CHCF), Georgetown Litigation Tracker
 

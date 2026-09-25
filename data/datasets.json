@@ -61,7 +61,7 @@
     "linkageIds": [
       "BENE_ID",
       "CLM_ID",
-      "HHA_ID"
+      "PRVDR_NUM"
     ]
   },
   {
@@ -113,7 +113,7 @@
   },
   {
     "name": "Medicare Beneficiary Summary File (MBSF)",
-    "description": "Annual beneficiary-level enrollment and demographic file for all Medicare beneficiaries. Contains monthly enrollment by part (A, B, C, D), chronic condition flags (CCW), HMO indicators, county/state FIPS codes, race/ethnicity, and date of death. Essential denominator file for Medicare research.",
+    "description": "Annual beneficiary-level enrollment and demographic file for all Medicare beneficiaries. Contains monthly enrollment by part (A, B, C, D), chronic condition flags (CCW), HMO indicators, county/state FIPS codes, race/ethnicity, and date of death. Essential denominator file for Medicare research. Note: the HIC number (HICNO) was replaced by the Medicare Beneficiary Identifier (MBI) beginning in 2018.",
     "category": "Enrollment",
     "years": "1991-present",
     "unit": "Beneficiary-year",
@@ -124,7 +124,7 @@
     "states": "All",
     "linkageIds": [
       "BENE_ID",
-      "HICNO"
+      "MBI"
     ]
   },
   {
@@ -407,7 +407,7 @@
   },
   {
     "name": "HRSA Uniform Data System (UDS)",
-    "description": "Annual, federally-mandated reporting by every HRSA-funded Federally Qualified Health Center (FQHC), covering patient demographics, payer mix (including Medicaid share), services provided, staffing, costs, and clinical quality measures at the individual health-center level. The primary source for FQHC-level payer-mix and patient-count figures — should replace org-level [est.] figures in analyses like the Bay Area companion page wherever a center's UDS filing is available.",
+    "description": "Annual, federally-mandated reporting by every HRSA Health Center Program awardee and look-alike (FQHCs and FQHC Look-Alikes), covering patient demographics, payer mix (including Medicaid share), services provided, staffing, costs, and clinical quality measures at the individual health-center level. The primary source for FQHC-level payer-mix and patient-count figures — should replace org-level [est.] figures in analyses like the Bay Area companion page wherever a center's UDS filing is available.",
     "category": "Provider",
     "years": "1996-present",
     "unit": "Health-center-year",

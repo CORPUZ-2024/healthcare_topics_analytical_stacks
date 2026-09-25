@@ -15,6 +15,102 @@ Single-page app at https://corpuz-2024.github.io/healthcare_topics_analytical_st
 
 Trigger phrase: *"update the contents of all the tabs with new information as of today"* (or any variant).
 
+---
+
+## Step 00 — Verification standard (read before any content step)
+
+Every factual claim published anywhere in this repo must clear this bar. A September 2026 second-round audit of content that had already passed a first-round check found errors in **all four tabs**, so these rules exist because they were each violated at least once.
+
+### The bar
+
+1. **Traceable or absent.** A claim is publishable only if a named source can be opened and checked. If it cannot be traced, it does not go on the page — not even hedged. Put it in an excluded register with the reason.
+2. **Cite the issuer, not the repeater.** Link the agency, court, or journal that produced the figure, not the news story summarising it.
+3. **Lead with the conservative figure.** Where a range exists, publish the issuing agency's central estimate and name any high-end scenario separately.
+4. **Never manufacture precision.** If sources give ~240,000-250,000, publish the range. Converting a range to a single precise number is a fabrication even when the number falls inside the range. *(This happened: an unsourced "246,365" was propagated to 8 locations before being caught.)*
+5. **No superlatives without evidence.** "First", "most", "largest", "only" are empirical claims. Verify or drop the superlative.
+6. **A correction is not done until it is swept.** See the sweep rule below.
+
+### The sweep rule
+
+Facts in this repo are duplicated across `data/*.json`, the inline `window.__XXX__` mirrors, static HTML in `index.html`, and `special-topics/`. **Fixing one instance and stopping is the single most common failure mode in this project's history.** After correcting any fact:
+
+```bash
+grep -rn "<the old string>" index.html data/ special-topics/ README.md
+```
+
+Only when that returns nothing is the correction complete. Then re-sync mirrors (Step 7) and confirm with the mirror check.
+
+### Error patterns to check for
+
+Observed repeatedly in this repo's own history. Treat as a pre-flight checklist:
+
+| Pattern | What it looks like | Real example caught |
+|---|---|---|
+| **False precision** | A range collapsed to one exact-looking number | "246,365 eligible" from a ~240-250k range |
+| **Statistic misattribution** | A real number attached to the wrong claim | KFF's 77% *satisfaction* figure cited as an *eligibility* finding |
+| **Unswept correction** | Fixed in one file, stale in three others | FDA PCCP date fixed in Top Shifts, left wrong in two graph files |
+| **Direction inversion** | A constraint reported as its opposite | "PE closes in 30-60 days" — actually the regulatory notice period *before* closing |
+| **Superlative inflation** | Unearned "first/most/only" | "First mandatory CMMI model since CJR" — ETC was mandatory in between |
+| **Stale-as-current** | `endDate: null` on an ended program; present-tense on a closed model | 5 CMMI models rendering as active after ending |
+| **Scope overreach** | Subgroup finding applied to a general population | "$1 removed → $3-5 downstream" holds for high utilizers, not the average enrollee |
+| **Relationship invention** | An edge asserting a lineage that does not exist | `ACO_REACH → MSSP "successor to"` — REACH replaced GPDC |
+| **Cited but unchecked** | Real source attached to a claim it does not support | "AB 2468" for CHW billing — the authority is AB 133 |
+| **Adjacent-date conflation** | Two nearby dates merged into one | CHAI/Joint Commission June 2025 partnership vs Sept 2025 guidance release |
+
+### Conflation register — pairs this project has actually mixed up
+
+Check against this list whenever touching the relevant subject. Each pair is two *different true things* that read as one:
+
+| Do not confuse | With |
+|---|---|
+| TEAM's **30-day** post-discharge window | BPCI Advanced / CJR's **90-day** window |
+| **Original HHVBP** (9-state model, ended 2021) | **Expanded HHVBP** (nationwide, permanent, 2023–) |
+| ACO REACH's predecessor: **GPDC** | MSSP, which runs in parallel and still exists |
+| **§71109** — Medicaid eligibility (Oct 1, 2026) | **§71301/§71302** — marketplace PTC eligibility |
+| CMS-0057-F **decision timeframes** (Jan 1, 2026) | CMS-0057-F **FHIR API deadline** (Jan 1, 2027) |
+| Provider-tax **freeze** (Oct 1, 2026) | **Phase-down** (FFY2028) and **SDP caps** (Jan 1, 2028) — three different dates |
+| DHCS **1.1M** central estimate | DHCS **3.4M** high-end scenario, and LAO's **~2M** net-uninsured projection — three different measures |
+| **FQHC** 340B path (Health Center Program status) | **DSH hospital** 340B path (11.75% DSH adjustment percentage — a formula output, not "Medicaid inpatient days") |
+| Retroactive coverage **1 month** (expansion) | **2 months** (traditional — seniors, children, people with disabilities) |
+| DHCS housing supports: **ED −13.2%, inpatient −24.3%** | LA County psychiatric recuperative care: **71%/24%** — a different service entirely |
+| **Wilson** score interval | **Clopper-Pearson** exact interval — they give materially different bounds |
+| Texas's application backlog (**SNAP/redetermination**-driven; non-expansion state) | Work-requirement enforcement, which Texas has no population for |
+| Partnership HealthPlan serves **Solano** (a nine-county Bay Area county) | It does **not** serve SF, Alameda, Santa Clara, Contra Costa or San Mateo |
+| CHAI/Joint Commission **partnership** (June 2025) | First **joint guidance** release (Sept 17, 2025) |
+| HCC **V28** (100% weight from 2026) | **V24**, fully retired |
+
+---
+
+## Step 01 — Model escalation check (run at start, and re-run whenever scope grows)
+
+**Notify the user — out loud, in the response, at the moment the trigger fires — when the task has outgrown the current model.** Do not wait to be asked, and do not silently continue. The user decides; the job here is to surface the recommendation promptly.
+
+### Escalation triggers
+
+Recommend switching to a stronger reasoning model when **any** of these becomes true:
+
+- More than **10 external factual claims** need verification in one pass
+- Sources **contradict each other** and the conflict must be adjudicated
+- The task **audits a previous pass's output** (meta-verification — historically the highest error-yield work in this repo)
+- **Statistical or methodological content** is being authored or corrected (Tab 4, risk adjustment, confidence intervals, causal claims)
+- **Legal or regulatory citation** with section numbers, effective dates, or litigation status
+- Edits span **more than three files** with cross-file consistency requirements
+- The running **error rate in the current pass exceeds ~20%** of claims checked — that is evidence the material is unreliable and needs more careful handling, not faster handling
+
+### How to notify
+
+State it plainly and briefly, then continue working unless told otherwise:
+
+> "This pass now involves [trigger]. That is the kind of work where a stronger reasoning model materially reduces error rate — recommend `/model` → Opus 5 before I go further. Continuing for now; say the word and I'll pause."
+
+### Why this is in the protocol
+
+A September 2026 audit compared verification passes by model. The content verified under the weaker model carried errors into production across all four tabs, including the ten patterns tabulated above. The escalation check is cheap; re-auditing a published page is not.
+
+**Also record which model verified what.** When a changelog entry documents verification, name the model. Provenance is otherwise unrecoverable, and the question "what here was never checked properly?" becomes unanswerable.
+
+---
+
 ### Step 0 — Establish the update baseline
 
 Check today's date. Cross-reference the README freshness table to identify what has changed since the last update.
@@ -61,6 +157,15 @@ Sources to consult (web search each):
 | Existing node description outdated | Update `description` field |
 | Program ended or renamed | Update `description`; do NOT delete nodes (preserve graph topology) |
 | New link reference (Federal Register, CMS page) | Add to `links[]` array |
+
+**Relationship validity (added after the September 2026 audit).** An edge label is a factual claim and must be verifiable. Before adding or keeping one, confirm:
+
+1. **The relationship genuinely exists.** Check the node descriptions for contradiction — `ACO_REACH → MSSP "successor to"` survived a full review round while its own node description correctly stated that REACH replaced the Global and Professional Direct Contracting model. The graph contradicted itself and nothing caught it.
+2. **The reverse edge does not already exist.** Reciprocal pairs (`ACA → MSSP "authorized"` alongside `MSSP → ACA "authorized by"`) assert the same fact twice and double-count in any path analysis.
+3. **Direction follows the convention:** legislation and agencies are sources; programs, models and rules are targets.
+4. **Tense matches status.** A model with an `endDate` takes "administered", not "administers".
+
+**Never add a vague edge purely to keep a node connected.** Two edges (`HRSA → PACE`, `AHRQ → QPP`) existed only to avoid orphaning their source nodes and asserted relationships that do not meaningfully exist. Find the real relationship or leave the node unconnected and flag it.
 
 ---
 
@@ -116,6 +221,15 @@ Edge type meanings:
 | New partnership announced | Add `partner` edge |
 | New regulatory tension (e.g., DOJ investigation) | Add or update `tension` edge |
 | Program node description outdated | Update `description` |
+
+**Edge-type discipline (added after the September 2026 audit).** Each type carries a specific meaning, and three were found misapplied:
+
+- `cloud_ehr_partnership` was used on edges pointing at **a regulation** (`cms0057_prog`) rather than an EHR or health system — the type's documented definition is "cloud vendor ↔ EHR/health-system relationship".
+- `sets_voluntary_standard_for` was used for a **peer partnership** (CHAI ↔ Joint Commission, who jointly issued guidance) and separately for **plain membership** (CHAI → Mayo Clinic).
+
+Before assigning a type, confirm the target is the kind of entity the type describes.
+
+For `tension`, this file's own bar applies and was found violated twice: an **active, unresolved dispute with two named sides**, whose **endpoints are the actual parties**. A general statement that "vendors and CMS have not converged" is regulatory uncertainty, not a dispute. An edge from a statute to a state agency that is itself a co-plaintiff does not describe the litigation between that coalition and CMS.
 
 ---
 
@@ -288,6 +402,31 @@ This section lives in `<div id="taxonomy-reference">` directly in `index.html` �
 
 ---
 
+#### 6d — Reference: Commonly Conflated Distinctions (static HTML in `index.html`)
+
+**Location in index.html:** Search for `id="taxonomy-reference"` → Section C (`ref-section` for "Commonly Conflated Distinctions"), grouped into three `ref-block` tables: Payment Models & Episodes, Policy/Coverage/Statute, Data & Method.
+
+This is the **reader-facing** counterpart to the conflation register in Step 00. The two must stay aligned, but they are not the same document:
+
+| | Step 00 register | Section C |
+|---|---|---|
+| Audience | Whoever is editing this repo | Whoever is reading the site |
+| Framing | "Do not merge these when writing" | "These are two different things; here is the error the merge produces" |
+| Entry bar | Any pair this project has confused | A pair whose distinction changes how a reader would use the number |
+
+**Rules for this section:**
+
+1. **Every entry must be a real correction from this repo's history.** Not a hypothetical, not a textbook distinction. Its authority comes from the fact that these errors were actually made here. If a pair is added, the changelog entry that corrected it must exist.
+2. **Each row states both true things, not one true and one false.** A conflation is two correct facts merged — that is what makes it hard to catch. A row that reads "X is wrong, Y is right" is a correction, not a conflation, and belongs in the changelog instead.
+3. **The third column names the consequence.** "Different windows" is not useful; "attributing the wrong window to the one model still operating" is.
+4. **Use only existing `ref-*` classes.** `css/styles.css` is frozen — Section C uses `ref-section`, `ref-section-title`, `ref-section-desc`, `ref-block`, `ref-block-title`, `ref-table-wrap`, `ref-table`, `ref-feature-col` and adds no new ones.
+
+**When to add a row:** after any correction pass that finds two facts were merged. **When to remove one:** when the underlying distinction ceases to exist (e.g. a superseded coding system retires), not merely because the error feels unlikely to recur.
+
+**Keep the README count current** — the Tab 3 table in `README.md` states the number of pairs.
+
+---
+
 ### Step 7 — Sync inline data in index.html
 
 After updating any JSON file, find the matching `window.__XXX__` block in `index.html` and replace its contents with the updated JSON array.
@@ -322,7 +461,9 @@ Update the table at the bottom of `README.md`:
 
 ### Step 9 — Validate and commit
 
-Run a quick cross-reference check:
+Referential integrity is necessary but **not sufficient** — every error found in the September 2026 audit passed the check below. Run all four gates.
+
+**Gate 1 — cross-references resolve:**
 ```bash
 node -e "
   const svc = require('./data/service_types.json');
@@ -334,6 +475,35 @@ node -e "
   console.log('Check complete.');
 "
 ```
+
+**Gate 2 — graph integrity.** Every node has ≥1 edge; no reciprocal duplicate pairs (the same relationship asserted in both directions); no edge type used outside its documented meaning; every `tension` edge carries a `tension_note` naming two sides of a live dispute.
+```bash
+node -e "
+  const e = require('./data/company_edges.json'), n = require('./data/company_nodes.json');
+  const ids = new Set(n.map(x => x.id));
+  const touched = new Set(); e.forEach(x => { touched.add(x.source); touched.add(x.target); });
+  e.forEach(x => { if (!ids.has(x.source) || !ids.has(x.target)) console.log('BROKEN EDGE', x.source, '->', x.target); });
+  n.filter(x => !touched.has(x.id)).forEach(x => console.log('ORPHAN', x.id));
+  const seen = new Set();
+  e.forEach(x => { if (seen.has(x.target + '>' + x.source)) console.log('RECIPROCAL DUP', x.source, '<->', x.target); seen.add(x.source + '>' + x.target); });
+  e.filter(x => x.type === 'tension' && !x.tension_note).forEach(x => console.log('TENSION W/O NOTE', x.source));
+  console.log('Graph check complete.');
+"
+```
+
+**Gate 3 — stale-status sweep.** Anything with an end date that has passed must not be described in the present tense, and no ended program may carry `endDate: null`:
+```bash
+node -e "
+  const m = require('./data/cmmi_models.json'); const today = new Date().toISOString().slice(0,10);
+  m.filter(x => !x.endDate).forEach(x => console.log('ASSERTED ONGOING — verify:', x.id, x.name));
+  m.filter(x => x.endDate && x.endDate < today).forEach(x => console.log('ended', x.endDate, x.id));
+"
+```
+Then confirm the ontology edges for any ended model use past tense ("administered", not "administers").
+
+**Gate 4 — mirrors match.** Every `window.__XXX__` block must be data-identical to its `data/*.json` source. Parse both and compare `JSON.stringify` output; formatting may differ, content may not.
+
+**Then apply the Step 00 sweep rule** to every fact changed in this pass before committing.
 
 Then commit:
 ```bash
