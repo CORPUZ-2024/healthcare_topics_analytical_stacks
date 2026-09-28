@@ -189,9 +189,9 @@ Below the table sit three static reference sections (no backing JSON — edited 
 |---|---|
 | **A — Coding System Distinctions** | DRG / HCPCS / HCC / ICD / APC comparison across 8 dimensions, per-system deep dives, claim form and TOB reference |
 | **B — Important Variables & Cross-Program Linkage** | Variable availability across Parts A/B/C/D and Medicaid TAF, analytic domain cards, mini-glossary, quick starter list |
-| **C — Commonly Conflated Distinctions** | 19 pairs of individually-true facts that are routinely merged into one wrong statement — each with what the two things actually are and the specific error the merge produces |
+| **C — Commonly Conflated Concepts** | 19 pairs that are easy to read as one thing — each with what the two actually are, why they resemble each other, and what separates them |
 
-Section C is a byproduct of this repo's own audit history: every pair in it is a conflation that was found and corrected in this content, not a hypothetical. See [Verification Standard](#verification-standard) below.
+Section C reads as subject-matter reference, not as an erratum — it explains why each pair is easy to merge and what separates them. Most entries were identified through this repo's own audit work (see [Verification Standard](#verification-standard) below), but provenance is not the entry bar; reader usefulness is.
 
 ---
 

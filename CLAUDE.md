@@ -402,26 +402,27 @@ This section lives in `<div id="taxonomy-reference">` directly in `index.html` �
 
 ---
 
-#### 6d — Reference: Commonly Conflated Distinctions (static HTML in `index.html`)
+#### 6d — Reference: Commonly Conflated Concepts (static HTML in `index.html`)
 
-**Location in index.html:** Search for `id="taxonomy-reference"` → Section C (`ref-section` for "Commonly Conflated Distinctions"), grouped into three `ref-block` tables: Payment Models & Episodes, Policy/Coverage/Statute, Data & Method.
+**Location in index.html:** Search for `id="taxonomy-reference"` → Section C (`ref-section` for "Commonly Conflated Concepts"), grouped into three `ref-block` tables: Payment Models & Episodes, Policy/Coverage/Statute, Data & Method. Each table has three columns: **Conflated pair**, **What each one actually is**, **Distinctions**.
 
-This is the **reader-facing** counterpart to the conflation register in Step 00. The two must stay aligned, but they are not the same document:
+This is the **reader-facing** counterpart to the conflation register in Step 00. The two must stay aligned, but they are not the same document, and the difference is one of framing:
 
 | | Step 00 register | Section C |
 |---|---|---|
 | Audience | Whoever is editing this repo | Whoever is reading the site |
-| Framing | "Do not merge these when writing" | "These are two different things; here is the error the merge produces" |
+| Framing | "Do not merge these when writing" | "Here are two things that are easy to read as one, and here is what separates them" |
 | Entry bar | Any pair this project has confused | A pair whose distinction changes how a reader would use the number |
 
 **Rules for this section:**
 
-1. **Every entry must be a real correction from this repo's history.** Not a hypothetical, not a textbook distinction. Its authority comes from the fact that these errors were actually made here. If a pair is added, the changelog entry that corrected it must exist.
-2. **Each row states both true things, not one true and one false.** A conflation is two correct facts merged — that is what makes it hard to catch. A row that reads "X is wrong, Y is right" is a correction, not a conflation, and belongs in the changelog instead.
-3. **The third column names the consequence.** "Different windows" is not useful; "attributing the wrong window to the one model still operating" is.
-4. **Use only existing `ref-*` classes.** `css/styles.css` is frozen — Section C uses `ref-section`, `ref-section-title`, `ref-section-desc`, `ref-block`, `ref-block-title`, `ref-table-wrap`, `ref-table`, `ref-feature-col` and adds no new ones.
+1. **Write it forward, not as an erratum.** Section C is reference material about the subject, not a record of this repo's mistakes. A reader should never be able to tell which rows came from a correction here. Do not write "this was previously stated as X", do not name the wrong version as wrong, and do not carry over changelog phrasing.
+2. **The "Distinctions" column explains why the two are easy to merge, then what separates them.** Name the genuine resemblance first — shared name, adjacent dates, same statute, consecutive steps in one workflow, overlapping populations — because that resemblance is the useful content. Then give the line that actually divides them. A row that only asserts "these are different" has not earned its place.
+3. **Each row states two true things, not one true and one false.** A conflation is two correct facts merged — that is what makes it hard to catch. A pair where one side is simply an error is a correction and belongs in the changelog instead.
+4. **No section-level preamble.** The section carries its title and goes straight to the tables; the rows do the explaining.
+5. **Use only existing `ref-*` classes.** `css/styles.css` is frozen — Section C uses `ref-section`, `ref-section-title`, `ref-block`, `ref-block-title`, `ref-table-wrap`, `ref-table`, `ref-feature-col` and adds no new ones.
 
-**When to add a row:** after any correction pass that finds two facts were merged. **When to remove one:** when the underlying distinction ceases to exist (e.g. a superseded coding system retires), not merely because the error feels unlikely to recur.
+**When to add a row:** after any correction pass that finds two facts were merged, or when a genuinely confusable pair is identified without an error having occurred — the entry bar is reader usefulness, not provenance. **When to remove one:** when the underlying distinction ceases to exist (e.g. a superseded coding system retires), not merely because the error feels unlikely to recur.
 
 **Keep the README count current** — the Tab 3 table in `README.md` states the number of pairs.
 
