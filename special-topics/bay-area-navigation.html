@@ -149,32 +149,6 @@
     color:var(--risk); font-weight:600; font-style:normal;
   }
 
-  /* Excluded-evidence register. Deliberately set apart from the cards: material
-     that failed verification should be auditable without sitting next to
-     material that passed, where a reader could mistake one for the other. */
-  .excluded-block{
-    margin-top:28px; border:1px solid var(--line); border-left:4px solid var(--risk);
-    border-radius:6px; background:var(--surface); padding:20px 24px;
-  }
-  .excluded-block h3{
-    font-size:1.08rem; font-weight:700; margin-bottom:8px;
-    font-family:"Source Serif 4", Georgia, serif;
-  }
-  .excluded-block > p{font-size:0.9rem; color:var(--ink-soft); max-width:74ch;}
-  .excl-group{margin-top:16px;}
-  .excl-head{
-    font-family:"IBM Plex Mono",monospace; font-size:0.68rem; font-weight:600;
-    text-transform:uppercase; letter-spacing:0.06em; color:var(--risk);
-    padding-bottom:4px; border-bottom:1px solid var(--line); margin-bottom:8px;
-  }
-  .excl-group ul{margin:0; padding-left:18px; display:flex; flex-direction:column; gap:8px;}
-  .excl-group li{font-size:0.86rem; line-height:1.6; color:var(--ink-soft);}
-  .excl-group li strong{color:var(--ink);}
-  .excl-scope{
-    margin-top:18px; padding-top:12px; border-top:1px dashed var(--line);
-    font-size:0.82rem; color:var(--ink-soft);
-  }
-
   .org-table-wrap{overflow-x:auto; border:1px solid var(--line); border-radius:8px;}
   table.org-table{width:100%; border-collapse:collapse; font-size:0.83rem; min-width:820px;}
   table.org-table thead th{background:var(--surface-alt); text-align:left; font-weight:700; padding:9px 12px; border-bottom:2px solid var(--line); font-size:0.72rem; text-transform:uppercase; letter-spacing:0.04em; color:var(--ink-soft); white-space:nowrap;}
@@ -266,7 +240,7 @@
     <span class="toc-label">On this page</span>
     <ol>
       <li><a href="#insights">Potential Actionable Insights for Navigation Networks</a></li>
-      <li><a href="#resilient">Top 10 Most Resilient Organizations</a></li>
+      <li><a href="#resilient">Most Resilient Organizations</a></li>
       <li><a href="#at-risk">Top 10 At-Risk Organizations</a></li>
       <li><a href="#counties">County-Level Risk Delineation</a></li>
       <li><a href="#externalities">Externality Cost Reference</a></li>
@@ -284,7 +258,7 @@
     <p class="section-dek">A curated set from a 20-issue navigator action framework spanning administrative/compliance, infrastructure, workforce, funding, market-structure, and clinical-integration problems — each paired with an option to weigh first, a fallback, and the incentive structure that would make it durable rather than one-off.</p>
     <div class="callout" style="margin-bottom:22px;">
       <p><strong>How to read this section:</strong> these are <strong>potential</strong> options, not recommendations or a plan of record. The intent is to explore what solution space exists and surface the trade-offs in each — not to predict or prescribe what any organization will actually do. Which of these stakeholders pursue, in what order, and whether they work at all, remains genuinely open: several depend on decisions (CalAIM waiver renewal, MCP contracting choices, litigation outcomes) that are not settled as of this writing.</p>
-      <p style="margin-top:12px;font-size:0.92rem;"><strong>Evidence standard.</strong> Every factual claim in the cards below is traceable to a named source you can open and check. The source framework these options came from carried supporting claims that were re-checked against primary sources, and a substantial share did not survive — <strong>those are not presented here as findings</strong>. They are listed in full, with the reason each failed, in <a href="#excluded">What was excluded</a> at the foot of this section. Nothing was quietly dropped, and nothing unverified is stated as fact.</p>
+      <p style="margin-top:12px;font-size:0.92rem;"><strong>Evidence standard.</strong> Every factual claim in the cards below is traceable to a named source you can open and check. The source framework these options came from carried supporting claims that were re-checked against primary sources, and anything that did not survive that check has been left out rather than hedged. Nothing unverified is stated as fact here.</p>
     </div>
     <div class="insight-grid">
 
@@ -307,7 +281,7 @@
         <div class="action-box action-alt"><strong>Fallback option</strong>Where a shared org-level layer is feasible, standardize data entry to cut duplicate documentation and use managed-care-plan member renewal-date files as the redetermination signal.<div class="who-line">Who: Abode Services, Hamilton Families, BACS, La Clínica</div></div>
         <div class="incentive-box"><strong>Why it could hold — incentive leverage</strong>Any data-sharing design has to map consent under HIPAA, HUD's HMIS rules (24 CFR Part 576), and 42 CFR Part 2 for substance-use records before systems are linked — that mapping is a prerequisite, not an afterthought, and is the main reason these integrations stall.</div>
         <div class="card-foot">
-          <p class="foot-note"><span class="foot-tag">Evidence</span>The best-established measure of documentation burden in healthcare is physician-based: Sinsky et al. found <strong>49.2% of physician time went to EHR and desk work against 27% in direct face time</strong> (<a href="https://www.acpjournals.org/doi/10.7326/M16-0961" target="_blank" rel="noopener">Annals of Internal Medicine, 2016</a>). It is cited here as the nearest rigorous analogue, not as a navigator measurement — see <a href="#excluded">What was excluded</a> on the absence of navigator-specific data. CHCF convening materials document providers feeling overwhelmed by CalAIM's pace (<a href="https://www.chcf.org/resource/whats-next-calaim/" target="_blank" rel="noopener">CHCF</a>).</p>
+          <p class="foot-note"><span class="foot-tag">Evidence</span>The best-established measure of documentation burden in healthcare is physician-based: Sinsky et al. found <strong>49.2% of physician time went to EHR and desk work against 27% in direct face time</strong> (<a href="https://www.acpjournals.org/doi/10.7326/M16-0961" target="_blank" rel="noopener">Annals of Internal Medicine, 2016</a>). It is cited here as the nearest rigorous analogue, not as a navigator measurement: no navigator-specific time-use study could be located, which is itself worth naming. CHCF convening materials document providers feeling overwhelmed by CalAIM's pace (<a href="https://www.chcf.org/resource/whats-next-calaim/" target="_blank" rel="noopener">CHCF</a>).</p>
           <p class="foot-note"><span class="foot-tag">Day-to-day impact</span>Housing navigators enter each client contact into HMIS, update Coordinated Entry status, log it in a program CRM, then report monthly in a county system. Health navigators document in an EHR plus a Medi-Cal portal plus a program system. One client interaction can mean four separate data entries.</p>
         </div>
       </div>
@@ -331,7 +305,7 @@
         <div class="action-box action-alt"><strong>Fallback option</strong>County emergency-assistance funds with a short turnaround for navigator requests, and pre-positioned stored-value cards for costs outside CalAIM's covered categories.<div class="who-line">Who: County human services departments, local emergency funds</div></div>
         <div class="incentive-box"><strong>Why it could hold — incentive leverage</strong>The structural argument does not depend on a leverage ratio: a covered Community Support converts an unpredictable, grant-funded expense into a billable one, which is what makes it durable. Any specific multiple of return on flex spending should be treated as illustrative unless an org measures its own.</div>
         <div class="card-foot">
-          <p class="foot-note"><span class="foot-tag">Evidence</span>CalAIM Community Supports explicitly include housing deposits, housing transition navigation, and tenancy sustaining services as Medi-Cal-billable categories when a plan elects and contracts them (<a href="https://www.dhcs.ca.gov/provgovpart/Pages/CalAIM-Enhanced-Care-Management-and-Community-Supports.aspx" target="_blank" rel="noopener">DHCS</a>). The claim that frontline staff routinely subsidise client costs personally is discussed under <a href="#excluded">What was excluded</a> — the available survey evidence is real but not transferable to this setting.</p>
+          <p class="foot-note"><span class="foot-tag">Evidence</span>CalAIM Community Supports explicitly include housing deposits, housing transition navigation, and tenancy sustaining services as Medi-Cal-billable categories when a plan elects and contracts them (<a href="https://www.dhcs.ca.gov/provgovpart/Pages/CalAIM-Enhanced-Care-Management-and-Community-Supports.aspx" target="_blank" rel="noopener">DHCS</a>). No claim is made here about frontline staff personally subsidising client costs; the available survey evidence covers a different workforce and is not transferable to this setting.</p>
           <p class="foot-note"><span class="foot-tag">Day-to-day impact</span>A placement stalls on something small — a document fee, a bus pass to reach the appointment, a storage deposit — and program rules bar spending on it. With a flex line it resolves in minutes; without one it becomes a multi-week delay and another case cycling back.</p>
         </div>
       </div>
@@ -343,7 +317,7 @@
         <div class="action-box action-alt"><strong>Fallback option</strong>CDFI lenders pre-position bridge or acquisition financing for mission-aligned consolidators, so that a capable nonprofit buyer is not excluded simply by how long its financing takes to assemble.<div class="who-line">Who: Community development financial institutions (CDFIs)</div></div>
         <div class="incentive-box"><strong>Why it could hold — incentive leverage</strong>340B savings are a significant margin source for health centres and give a mission-aligned acquirer a real reason to preserve the designation — though the value concentrates in commercial and Medicare volume, since Medicaid is typically carved out or reimbursed near acquisition cost. That makes the incentive strongest for centres with a mixed payer base, and weakest for the most Medi-Cal-dependent ones.</div>
         <div class="card-foot">
-          <p class="foot-note"><span class="foot-tag">Evidence</span>FQHC designation carries four distinct benefits that all lapse together if a centre is absorbed by a non-FQHC entity: the federal Section 330 grant, Medi-Cal cost-based reimbursement, 340B drug pricing, and NHSC workforce eligibility (<a href="https://www.hrsa.gov/opa/eligibility-and-registration/health-centers/fqhc/index.html" target="_blank" rel="noopener">HRSA</a>). The comparative acquisition-timing claim the source framework used is addressed under <a href="#excluded">What was excluded</a>.</p>
+          <p class="foot-note"><span class="foot-tag">Evidence</span>FQHC designation carries four distinct benefits that all lapse together if a centre is absorbed by a non-FQHC entity: the federal Section 330 grant, Medi-Cal cost-based reimbursement, 340B drug pricing, and NHSC workforce eligibility (<a href="https://www.hrsa.gov/opa/eligibility-and-registration/health-centers/fqhc/index.html" target="_blank" rel="noopener">HRSA</a>). The case for pre-positioned financing rests on that cliff alone — no comparative claim is made about how quickly different types of acquirer can close.</p>
           <p class="foot-note"><span class="foot-tag">Day-to-day impact</span>No direct daily change — this one is felt afterwards. Staff at an FQHC absorbed by a mission-aligned nonprofit keep the patient-majority governing board; staff at one absorbed by a non-FQHC entity see that accountability structure dissolve and service lines reweighted toward commercially profitable care.</p>
         </div>
       </div>
@@ -361,46 +335,11 @@
       </div>
 
     </div>
-
-    <div class="excluded-block" id="excluded">
-      <h3>What was excluded, and why</h3>
-      <p>The source framework attached supporting claims to each of these options. Re-checked against primary sources, <strong>6 of 13 did not hold</strong>. They are listed here rather than in the cards, because material that failed verification should not sit alongside material that passed as though the two were equivalent.</p>
-
-      <div class="excl-group">
-        <div class="excl-head">Wrong &mdash; not used</div>
-        <ul>
-          <li><strong>"77% of those who lost Medicaid during redetermination still qualified."</strong> A misattribution: KFF's 77% is a <em>satisfaction</em> figure — the share of pre-unwinding enrollees rating their Medicaid experience excellent or good. It says nothing about eligibility. The administrative-disenrollment card instead uses the two figures that do bear on the question: 69-70% of unwinding disenrollments were procedural, and 47% of those disenrolled later re-enrolled.</li>
-          <li><strong>"Private equity can close in 30-60 days; nonprofit acquirers need 6-12 months."</strong> Untraceable in either direction, and probably inverted: a 30-60 day figure does recur in this literature, but it describes the <em>state regulatory notice period required before closing</em> a healthcare transaction (<a href="https://www.healthaffairs.org/content/forefront/private-equity-health-care-state-based-policy-perspective" target="_blank" rel="noopener">Health Affairs Forefront</a>) — a constraint on speed, not evidence of it. The FQHC card's argument for pre-positioned financing stands on its own without the comparison.</li>
-        </ul>
-      </div>
-
-      <div class="excl-group">
-        <div class="excl-head">Corrected before use</div>
-        <ul>
-          <li><strong>DHCS coverage-loss figure: 1.4M &rarr; 1.1M.</strong> No defensible 1.4M DHCS figure could be located; 1.1M is the agency's central estimate.</li>
-          <li><strong>CHW wage: $45-60K &rarr; $69,030.</strong> BLS OEWS for the SF-Oakland-Hayward metro. This cuts against the framework's own use of the number, so the card's argument was rewritten around cost of living rather than low pay.</li>
-          <li><strong>CHW billing authority: AB 2468 &rarr; AB 133 (2021).</strong> AB 2468 is not the enabling statute; the benefit took effect July 1, 2022, with SB 184 setting core competencies.</li>
-          <li><strong>Housing supports: "ED &minus;20-35%, readmissions &minus;27%" &rarr; inpatient &minus;24.3%, ED &minus;13.2%.</strong> The original overstated the ED effect by roughly double. A larger 71%/24% pair in circulation comes from an LA County psychiatric recuperative care service, not housing supports generally — the likely origin of the inflation.</li>
-        </ul>
-      </div>
-
-      <div class="excl-group">
-        <div class="excl-head">Untraceable &mdash; not stated as fact anywhere in the cards</div>
-        <ul>
-          <li><strong>"Navigator time-use studies consistently report 30-40% of hours on documentation."</strong> No navigator, CHW, or case-manager study supports this; the one CHW time-use study located (rural Tanzania) puts documentation at 7.8%, which is not comparable. The infrastructure card cites the physician literature instead, labelled as an analogue. <em>The absence of navigator-specific time-use data is itself a finding worth naming.</em></li>
-          <li><strong>"Turnover costs $8,000-15,000 per hire."</strong> Not traceable to a CHW-specific study, and comparable estimates bracket it incompatibly — roughly $2,100-4,200 per instance for direct care workers, against $35-50K under percentage-of-salary methods for a $69K role. No figure is asserted.</li>
-          <li><strong>"Unmet basic needs are the most common preventable barrier to housing placement completion."</strong> No source located. The underlying observation may well be right; the superlative is what makes it unpublishable.</li>
-          <li><strong>"Many navigators spend personal money on client needs."</strong> The closest evidence is a BASW membership survey in which about 70% of 290 social workers reported using their own money or resources for clients (<a href="https://www.communitycare.co.uk/2018/07/31/social-workers-use-money-buy-food-clothing-service-users-survey-finds/" target="_blank" rel="noopener">via Community Care</a>) — UK social workers rather than US navigators, and a membership survey rather than peer-reviewed research. Not transferable enough to carry an argument here.</li>
-        </ul>
-      </div>
-
-      <p class="excl-scope"><strong>Scope.</strong> The framework carries 20 issues; this page carries 6. The 13 claims audited are those attached to the 6 published cards. The remaining 14 items carry their own supporting claims that have <em>not</em> been checked — given that roughly half of this sample failed, they should not be assumed sound if any are promoted here later.</p>
-    </div>
   </section>
 
   <section id="resilient">
-    <h2>Top 10 Most Resilient Organizations</h2>
-    <p class="section-dek">Resilience = revenue diversification away from Medi-Cal, endowment or tax-base backing, CalAIM integration, or a funder/research role that isn't directly service-delivery dependent. Even resilient orgs face real losses — "resilient" means an organization survives the 2026-2028 window intact, not that it emerges unaffected. <strong>Dollar figures below are modeled total exposure across the 2026-2028 window</strong> (not an annual run-rate — see the At-Risk table below for the annualized framing), and are estimates (see Methodology), not audited projections.</p>
+    <h2>Most Resilient Organizations</h2>
+    <p class="section-dek">Both tables are limited to organizations with <strong>direct fiscal exposure to OBBBA-related cuts</strong> — a revenue line that shrinks when Medi-Cal enrollment does. Funders, endowed foundations, and research institutes were removed: their grantees are exposed, but they are not, and ranking them as "resilient" measured the wrong thing. Resilience here means revenue diversification away from Medi-Cal, tax-base backing, commercial cross-subsidy, or CalAIM integration. Even resilient orgs face real losses — "resilient" means an organization survives the 2026-2028 window intact, not that it emerges unaffected. <strong>Dollar figures below are modeled total exposure across the 2026-2028 window</strong> (not an annual run-rate — see the At-Risk table below for the annualized framing), and are estimates (see Methodology), not audited projections.</p>
     <div class="org-table-wrap">
       <table class="org-table">
         <thead><tr><th>#</th><th>Organization</th><th>Type · Medi-Cal % of revenue</th><th>Est. $ at risk, 2026-28</th><th>Why it's resilient</th></tr></thead>
@@ -411,10 +350,7 @@
           <tr><td class="rank resilient">04</td><td><span class="org-name">Sutter Health (Northern CA)</span><span class="org-loc">Sacramento HQ · Alta Bates Summit (Oakland/Berkeley), CPMC (SF)</span></td><td>Nonprofit system · ~18-22%</td><td class="fig resilient">$300-450M [est.]</td><td>Multi-market scale and cross-subsidy; commercial-heavy Alta Bates/CPMC markets offset thinner-margin sites elsewhere in the system.</td></tr>
           <tr><td class="rank resilient">05</td><td><span class="org-name">Abode Services</span><span class="org-loc">Fremont HQ · Alameda, Santa Clara, San Mateo counties</span></td><td>Housing/homelessness nonprofit · ~30-35% (CalAIM billing)</td><td class="fig resilient">$10-18M [est.]</td><td>Most diversified funding structure among Bay Area housing orgs — county contracts, CalAIM Community Supports billing, CARE Court contracts, philanthropy; PSH operating subsidies are contractually locked for 10-20 years.</td></tr>
           <tr><td class="rank resilient">06</td><td><span class="org-name">Bay Area Community Services (BACS)</span><span class="org-loc">Oakland · Alameda County</span></td><td>Behavioral health/housing nonprofit · ~35-40%</td><td class="fig resilient">$8-15M [est.]</td><td>CARE Court contracts are court-ordered, not Medi-Cal dependent; Prop 1 behavioral-health bonds create a new non-Medi-Cal funding stream for the same service lines.</td></tr>
-          <tr><td class="rank resilient">07</td><td><span class="org-name">The Health Trust</span><span class="org-loc">San Jose · Santa Clara &amp; N. San Benito counties</span></td><td>Operating foundation (funder) · 0% (grants out, doesn't bill Medi-Cal)</td><td class="fig resilient">$0 direct; grantees at risk</td><td>Endowment-funded from a 1996 hospital sale — fully insulated from Medi-Cal revenue risk; can activate a rapid-response fund for grantee emergencies.</td></tr>
-          <tr><td class="rank resilient">08</td><td><span class="org-name">Silicon Valley Community Foundation (SVCF)</span><span class="org-loc">Mountain View · Bay Area-wide</span></td><td>Community foundation (funder) · 0%</td><td class="fig resilient">$0 direct</td><td>Large AUM community foundation, immune to Medi-Cal revenue risk; role is strategic coordinator/co-funder for regional housing, health, and equity initiatives.</td></tr>
-          <tr><td class="rank resilient">09</td><td><span class="org-name">Terner Center / Terner Labs</span><span class="org-loc">UC Berkeley · Oakland</span></td><td>Research + accelerator (nonprofit) · 0%</td><td class="fig resilient">$0 direct</td><td>University-backed and philanthropically funded, no Medi-Cal dependency; academic tenure insulates staff from budget swings.</td></tr>
-          <tr><td class="rank resilient">10</td><td><span class="org-name">Community Health Center Network (CHCN)</span><span class="org-loc">Oakland · Alameda + Contra Costa</span></td><td>Medi-Cal MCO admin backbone for 8 FQHCs · ~90%</td><td class="fig resilient">Revenue tracks enrollment, not a direct service-revenue org</td><td>Structural role as shared administrative infrastructure (not clinical care) makes it more, not less, needed by member FQHCs during a revenue disruption.</td></tr>
+          <tr><td class="rank resilient">07</td><td><span class="org-name">Community Health Center Network (CHCN)</span><span class="org-loc">Oakland · Alameda + Contra Costa</span></td><td>Medi-Cal MCO admin backbone for 8 FQHCs · ~90%</td><td class="fig resilient">Revenue tracks enrollment, not a direct service-revenue org</td><td>Structural role as shared administrative infrastructure (not clinical care) makes it more, not less, needed by member FQHCs during a revenue disruption.</td></tr>
         </tbody>
       </table>
     </div>
@@ -583,7 +519,7 @@
       </ul>
       <h3>How the resilient/at-risk rankings were built</h3>
       <ul>
-        <li>Organizations were selected as real, currently operating Bay Area entities in categories directly relevant to Medi-Cal work-requirement exposure (health systems, Medi-Cal MCOs, FQHCs, safety-net hospitals, housing/behavioral-health nonprofits, and funders).</li>
+        <li>Organizations were selected as real, currently operating Bay Area entities in categories directly relevant to Medi-Cal work-requirement exposure (health systems, Medi-Cal MCOs, FQHCs, safety-net hospitals, and housing/behavioral-health nonprofits). <strong>Entry requires direct fiscal exposure</strong> — a revenue line that contracts when Medi-Cal enrollment does. Funders and endowed research institutes are therefore not ranked: their grantees carry the exposure, and scoring a foundation as "resilient" against a risk it does not bear inflates the resilient column with organizations that were never at stake.</li>
         <li>Ranking is a <strong>structural</strong> assessment — payer-mix diversification, known infrastructure maturity (e.g. CalAIM/1115-waiver systems), reserve position, and organization scale — not an audited financial or credit-rating analysis. No individual organization's balance sheet, reserve position, or bond rating was independently verified for this page.</li>
         <li>Revenue-at-risk methodology (from the source working document): estimated revenue × Medi-Cal share × a population-specific disenrollment-rate assumption (immigrant-heavy populations 35-50%; general low-income 15-25%; homeless-adjacent 20-30%) — a planning heuristic, not a statistical model validated against realized outcomes. <strong>This methodology likely overstates exposure</strong>: it applies the disenrollment rate to an org's <em>entire</em> Medi-Cal revenue, but only the ACA expansion adult population (not children, seniors, pregnant enrollees, disabled enrollees, or dual-eligibles) is subject to the work requirement — DHCS puts that population at ~34% of total Medi-Cal enrollment statewide (4.8M of ~14M), with a central coverage-loss estimate of ~1.1M (roughly 7-8% of enrollment), not the much larger share these dollar figures could be read to imply. Orgs with heavier elderly, disabled, or pediatric caseloads are more insulated than their flat Medi-Cal % suggests; Alameda County's own official figure (14,600 of 159,000 subject = ~9% losing coverage in 2026-27) is a more grounded near-term reference point than this page's org-level ranges.</li>
       </ul>
