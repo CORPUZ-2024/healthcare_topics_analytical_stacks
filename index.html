@@ -139,76 +139,76 @@
             <tr>
               <th class="ref-feature-col">Feature</th>
               <th>DRG<br><span class="ref-th-sub">Diagnosis-Related Group</span></th>
+              <th>APC<br><span class="ref-th-sub">Ambulatory Payment Classification</span></th>
               <th>HCPCS<br><span class="ref-th-sub">Healthcare Common Procedure Coding System</span></th>
               <th>HCC<br><span class="ref-th-sub">Hierarchical Condition Category</span></th>
               <th>ICD<br><span class="ref-th-sub">International Classification of Diseases</span></th>
-              <th>APC<br><span class="ref-th-sub">Ambulatory Payment Classification</span></th>
             </tr>
           </thead>
           <tbody>
             <tr>
               <td class="ref-feature-col"><strong>Primary use</strong></td>
               <td>Inpatient hospital payment under IPPS.</td>
+              <td>Hospital outpatient payment under OPPS.</td>
               <td>Billing codes for procedures, supplies, drugs, and services (FFS). Level I = CPT; Level II = non-physician supplies/drugs/etc.</td>
               <td>Risk adjustment to predict annual expected cost (premiums/capitation and quality models).</td>
               <td>Clinical classification of diagnoses (ICD-10-CM) and inpatient procedures (ICD-10-PCS).</td>
-              <td>Hospital outpatient payment under OPPS.</td>
             </tr>
             <tr>
               <td class="ref-feature-col"><strong>Care setting</strong></td>
               <td>Acute inpatient stays.</td>
+              <td>Hospital outpatient departments (HOPDs); some ED/clinic/ancillary.</td>
               <td>All settings (professional, outpatient, ASC, DME, ambulance, etc.).</td>
               <td>Population-level risk for Medicare Advantage/ACA and some Medicaid models.</td>
               <td>All settings; foundational clinical coding on every claim/record.</td>
-              <td>Hospital outpatient departments (HOPDs); some ED/clinic/ancillary.</td>
             </tr>
             <tr>
               <td class="ref-feature-col"><strong>Payment model</strong></td>
               <td><strong>Episode-based</strong>: one payment per stay, adjusted by DRG weight, wage index, etc.</td>
+              <td><strong>Prospective</strong>: APC weight × conversion factor; packaging &amp; multiple-procedure rules under OPPS.</td>
               <td><strong>Fee-for-service</strong>: line-item payment per code (subject to edits, bundling).</td>
               <td><strong>Risk-adjusted</strong>: additive risk score applied to premiums/benchmarks.</td>
               <td><strong>Not a payment system</strong> by itself; feeds DRG, HCC, quality, epi studies.</td>
-              <td><strong>Prospective</strong>: APC weight × conversion factor; packaging &amp; multiple-procedure rules under OPPS.</td>
             </tr>
             <tr>
               <td class="ref-feature-col"><strong>Basis of grouping</strong></td>
               <td>Groups from ICD-10-CM/PCS diagnoses &amp; procedures, age/sex/discharge status; CC/MCC tiers.</td>
+              <td>Groups <strong>CPT/HCPCS</strong> codes into clinical/resource bundles (status indicators determine packaging).</td>
               <td>CPT/HCPCS codes describing the specific service/supply/drug; units and modifiers refine payment.</td>
               <td>Mapped from <strong>ICD-10-CM</strong> diagnosis codes recorded over a look-back year; disease hierarchies.</td>
               <td>ICD-10-CM (diagnoses) and ICD-10-PCS (inpatient procedures) with clinical rules/edits.</td>
-              <td>Groups <strong>CPT/HCPCS</strong> codes into clinical/resource bundles (status indicators determine packaging).</td>
             </tr>
             <tr>
               <td class="ref-feature-col"><strong>Scope</strong></td>
               <td>Single inpatient episode.</td>
+              <td>An outpatient visit/encounter; multiple APCs may apply.</td>
               <td>Individual services and supplies.</td>
               <td><strong>Annual</strong> view of chronic disease burden per member.</td>
               <td>Complete clinical picture across encounters (conditions &amp; procedures).</td>
-              <td>An outpatient visit/encounter; multiple APCs may apply.</td>
             </tr>
             <tr>
               <td class="ref-feature-col"><strong>Additivity / interaction</strong></td>
               <td><strong>Hierarchical</strong>: one DRG per stay; CC/MCC levels modify payment (not additive).</td>
+              <td><strong>Mixed</strong>: some APCs pay separately; many ancillary items are packaged into a primary APC; multiples discounted.</td>
               <td>Generally <strong>not additive</strong> across bundled edits; each line evaluated (NCCI edits, modifiers).</td>
               <td><strong>Additive with hierarchies</strong>: most unrelated HCCs add; within a disease family, higher-severity HCC suppresses lower.</td>
               <td>Multiple diagnoses/procedures can be listed; downstream systems (DRG/HCC) impose hierarchy.</td>
-              <td><strong>Mixed</strong>: some APCs pay separately; many ancillary items are packaged into a primary APC; multiples discounted.</td>
             </tr>
             <tr>
               <td class="ref-feature-col"><strong>Typical inputs</strong></td>
               <td>Principal diagnosis, OR/non-OR procedures, comorbidities (CC/MCC), demographics, discharge status.</td>
+              <td>Outpatient CPT/HCPCS codes, status indicators, units; sometimes device edits, composite logic.</td>
               <td>Procedure code + units + modifiers; sometimes drug strength (J-codes), DME details.</td>
               <td>All qualifying chronic/severe diagnoses from claims/encounters in the model year.</td>
               <td>Provider documentation abstracted to ICD codes; POA, laterality, encounter type, etc.</td>
-              <td>Outpatient CPT/HCPCS codes, status indicators, units; sometimes device edits, composite logic.</td>
             </tr>
             <tr>
               <td class="ref-feature-col"><strong>Governing body</strong></td>
               <td><strong>CMS</strong> (Medicare IPPS; MS-DRGs).</td>
+              <td><strong>CMS</strong> (OPPS/APC program).</td>
               <td><strong>CMS</strong> (HCPCS Level II) and <strong>AMA</strong> (CPT = HCPCS Level I).</td>
               <td><strong>CMS</strong> (MA/ACA risk models; state variations for Medicaid).</td>
               <td><strong>WHO</strong> (ICD), with U.S. maintenance by <strong>NCHS</strong> (ICD-10-CM) and <strong>CMS</strong> (ICD-10-PCS).</td>
-              <td><strong>CMS</strong> (OPPS/APC program).</td>
             </tr>
           </tbody>
         </table>
@@ -225,6 +225,14 @@
           </ul>
         </div>
         <div class="ref-deepdive-card">
+          <div class="ref-deepdive-title">APC</div>
+          <ul>
+            <li><strong>Creation (claim/part):</strong> Assigned to hospital outpatient (UB-04/837I) claims — TOB <strong>13x</strong>, paid under <strong>Medicare Part B (OPPS)</strong>. State Medicaid programs may use OPPS-like rules. Built from CPT/HCPCS + status indicators (includes packaging and C-APC logic).</li>
+            <li><strong>Input to bundling/VBC:</strong> Payment unit for OPPS (B); packaging creates de facto ambulatory bundles; used in outpatient episode/cost measures in VBP contexts.</li>
+            <li><strong>Used with other data:</strong> OPPS conversion factor, wage index, multiple-procedure discounting, device/drug pass-through status, required modifiers.</li>
+          </ul>
+        </div>
+        <div class="ref-deepdive-card">
           <div class="ref-deepdive-title">HCPCS (CPT Level I / Level II)</div>
           <ul>
             <li><strong>Creation (claim/part):</strong> Reported on professional (CMS-1500/837P) and hospital outpatient (UB-04/837I, TOB <strong>13x</strong>) claims in Medicare Part B; also used in MA (C) encounters and Medicaid (TAF). Level I maintained by AMA (CPT); Level II by CMS.</li>
@@ -238,14 +246,6 @@
             <li><strong>Creation (claim/part):</strong> Derived annually from ICD-10-CM diagnoses on institutional (UB-04/837I: A/B) and professional (1500/837P: B) claims across settings; computes RAF for <strong>Medicare Advantage (Part C)</strong>; some Medicaid programs adopt HCC-like risk models.</li>
             <li><strong>Input to bundling/VBC:</strong> Adjusts MA (C) capitation and ACO benchmarks; used for risk stratification and performance attribution.</li>
             <li><strong>Used with other data:</strong> Demographics (age/sex/dual/disability), model interactions, encounter completeness rules to produce final RAF.</li>
-          </ul>
-        </div>
-        <div class="ref-deepdive-card">
-          <div class="ref-deepdive-title">APC</div>
-          <ul>
-            <li><strong>Creation (claim/part):</strong> Assigned to hospital outpatient (UB-04/837I) claims — TOB <strong>13x</strong>, paid under <strong>Medicare Part B (OPPS)</strong>. State Medicaid programs may use OPPS-like rules. Built from CPT/HCPCS + status indicators (includes packaging and C-APC logic).</li>
-            <li><strong>Input to bundling/VBC:</strong> Payment unit for OPPS (B); packaging creates de facto ambulatory bundles; used in outpatient episode/cost measures in VBP contexts.</li>
-            <li><strong>Used with other data:</strong> OPPS conversion factor, wage index, multiple-procedure discounting, device/drug pass-through status, required modifiers.</li>
           </ul>
         </div>
       </div>
@@ -4523,7 +4523,8 @@ window.__CMMI_MODELS__ = [
     "category": "Accountable Care Models",
     "startDate": "2012-01-01",
     "endDate": null,
-    "description": "CMS flagship ACO program where provider groups coordinate care for Medicare FFS beneficiaries and share savings relative to a benchmark. BASIC and ENHANCED tracks offer varying levels of shared savings and downside risk."
+    "description": "CMS flagship ACO program where provider groups coordinate care for Medicare FFS beneficiaries and share savings relative to a benchmark. BASIC and ENHANCED tracks offer varying levels of shared savings and downside risk.",
+    "url": "https://www.cms.gov/medicare/payment/fee-for-service-providers/shared-savings-program-ssp-acos"
   },
   {
     "id": "Pioneer",
@@ -4531,7 +4532,8 @@ window.__CMMI_MODELS__ = [
     "category": "Accountable Care Models",
     "startDate": "2012-01-01",
     "endDate": "2016-12-31",
-    "description": "CMMI's first ACO model designed for health systems already experienced in coordinated care. Offered higher shared savings rates and greater downside risk than MSSP. Most participants transitioned to MSSP after model ended."
+    "description": "CMMI's first ACO model designed for health systems already experienced in coordinated care. Offered higher shared savings rates and greater downside risk than MSSP. Most participants transitioned to MSSP after model ended.",
+    "url": "https://www.cms.gov/priorities/innovation/innovation-models/pioneer-aco-model"
   },
   {
     "id": "NextGen",
@@ -4539,7 +4541,8 @@ window.__CMMI_MODELS__ = [
     "category": "Accountable Care Models",
     "startDate": "2016-01-01",
     "endDate": "2021-12-31",
-    "description": "CMMI model testing higher levels of risk and reward for ACOs experienced with population-based payments. Included prospective attribution, benchmark discounts, and benefit enhancements for beneficiaries."
+    "description": "CMMI model testing higher levels of risk and reward for ACOs experienced with population-based payments. Included prospective attribution, benchmark discounts, and benefit enhancements for beneficiaries.",
+    "url": "https://www.cms.gov/priorities/innovation/innovation-models/next-generation-aco-model"
   },
   {
     "id": "ACO_REACH",
@@ -4547,7 +4550,8 @@ window.__CMMI_MODELS__ = [
     "category": "Accountable Care Models",
     "startDate": "2023-01-01",
     "endDate": "2026-12-31",
-    "description": "Successor to the Global and Professional Direct Contracting Model. ACOs accept prospective attribution and financial accountability (Professional or Global risk) for Medicare FFS beneficiaries, with mandatory Health Equity Plans."
+    "description": "Successor to the Global and Professional Direct Contracting Model. ACOs accept prospective attribution and financial accountability (Professional or Global risk) for Medicare FFS beneficiaries, with mandatory Health Equity Plans.",
+    "url": "https://www.cms.gov/priorities/innovation/innovation-models/aco-reach"
   },
   {
     "id": "CPCPlus",
@@ -4555,7 +4559,8 @@ window.__CMMI_MODELS__ = [
     "category": "Accountable Care Models",
     "startDate": "2017-01-01",
     "endDate": "2021-12-31",
-    "description": "CMMI multi-payer primary care model offering care management fees and performance-based incentives to primary care practices. Tested in 14 regions with over 2,900 participating practices and 40 payer partners."
+    "description": "CMMI multi-payer primary care model offering care management fees and performance-based incentives to primary care practices. Tested in 14 regions with over 2,900 participating practices and 40 payer partners.",
+    "url": "https://www.cms.gov/priorities/innovation/innovation-models/comprehensive-primary-care-plus"
   },
   {
     "id": "PCF",
@@ -4563,7 +4568,8 @@ window.__CMMI_MODELS__ = [
     "category": "Accountable Care Models",
     "startDate": "2021-01-01",
     "endDate": "2025-12-31",
-    "description": "CMMI model offering a flat primary care visit fee, population-based payment, and performance-based adjustments for primary care practices ready to accept accountability for total cost of care."
+    "description": "CMMI model offering a flat primary care visit fee, population-based payment, and performance-based adjustments for primary care practices ready to accept accountability for total cost of care.",
+    "url": "https://www.cms.gov/priorities/innovation/innovation-models/primary-care-first-model-options"
   },
   {
     "id": "MCP",
@@ -4571,7 +4577,8 @@ window.__CMMI_MODELS__ = [
     "category": "Accountable Care Models",
     "startDate": "2024-07-01",
     "endDate": "2025-06-30",
-    "description": "Ten-year CMMI primary care model in 8 states with a graduated pathway toward prospective total cost of care accountability. Focuses on care management, behavioral health integration, and specialist partnerships."
+    "description": "Ten-year CMMI primary care model in 8 states with a graduated pathway toward prospective total cost of care accountability. Focuses on care management, behavioral health integration, and specialist partnerships.",
+    "url": "https://www.cms.gov/priorities/innovation/innovation-models/making-care-primary"
   },
   {
     "id": "BPCI_ADV",
@@ -4579,7 +4586,8 @@ window.__CMMI_MODELS__ = [
     "category": "Disease-Specific & Episode-Based Models",
     "startDate": "2018-10-01",
     "endDate": "2025-12-31",
-    "description": "Episode-based payment model for 90-day clinical episodes triggered by inpatient hospitalization. Participants — hospitals or physician group practices — are accountable for quality and cost across 32 clinical episode types. Ran eight model years and concluded December 31, 2025."
+    "description": "Episode-based payment model for 90-day clinical episodes triggered by inpatient hospitalization. Participants — hospitals or physician group practices — are accountable for quality and cost across 32 clinical episode types. Ran eight model years and concluded December 31, 2025.",
+    "url": "https://www.cms.gov/priorities/innovation/innovation-models/bpci-advanced"
   },
   {
     "id": "CJR",
@@ -4587,7 +4595,8 @@ window.__CMMI_MODELS__ = [
     "category": "Disease-Specific & Episode-Based Models",
     "startDate": "2016-04-01",
     "endDate": "2024-12-31",
-    "description": "Mandatory-then-voluntary episode payment model for hip and knee replacement surgeries. Hospitals bear upside and downside risk for the 90-day post-discharge episode. Initially mandatory in selected markets. Concluded December 31, 2024 after its final performance year."
+    "description": "Mandatory-then-voluntary episode payment model for hip and knee replacement surgeries. Hospitals bear upside and downside risk for the 90-day post-discharge episode. Initially mandatory in selected markets. Concluded December 31, 2024 after its final performance year.",
+    "url": "https://www.cms.gov/priorities/innovation/innovation-models/cjr"
   },
   {
     "id": "OCM",
@@ -4595,7 +4604,8 @@ window.__CMMI_MODELS__ = [
     "category": "Disease-Specific & Episode-Based Models",
     "startDate": "2016-07-01",
     "endDate": "2022-06-30",
-    "description": "Six-year CMMI model for oncology practices providing chemotherapy. Practices received monthly enhanced oncology services payments and could earn performance-based incentives. Predecessor to the Enhancing Oncology Model."
+    "description": "Six-year CMMI model for oncology practices providing chemotherapy. Practices received monthly enhanced oncology services payments and could earn performance-based incentives. Predecessor to the Enhancing Oncology Model.",
+    "url": "https://www.cms.gov/priorities/innovation/innovation-models/oncology-care"
   },
   {
     "id": "EOM",
@@ -4603,7 +4613,8 @@ window.__CMMI_MODELS__ = [
     "category": "Disease-Specific & Episode-Based Models",
     "startDate": "2023-07-01",
     "endDate": "2030-06-30",
-    "description": "Successor to OCM. Oncology practices assume downside risk for 6-month chemotherapy episodes across 7 cancer types. Incorporates health equity screening requirements, care management payments, and mandatory downside risk. Extended through June 30, 2030."
+    "description": "Successor to OCM. Oncology practices assume downside risk for 6-month chemotherapy episodes across 7 cancer types. Incorporates health equity screening requirements, care management payments, and mandatory downside risk. Extended through June 30, 2030.",
+    "url": "https://www.cms.gov/priorities/innovation/innovation-models/enhancing-oncology-model"
   },
   {
     "id": "HHVBP",
@@ -4611,7 +4622,8 @@ window.__CMMI_MODELS__ = [
     "category": "Disease-Specific & Episode-Based Models",
     "startDate": "2016-01-01",
     "endDate": "2021-12-31",
-    "description": "Model tying a portion of home health agency payment to quality performance. Piloted in 9 states; a separate nationwide expansion began January 1, 2022 (a pre-implementation year), with performance measured from 2023. Agencies can earn up to +5% or face up to -5% payment adjustments based on quality scores. NOTE: this is the ORIGINAL nine-state model, which ended December 31, 2021. The nationwide \"expanded HHVBP\" operating since 2023 is a separate, permanent program — not this model."
+    "description": "Model tying a portion of home health agency payment to quality performance. Piloted in 9 states; a separate nationwide expansion began January 1, 2022 (a pre-implementation year), with performance measured from 2023. Agencies can earn up to +5% or face up to -5% payment adjustments based on quality scores. NOTE: this is the ORIGINAL nine-state model, which ended December 31, 2021. The nationwide \"expanded HHVBP\" operating since 2023 is a separate, permanent program — not this model.",
+    "url": "https://www.cms.gov/priorities/innovation/innovation-models/home-health-value-based-purchasing-model"
   },
   {
     "id": "GUIDE",
@@ -4619,7 +4631,8 @@ window.__CMMI_MODELS__ = [
     "category": "Disease-Specific & Episode-Based Models",
     "startDate": "2024-07-01",
     "endDate": "2032-06-30",
-    "description": "CMMI model supporting individuals with dementia and their caregivers. Participants provide interdisciplinary care navigation, 24/7 access, and respite care. Monthly per-beneficiary-per-month payments fund model infrastructure."
+    "description": "CMMI model supporting individuals with dementia and their caregivers. Participants provide interdisciplinary care navigation, 24/7 access, and respite care. Monthly per-beneficiary-per-month payments fund model infrastructure.",
+    "url": "https://www.cms.gov/priorities/innovation/innovation-models/guide"
   },
   {
     "id": "ViT",
@@ -4627,7 +4640,8 @@ window.__CMMI_MODELS__ = [
     "category": "Disease-Specific & Episode-Based Models",
     "startDate": "2021-01-01",
     "endDate": "2024-12-31",
-    "description": "CMMI model testing episode-based payment for opioid use disorder treatment, bundling all services for a 6-month episode. Aims to expand access to evidence-based medication-assisted treatment (MAT). Four-year demonstration scheduled through December 2024."
+    "description": "CMMI model testing episode-based payment for opioid use disorder treatment, bundling all services for a 6-month episode. Aims to expand access to evidence-based medication-assisted treatment (MAT). Four-year demonstration scheduled through December 2024.",
+    "url": "https://www.cms.gov/priorities/innovation/innovation-models/value-in-treatment-demonstration"
   },
   {
     "id": "IBH",
@@ -4635,7 +4649,8 @@ window.__CMMI_MODELS__ = [
     "category": "Disease-Specific & Episode-Based Models",
     "startDate": "2024-01-01",
     "endDate": "2032-12-31",
-    "description": "CMMI model integrating physical health services into community behavioral health settings. Practices receive infrastructure and per-member-per-month payments to screen and coordinate care for Medicare and Medicaid beneficiaries."
+    "description": "CMMI model integrating physical health services into community behavioral health settings. Practices receive infrastructure and per-member-per-month payments to screen and coordinate care for Medicare and Medicaid beneficiaries.",
+    "url": "https://www.cms.gov/priorities/innovation/innovation-models/ibh"
   },
   {
     "id": "AHEAD",
@@ -4643,7 +4658,8 @@ window.__CMMI_MODELS__ = [
     "category": "State & Community-Based Models",
     "startDate": "2024-01-01",
     "endDate": "2035-12-31",
-    "description": "State-level CMMI model testing all-payer total cost of care approaches. States implement population-based payments spanning Medicare, Medicaid, and commercial payers, with explicit health equity goals. CMS renamed the model in September 2025 from \"States Advancing All-Payer Health Equity Approaches\"; the AHEAD acronym was retained."
+    "description": "State-level CMMI model testing all-payer total cost of care approaches. States implement population-based payments spanning Medicare, Medicaid, and commercial payers, with explicit health equity goals. CMS renamed the model in September 2025 from \"States Advancing All-Payer Health Equity Approaches\"; the AHEAD acronym was retained.",
+    "url": "https://www.cms.gov/priorities/innovation/innovation-models/ahead"
   },
   {
     "id": "TEAM",
@@ -4651,7 +4667,8 @@ window.__CMMI_MODELS__ = [
     "category": "Disease-Specific & Episode-Based Models",
     "startDate": "2026-01-01",
     "endDate": "2030-12-31",
-    "description": "Mandatory episode-based payment model for five surgical procedures: lower extremity joint replacement, surgical hip femur fracture treatment, spinal fusion, coronary artery bypass graft, and major bowel procedure. Hospitals in selected geographic areas are required to participate (721 hospitals on CMS's August 18, 2026 participant list: 711 mandatory hospitals in the 188 selected core-based statistical areas plus 10 voluntary participants; the original 2024 list named 741). 30-day post-discharge episode window — shorter than CJR/BPCI Advanced's 90-day window by design. Runs January 1, 2026 through December 31, 2030."
+    "description": "Mandatory episode-based payment model for five surgical procedures: lower extremity joint replacement, surgical hip femur fracture treatment, spinal fusion, coronary artery bypass graft, and major bowel procedure. Hospitals in selected geographic areas are required to participate (721 hospitals on CMS's August 18, 2026 participant list: 711 mandatory hospitals in the 188 selected core-based statistical areas plus 10 voluntary participants; the original 2024 list named 741). 30-day post-discharge episode window — shorter than CJR/BPCI Advanced's 90-day window by design. Runs January 1, 2026 through December 31, 2030.",
+    "url": "https://www.cms.gov/priorities/innovation/innovation-models/team-model"
   },
   {
     "id": "VBID",
@@ -4659,7 +4676,8 @@ window.__CMMI_MODELS__ = [
     "category": "Health Plan Models",
     "startDate": "2017-01-01",
     "endDate": "2025-12-31",
-    "description": "Tests whether Medicare Advantage plans can use health-condition-specific cost-sharing structures and supplemental benefits to improve care quality and reduce costs. Participating MA plans can offer targeted reduced cost-sharing for high-value services for chronically ill enrollees. CMS ended the model after CY2025, citing excess costs to Medicare."
+    "description": "Tests whether Medicare Advantage plans can use health-condition-specific cost-sharing structures and supplemental benefits to improve care quality and reduce costs. Participating MA plans can offer targeted reduced cost-sharing for high-value services for chronically ill enrollees. CMS ended the model after CY2025, citing excess costs to Medicare.",
+    "url": "https://www.cms.gov/priorities/innovation/innovation-models/vbid"
   },
   {
     "id": "EnhancedMTM",
@@ -4667,7 +4685,8 @@ window.__CMMI_MODELS__ = [
     "category": "Prescription Drug Models",
     "startDate": "2017-01-01",
     "endDate": "2021-12-31",
-    "description": "CMMI model testing whether enhanced MTM services in Medicare Part D can improve medication adherence and health outcomes for high-risk beneficiaries. Participating Part D plan sponsors were incentivized to increase MTM program participation and reduce hospitalizations."
+    "description": "CMMI model testing whether enhanced MTM services in Medicare Part D can improve medication adherence and health outcomes for high-risk beneficiaries. Participating Part D plan sponsors were incentivized to increase MTM program participation and reduce hospitalizations.",
+    "url": "https://www.cms.gov/priorities/innovation/innovation-models/enhancedmtm"
   },
   {
     "id": "SIM",
@@ -4675,7 +4694,8 @@ window.__CMMI_MODELS__ = [
     "category": "State & Community-Based Models",
     "startDate": "2013-02-01",
     "endDate": "2019-12-31",
-    "description": "CMMI initiative providing funding and technical assistance to states developing and testing multi-payer health system transformation models. Two rounds (2013 and 2015) funded 38 states to design and test state-led payment and delivery system reforms across all payers."
+    "description": "CMMI initiative providing funding and technical assistance to states developing and testing multi-payer health system transformation models. Two rounds (2013 and 2015) funded 38 states to design and test state-led payment and delivery system reforms across all payers.",
+    "url": "https://www.cms.gov/priorities/innovation/innovation-models/state-innovations"
   },
   {
     "id": "FAI",
@@ -4683,7 +4703,8 @@ window.__CMMI_MODELS__ = [
     "category": "Statutory Demonstrations and Other Projects",
     "startDate": "2013-01-01",
     "endDate": "2023-12-31",
-    "description": "Capitated and managed fee-for-service demonstrations integrating Medicare and Medicaid financing and services for dual-eligible beneficiaries. States partnered with CMS to reduce fragmentation between Medicare and Medicaid for individuals dually enrolled in both programs."
+    "description": "Capitated and managed fee-for-service demonstrations integrating Medicare and Medicaid financing and services for dual-eligible beneficiaries. States partnered with CMS to reduce fragmentation between Medicare and Medicaid for individuals dually enrolled in both programs.",
+    "url": "https://www.cms.gov/medicaid-chip/medicare-coordination/financial-alignment"
   },
   {
     "id": "PACE",
@@ -4691,7 +4712,8 @@ window.__CMMI_MODELS__ = [
     "category": "Statutory Demonstrations and Other Projects",
     "startDate": "2017-01-01",
     "endDate": null,
-    "description": "Statutory demonstration expanding PACE (Program of All-Inclusive Care for the Elderly) to new populations and settings. Tests PACE-like models of comprehensive, integrated care for frail elderly individuals who do not yet qualify for nursing home level of care."
+    "description": "Statutory demonstration expanding PACE (Program of All-Inclusive Care for the Elderly) to new populations and settings. Tests PACE-like models of comprehensive, integrated care for frail elderly individuals who do not yet qualify for nursing home level of care.",
+    "url": "https://www.cms.gov/medicare/medicaid-coordination/pace"
   },
   {
     "id": "LEAD",
@@ -4699,7 +4721,8 @@ window.__CMMI_MODELS__ = [
     "category": "Accountable Care Models",
     "startDate": "2027-01-01",
     "endDate": "2036-12-31",
-    "description": "Voluntary 10-year CMMI model (January 1, 2027 - December 31, 2036) succeeding ACO REACH, which ends Dec 31, 2026. RFA released March 31, 2026. Fixed 10-year term structured to give ACOs a longer runway for total-cost-of-care accountability than REACH's shorter cycle offered, with an emphasis on bringing smaller, rural and independent practices into accountable care."
+    "description": "Voluntary 10-year CMMI model (January 1, 2027 - December 31, 2036) succeeding ACO REACH, which ends Dec 31, 2026. RFA released March 31, 2026. Fixed 10-year term structured to give ACOs a longer runway for total-cost-of-care accountability than REACH's shorter cycle offered, with an emphasis on bringing smaller, rural and independent practices into accountable care.",
+    "url": "https://www.cms.gov/priorities/innovation/innovation-models/lead"
   },
   {
     "id": "CJR_X",
@@ -4707,7 +4730,8 @@ window.__CMMI_MODELS__ = [
     "category": "Disease-Specific & Episode-Based Models",
     "startDate": "2028-01-01",
     "endDate": null,
-    "description": "Mandatory nationwide successor to CJR (which ended December 31, 2024), finalized in the FY2027 IPPS final rule released July 31, 2026. From January 1, 2028 — delayed from the proposed October 1, 2027 — acute care hospitals nationwide are accountable for inpatient and outpatient lower-extremity joint replacement episodes through 90 days post-discharge. TEAM participants and Maryland hospitals are excluded."
+    "description": "Mandatory nationwide successor to CJR (which ended December 31, 2024), finalized in the FY2027 IPPS final rule released July 31, 2026. From January 1, 2028 — delayed from the proposed October 1, 2027 — acute care hospitals nationwide are accountable for inpatient and outpatient lower-extremity joint replacement episodes through 90 days post-discharge. TEAM participants and Maryland hospitals are excluded.",
+    "url": "https://www.cms.gov/priorities/innovation/innovation-models/cjr-x"
   },
   {
     "id": "WISeR",
@@ -4715,7 +4739,8 @@ window.__CMMI_MODELS__ = [
     "category": "Disease-Specific & Episode-Based Models",
     "startDate": "2026-01-01",
     "endDate": "2031-12-31",
-    "description": "CMMI model in which participating technology vendors use AI and machine-learning tools, with clinician review, to run prior authorization for selected items and services vulnerable to waste — such as skin and tissue substitutes, electrical nerve stimulator implants, and knee arthroscopy for knee osteoarthritis — in Original Medicare in six states (Arizona, New Jersey, Ohio, Oklahoma, Texas, Washington). Voluntary for the vendors; providers in those states cannot opt out of the prior authorization process. Coverage and payment rules are unchanged, and the model does not apply to Medicare Advantage."
+    "description": "CMMI model in which participating technology vendors use AI and machine-learning tools, with clinician review, to run prior authorization for selected items and services vulnerable to waste — such as skin and tissue substitutes, electrical nerve stimulator implants, and knee arthroscopy for knee osteoarthritis — in Original Medicare in six states (Arizona, New Jersey, Ohio, Oklahoma, Texas, Washington). Voluntary for the vendors; providers in those states cannot opt out of the prior authorization process. Coverage and payment rules are unchanged, and the model does not apply to Medicare Advantage.",
+    "url": "https://www.cms.gov/priorities/innovation/innovation-models/wiser"
   },
   {
     "id": "ACCESS",
@@ -4723,7 +4748,8 @@ window.__CMMI_MODELS__ = [
     "category": "Disease-Specific & Episode-Based Models",
     "startDate": "2026-07-05",
     "endDate": null,
-    "description": "Voluntary 10-year CMMI model, begun July 5, 2026, that pays Outcome-Aligned Payments to Part B-enrolled organizations delivering technology-supported care in Original Medicare for high blood pressure, diabetes, chronic musculoskeletal pain and depression. Payment is tied to measured outcomes rather than to activities."
+    "description": "Voluntary 10-year CMMI model, begun July 5, 2026, that pays Outcome-Aligned Payments to Part B-enrolled organizations delivering technology-supported care in Original Medicare for high blood pressure, diabetes, chronic musculoskeletal pain and depression. Payment is tied to measured outcomes rather than to activities.",
+    "url": "https://www.cms.gov/priorities/innovation/innovation-models/access-model"
   },
   {
     "id": "ASM",
@@ -4731,7 +4757,8 @@ window.__CMMI_MODELS__ = [
     "category": "Disease-Specific & Episode-Based Models",
     "startDate": "2027-01-01",
     "endDate": "2031-12-31",
-    "description": "Mandatory CMMI model that applies performance-based Medicare Part B payment adjustments to individual specialists managing heart failure (cardiology) and low back pain (anesthesiology, pain management, interventional pain management, neurosurgery, orthopedic surgery, physical medicine and rehabilitation) in roughly one-quarter of CBSAs and metropolitan divisions. Adjustments range from -9% to +9% in the first two performance years, widening to -12% to +12% by the final year. The CY2027 Physician Fee Schedule final rule refined its measures without changing the January 1, 2027 start."
+    "description": "Mandatory CMMI model that applies performance-based Medicare Part B payment adjustments to individual specialists managing heart failure (cardiology) and low back pain (anesthesiology, pain management, interventional pain management, neurosurgery, orthopedic surgery, physical medicine and rehabilitation) in roughly one-quarter of CBSAs and metropolitan divisions. Adjustments range from -9% to +9% in the first two performance years, widening to -12% to +12% by the final year. The CY2027 Physician Fee Schedule final rule refined its measures without changing the January 1, 2027 start.",
+    "url": "https://www.cms.gov/priorities/innovation/innovation-models/asm"
   }
 ]
 ;
@@ -4741,6 +4768,10 @@ window.__DATASETS__ = [
   {
     "name": "Medicare Carrier (Physician/Supplier) Claims",
     "description": "Line-level claims data for physician and other supplier services billed to Medicare Part B. Contains procedure codes (HCPCS), diagnosis codes (ICD), provider NPI, service dates, allowed amounts, and beneficiary identifiers. Primary source for studying physician utilization patterns and fee schedule payments.",
+    "source": {
+      "label": "ResDAC — FFS Carrier file",
+      "url": "https://resdac.org/cms-data/files/carrier-ffs"
+    },
     "category": "Claims",
     "years": "1991-present",
     "unit": "Claim line",
@@ -4758,6 +4789,10 @@ window.__DATASETS__ = [
   {
     "name": "Medicare MEDPAR (Inpatient) File",
     "description": "Stay-level records for Medicare inpatient hospital discharges and skilled nursing facility stays. Contains DRG codes, ICD diagnoses/procedures, admission and discharge dates, length of stay, total charges and payments, and facility identifiers. Essential for studying inpatient utilization under IPPS.",
+    "source": {
+      "label": "ResDAC — MedPAR file",
+      "url": "https://resdac.org/cms-data/files/medpar"
+    },
     "category": "Claims",
     "years": "1984-present",
     "unit": "Stay",
@@ -4774,6 +4809,10 @@ window.__DATASETS__ = [
   {
     "name": "Medicare Outpatient Claims",
     "description": "Claim-level data for services provided in hospital outpatient departments, including revenue center codes, HCPCS procedure codes, diagnosis codes, and payment amounts. Used to study OPPS payment patterns, APC utilization, and ambulatory surgery volumes.",
+    "source": {
+      "label": "ResDAC — FFS Outpatient file",
+      "url": "https://resdac.org/cms-data/files/op-ffs"
+    },
     "category": "Claims",
     "years": "1991-present",
     "unit": "Claim",
@@ -4790,6 +4829,10 @@ window.__DATASETS__ = [
   {
     "name": "Home Health Claims",
     "description": "Episode-level claims for Medicare home health agency services, including 30-day periods (post-PDGM), HHRG/HIPPS codes, visit counts by discipline, and payment amounts. Used to study post-acute care utilization, home health episode patterns, and PDGM implementation impact.",
+    "source": {
+      "label": "ResDAC — FFS Home Health Agency file",
+      "url": "https://resdac.org/cms-data/files/hha-ffs"
+    },
     "category": "Claims",
     "years": "1991-present",
     "unit": "Episode",
@@ -4806,6 +4849,10 @@ window.__DATASETS__ = [
   {
     "name": "Hospice Claims",
     "description": "Claim-level records for Medicare hospice services. Contains revenue codes by level of care (routine, continuous, inpatient, respite), diagnosis codes, hospice election dates, and payment amounts. Used to study end-of-life care patterns, hospice length of stay, and spending.",
+    "source": {
+      "label": "ResDAC — FFS Hospice file",
+      "url": "https://resdac.org/cms-data/files/hospice-ffs"
+    },
     "category": "Claims",
     "years": "1991-present",
     "unit": "Claim",
@@ -4821,6 +4868,10 @@ window.__DATASETS__ = [
   {
     "name": "DME Claims",
     "description": "Claim-level records for durable medical equipment, prosthetics, orthotics, and supplies (DMEPOS) billed to Medicare Part B. Contains HCPCS codes, supplier NPI, beneficiary location, and allowed amounts. Used to study equipment utilization, competitive bidding program impacts, and fraud patterns.",
+    "source": {
+      "label": "ResDAC — FFS Durable Medical Equipment file",
+      "url": "https://resdac.org/cms-data/files/dme-ffs"
+    },
     "category": "Claims",
     "years": "1991-present",
     "unit": "Claim",
@@ -4837,6 +4888,10 @@ window.__DATASETS__ = [
   {
     "name": "Medicare Advantage Encounter Data",
     "description": "Encounter-level records submitted by Medicare Advantage plans to CMS for risk adjustment and oversight purposes. Data quality has improved over time with enhanced validation rules. Enables MA utilization research but requires careful interpretation due to plan submission variation.",
+    "source": {
+      "label": "ResDAC — Encounter Carrier file",
+      "url": "https://resdac.org/cms-data/files/carrier-encounter"
+    },
     "category": "Claims",
     "years": "2012-present",
     "unit": "Encounter",
@@ -4853,6 +4908,10 @@ window.__DATASETS__ = [
   {
     "name": "Medicare Beneficiary Summary File (MBSF)",
     "description": "Annual beneficiary-level enrollment and demographic file for all Medicare beneficiaries. Contains monthly enrollment by part (A, B, C, D), chronic condition flags (CCW), HMO indicators, county/state FIPS codes, race/ethnicity, and date of death. Essential denominator file for Medicare research. Note: the HIC number (HICNO) was replaced by the Medicare Beneficiary Identifier (MBI) beginning in 2018.",
+    "source": {
+      "label": "ResDAC — MBSF Base A/B/C/D",
+      "url": "https://resdac.org/cms-data/files/mbsf-base"
+    },
     "category": "Enrollment",
     "years": "1991-present",
     "unit": "Beneficiary-year",
@@ -4869,6 +4928,10 @@ window.__DATASETS__ = [
   {
     "name": "Part D Prescribing Data",
     "description": "Prescription Drug Event (PDE) records for Medicare Part D drug claims. Contains drug name (NDC, brand/generic), prescriber NPI, dispensing pharmacy, days supply, quantity, and plan payments. Used to study prescribing patterns, formulary compliance, and drug spending trends.",
+    "source": {
+      "label": "ResDAC — Part D Event file",
+      "url": "https://resdac.org/cms-data/files/pde"
+    },
     "category": "Claims",
     "years": "2006-present",
     "unit": "Prescription event",
@@ -4885,6 +4948,10 @@ window.__DATASETS__ = [
   {
     "name": "CMS Chronic Conditions Warehouse (CCW) Flags",
     "description": "Beneficiary-level indicators for 65+ chronic conditions derived from Medicare and Medicaid claims using standardized algorithms. Conditions include diabetes, heart failure, COPD, cancer, Alzheimer's, and depression. Annual flag file linked to MBSF for longitudinal chronic condition research.",
+    "source": {
+      "label": "CCW — Condition Categories",
+      "url": "https://www2.ccwdata.org/web/guest/condition-categories"
+    },
     "category": "Enrollment",
     "years": "1999-present",
     "unit": "Beneficiary-year",
@@ -4899,6 +4966,10 @@ window.__DATASETS__ = [
   {
     "name": "Provider of Services (POS) File",
     "description": "Annual cross-sectional file of all Medicare-certified providers and suppliers, including hospitals, nursing homes, home health agencies, hospices, and outpatient facilities. Contains facility type, ownership, bed count, accreditation, and geographic location. Standard source for provider characteristics.",
+    "source": {
+      "label": "data.cms.gov — POS File (QIES)",
+      "url": "https://data.cms.gov/provider-characteristics/hospitals-and-other-facilities/provider-of-services-file-quality-improvement-and-evaluation-system"
+    },
     "category": "Provider",
     "years": "1984-present",
     "unit": "Provider",
@@ -4914,6 +4985,10 @@ window.__DATASETS__ = [
   {
     "name": "Healthcare Cost Report Information System (HCRIS)",
     "description": "Annual cost reports filed by Medicare-participating hospitals, SNFs, home health agencies, and other facilities with CMS. Contains detailed financial data: cost centers, charges, payments, staffing FTEs, and utilization statistics. Primary source for hospital financial analysis and cost structure research.",
+    "source": {
+      "label": "CMS — Cost Reports",
+      "url": "https://www.cms.gov/data-research/statistics-trends-and-reports/cost-reports"
+    },
     "category": "Provider",
     "years": "1994-present",
     "unit": "Facility-year",
@@ -4929,6 +5004,10 @@ window.__DATASETS__ = [
   {
     "name": "MIPS Performance Data",
     "description": "CMS-released clinician-level MIPS performance data including final scores, category scores (Quality, IA, PI, Cost), APM affiliation, and payment adjustment percentages. Available as public use file and through the CMS Care Compare website. Useful for studying QPP implementation and clinician performance variation.",
+    "source": {
+      "label": "QPP — Participation and Performance Data",
+      "url": "https://qpp.cms.gov/resources/performance-data"
+    },
     "category": "Provider",
     "years": "2017-present",
     "unit": "Clinician",
@@ -4944,6 +5023,10 @@ window.__DATASETS__ = [
   {
     "name": "ACO Program Public Data",
     "description": "Annual public use files for Medicare Shared Savings Program ACOs and other ACO models. Contains ACO financial results (benchmark, expenditures, shared savings/losses), quality scores, assigned beneficiary counts, and participant provider lists. Used for ACO performance and spillover research.",
+    "source": {
+      "label": "data.cms.gov — Shared Savings Program ACOs",
+      "url": "https://data.cms.gov/medicare-shared-savings-program/accountable-care-organizations"
+    },
     "category": "Provider",
     "years": "2013-present",
     "unit": "ACO",
@@ -4959,6 +5042,10 @@ window.__DATASETS__ = [
   {
     "name": "Area Health Resources File (ARF)",
     "description": "County-level health resources data compiled by HRSA from multiple federal sources. Contains over 6,000 variables including physician supply, hospital beds, socioeconomic indicators, health outcomes, insurance coverage rates, and geographic classifications (RUCA, CBSA). Primary source for health workforce and access research.",
+    "source": {
+      "label": "HRSA — Area Health Resources Files",
+      "url": "https://data.hrsa.gov/topics/health-workforce/ahrf"
+    },
     "category": "Provider",
     "years": "1990-present",
     "unit": "County",
@@ -4974,6 +5061,10 @@ window.__DATASETS__ = [
   {
     "name": "Medicare Current Beneficiary Survey (MCBS)",
     "description": "Continuous longitudinal survey of a nationally representative sample of Medicare beneficiaries. Collects data on health status, access to care, satisfaction, spending (including out-of-pocket), supplemental insurance, and social determinants of health. Includes both FFS and MA enrollees. Access Survey and Cost Supplement available.",
+    "source": {
+      "label": "CMS — MCBS",
+      "url": "https://www.cms.gov/data-research/research/medicare-current-beneficiary-survey"
+    },
     "category": "Survey",
     "years": "1991-present",
     "unit": "Beneficiary",
@@ -4989,6 +5080,10 @@ window.__DATASETS__ = [
   {
     "name": "Medical Expenditure Panel Survey (MEPS)",
     "description": "AHRQ survey collecting detailed data on health services use, expenditures, insurance coverage, and health status for the U.S. civilian non-institutionalized population. Household, medical provider, and insurance components allow linkage across data sources. Standard source for all-payer spending research.",
+    "source": {
+      "label": "AHRQ — MEPS",
+      "url": "https://meps.ahrq.gov/mepsweb/"
+    },
     "category": "Survey",
     "years": "1996-present",
     "unit": "Person",
@@ -5004,6 +5099,10 @@ window.__DATASETS__ = [
   {
     "name": "National Health and Nutrition Examination Survey (NHANES)",
     "description": "CDC/NCHS cross-sectional survey combining interviews and physical examinations to assess health and nutritional status of U.S. adults and children. Contains laboratory results, clinical measurements, dietary recall, and interview data on demographics, health conditions, and behaviors.",
+    "source": {
+      "label": "CDC/NCHS — NHANES",
+      "url": "https://www.cdc.gov/nchs/nhanes/index.html"
+    },
     "category": "Survey",
     "years": "1988-present",
     "unit": "Person",
@@ -5018,6 +5117,10 @@ window.__DATASETS__ = [
   {
     "name": "HCUP National Inpatient Sample (NIS)",
     "description": "AHRQ's Healthcare Cost and Utilization Project all-payer inpatient care database, approximating a 20% stratified sample of U.S. community hospital discharges. Contains ICD diagnoses/procedures, DRGs, charges, payer, and hospital characteristics. Largest all-payer inpatient database in the U.S.",
+    "source": {
+      "label": "AHRQ HCUP — NIS Overview",
+      "url": "https://hcup-us.ahrq.gov/nisoverview.jsp"
+    },
     "category": "Claims",
     "years": "1988-present",
     "unit": "Discharge",
@@ -5031,10 +5134,14 @@ window.__DATASETS__ = [
     ]
   },
   {
-    "name": "CMS Synthetic Public Use Files (SynPUF)",
-    "description": "De-identified synthetic claims data created by CMS to resemble Medicare claims data for training and software development purposes. Derived from a 5% sample of 2008-2010 Medicare beneficiaries using statistical simulation. Not suitable for statistical inference; intended for code development and methodology testing.",
+    "name": "CMS Synthetic Public Use Files (SynPUFs)",
+    "description": "Synthetic Medicare data built by CMS so analysts can learn claims structures and develop code without access to real beneficiary records. Not suitable for statistical inference. Types: (1) 2008-2010 Data Entrepreneurs' SynPUF (DE-SynPUF) — five file types (Beneficiary Summary, Inpatient Claims, Outpatient Claims, Carrier Claims, Prescription Drug Events), released as 20 linkable samples that together represent a 5% sample of 2008-2010 Medicare beneficiaries; (2) Synthetic Medicare Enrollment, Fee-for-Service Claims, and Prescription Drug Event files on data.cms.gov (2023) — realistic-but-not-real enrollment and claims records for 8,671 synthetic beneficiaries.",
+    "source": {
+      "label": "CMS — Medicare Claims Synthetic Public Use Files",
+      "url": "https://www.cms.gov/data-research/statistics-trends-and-reports/medicare-claims-synthetic-public-use-files"
+    },
     "category": "Synthetic",
-    "years": "2008-2010",
+    "years": "2008-2010 (DE-SynPUF); 2023 release (data.cms.gov synthetic files)",
     "unit": "Beneficiary",
     "payers": [
       "Medicare FFS"
@@ -5047,6 +5154,10 @@ window.__DATASETS__ = [
   {
     "name": "Medicare Part D Prescriber Public Use File",
     "description": "Annual CMS public use file of prescriber-level Part D drug utilization and cost, including brand/generic drug name, total claims, days supply, and total drug cost by prescriber NPI. Used to study prescribing patterns and IRA-era formulary shifts.",
+    "source": {
+      "label": "data.cms.gov — Part D Prescribers by Provider and Drug",
+      "url": "https://data.cms.gov/provider-summary-by-type-of-service/medicare-part-d-prescribers/medicare-part-d-prescribers-by-provider-and-drug"
+    },
     "category": "Drug/Formulary",
     "years": "2013-present",
     "unit": "Prescriber-drug-year",
@@ -5077,6 +5188,10 @@ window.__DATASETS__ = [
   {
     "name": "Medicaid National Average Drug Acquisition Cost (NADAC)",
     "description": "CMS-published survey-based national average retail pharmacy acquisition cost per NDC, updated weekly. Used as a Medicaid pharmacy reimbursement benchmark distinct from AWP-based pricing.",
+    "source": {
+      "label": "data.medicaid.gov — NADAC 2026",
+      "url": "https://data.medicaid.gov/dataset/fbb83258-11c7-47f5-8b18-5f8e79f7e704"
+    },
     "category": "Drug/Formulary",
     "years": "2013-present",
     "unit": "NDC-week",
@@ -5101,6 +5216,10 @@ window.__DATASETS__ = [
   {
     "name": "Medicaid Drug Rebate Program / State Drug Utilization Data (SDUD)",
     "description": "Quarterly state-reported Medicaid outpatient drug utilization and reimbursement data submitted under the Medicaid Drug Rebate Program (MDRP), covering units reimbursed and total amount reimbursed by NDC and state.",
+    "source": {
+      "label": "data.medicaid.gov — SDUD 2025",
+      "url": "https://data.medicaid.gov/dataset/158a1baa-5506-400a-8ec3-97756f0b0536"
+    },
     "category": "Drug/Formulary",
     "years": "1991-present",
     "unit": "NDC-state-quarter",
@@ -5130,6 +5249,10 @@ window.__DATASETS__ = [
   {
     "name": "Transformed Medicaid Statistical Information System (T-MSIS / TAF)",
     "description": "CMS's national administrative claims and eligibility data source for Medicaid and CHIP across all states, delivered to researchers as the Medicaid/CHIP TAF Analytic Files. The authoritative source for state-level Medicaid eligibility, enrollment, and utilization counts — the primary citation this project should use for OBBBA work-requirement coverage-loss figures rather than secondary news estimates where TAF data is available.",
+    "source": {
+      "label": "ResDAC — TAF Demographic & Eligibility file",
+      "url": "https://resdac.org/cms-data/files/taf-de"
+    },
     "category": "Claims",
     "years": "2014-present (TAF); T-MSIS since 2011",
     "unit": "Claim / enrollment record",
@@ -5147,6 +5270,10 @@ window.__DATASETS__ = [
   {
     "name": "HRSA Uniform Data System (UDS)",
     "description": "Annual, federally-mandated reporting by every HRSA Health Center Program awardee and look-alike (FQHCs and FQHC Look-Alikes), covering patient demographics, payer mix (including Medicaid share), services provided, staffing, costs, and clinical quality measures at the individual health-center level. The primary source for FQHC-level payer-mix and patient-count figures — should replace org-level [est.] figures in analyses like the Bay Area companion page wherever a center's UDS filing is available.",
+    "source": {
+      "label": "HRSA — UDS National Awardee Data",
+      "url": "https://data.hrsa.gov/tools/data-reporting/program-data/national"
+    },
     "category": "Provider",
     "years": "1996-present",
     "unit": "Health-center-year",
@@ -5165,6 +5292,10 @@ window.__DATASETS__ = [
   {
     "name": "California Health Care Almanac / HCAI Hospital Financial Data",
     "description": "California Department of Health Care Access and Information (HCAI, formerly OSHPD) annual hospital financial disclosure data — utilization, payer mix, revenue, and uncompensated care by facility. The primary source for California-specific hospital payer-mix and financial-exposure figures (e.g. Bay Area safety-net hospital analysis) in place of modeled estimates.",
+    "source": {
+      "label": "HCAI — Hospital Financials",
+      "url": "https://hcai.ca.gov/data/cost-transparency/hospital-financials/"
+    },
     "category": "Provider",
     "years": "1996-present",
     "unit": "Hospital-year",

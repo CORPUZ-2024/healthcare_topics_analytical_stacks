@@ -104,6 +104,8 @@ function initReimbursement(serviceTypes, cmmiModels) {
     tooltip.className = 'tooltip';
     document.body.appendChild(tooltip);
   }
+  /* Wide enough that the full model description fits without truncation */
+  tooltip.style.maxWidth = 'min(400px, calc(100vw - 20px))';
 
   function showTooltip(event, model, svcName) {
     tooltip.classList.add('visible');
@@ -114,7 +116,8 @@ function initReimbursement(serviceTypes, cmmiModels) {
       <div class="tt-row"><span class="tt-label">Start</span><span>${model.startDate}</span></div>
       <div class="tt-row"><span class="tt-label">End</span><span>${model.endDate || 'Ongoing'}</span></div>
       <div class="tt-row"><span class="tt-label">Eligibility</span><span>Program-based (not actual participation)</span></div>
-      ${model.description ? `<div class="tt-desc">${model.description.substring(0, 240)}${model.description.length > 240 ? '…' : ''}</div>` : ''}
+      ${model.description ? `<div class="tt-desc">${model.description}</div>` : ''}
+      ${model.url ? `<div class="tt-desc" style="opacity:1"><span style="color:var(--accent-light)">CMS model page ↗</span> <span style="opacity:.7">— click the bar to open</span></div>` : ''}
     `;
     moveTooltip(event);
   }
@@ -124,6 +127,8 @@ function initReimbursement(serviceTypes, cmmiModels) {
     let left = event.clientX + pad, top = event.clientY + pad;
     if (left + tw > window.innerWidth  - 10) left = event.clientX - tw - pad;
     if (top  + th > window.innerHeight - 10) top  = event.clientY - th - pad;
+    left = Math.max(10, Math.min(left, window.innerWidth  - tw - 10));
+    top  = Math.max(10, Math.min(top,  window.innerHeight - th - 10));
     tooltip.style.left = left + 'px';
     tooltip.style.top  = top  + 'px';
   }
@@ -316,7 +321,8 @@ function initReimbursement(serviceTypes, cmmiModels) {
 
         bar.on('mouseover', (event) => showTooltip(event, model, row.svcName))
            .on('mousemove', moveTooltip)
-           .on('mouseout', hideTooltip);
+           .on('mouseout', hideTooltip)
+           .on('click', () => { if (model.url) window.open(model.url, '_blank', 'noopener'); });
       }
     }
   });
@@ -452,7 +458,7 @@ function renderReimbursementOutline(container, serviceTypes, cmmiModels, officia
       const models = byCategory.get(oc.name)
         .sort((a, b) => new Date(a.startDate) - new Date(b.startDate));
       const modelItems = models.map(m =>
-        `<li><strong>${m.name}</strong> (${m.startDate.slice(0,4)}${m.endDate ? '–'+m.endDate.slice(0,4) : '–present'}) ${modelBadge(m)}</li>`
+        `<li><strong>${m.url ? `<a href="${m.url}" target="_blank" rel="noopener" title="Open the CMS page for this model">${m.name}</a>` : m.name}</strong> (${m.startDate.slice(0,4)}${m.endDate ? '–'+m.endDate.slice(0,4) : '–present'}) ${modelBadge(m)}</li>`
       ).join('');
       const catColor = catColorMap.get(oc.name) || '#888';
       return `

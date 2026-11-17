@@ -238,7 +238,7 @@ function initTaxonomy(datasets) {
           const tr = document.createElement('tr');
           tr.style.cursor = 'pointer';
           tr.innerHTML = `
-            <td><strong>${d.name}</strong></td>
+            <td><strong>${d.name}</strong>${d.source ? `<br><a href="${d.source.url}" target="_blank" rel="noopener" onclick="event.stopPropagation()" style="font-size:11px;font-weight:400">${d.source.label} ↗</a>` : ''}</td>
             <td>${categoryBadge(d.category)}</td>
             <td>${d.years || '—'}</td>
             <td>${d.unit || '—'}</td>
@@ -275,6 +275,10 @@ function initTaxonomy(datasets) {
                   <span style="font-weight:600;color:#0d1b2a;font-size:11px;text-transform:uppercase;letter-spacing:.04em">Description</span>
                   <p style="margin-top:4px;line-height:1.55;color:#374151">${d.description || 'No description available.'}</p>
                 </div>
+                ${d.source ? `<div style="min-width:180px">
+                  <span style="font-weight:600;color:#0d1b2a;font-size:11px;text-transform:uppercase;letter-spacing:.04em">Primary Source</span>
+                  <p style="margin-top:4px"><a href="${d.source.url}" target="_blank" rel="noopener">${d.source.label} ↗</a></p>
+                </div>` : ''}
                 <div style="min-width:180px">
                   <span style="font-weight:600;color:#0d1b2a;font-size:11px;text-transform:uppercase;letter-spacing:.04em">States</span>
                   <p style="margin-top:4px">${statesLabel}</p>
@@ -312,11 +316,12 @@ function initTaxonomy(datasets) {
 
   /* --- Export CSV --------------------------------------- */
   exportBtn.addEventListener('click', () => {
-    const rows = [['Name','Description','Category','Years','Unit','Payers','States','LinkageIDs']];
+    const rows = [['Name','Description','Primary Source','Category','Years','Unit','Payers','States','LinkageIDs']];
     datasets.forEach(d => {
       rows.push([
         `"${(d.name || '').replace(/"/g, '""')}"`,
         `"${(d.description || '').replace(/"/g, '""')}"`,
+        `"${d.source ? d.source.url : ''}"`,
         `"${d.category || ''}"`,
         `"${d.years || ''}"`,
         `"${d.unit || ''}"`,

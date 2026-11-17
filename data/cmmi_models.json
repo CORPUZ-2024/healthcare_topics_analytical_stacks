@@ -5,7 +5,8 @@
     "category": "Accountable Care Models",
     "startDate": "2012-01-01",
     "endDate": null,
-    "description": "CMS flagship ACO program where provider groups coordinate care for Medicare FFS beneficiaries and share savings relative to a benchmark. BASIC and ENHANCED tracks offer varying levels of shared savings and downside risk."
+    "description": "CMS flagship ACO program where provider groups coordinate care for Medicare FFS beneficiaries and share savings relative to a benchmark. BASIC and ENHANCED tracks offer varying levels of shared savings and downside risk.",
+    "url": "https://www.cms.gov/medicare/payment/fee-for-service-providers/shared-savings-program-ssp-acos"
   },
   {
     "id": "Pioneer",
@@ -13,7 +14,8 @@
     "category": "Accountable Care Models",
     "startDate": "2012-01-01",
     "endDate": "2016-12-31",
-    "description": "CMMI's first ACO model designed for health systems already experienced in coordinated care. Offered higher shared savings rates and greater downside risk than MSSP. Most participants transitioned to MSSP after model ended."
+    "description": "CMMI's first ACO model designed for health systems already experienced in coordinated care. Offered higher shared savings rates and greater downside risk than MSSP. Most participants transitioned to MSSP after model ended.",
+    "url": "https://www.cms.gov/priorities/innovation/innovation-models/pioneer-aco-model"
   },
   {
     "id": "NextGen",
@@ -21,7 +23,8 @@
     "category": "Accountable Care Models",
     "startDate": "2016-01-01",
     "endDate": "2021-12-31",
-    "description": "CMMI model testing higher levels of risk and reward for ACOs experienced with population-based payments. Included prospective attribution, benchmark discounts, and benefit enhancements for beneficiaries."
+    "description": "CMMI model testing higher levels of risk and reward for ACOs experienced with population-based payments. Included prospective attribution, benchmark discounts, and benefit enhancements for beneficiaries.",
+    "url": "https://www.cms.gov/priorities/innovation/innovation-models/next-generation-aco-model"
   },
   {
     "id": "ACO_REACH",
@@ -29,7 +32,8 @@
     "category": "Accountable Care Models",
     "startDate": "2023-01-01",
     "endDate": "2026-12-31",
-    "description": "Successor to the Global and Professional Direct Contracting Model. ACOs accept prospective attribution and financial accountability (Professional or Global risk) for Medicare FFS beneficiaries, with mandatory Health Equity Plans."
+    "description": "Successor to the Global and Professional Direct Contracting Model. ACOs accept prospective attribution and financial accountability (Professional or Global risk) for Medicare FFS beneficiaries, with mandatory Health Equity Plans.",
+    "url": "https://www.cms.gov/priorities/innovation/innovation-models/aco-reach"
   },
   {
     "id": "CPCPlus",
@@ -37,7 +41,8 @@
     "category": "Accountable Care Models",
     "startDate": "2017-01-01",
     "endDate": "2021-12-31",
-    "description": "CMMI multi-payer primary care model offering care management fees and performance-based incentives to primary care practices. Tested in 14 regions with over 2,900 participating practices and 40 payer partners."
+    "description": "CMMI multi-payer primary care model offering care management fees and performance-based incentives to primary care practices. Tested in 14 regions with over 2,900 participating practices and 40 payer partners.",
+    "url": "https://www.cms.gov/priorities/innovation/innovation-models/comprehensive-primary-care-plus"
   },
   {
     "id": "PCF",
@@ -45,7 +50,8 @@
     "category": "Accountable Care Models",
     "startDate": "2021-01-01",
     "endDate": "2025-12-31",
-    "description": "CMMI model offering a flat primary care visit fee, population-based payment, and performance-based adjustments for primary care practices ready to accept accountability for total cost of care."
+    "description": "CMMI model offering a flat primary care visit fee, population-based payment, and performance-based adjustments for primary care practices ready to accept accountability for total cost of care.",
+    "url": "https://www.cms.gov/priorities/innovation/innovation-models/primary-care-first-model-options"
   },
   {
     "id": "MCP",
@@ -53,7 +59,8 @@
     "category": "Accountable Care Models",
     "startDate": "2024-07-01",
     "endDate": "2025-06-30",
-    "description": "Ten-year CMMI primary care model in 8 states with a graduated pathway toward prospective total cost of care accountability. Focuses on care management, behavioral health integration, and specialist partnerships."
+    "description": "Ten-year CMMI primary care model in 8 states with a graduated pathway toward prospective total cost of care accountability. Focuses on care management, behavioral health integration, and specialist partnerships.",
+    "url": "https://www.cms.gov/priorities/innovation/innovation-models/making-care-primary"
   },
   {
     "id": "BPCI_ADV",
@@ -61,7 +68,8 @@
     "category": "Disease-Specific & Episode-Based Models",
     "startDate": "2018-10-01",
     "endDate": "2025-12-31",
-    "description": "Episode-based payment model for 90-day clinical episodes triggered by inpatient hospitalization. Participants — hospitals or physician group practices — are accountable for quality and cost across 32 clinical episode types. Ran eight model years and concluded December 31, 2025."
+    "description": "Episode-based payment model for 90-day clinical episodes triggered by inpatient hospitalization. Participants — hospitals or physician group practices — are accountable for quality and cost across 32 clinical episode types. Ran eight model years and concluded December 31, 2025.",
+    "url": "https://www.cms.gov/priorities/innovation/innovation-models/bpci-advanced"
   },
   {
     "id": "CJR",
@@ -69,7 +77,8 @@
     "category": "Disease-Specific & Episode-Based Models",
     "startDate": "2016-04-01",
     "endDate": "2024-12-31",
-    "description": "Mandatory-then-voluntary episode payment model for hip and knee replacement surgeries. Hospitals bear upside and downside risk for the 90-day post-discharge episode. Initially mandatory in selected markets. Concluded December 31, 2024 after its final performance year."
+    "description": "Mandatory-then-voluntary episode payment model for hip and knee replacement surgeries. Hospitals bear upside and downside risk for the 90-day post-discharge episode. Initially mandatory in selected markets. Concluded December 31, 2024 after its final performance year.",
+    "url": "https://www.cms.gov/priorities/innovation/innovation-models/cjr"
   },
   {
     "id": "OCM",
@@ -77,7 +86,8 @@
     "category": "Disease-Specific & Episode-Based Models",
     "startDate": "2016-07-01",
     "endDate": "2022-06-30",
-    "description": "Six-year CMMI model for oncology practices providing chemotherapy. Practices received monthly enhanced oncology services payments and could earn performance-based incentives. Predecessor to the Enhancing Oncology Model."
+    "description": "Six-year CMMI model for oncology practices providing chemotherapy. Practices received monthly enhanced oncology services payments and could earn performance-based incentives. Predecessor to the Enhancing Oncology Model.",
+    "url": "https://www.cms.gov/priorities/innovation/innovation-models/oncology-care"
   },
   {
     "id": "EOM",
@@ -85,7 +95,8 @@
     "category": "Disease-Specific & Episode-Based Models",
     "startDate": "2023-07-01",
     "endDate": "2030-06-30",
-    "description": "Successor to OCM. Oncology practices assume downside risk for 6-month chemotherapy episodes across 7 cancer types. Incorporates health equity screening requirements, care management payments, and mandatory downside risk. Extended through June 30, 2030."
+    "description": "Successor to OCM. Oncology practices assume downside risk for 6-month chemotherapy episodes across 7 cancer types. Incorporates health equity screening requirements, care management payments, and mandatory downside risk. Extended through June 30, 2030.",
+    "url": "https://www.cms.gov/priorities/innovation/innovation-models/enhancing-oncology-model"
   },
   {
     "id": "HHVBP",
@@ -93,7 +104,8 @@
     "category": "Disease-Specific & Episode-Based Models",
     "startDate": "2016-01-01",
     "endDate": "2021-12-31",
-    "description": "Model tying a portion of home health agency payment to quality performance. Piloted in 9 states; a separate nationwide expansion began January 1, 2022 (a pre-implementation year), with performance measured from 2023. Agencies can earn up to +5% or face up to -5% payment adjustments based on quality scores. NOTE: this is the ORIGINAL nine-state model, which ended December 31, 2021. The nationwide \"expanded HHVBP\" operating since 2023 is a separate, permanent program — not this model."
+    "description": "Model tying a portion of home health agency payment to quality performance. Piloted in 9 states; a separate nationwide expansion began January 1, 2022 (a pre-implementation year), with performance measured from 2023. Agencies can earn up to +5% or face up to -5% payment adjustments based on quality scores. NOTE: this is the ORIGINAL nine-state model, which ended December 31, 2021. The nationwide \"expanded HHVBP\" operating since 2023 is a separate, permanent program — not this model.",
+    "url": "https://www.cms.gov/priorities/innovation/innovation-models/home-health-value-based-purchasing-model"
   },
   {
     "id": "GUIDE",
@@ -101,7 +113,8 @@
     "category": "Disease-Specific & Episode-Based Models",
     "startDate": "2024-07-01",
     "endDate": "2032-06-30",
-    "description": "CMMI model supporting individuals with dementia and their caregivers. Participants provide interdisciplinary care navigation, 24/7 access, and respite care. Monthly per-beneficiary-per-month payments fund model infrastructure."
+    "description": "CMMI model supporting individuals with dementia and their caregivers. Participants provide interdisciplinary care navigation, 24/7 access, and respite care. Monthly per-beneficiary-per-month payments fund model infrastructure.",
+    "url": "https://www.cms.gov/priorities/innovation/innovation-models/guide"
   },
   {
     "id": "ViT",
@@ -109,7 +122,8 @@
     "category": "Disease-Specific & Episode-Based Models",
     "startDate": "2021-01-01",
     "endDate": "2024-12-31",
-    "description": "CMMI model testing episode-based payment for opioid use disorder treatment, bundling all services for a 6-month episode. Aims to expand access to evidence-based medication-assisted treatment (MAT). Four-year demonstration scheduled through December 2024."
+    "description": "CMMI model testing episode-based payment for opioid use disorder treatment, bundling all services for a 6-month episode. Aims to expand access to evidence-based medication-assisted treatment (MAT). Four-year demonstration scheduled through December 2024.",
+    "url": "https://www.cms.gov/priorities/innovation/innovation-models/value-in-treatment-demonstration"
   },
   {
     "id": "IBH",
@@ -117,7 +131,8 @@
     "category": "Disease-Specific & Episode-Based Models",
     "startDate": "2024-01-01",
     "endDate": "2032-12-31",
-    "description": "CMMI model integrating physical health services into community behavioral health settings. Practices receive infrastructure and per-member-per-month payments to screen and coordinate care for Medicare and Medicaid beneficiaries."
+    "description": "CMMI model integrating physical health services into community behavioral health settings. Practices receive infrastructure and per-member-per-month payments to screen and coordinate care for Medicare and Medicaid beneficiaries.",
+    "url": "https://www.cms.gov/priorities/innovation/innovation-models/ibh"
   },
   {
     "id": "AHEAD",
@@ -125,7 +140,8 @@
     "category": "State & Community-Based Models",
     "startDate": "2024-01-01",
     "endDate": "2035-12-31",
-    "description": "State-level CMMI model testing all-payer total cost of care approaches. States implement population-based payments spanning Medicare, Medicaid, and commercial payers, with explicit health equity goals. CMS renamed the model in September 2025 from \"States Advancing All-Payer Health Equity Approaches\"; the AHEAD acronym was retained."
+    "description": "State-level CMMI model testing all-payer total cost of care approaches. States implement population-based payments spanning Medicare, Medicaid, and commercial payers, with explicit health equity goals. CMS renamed the model in September 2025 from \"States Advancing All-Payer Health Equity Approaches\"; the AHEAD acronym was retained.",
+    "url": "https://www.cms.gov/priorities/innovation/innovation-models/ahead"
   },
   {
     "id": "TEAM",
@@ -133,7 +149,8 @@
     "category": "Disease-Specific & Episode-Based Models",
     "startDate": "2026-01-01",
     "endDate": "2030-12-31",
-    "description": "Mandatory episode-based payment model for five surgical procedures: lower extremity joint replacement, surgical hip femur fracture treatment, spinal fusion, coronary artery bypass graft, and major bowel procedure. Hospitals in selected geographic areas are required to participate (721 hospitals on CMS's August 18, 2026 participant list: 711 mandatory hospitals in the 188 selected core-based statistical areas plus 10 voluntary participants; the original 2024 list named 741). 30-day post-discharge episode window — shorter than CJR/BPCI Advanced's 90-day window by design. Runs January 1, 2026 through December 31, 2030."
+    "description": "Mandatory episode-based payment model for five surgical procedures: lower extremity joint replacement, surgical hip femur fracture treatment, spinal fusion, coronary artery bypass graft, and major bowel procedure. Hospitals in selected geographic areas are required to participate (721 hospitals on CMS's August 18, 2026 participant list: 711 mandatory hospitals in the 188 selected core-based statistical areas plus 10 voluntary participants; the original 2024 list named 741). 30-day post-discharge episode window — shorter than CJR/BPCI Advanced's 90-day window by design. Runs January 1, 2026 through December 31, 2030.",
+    "url": "https://www.cms.gov/priorities/innovation/innovation-models/team-model"
   },
   {
     "id": "VBID",
@@ -141,7 +158,8 @@
     "category": "Health Plan Models",
     "startDate": "2017-01-01",
     "endDate": "2025-12-31",
-    "description": "Tests whether Medicare Advantage plans can use health-condition-specific cost-sharing structures and supplemental benefits to improve care quality and reduce costs. Participating MA plans can offer targeted reduced cost-sharing for high-value services for chronically ill enrollees. CMS ended the model after CY2025, citing excess costs to Medicare."
+    "description": "Tests whether Medicare Advantage plans can use health-condition-specific cost-sharing structures and supplemental benefits to improve care quality and reduce costs. Participating MA plans can offer targeted reduced cost-sharing for high-value services for chronically ill enrollees. CMS ended the model after CY2025, citing excess costs to Medicare.",
+    "url": "https://www.cms.gov/priorities/innovation/innovation-models/vbid"
   },
   {
     "id": "EnhancedMTM",
@@ -149,7 +167,8 @@
     "category": "Prescription Drug Models",
     "startDate": "2017-01-01",
     "endDate": "2021-12-31",
-    "description": "CMMI model testing whether enhanced MTM services in Medicare Part D can improve medication adherence and health outcomes for high-risk beneficiaries. Participating Part D plan sponsors were incentivized to increase MTM program participation and reduce hospitalizations."
+    "description": "CMMI model testing whether enhanced MTM services in Medicare Part D can improve medication adherence and health outcomes for high-risk beneficiaries. Participating Part D plan sponsors were incentivized to increase MTM program participation and reduce hospitalizations.",
+    "url": "https://www.cms.gov/priorities/innovation/innovation-models/enhancedmtm"
   },
   {
     "id": "SIM",
@@ -157,7 +176,8 @@
     "category": "State & Community-Based Models",
     "startDate": "2013-02-01",
     "endDate": "2019-12-31",
-    "description": "CMMI initiative providing funding and technical assistance to states developing and testing multi-payer health system transformation models. Two rounds (2013 and 2015) funded 38 states to design and test state-led payment and delivery system reforms across all payers."
+    "description": "CMMI initiative providing funding and technical assistance to states developing and testing multi-payer health system transformation models. Two rounds (2013 and 2015) funded 38 states to design and test state-led payment and delivery system reforms across all payers.",
+    "url": "https://www.cms.gov/priorities/innovation/innovation-models/state-innovations"
   },
   {
     "id": "FAI",
@@ -165,7 +185,8 @@
     "category": "Statutory Demonstrations and Other Projects",
     "startDate": "2013-01-01",
     "endDate": "2023-12-31",
-    "description": "Capitated and managed fee-for-service demonstrations integrating Medicare and Medicaid financing and services for dual-eligible beneficiaries. States partnered with CMS to reduce fragmentation between Medicare and Medicaid for individuals dually enrolled in both programs."
+    "description": "Capitated and managed fee-for-service demonstrations integrating Medicare and Medicaid financing and services for dual-eligible beneficiaries. States partnered with CMS to reduce fragmentation between Medicare and Medicaid for individuals dually enrolled in both programs.",
+    "url": "https://www.cms.gov/medicaid-chip/medicare-coordination/financial-alignment"
   },
   {
     "id": "PACE",
@@ -173,7 +194,8 @@
     "category": "Statutory Demonstrations and Other Projects",
     "startDate": "2017-01-01",
     "endDate": null,
-    "description": "Statutory demonstration expanding PACE (Program of All-Inclusive Care for the Elderly) to new populations and settings. Tests PACE-like models of comprehensive, integrated care for frail elderly individuals who do not yet qualify for nursing home level of care."
+    "description": "Statutory demonstration expanding PACE (Program of All-Inclusive Care for the Elderly) to new populations and settings. Tests PACE-like models of comprehensive, integrated care for frail elderly individuals who do not yet qualify for nursing home level of care.",
+    "url": "https://www.cms.gov/medicare/medicaid-coordination/pace"
   },
   {
     "id": "LEAD",
@@ -181,7 +203,8 @@
     "category": "Accountable Care Models",
     "startDate": "2027-01-01",
     "endDate": "2036-12-31",
-    "description": "Voluntary 10-year CMMI model (January 1, 2027 - December 31, 2036) succeeding ACO REACH, which ends Dec 31, 2026. RFA released March 31, 2026. Fixed 10-year term structured to give ACOs a longer runway for total-cost-of-care accountability than REACH's shorter cycle offered, with an emphasis on bringing smaller, rural and independent practices into accountable care."
+    "description": "Voluntary 10-year CMMI model (January 1, 2027 - December 31, 2036) succeeding ACO REACH, which ends Dec 31, 2026. RFA released March 31, 2026. Fixed 10-year term structured to give ACOs a longer runway for total-cost-of-care accountability than REACH's shorter cycle offered, with an emphasis on bringing smaller, rural and independent practices into accountable care.",
+    "url": "https://www.cms.gov/priorities/innovation/innovation-models/lead"
   },
   {
     "id": "CJR_X",
@@ -189,7 +212,8 @@
     "category": "Disease-Specific & Episode-Based Models",
     "startDate": "2028-01-01",
     "endDate": null,
-    "description": "Mandatory nationwide successor to CJR (which ended December 31, 2024), finalized in the FY2027 IPPS final rule released July 31, 2026. From January 1, 2028 — delayed from the proposed October 1, 2027 — acute care hospitals nationwide are accountable for inpatient and outpatient lower-extremity joint replacement episodes through 90 days post-discharge. TEAM participants and Maryland hospitals are excluded."
+    "description": "Mandatory nationwide successor to CJR (which ended December 31, 2024), finalized in the FY2027 IPPS final rule released July 31, 2026. From January 1, 2028 — delayed from the proposed October 1, 2027 — acute care hospitals nationwide are accountable for inpatient and outpatient lower-extremity joint replacement episodes through 90 days post-discharge. TEAM participants and Maryland hospitals are excluded.",
+    "url": "https://www.cms.gov/priorities/innovation/innovation-models/cjr-x"
   },
   {
     "id": "WISeR",
@@ -197,7 +221,8 @@
     "category": "Disease-Specific & Episode-Based Models",
     "startDate": "2026-01-01",
     "endDate": "2031-12-31",
-    "description": "CMMI model in which participating technology vendors use AI and machine-learning tools, with clinician review, to run prior authorization for selected items and services vulnerable to waste — such as skin and tissue substitutes, electrical nerve stimulator implants, and knee arthroscopy for knee osteoarthritis — in Original Medicare in six states (Arizona, New Jersey, Ohio, Oklahoma, Texas, Washington). Voluntary for the vendors; providers in those states cannot opt out of the prior authorization process. Coverage and payment rules are unchanged, and the model does not apply to Medicare Advantage."
+    "description": "CMMI model in which participating technology vendors use AI and machine-learning tools, with clinician review, to run prior authorization for selected items and services vulnerable to waste — such as skin and tissue substitutes, electrical nerve stimulator implants, and knee arthroscopy for knee osteoarthritis — in Original Medicare in six states (Arizona, New Jersey, Ohio, Oklahoma, Texas, Washington). Voluntary for the vendors; providers in those states cannot opt out of the prior authorization process. Coverage and payment rules are unchanged, and the model does not apply to Medicare Advantage.",
+    "url": "https://www.cms.gov/priorities/innovation/innovation-models/wiser"
   },
   {
     "id": "ACCESS",
@@ -205,7 +230,8 @@
     "category": "Disease-Specific & Episode-Based Models",
     "startDate": "2026-07-05",
     "endDate": null,
-    "description": "Voluntary 10-year CMMI model, begun July 5, 2026, that pays Outcome-Aligned Payments to Part B-enrolled organizations delivering technology-supported care in Original Medicare for high blood pressure, diabetes, chronic musculoskeletal pain and depression. Payment is tied to measured outcomes rather than to activities."
+    "description": "Voluntary 10-year CMMI model, begun July 5, 2026, that pays Outcome-Aligned Payments to Part B-enrolled organizations delivering technology-supported care in Original Medicare for high blood pressure, diabetes, chronic musculoskeletal pain and depression. Payment is tied to measured outcomes rather than to activities.",
+    "url": "https://www.cms.gov/priorities/innovation/innovation-models/access-model"
   },
   {
     "id": "ASM",
@@ -213,6 +239,7 @@
     "category": "Disease-Specific & Episode-Based Models",
     "startDate": "2027-01-01",
     "endDate": "2031-12-31",
-    "description": "Mandatory CMMI model that applies performance-based Medicare Part B payment adjustments to individual specialists managing heart failure (cardiology) and low back pain (anesthesiology, pain management, interventional pain management, neurosurgery, orthopedic surgery, physical medicine and rehabilitation) in roughly one-quarter of CBSAs and metropolitan divisions. Adjustments range from -9% to +9% in the first two performance years, widening to -12% to +12% by the final year. The CY2027 Physician Fee Schedule final rule refined its measures without changing the January 1, 2027 start."
+    "description": "Mandatory CMMI model that applies performance-based Medicare Part B payment adjustments to individual specialists managing heart failure (cardiology) and low back pain (anesthesiology, pain management, interventional pain management, neurosurgery, orthopedic surgery, physical medicine and rehabilitation) in roughly one-quarter of CBSAs and metropolitan divisions. Adjustments range from -9% to +9% in the first two performance years, widening to -12% to +12% by the final year. The CY2027 Physician Fee Schedule final rule refined its measures without changing the January 1, 2027 start.",
+    "url": "https://www.cms.gov/priorities/innovation/innovation-models/asm"
   }
 ]
