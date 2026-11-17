@@ -277,7 +277,8 @@ Always maintain exactly **6 shifts**, ranked 1–6 by urgency. Keep at least 2 e
   "category": "Accountable Care Models | Disease-Specific & Episode-Based Models | Health Plan Models | Prescription Drug Models | State & Community-Based Models | Statutory Demonstrations and Other Projects",
   "startDate": "YYYY-MM-DD",
   "endDate": "YYYY-MM-DD | null",
-  "description": "string (2–4 sentences)"
+  "description": "string (2–4 sentences; shown in full in the Tab 2 tooltip)",
+  "url": "string (the model's own CMS page; a Tab 2 bar click and the outline name open it. Verify the slug loads: CMS slugs are not derivable from the model name)"
 }
 ```
 
@@ -337,6 +338,7 @@ The taxonomy tab has two distinct content areas, each with its own update rules.
 {
   "name": "string",
   "description": "string",
+  "source": { "label": "string (issuer — file, e.g. 'ResDAC — MedPAR file')", "url": "string (primary documentation page: ResDAC, data.cms.gov, AHRQ, CDC, HRSA, etc.)" },
   "category": "Claims | Enrollment | Provider | Survey | Synthetic | Drug/Formulary",
   "years": "string (e.g. '1991-present')",
   "unit": "string",
