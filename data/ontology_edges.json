@@ -42,7 +42,7 @@
   {
     "source": "CMMI",
     "target": "BPCI_ADV",
-    "label": "administers"
+    "label": "administered"
   },
   {
     "source": "CMMI",
@@ -67,7 +67,7 @@
   {
     "source": "CMMI",
     "target": "CJR",
-    "label": "administers"
+    "label": "administered"
   },
   {
     "source": "CMMI",

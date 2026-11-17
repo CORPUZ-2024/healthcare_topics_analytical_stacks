@@ -442,6 +442,7 @@ After updating any JSON file, find the matching `window.__XXX__` block in `index
 | `data/cmmi_models.json` | `window.__CMMI_MODELS__` |
 | `data/service_types.json` | `window.__SERVICE_TYPES__` |
 | `data/datasets.json` | `window.__DATASETS__` |
+| `data/analytical_tasks.json` | `window.__ANALYTICAL_TASKS__` (single compact line — added Nov 2026 after the Sept 2026 Tab 4 corrections were found never to have reached this mirror) |
 
 ---
 

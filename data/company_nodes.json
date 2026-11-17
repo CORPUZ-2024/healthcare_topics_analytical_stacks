@@ -15,7 +15,7 @@
     "id": "ira_c",
     "name": "Inflation Reduction Act 2022",
     "category": "legislation",
-    "description": "Created Medicare Drug Price Negotiation Program. Cycle 1 (10 drugs) live Jan 2026. Cycle 3 underway — first Part B drugs and renegotiations, prices effective 2028."
+    "description": "Created Medicare Drug Price Negotiation Program. Cycle 1 (10 drugs) live Jan 2026; Cycle 2 (15 drugs) effective Jan 2027. Cycle 3 — first Part B drugs and first renegotiation — closed negotiations Nov 1, 2026, with prices due by Nov 30, 2026 and effective 2028."
   },
   {
     "id": "hitech_c",
@@ -33,7 +33,7 @@
     "id": "obbba_c",
     "name": "One Big Beautiful Bill Act (H.R. 1 / P.L. 119-21)",
     "category": "legislation",
-    "description": "Signed July 4, 2025. Mandates Medicaid community-engagement (work) requirements for the ACA expansion population (80 hrs/month, effective by Jan 1, 2027; several states implementing earlier on state-level timelines), narrows ACA marketplace subsidy eligibility for lawfully present immigrants, phases down state provider taxes and caps state-directed payments, and creates the $50B Rural Health Transformation Fund. Compounds with the separate, coincidentally-timed expiration of IRA-era enhanced ACA premium tax credits (Dec 31, 2025) to reshape coverage and cost for 2026 onward."
+    "description": "Signed July 4, 2025. Mandates Medicaid community-engagement (work) requirements for the ACA expansion population (80 hrs/month, effective by Jan 1, 2027; several states implementing earlier on state-level timelines), narrows ACA marketplace subsidy eligibility for lawfully present immigrants, phases down state provider taxes and caps state-directed payments, and creates the $50B Rural Health Transformation Fund. Compounds with the separate, coincidentally-timed expiration of IRA-era enhanced ACA premium tax credits (Dec 31, 2025) to reshape coverage and cost for 2026 onward. Status as of Nov 2026: on Oct 29, 2026 a federal court (Commonwealth of Massachusetts et al. v. Oz, D. Mass.) vacated the interim final rule's added functional-impairment test for the 'medically frail' exemption; CMS guidance of Nov 13, 2026 (SMD #26-006) lets states elect a hold-harmless period through June 30, 2027. The Jan 1, 2027 start date is unchanged."
   },
   {
     "id": "ma_prog",
@@ -81,7 +81,7 @@
     "id": "ira_drug_prog",
     "name": "Drug Price Negotiation",
     "category": "program",
-    "description": "IRA Medicare Drug Price Negotiation Program. Cycle 1: 10 drugs, Jan 2026 prices, 38-79% discounts, ~8.8M Part D enrollees affected. Cycle 2: 15 drugs (incl. GLP-1s Ozempic/Wegovy) effective 2027. Cycle 3: 15 more selected Jan 2026 for 2028, including first Part B drugs and first renegotiations. Across all 40 drugs selected to date, KFF estimates $125B of the roughly $350B (36%) in 2024 Medicare Part B+D drug spending is represented."
+    "description": "IRA Medicare Drug Price Negotiation Program. Cycle 1: 10 drugs, Jan 2026 prices, 38-79% discounts, ~8.8M Part D enrollees affected. Cycle 2: 15 drugs (incl. GLP-1s Ozempic/Wegovy) effective 2027. Cycle 3: 15 more selected Jan 2026 for 2028, including first Part B drugs and first renegotiations; negotiation period closed Nov 1, 2026, with prices due by Nov 30, 2026. Across all 40 drugs selected to date, KFF estimates $125B of the roughly $350B (36%) in 2024 Medicare Part B+D drug spending is represented."
   },
   {
     "id": "esrd_prog",
@@ -620,13 +620,13 @@
     "id": "onc_astp",
     "name": "ONC / ASTP",
     "category": "ai_gov",
-    "description": "HHS office whose HTI-1 rule (effective Jan 1, 2025) requires certified EHRs to expose 31 source-attribute transparency fields for predictive decision-support tools — mandatory, but narrower in reach than CHAI's model-card approach since it only covers algorithms deployed through certified EHRs. Status is unsettled: ASTP/ONC’s HTI-5 proposed rule (published January 2026, comment period closed February 27, 2026) would REMOVE these source-attribute and risk-management requirements from the certification program. Not finalized as of September 2026."
+    "description": "HHS office whose HTI-1 rule (effective Jan 1, 2025) required certified EHRs to expose 31 source-attribute transparency fields for predictive decision-support tools — mandatory, but narrower in reach than CHAI's model-card approach since it only covered algorithms deployed through certified EHRs. The HTI-5 final rule (released October 26, 2026) removed those source-attribute (\"model card\") and risk-management requirements from the decision support interventions criterion, which stays in the certification program in revised form. HTI-5 removed 14 certification criteria (34 had been proposed) and did not finalize its information-blocking proposals."
   },
   {
     "id": "joint_commission",
     "name": "The Joint Commission",
     "category": "ai_gov",
-    "description": "Hospital accreditor that entered a strategic partnership with CHAI in June 2025 and released the first joint guidance (Responsible Use of AI in Healthcare) on September 17, 2025 on Responsible Use of AI guidance and is planning a voluntary AI certification track for its 22,000+ accredited organizations."
+    "description": "Hospital accreditor that entered a strategic partnership with CHAI in June 2025, released joint Responsible Use of AI in Healthcare guidance with CHAI on September 17, 2025, and launched a voluntary Responsible Use of AI in Healthcare certification on June 1, 2026. The certification assesses an organization's AI governance, data management, monitoring and training — it does not certify individual AI products — and is open to organizations the Joint Commission does not accredit."
   },
   {
     "id": "duke_ai_gov",
@@ -686,7 +686,7 @@
     "id": "lead_prog",
     "name": "LEAD (Long-Term Enhanced ACO Design)",
     "category": "program",
-    "description": "Successor ACO model to ACO REACH, launching in 2027."
+    "description": "Successor ACO model to ACO REACH: a 10-year voluntary model running Jan 1, 2027 - Dec 31, 2036. CMS posted an implementation-period ACO list on Sept 21, 2026; the final PY2027 participant roster had not been published as of mid-November 2026."
   },
   {
     "id": "cms_aligned_network_prog",

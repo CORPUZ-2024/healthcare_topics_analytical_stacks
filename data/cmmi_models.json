@@ -93,7 +93,7 @@
     "category": "Disease-Specific & Episode-Based Models",
     "startDate": "2016-01-01",
     "endDate": "2021-12-31",
-    "description": "Model tying a portion of home health agency payment to quality performance. Originally piloted in 9 states, expanded nationally in 2022. Agencies can earn up to +5% or face up to -5% payment adjustments based on quality scores. NOTE: this is the ORIGINAL nine-state model, which ended December 31, 2021. The nationwide \"expanded HHVBP\" operating since 2023 is a separate, permanent program — not this model."
+    "description": "Model tying a portion of home health agency payment to quality performance. Piloted in 9 states; a separate nationwide expansion was finalized in the CY2022 Home Health final rule, with performance measured from 2023. Agencies can earn up to +5% or face up to -5% payment adjustments based on quality scores. NOTE: this is the ORIGINAL nine-state model, which ended December 31, 2021. The nationwide \"expanded HHVBP\" operating since 2023 is a separate, permanent program — not this model."
   },
   {
     "id": "GUIDE",
@@ -132,8 +132,8 @@
     "name": "Transforming Episode Accountability Model",
     "category": "Disease-Specific & Episode-Based Models",
     "startDate": "2026-01-01",
-    "endDate": null,
-    "description": "Mandatory episode-based payment model for five surgical procedures: lower extremity joint replacement, surgical hip femur fracture treatment, spinal fusion, coronary artery bypass graft, and major bowel procedure. Hospitals in selected geographic areas are required to participate (721 hospitals, 188 metro areas). 30-day post-discharge episode window — shorter than CJR/BPCI Advanced's 90-day window by design."
+    "endDate": "2030-12-31",
+    "description": "Mandatory episode-based payment model for five surgical procedures: lower extremity joint replacement, surgical hip femur fracture treatment, spinal fusion, coronary artery bypass graft, and major bowel procedure. Hospitals in selected geographic areas are required to participate (721 hospitals across 188 core-based statistical areas, revised down from the original 741-hospital list). 30-day post-discharge episode window — shorter than CJR/BPCI Advanced's 90-day window by design. Runs January 1, 2026 through December 31, 2030."
   },
   {
     "id": "VBID",
@@ -177,11 +177,11 @@
   },
   {
     "id": "LEAD",
-    "name": "ACO Long-Term Enhanced Accountable Care Organization Design (LEAD)",
+    "name": "Long-term Enhanced ACO Design (LEAD)",
     "category": "Accountable Care Models",
     "startDate": "2027-01-01",
     "endDate": "2036-12-31",
-    "description": "CMMI model (2027-2036) succeeding ACO REACH, which ends Dec 31, 2026. RFA released March 31, 2026. Fixed 10-year term structured to give ACOs a longer runway for total-cost-of-care accountability than REACH's shorter cycle offered."
+    "description": "Voluntary 10-year CMMI model (January 1, 2027 - December 31, 2036) succeeding ACO REACH, which ends Dec 31, 2026. RFA released March 31, 2026. Fixed 10-year term structured to give ACOs a longer runway for total-cost-of-care accountability than REACH's shorter cycle offered, with an emphasis on bringing smaller, rural and independent practices into accountable care."
   },
   {
     "id": "CJR_X",
@@ -189,6 +189,30 @@
     "category": "Disease-Specific & Episode-Based Models",
     "startDate": "2028-01-01",
     "endDate": null,
-    "description": "Mandatory nationwide successor to CJR, which ended December 31, 2024. Extends episode accountability for lower-extremity joint replacement beyond the original 34 metropolitan areas to national scope beginning January 1, 2028."
+    "description": "Mandatory nationwide successor to CJR (which ended December 31, 2024), finalized in the FY2027 IPPS final rule released July 31, 2026. From January 1, 2028 — delayed from the proposed October 1, 2027 — acute care hospitals nationwide are accountable for inpatient and outpatient lower-extremity joint replacement episodes through 90 days post-discharge. TEAM participants and Maryland hospitals are excluded."
+  },
+  {
+    "id": "WISeR",
+    "name": "Wasteful and Inappropriate Service Reduction (WISeR) Model",
+    "category": "Disease-Specific & Episode-Based Models",
+    "startDate": "2026-01-01",
+    "endDate": "2031-12-31",
+    "description": "CMMI model in which participating technology vendors use AI and machine-learning tools, with clinician review, to run prior authorization for selected items and services vulnerable to waste — such as skin and tissue substitutes, electrical nerve stimulator implants, and knee arthroscopy for knee osteoarthritis — in Original Medicare in six states (Arizona, New Jersey, Ohio, Oklahoma, Texas, Washington). Voluntary for the vendors; providers in those states cannot opt out of the prior authorization process. Coverage and payment rules are unchanged, and the model does not apply to Medicare Advantage."
+  },
+  {
+    "id": "ACCESS",
+    "name": "Advancing Chronic Care with Effective, Scalable Solutions (ACCESS) Model",
+    "category": "Disease-Specific & Episode-Based Models",
+    "startDate": "2026-07-05",
+    "endDate": null,
+    "description": "Voluntary 10-year CMMI model, begun July 5, 2026, that pays Outcome-Aligned Payments to Part B-enrolled organizations delivering technology-supported care in Original Medicare for high blood pressure, diabetes, chronic musculoskeletal pain and depression. Payment is tied to measured outcomes rather than to activities."
+  },
+  {
+    "id": "ASM",
+    "name": "Ambulatory Specialty Model",
+    "category": "Disease-Specific & Episode-Based Models",
+    "startDate": "2027-01-01",
+    "endDate": "2031-12-31",
+    "description": "Mandatory CMMI model that applies performance-based Medicare Part B payment adjustments to individual specialists managing heart failure (cardiology) and low back pain (anesthesiology, pain management, interventional pain management, neurosurgery, orthopedic surgery, physical medicine and rehabilitation) in roughly one-quarter of CBSAs and metropolitan divisions. Adjustments range from -9% to +9% in the first two performance years, widening to -12% to +12% by the final year. The CY2027 Physician Fee Schedule final rule refined its measures without changing the January 1, 2027 start."
   }
 ]

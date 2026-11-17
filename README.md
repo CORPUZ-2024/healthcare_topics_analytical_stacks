@@ -51,7 +51,7 @@ healthcare_ref_materials/
 │   ├── company_nodes.json      # 117 nodes: payer, provider, pharma, hit, analytics, govt, digital, ai_gov, emergent
 │   ├── company_edges.json      # 170 directed relationships (hier, serves, partner, funds, tension, cloud_ehr_partnership, regulates, certifies, sets_voluntary_standard_for, provides_internal_governance_for)
 │   ├── top_shifts.json         # 6 active policy shifts with catalysts and implications
-│   ├── cmmi_models.json        # 23 CMMI models with start/end dates (6 official categories)
+│   ├── cmmi_models.json        # 27 CMMI models with start/end dates (6 official categories)
 │   ├── service_types.json      # 12 service types with fee schedules
 │   ├── datasets.json           # 26 CMS and public research datasets (incl. Drug/Formulary, T-MSIS/TAF, HRSA UDS, CA HCAI)
 │   └── analytical_tasks.json   # 14 analysis task types backing the Analytical Stacks tab
@@ -110,7 +110,7 @@ Six active shifts displayed as cards below the graphs, each with a trend rating,
 | # | Title | Trend |
 |---|-------|-------|
 | 1 | OBBBA Medicaid Work Requirements + ACA Subsidy Cliff Compound | Critical |
-| 2 | IRA Drug Price Negotiation — Cycle 3 Live | Critical |
+| 2 | IRA Drug Price Negotiation — Cycle 3 Prices Due Nov 30 | Critical |
 | 3 | CMS-0057-F Prior Auth APIs — Jan 2027 Deadline | Critical |
 | 4 | MA Risk Adjustment Tightening (HCC V28 + RADV) | Critical |
 | 5 | TEAM Model — Mandatory Episode Accountability | Rising |
@@ -164,7 +164,7 @@ This structure lets you see program eligibility overlap — when multiple models
 | State & Community-Based Models | Dark teal (#264653) |
 | Statutory Demonstrations and Other Projects | Amber (#f4a261) |
 
-**23 CMMI models** (16 original + 6 new + LEAD, ACO REACH's successor, added Sept 2026): TEAM, MA Value-Based Insurance Design Model, Enhanced Medication Therapy Management, State Innovation Models, Financial Alignment Initiative, PACE Innovation, and LEAD. Each model row shows the program's full active date range. Ended models display dashed borders. Scroll vertically to see all service types. Hover a bar for program details including CMMI category, start/end dates, and description.
+**27 CMMI models** (16 original + 6 new + LEAD and CJR-X, added Sept 2026, + WISeR, ACCESS and the Ambulatory Specialty Model, added Nov 2026): TEAM, MA Value-Based Insurance Design Model, Enhanced Medication Therapy Management, State Innovation Models, Financial Alignment Initiative, PACE Innovation, LEAD, CJR-X, WISeR, ACCESS, and ASM. Each model row shows the program's full active date range. Ended models display dashed borders. Scroll vertically to see all service types. Hover a bar for program details including CMMI category, start/end dates, and description.
 
 ---
 
@@ -189,7 +189,7 @@ Below the table sit three static reference sections (no backing JSON — edited 
 |---|---|
 | **A — Coding System Distinctions** | DRG / HCPCS / HCC / ICD / APC comparison across 8 dimensions, per-system deep dives, claim form and TOB reference |
 | **B — Important Variables & Cross-Program Linkage** | Variable availability across Parts A/B/C/D and Medicaid TAF, analytic domain cards, mini-glossary, quick starter list |
-| **C — Commonly Conflated Concepts** | 19 pairs that are easy to read as one thing — each with what the two actually are, why they resemble each other, and what separates them |
+| **C — Commonly Conflated Concepts** | 21 pairs that are easy to read as one thing — each with what the two actually are, why they resemble each other, and what separates them |
 
 Section C reads as subject-matter reference, not as an erratum — it explains why each pair is easy to merge and what separates them. Most entries were identified through this repo's own audit work (see [Verification Standard](#verification-standard) below), but provenance is not the entry bar; reader usefulness is.
 
@@ -314,12 +314,13 @@ This exists because the provenance of verification was unrecoverable after the f
 | Layer | Current as of |
 |-------|--------------|
 | Legislation | OBBBA / H.R. 1 (P.L. 119-21, signed July 4, 2025 — most recent major law) |
-| CMMI Models | August 2026 |
-| Fee Schedules | CY/FY 2026 Final Rules (PFS includes OBBBA's one-year 2.5% payment increase) |
+| CMMI Models | November 2026 (WISeR, ACCESS, Ambulatory Specialty Model added; CJR-X finalized; TEAM end date set) |
+| Fee Schedules | FY 2027 IPPS (July 2026) and CY 2027 PFS, OPPS, ESRD and HH Final Rules (Oct–Nov 2026; PFS conversion factors fall as OBBBA's one-year 2.5% increase expires) |
 | Datasets | September 2026 |
-| Payer & Company Map | September 2026 (hospital systems, interoperability/RWD, cloud/EHR partnerships, AI governance stakeholders, OBBBA national-context entities) |
-| Special Topics: OBBBA (Tab 5) | September 2026 |
+| Payer & Company Map | November 2026 (HTI-5 final rule, Joint Commission AI certification, IRA Cycle 3 timeline, OBBBA litigation status; structure as of September 2026) |
+| Special Topics: OBBBA (Tab 5) | November 2026 (litigation and CMS hold-harmless guidance only; estimates as of September 2026) |
 | Last full verification pass | 2026-09-25 — Tabs 1–4 audited under Opus 5; see [changelog](changelog/2026-09-25-second-round-audit-corrections.md) |
+| Last refresh | 2026-11-17 — new and changed items verified under Opus 5.5 (not a full re-audit); see [changelog](changelog/2026-11-17-content-refresh.md) |
 
 **Sources:** CMS.gov, CMMI, Federal Register, ResDAC, AHRQ HCUP, NIH, CDC, Becker's Hospital Review, KFF, Sequoia Project, FDA, ONC/ASTP, CHAI, The Joint Commission, CBO, Georgetown University Center for Children and Families, GAO, California DHCS, California DOJ, California LAO, California Health Care Foundation (CHCF), Georgetown Litigation Tracker
 

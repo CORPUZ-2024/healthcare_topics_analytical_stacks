@@ -1,7 +1,7 @@
 [
   {
     "name": "Inpatient Hospital",
-    "description": "Acute inpatient care paid under IPPS using DRGs. Subject to mandatory Hospital VBP, HRRP, and HAC reduction payment adjustments.",
+    "description": "Acute inpatient care paid under IPPS using DRGs. Subject to mandatory Hospital VBP, HRRP, and HAC reduction payment adjustments. FY2027 IPPS final rule (released July 31, 2026; effective Oct 1, 2026): 2.3% net update for hospitals meeting quality-reporting and EHR requirements.",
     "feeSchedule": "IPPS",
     "valueBasedModels": [
       "Hospital Value-Based Purchasing (VBP)",
@@ -13,15 +13,16 @@
       "Pioneer ACO Model",
       "Next Generation ACO Model",
       "ACO REACH Model",
-      "ACO Long-Term Enhanced Accountable Care Organization Design (LEAD)",
+      "Long-term Enhanced ACO Design (LEAD)",
       "BPCI Advanced",
       "Comprehensive Care for Joint Replacement",
+      "Comprehensive Care for Joint Replacement Expanded (CJR-X)",
       "Transforming Episode Accountability Model"
     ]
   },
   {
     "name": "Outpatient Hospital",
-    "description": "Hospital outpatient and ASC services paid under OPPS/ASC fee schedule using Ambulatory Payment Classifications.",
+    "description": "Hospital outpatient and ASC services paid under OPPS/ASC fee schedule using Ambulatory Payment Classifications. CY2027 OPPS final rule (released Nov 4, 2026): 2.3% payment update; separately payable 340B-acquired drugs paid at ASP minus 28% (ASP minus 33.4% had been proposed); the 340B-remedy offset on non-drug services rises from 0.5% to 2% a year; site-neutral, PFS-equivalent payment extends to certain imaging without contrast at excepted off-campus departments; second year of the three-year inpatient-only list phase-out.",
     "feeSchedule": "OPPS / ASC",
     "valueBasedModels": [
       "Ambulatory Surgical Center Quality Reporting"
@@ -30,15 +31,17 @@
       "Medicare Shared Savings Program",
       "Next Generation ACO Model",
       "ACO REACH Model",
-      "ACO Long-Term Enhanced Accountable Care Organization Design (LEAD)",
+      "Long-term Enhanced ACO Design (LEAD)",
       "BPCI Advanced",
       "Enhancing Oncology Model",
-      "Oncology Care Model"
+      "Oncology Care Model",
+      "Comprehensive Care for Joint Replacement Expanded (CJR-X)",
+      "Wasteful and Inappropriate Service Reduction (WISeR) Model"
     ]
   },
   {
     "name": "Physician / Professional Services",
-    "description": "Physician and eligible professional services paid under the PFS. Subject to QPP (MIPS or Advanced APM) payment adjustments.",
+    "description": "Physician and eligible professional services paid under the PFS. Subject to QPP (MIPS or Advanced APM) payment adjustments. CY2027 conversion factors (CY2027 PFS final rule, released Nov 4, 2026): $32.9548 for qualifying APM participants and $32.6286 for all others — down 1.83% and 2.31% respectively, as OBBBA's one-year 2.5% CY2026 increase expired.",
     "feeSchedule": "Physician Fee Schedule (PFS)",
     "valueBasedModels": [
       "MIPS",
@@ -49,7 +52,7 @@
       "Pioneer ACO Model",
       "Next Generation ACO Model",
       "ACO REACH Model",
-      "ACO Long-Term Enhanced Accountable Care Organization Design (LEAD)",
+      "Long-term Enhanced ACO Design (LEAD)",
       "Comprehensive Primary Care Plus",
       "Primary Care First",
       "Making Care Primary",
@@ -57,9 +60,13 @@
       "Oncology Care Model",
       "Enhancing Oncology Model",
       "Comprehensive Care for Joint Replacement",
+      "Comprehensive Care for Joint Replacement Expanded (CJR-X)",
       "Guiding an Improved Dementia Experience",
       "Value in Opioid Use Disorder Treatment",
-      "Innovation in Behavioral Health"
+      "Innovation in Behavioral Health",
+      "Wasteful and Inappropriate Service Reduction (WISeR) Model",
+      "Advancing Chronic Care with Effective, Scalable Solutions (ACCESS) Model",
+      "Ambulatory Specialty Model"
     ]
   },
   {
@@ -73,15 +80,16 @@
       "Medicare Shared Savings Program",
       "Next Generation ACO Model",
       "ACO REACH Model",
-      "ACO Long-Term Enhanced Accountable Care Organization Design (LEAD)",
+      "Long-term Enhanced ACO Design (LEAD)",
       "BPCI Advanced",
       "Comprehensive Care for Joint Replacement",
+      "Comprehensive Care for Joint Replacement Expanded (CJR-X)",
       "Transforming Episode Accountability Model"
     ]
   },
   {
     "name": "Home Health",
-    "description": "Skilled home health services paid under HH PPS (PDGM). Subject to HHVBP quality-linked payment adjustments nationally since 2022.",
+    "description": "Skilled home health services paid under HH PPS (PDGM). Subject to the nationwide expanded HHVBP Model (performance measured from 2023). The CY2027 HH PPS final rule (published Nov 9, 2026) finalized a temporary behavior adjustment and recalibrated case-mix weights and LUPA thresholds.",
     "feeSchedule": "HH PPS (PDGM)",
     "valueBasedModels": [
       "Home Health Value-Based Purchasing (HHVBP)"
@@ -90,9 +98,10 @@
       "Medicare Shared Savings Program",
       "Next Generation ACO Model",
       "ACO REACH Model",
-      "ACO Long-Term Enhanced Accountable Care Organization Design (LEAD)",
+      "Long-term Enhanced ACO Design (LEAD)",
       "BPCI Advanced",
       "Comprehensive Care for Joint Replacement",
+      "Comprehensive Care for Joint Replacement Expanded (CJR-X)",
       "Transforming Episode Accountability Model",
       "Guiding an Improved Dementia Experience"
     ]
@@ -107,7 +116,7 @@
     "innovationModels": [
       "Medicare Shared Savings Program",
       "ACO REACH Model",
-      "ACO Long-Term Enhanced Accountable Care Organization Design (LEAD)",
+      "Long-term Enhanced ACO Design (LEAD)",
       "Guiding an Improved Dementia Experience",
       "Financial Alignment Initiative"
     ]
@@ -122,15 +131,16 @@
     "innovationModels": [
       "Medicare Shared Savings Program",
       "ACO REACH Model",
-      "ACO Long-Term Enhanced Accountable Care Organization Design (LEAD)",
+      "Long-term Enhanced ACO Design (LEAD)",
       "BPCI Advanced",
       "Comprehensive Care for Joint Replacement",
+      "Comprehensive Care for Joint Replacement Expanded (CJR-X)",
       "Transforming Episode Accountability Model"
     ]
   },
   {
     "name": "End-Stage Renal Disease",
-    "description": "Dialysis services paid under ESRD PPS as a bundled per-treatment rate. Home dialysis encouraged through expanded coverage and transitional add-on payments.",
+    "description": "Dialysis services paid under ESRD PPS as a bundled per-treatment rate. Home dialysis encouraged through expanded coverage and transitional add-on payments. CY2027 ESRD PPS final rule (Oct 28, 2026): base rate $297.52 (from $281.71), including $12.85 to bring phosphate binders into the bundle; total facility payments up about 2.7%.",
     "feeSchedule": "ESRD PPS",
     "valueBasedModels": [
       "ESRD Quality Incentive Program (QIP)"
@@ -138,7 +148,7 @@
     "innovationModels": [
       "Medicare Shared Savings Program",
       "ACO REACH Model",
-      "ACO Long-Term Enhanced Accountable Care Organization Design (LEAD)",
+      "Long-term Enhanced ACO Design (LEAD)",
       "BPCI Advanced",
       "Financial Alignment Initiative"
     ]
@@ -153,7 +163,7 @@
     "innovationModels": [
       "Medicare Shared Savings Program",
       "ACO REACH Model",
-      "ACO Long-Term Enhanced Accountable Care Organization Design (LEAD)",
+      "Long-term Enhanced ACO Design (LEAD)",
       "Oncology Care Model",
       "Enhancing Oncology Model",
       "BPCI Advanced"
@@ -169,10 +179,11 @@
     "innovationModels": [
       "Medicare Shared Savings Program",
       "ACO REACH Model",
-      "ACO Long-Term Enhanced Accountable Care Organization Design (LEAD)",
+      "Long-term Enhanced ACO Design (LEAD)",
       "Making Care Primary",
       "Innovation in Behavioral Health",
-      "Value in Opioid Use Disorder Treatment"
+      "Value in Opioid Use Disorder Treatment",
+      "Advancing Chronic Care with Effective, Scalable Solutions (ACCESS) Model"
     ]
   },
   {

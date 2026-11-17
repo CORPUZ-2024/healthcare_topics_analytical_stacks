@@ -800,7 +800,7 @@
   {
     "source": "onc_astp",
     "target": "epic",
-    "label": "HTI-1 source-attribute transparency mandate",
+    "label": "Health IT Certification Program criteria (HTI-5 removed the HTI-1 model-card mandate, Oct 2026)",
     "type": "regulates",
     "relationship_type": "direct"
   },

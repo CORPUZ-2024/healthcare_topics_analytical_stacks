@@ -183,11 +183,15 @@
     "category": "agency",
     "ptype": "Federal Agency",
     "enacted": null,
-    "description": "HHS agency established by HITECH to coordinate nationwide health IT policy, standards, and EHR certification. ONC oversees the 21st Century Cures Act information blocking rules, the TEFCA interoperability framework, and the Health IT Certification Program.",
+    "description": "HHS agency established by HITECH to coordinate nationwide health IT policy, standards, and EHR certification. ONC oversees the 21st Century Cures Act information blocking rules, the TEFCA interoperability framework, and the Health IT Certification Program. Its HTI-5 final rule (Oct 26, 2026) removed 14 certification criteria and the AI \"model card\" requirements HTI-1 had added to the decision support interventions criterion.",
     "links": [
       {
         "label": "HealthIT.gov",
         "url": "https://www.healthit.gov"
+      },
+      {
+        "label": "ONC HTI-5 final rule: removed/revised criteria",
+        "url": "https://healthit.gov/resources/hti-5-final-rule-removals-or-revisions-of-certification-criteria/"
       }
     ]
   },
@@ -397,7 +401,7 @@
     "category": "model",
     "ptype": "CMMI Model",
     "enacted": null,
-    "description": "CMMI episode-based payment model (2018–) where participant initiators accept financial accountability for quality and cost of care during a 90-day clinical episode triggered by inpatient hospitalization. Covers 32 clinical episode types.",
+    "description": "CMMI episode-based payment model (2018–2025; concluded December 31, 2025) where participant initiators accept financial accountability for quality and cost of care during a 90-day clinical episode triggered by inpatient hospitalization. Covers 32 clinical episode types.",
     "links": [
       {
         "label": "CMMI BPCI Advanced",
@@ -467,7 +471,7 @@
     "category": "model",
     "ptype": "CMMI Model",
     "enacted": null,
-    "description": "CMMI episode-based payment model (2016–) holding hospitals accountable for quality and cost of care for Medicare FFS patients undergoing hip or knee replacement surgery through a 90-day episode. Hospitals bear upside and downside financial risk relative to a target price.",
+    "description": "CMMI episode-based payment model (2016–2024; concluded December 31, 2024) holding hospitals accountable for quality and cost of care for Medicare FFS patients undergoing hip or knee replacement surgery through a 90-day episode. Hospitals bear upside and downside financial risk relative to a target price. Succeeded by the mandatory, nationwide CJR-X model from January 1, 2028.",
     "links": [
       {
         "label": "CMMI CJR",
@@ -495,7 +499,7 @@
     "category": "model",
     "ptype": "CMMI Model",
     "enacted": null,
-    "description": "CMMI primary care model (2021–) offering a flat primary care visit fee, a population-based payment, and performance-based adjustments. Designed for independent and small primary care practices ready to accept accountability for total cost of care.",
+    "description": "CMMI primary care model (2021–2025; concluded December 31, 2025) offering a flat primary care visit fee, a population-based payment, and performance-based adjustments. Designed for independent and small primary care practices ready to accept accountability for total cost of care.",
     "links": [
       {
         "label": "CMMI PCF",
@@ -523,7 +527,7 @@
     "category": "rule",
     "ptype": "Annual Final Rule",
     "enacted": null,
-    "description": "Annual CMS rulemaking updating IPPS payment rates, DRG weights, outlier thresholds, disproportionate share hospital (DSH) adjustments, quality reporting requirements (IQR), and value-based purchasing (VBP) program parameters for acute care hospitals. Published each August for the upcoming fiscal year.",
+    "description": "Annual CMS rulemaking updating IPPS payment rates, DRG weights, outlier thresholds, disproportionate share hospital (DSH) adjustments, quality reporting requirements (IQR), and value-based purchasing (VBP) program parameters for acute care hospitals. Published each August for the upcoming fiscal year. The FY2027 final rule (released July 31, 2026; effective Oct 1, 2026) set a 2.3% net update and finalized the mandatory, nationwide CJR-X joint replacement model from January 1, 2028.",
     "links": [
       {
         "label": "CMS IPPS Rules",
@@ -537,7 +541,7 @@
     "category": "rule",
     "ptype": "Annual Final Rule",
     "enacted": null,
-    "description": "Annual CMS rulemaking updating OPPS payment rates for hospital outpatient departments, ambulatory payment classifications (APCs), ASC payment rates, quality reporting requirements (OQR), and price transparency policies. Published each November for the upcoming calendar year.",
+    "description": "Annual CMS rulemaking updating OPPS payment rates for hospital outpatient departments, ambulatory payment classifications (APCs), ASC payment rates, quality reporting requirements (OQR), and price transparency policies. Published each November for the upcoming calendar year. The CY2027 final rule (CMS-1850-FC, released Nov 4, 2026) set a 2.3% update, paid 340B-acquired drugs at ASP minus 28%, and extended site-neutral payment to certain imaging without contrast at off-campus departments.",
     "links": [
       {
         "label": "CMS OPPS Rules",
@@ -551,11 +555,15 @@
     "category": "rule",
     "ptype": "Annual Final Rule",
     "enacted": null,
-    "description": "Annual CMS rulemaking updating relative value units (RVUs), the conversion factor, geographic practice cost indices, and QPP/MIPS policies for physician and other practitioner services paid under the Medicare Physician Fee Schedule. Published each November for the upcoming calendar year.",
+    "description": "Annual CMS rulemaking updating relative value units (RVUs), the conversion factor, geographic practice cost indices, and QPP/MIPS policies for physician and other practitioner services paid under the Medicare Physician Fee Schedule. Published each November for the upcoming calendar year. The CY2027 final rule (CMS-1848-F, released Nov 4, 2026) lowered the conversion factors 1.83% for qualifying APM participants ($32.9548) and 2.31% for all others ($32.6286) as OBBBA's one-year 2.5% CY2026 increase expired.",
     "links": [
       {
         "label": "CMS Physician Fee Schedule",
         "url": "https://www.cms.gov/medicare/payment/physician-fee-schedule"
+      },
+      {
+        "label": "CMS CY2027 PFS final rule fact sheet",
+        "url": "https://www.cms.gov/newsroom/fact-sheets/calendar-year-cy-2027-medicare-physician-fee-schedule-final-rule"
       }
     ]
   },
@@ -565,11 +573,15 @@
     "category": "rule",
     "ptype": "Annual Final Rule",
     "enacted": null,
-    "description": "Annual CMS rulemaking updating the ESRD PPS bundled payment rate for dialysis facilities, the ESRD Quality Incentive Program (QIP) measures and scoring, and policies related to home dialysis and transitional drug add-on payment adjustment (TDAPA). Published each November.",
+    "description": "Annual CMS rulemaking updating the ESRD PPS bundled payment rate for dialysis facilities, the ESRD Quality Incentive Program (QIP) measures and scoring, and policies related to home dialysis and transitional drug add-on payment adjustment (TDAPA). Published each fall. The CY2027 final rule (CMS-1846-F, Oct 28, 2026) set a $297.52 base rate and raised total facility payments about 2.7%.",
     "links": [
       {
         "label": "CMS ESRD PPS",
         "url": "https://www.cms.gov/medicare/payment/prospective-payment-systems/end-stage-renal-disease"
+      },
+      {
+        "label": "CMS CY2027 ESRD PPS final rule fact sheet",
+        "url": "https://www.cms.gov/newsroom/fact-sheets/calendar-year-cy-2027-end-stage-renal-disease-esrd-prospective-payment-system-final-rule-cms-1846-f"
       }
     ]
   }
