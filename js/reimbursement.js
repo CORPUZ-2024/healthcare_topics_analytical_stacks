@@ -30,7 +30,19 @@ function initReimbursement(serviceTypes, cmmiModels) {
   const catColorMap = new Map(OFFICIAL_CATS.map(c => [c.name, c.color]));
 
   /* --- Timeline config ------------------------------------ */
-  const TODAY      = new Date('2026-08-31');
+  const TODAY      = new Date(new Date().toISOString().slice(0, 10)); // render date
+  /* A model is "ended" only once its end date has passed — a future endDate
+     (e.g. TEAM through 2030) is a scheduled end, and the model is still active. */
+  const isEnded = m => !!m.endDate && new Date(m.endDate) < TODAY;
+
+  /* --- Filter state (legend chips) — survives redraws and resize re-inits --- */
+  const FILTER = window.__REIMB_FILTER__ || (window.__REIMB_FILTER__ = {
+    hiddenStatus: new Set(),   // 'active' | 'ended'
+    hiddenCats:   new Set(),   // official CMMI category names
+    hideToday:    false
+  });
+  const passes = m => !FILTER.hiddenStatus.has(isEnded(m) ? 'ended' : 'active')
+                   && !FILTER.hiddenCats.has(m.category);
   const TIME_START = new Date('2010-01-01');
   const TIME_END   = new Date('2028-12-31');
 
@@ -43,58 +55,10 @@ function initReimbursement(serviceTypes, cmmiModels) {
   /* --- Build model lookup --------------------------------- */
   const modelByName = new Map(cmmiModels.map(m => [m.name, m]));
 
-  /* --- Build flat row list -------------------------------- */
-  // Each row: { type:'svc'|'cat'|'model', y, height, data, catName, svcName, catColor }
-  const rows = [];
-  let y = 0;
-
-  serviceTypes.forEach(svc => {
-    // Group eligible models by official category (preserve official category order)
-    const byCategory = new Map();
-    OFFICIAL_CATS.forEach(oc => byCategory.set(oc.name, []));
-
-    (svc.innovationModels || []).forEach(modelName => {
-      const m = modelByName.get(modelName);
-      if (!m) return;
-      const bucket = byCategory.get(m.category);
-      if (bucket) bucket.push(m);
-    });
-
-    // Remove empty categories
-    const activeCats = OFFICIAL_CATS.filter(oc => byCategory.get(oc.name).length > 0);
-
-    if (activeCats.length === 0) return; // skip service types with no eligible models
-
-    // Calculate total height for this service type
-    const modelCount = activeCats.reduce((s, oc) => s + byCategory.get(oc.name).length, 0);
-    const svcTotalH  = SVC_H + activeCats.length * CAT_H + modelCount * MOD_H;
-
-    rows.push({ type: 'svc', y, height: svcTotalH, data: svc, svcName: svc.name });
-    y += SVC_H;
-
-    activeCats.forEach(oc => {
-      const models = byCategory.get(oc.name)
-        .sort((a, b) => new Date(a.startDate) - new Date(b.startDate)); // sort by start date
-
-      const catTotalH = CAT_H + models.length * MOD_H;
-      rows.push({ type: 'cat', y, height: catTotalH, catName: oc.name, catColor: oc.color, svcName: svc.name });
-      y += CAT_H;
-
-      models.forEach(model => {
-        rows.push({ type: 'model', y, height: MOD_H, data: model, catName: oc.name, catColor: oc.color, svcName: svc.name });
-        y += MOD_H;
-      });
-    });
-
-    y += SVC_GAP;
-  });
-
-  const innerH = y;
 
   /* --- SVG dimensions ------------------------------------- */
   const totalW = Math.max(container.clientWidth || 960, 700);
   const innerW = totalW - LABEL_W - MARGIN_R;
-  const totalH = innerH + MARGIN_T + MARGIN_B;
 
   /* --- Tooltip ------------------------------------------- */
   let tooltip = document.getElementById('reimb-tooltip');
@@ -135,239 +99,310 @@ function initReimbursement(serviceTypes, cmmiModels) {
 
   function hideTooltip() { tooltip.classList.remove('visible'); }
 
+  /* --- Legend / filter chips (above the swimlane) --------
+     Click a chip to hide or show that slice, the same way the
+     Ontology graph legend toggles node categories. ---------- */
+  const legendEl = document.createElement('div');
+  legendEl.className = 'legend';
+  legendEl.style.margin = '0 0 12px';
+  legendEl.style.flexWrap = 'wrap';
+  legendEl.title = 'Click a chip to show or hide it in the swimlane';
+
+  function addChip(html, label, isHidden, toggle) {
+    const item = document.createElement('div');
+    item.className = 'legend-item' + (isHidden() ? ' hidden' : '');
+    item.innerHTML = html + '&nbsp;' + label;
+    item.addEventListener('click', () => {
+      toggle();
+      item.classList.toggle('hidden', isHidden());
+      draw();
+    });
+    legendEl.appendChild(item);
+  }
+  const toggleSet = (set, key) => () => { set.has(key) ? set.delete(key) : set.add(key); };
+
+  addChip(`<span style="display:inline-block;width:20px;height:10px;background:#2a9d8f;border-radius:2px;opacity:0.85;vertical-align:middle"></span>`,
+    'Active model', () => FILTER.hiddenStatus.has('active'), toggleSet(FILTER.hiddenStatus, 'active'));
+  addChip(`<span style="display:inline-block;width:20px;height:10px;background:#bbb;border:1px dashed #888;border-radius:2px;vertical-align:middle"></span>`,
+    'Ended model', () => FILTER.hiddenStatus.has('ended'), toggleSet(FILTER.hiddenStatus, 'ended'));
+  addChip(`<span style="display:inline-block;width:2px;height:12px;background:#e63946;vertical-align:middle;margin-right:2px"></span>`,
+    'Today', () => FILTER.hideToday, () => { FILTER.hideToday = !FILTER.hideToday; });
+  OFFICIAL_CATS.forEach(oc => addChip(
+    `<span class="legend-dot" style="background:${oc.color};border-radius:3px;width:14px;height:10px;display:inline-block;vertical-align:middle"></span>`,
+    oc.name, () => FILTER.hiddenCats.has(oc.name), toggleSet(FILTER.hiddenCats, oc.name)));
+
+  container.appendChild(legendEl);
+
   /* --- Outer wrapper for scroll --------------------------- */
   const wrapper = document.createElement('div');
   wrapper.style.cssText = 'width:100%;overflow-x:auto;overflow-y:auto;max-height:800px;position:relative;';
   container.appendChild(wrapper);
 
-  /* --- Build SVG ----------------------------------------- */
-  const svgEl = d3.select(wrapper)
-    .append('svg')
-    .attr('width', totalW)
-    .attr('height', totalH);
+  /* --- Draw (re-run whenever a legend chip is toggled) ---- */
+  function draw() {
+    wrapper.innerHTML = '';
+    hideTooltip();
+    /* --- Build flat row list -------------------------------- */
+    // Each row: { type:'svc'|'cat'|'model', y, height, data, catName, svcName, catColor }
+    const rows = [];
+    let y = 0;
 
-  /* --- Timeline scale ------------------------------------ */
-  const xScale = d3.scaleTime()
-    .domain([TIME_START, TIME_END])
-    .range([0, innerW]);
+    serviceTypes.forEach(svc => {
+      // Group eligible models by official category (preserve official category order)
+      const byCategory = new Map();
+      OFFICIAL_CATS.forEach(oc => byCategory.set(oc.name, []));
 
-  /* ---- Left panel background ---------------------------- */
-  svgEl.append('rect')
-    .attr('x', 0).attr('y', 0)
-    .attr('width', LABEL_W).attr('height', totalH)
-    .attr('fill', '#f0f4f8');
+      (svc.innovationModels || []).forEach(modelName => {
+        const m = modelByName.get(modelName);
+        if (!m || !passes(m)) return;
+        const bucket = byCategory.get(m.category);
+        if (bucket) bucket.push(m);
+      });
 
-  /* --- Timeline area group ------------------------------- */
-  const timeG = svgEl.append('g')
-    .attr('transform', `translate(${LABEL_W}, ${MARGIN_T})`);
+      // Remove empty categories
+      const activeCats = OFFICIAL_CATS.filter(oc => byCategory.get(oc.name).length > 0);
 
-  /* --- X axis -------------------------------------------- */
-  const xAxis = d3.axisTop(xScale)
-    .ticks(d3.timeYear.every(1))
-    .tickFormat(d3.timeFormat('%Y'))
-    .tickSize(-innerH);
+      if (activeCats.length === 0) return; // skip service types with no eligible models
 
-  const axisG = timeG.append('g').call(xAxis);
-  axisG.select('.domain').remove();
-  axisG.selectAll('.tick line')
-    .attr('stroke', '#dde8f0').attr('stroke-dasharray', '3,3');
-  axisG.selectAll('.tick text')
-    .attr('dy', -10).style('font-size', '10px').style('fill', '#64748b');
+      // Calculate total height for this service type
+      const modelCount = activeCats.reduce((s, oc) => s + byCategory.get(oc.name).length, 0);
+      const svcTotalH  = SVC_H + activeCats.length * CAT_H + modelCount * MOD_H;
 
-  /* --- Today line ---------------------------------------- */
-  const todayX = xScale(TODAY);
-  timeG.append('line')
-    .attr('x1', todayX).attr('x2', todayX)
-    .attr('y1', -MARGIN_T + 2).attr('y2', innerH)
-    .attr('stroke', '#e63946').attr('stroke-width', 1.5)
-    .attr('stroke-dasharray', '4,3').attr('opacity', 0.75);
-  timeG.append('text')
-    .attr('x', todayX + 3).attr('y', -MARGIN_T + 14)
-    .style('font-size', '9px').style('fill', '#e63946').style('font-weight', '700')
-    .text('Today');
+      rows.push({ type: 'svc', y, height: svcTotalH, data: svc, svcName: svc.name });
+      y += SVC_H;
 
-  /* --- Draw rows ----------------------------------------- */
-  let altModel = 0; // alternating background counter for model rows
+      activeCats.forEach(oc => {
+        const models = byCategory.get(oc.name)
+          .sort((a, b) => new Date(a.startDate) - new Date(b.startDate)); // sort by start date
 
-  rows.forEach(row => {
+        const catTotalH = CAT_H + models.length * MOD_H;
+        rows.push({ type: 'cat', y, height: catTotalH, catName: oc.name, catColor: oc.color, svcName: svc.name });
+        y += CAT_H;
 
-    if (row.type === 'svc') {
-      /* --- Service Type Header ---- */
-      // Timeline area: dark header band
-      timeG.append('rect')
-        .attr('x', 0).attr('y', row.y)
-        .attr('width', innerW).attr('height', SVC_H)
-        .attr('fill', '#0d1b2a').attr('opacity', 0.07);
+        models.forEach(model => {
+          rows.push({ type: 'model', y, height: MOD_H, data: model, catName: oc.name, catColor: oc.color, svcName: svc.name });
+          y += MOD_H;
+        });
+      });
 
-      // Left label: service name + fee schedule
-      svgEl.append('rect')
-        .attr('x', 0).attr('y', MARGIN_T + row.y)
-        .attr('width', LABEL_W).attr('height', SVC_H)
-        .attr('fill', '#0d1b2a').attr('opacity', 0.1);
+      y += SVC_GAP;
+    });
 
-      svgEl.append('text')
-        .attr('x', 8).attr('y', MARGIN_T + row.y + SVC_H / 2 + 3)
-        .style('font-size', '10px').style('font-weight', '700').style('fill', '#0d1b2a')
-        .text(row.data.name);
+    const innerH = y;
 
-      svgEl.append('text')
-        .attr('x', LABEL_W - 6).attr('y', MARGIN_T + row.y + SVC_H / 2 + 3)
-        .attr('text-anchor', 'end')
-        .style('font-size', '8.5px').style('fill', '#64748b').style('font-style', 'italic')
-        .text(row.data.feeSchedule);
+    if (rows.length === 0) {
+      wrapper.innerHTML = '<p style="padding:24px;color:#64748b;font-size:13px">No models match the selected filters. Click a chip above to show it again.</p>';
+      return;
+    }
 
-      altModel = 0; // reset alternating bg on new service type
+    const totalH = innerH + MARGIN_T + MARGIN_B;
 
-    } else if (row.type === 'cat') {
-      /* --- Category Sub-Header ---- */
-      const cc = row.catColor;
+    /* --- Build SVG ----------------------------------------- */
+    const svgEl = d3.select(wrapper)
+      .append('svg')
+      .attr('width', totalW)
+      .attr('height', totalH);
 
-      timeG.append('rect')
-        .attr('x', 0).attr('y', row.y)
-        .attr('width', innerW).attr('height', CAT_H)
-        .attr('fill', cc).attr('opacity', 0.08);
+    /* --- Timeline scale ------------------------------------ */
+    const xScale = d3.scaleTime()
+      .domain([TIME_START, TIME_END])
+      .range([0, innerW]);
 
-      svgEl.append('rect')
-        .attr('x', 0).attr('y', MARGIN_T + row.y)
-        .attr('width', LABEL_W).attr('height', CAT_H)
-        .attr('fill', cc).attr('opacity', 0.1);
+    /* ---- Left panel background ---------------------------- */
+    svgEl.append('rect')
+      .attr('x', 0).attr('y', 0)
+      .attr('width', LABEL_W).attr('height', totalH)
+      .attr('fill', '#f0f4f8');
 
-      // colored left edge bar
-      svgEl.append('rect')
-        .attr('x', 0).attr('y', MARGIN_T + row.y)
-        .attr('width', 3).attr('height', CAT_H)
-        .attr('fill', cc).attr('opacity', 0.9);
+    /* --- Timeline area group ------------------------------- */
+    const timeG = svgEl.append('g')
+      .attr('transform', `translate(${LABEL_W}, ${MARGIN_T})`);
 
-      svgEl.append('text')
-        .attr('x', 10).attr('y', MARGIN_T + row.y + CAT_H / 2 + 3)
-        .style('font-size', '8px').style('font-weight', '600')
-        .style('fill', cc).style('font-style', 'italic')
-        .text(row.catName);
+    /* --- X axis -------------------------------------------- */
+    const xAxis = d3.axisTop(xScale)
+      .ticks(d3.timeYear.every(1))
+      .tickFormat(d3.timeFormat('%Y'))
+      .tickSize(-innerH);
 
-    } else if (row.type === 'model') {
-      /* --- Individual Model Row ---- */
-      const isAlt = (altModel % 2 === 0);
-      altModel++;
-      const cc = row.catColor;
+    const axisG = timeG.append('g').call(xAxis);
+    axisG.select('.domain').remove();
+    axisG.selectAll('.tick line')
+      .attr('stroke', '#dde8f0').attr('stroke-dasharray', '3,3');
+    axisG.selectAll('.tick text')
+      .attr('dy', -10).style('font-size', '10px').style('fill', '#64748b');
 
-      // Row background
-      timeG.append('rect')
-        .attr('x', 0).attr('y', row.y)
-        .attr('width', innerW).attr('height', MOD_H)
-        .attr('fill', isAlt ? '#f7fafb' : '#ffffff')
-        .attr('stroke', '#e8f0f7').attr('stroke-width', 0.5);
+    /* --- Today line ---------------------------------------- */
+    const todayX = xScale(TODAY);
+    if (!FILTER.hideToday) {
+    timeG.append('line')
+      .attr('x1', todayX).attr('x2', todayX)
+      .attr('y1', -MARGIN_T + 2).attr('y2', innerH)
+      .attr('stroke', '#e63946').attr('stroke-width', 1.5)
+      .attr('stroke-dasharray', '4,3').attr('opacity', 0.75);
+    timeG.append('text')
+      .attr('x', todayX + 3).attr('y', -MARGIN_T + 14)
+      .style('font-size', '9px').style('fill', '#e63946').style('font-weight', '700')
+      .text('Today');
+    }
 
-      // Left label panel
-      svgEl.append('rect')
-        .attr('x', 0).attr('y', MARGIN_T + row.y)
-        .attr('width', LABEL_W).attr('height', MOD_H)
-        .attr('fill', isAlt ? '#f3f7f9' : '#f8fbfd');
+    /* --- Draw rows ----------------------------------------- */
+    let altModel = 0; // alternating background counter for model rows
 
-      // category color edge bar (thinner)
-      svgEl.append('rect')
-        .attr('x', 0).attr('y', MARGIN_T + row.y)
-        .attr('width', 3).attr('height', MOD_H)
-        .attr('fill', cc).attr('opacity', 0.5);
+    rows.forEach(row => {
 
-      // Model name label (indented)
-      const shortName = row.data.name.length > 34 ? row.data.name.substring(0, 32) + '…' : row.data.name;
-      svgEl.append('text')
-        .attr('x', 18).attr('y', MARGIN_T + row.y + MOD_H / 2 + 3.5)
-        .style('font-size', '8.5px').style('fill', '#1a1a2e')
-        .text(shortName);
+      if (row.type === 'svc') {
+        /* --- Service Type Header ---- */
+        // Timeline area: dark header band
+        timeG.append('rect')
+          .attr('x', 0).attr('y', row.y)
+          .attr('width', innerW).attr('height', SVC_H)
+          .attr('fill', '#0d1b2a').attr('opacity', 0.07);
 
-      // Ended badge
-      if (row.data.endDate) {
+        // Left label: service name + fee schedule
+        svgEl.append('rect')
+          .attr('x', 0).attr('y', MARGIN_T + row.y)
+          .attr('width', LABEL_W).attr('height', SVC_H)
+          .attr('fill', '#0d1b2a').attr('opacity', 0.1);
+
         svgEl.append('text')
-          .attr('x', LABEL_W - 6).attr('y', MARGIN_T + row.y + MOD_H / 2 + 3.5)
+          .attr('x', 8).attr('y', MARGIN_T + row.y + SVC_H / 2 + 3)
+          .style('font-size', '10px').style('font-weight', '700').style('fill', '#0d1b2a')
+          .text(row.data.name);
+
+        svgEl.append('text')
+          .attr('x', LABEL_W - 6).attr('y', MARGIN_T + row.y + SVC_H / 2 + 3)
           .attr('text-anchor', 'end')
-          .style('font-size', '7px').style('fill', '#aaa').style('font-style', 'italic')
-          .text('ended');
-      }
+          .style('font-size', '8.5px').style('fill', '#64748b').style('font-style', 'italic')
+          .text(row.data.feeSchedule);
 
-      /* --- Timeline bar --- */
-      const model = row.data;
-      const barStart = new Date(model.startDate);
-      const barEnd   = model.endDate ? new Date(model.endDate) : TODAY;
+        altModel = 0; // reset alternating bg on new service type
 
-      if (barEnd >= TIME_START && barStart <= TIME_END) {
-        const x1 = xScale(Math.max(barStart, TIME_START));
-        const x2 = xScale(Math.min(barEnd, TIME_END));
-        const bW  = Math.max(x2 - x1, 3);
-        const bY  = row.y + 4;
-        const bH  = MOD_H - 8;
+      } else if (row.type === 'cat') {
+        /* --- Category Sub-Header ---- */
+        const cc = row.catColor;
 
-        const bar = timeG.append('rect')
-          .attr('x', x1).attr('y', bY)
-          .attr('width', bW).attr('height', bH)
-          .attr('rx', 3)
-          .attr('fill', cc)
-          .attr('fill-opacity', model.endDate ? 0.45 : 0.80)
-          .attr('stroke', model.endDate ? '#aaa' : cc)
-          .attr('stroke-width', model.endDate ? 0.5 : 1)
-          .attr('stroke-dasharray', model.endDate ? '4,2' : 'none')
-          .style('cursor', 'pointer');
+        timeG.append('rect')
+          .attr('x', 0).attr('y', row.y)
+          .attr('width', innerW).attr('height', CAT_H)
+          .attr('fill', cc).attr('opacity', 0.08);
 
-        // Label inside bar if wide enough
-        if (bW > 60) {
-          const lbl = model.name.length > 22 ? model.name.substring(0, 20) + '…' : model.name;
-          timeG.append('text')
-            .attr('x', x1 + bW / 2).attr('y', bY + bH / 2 + 3.5)
-            .attr('text-anchor', 'middle')
-            .style('font-size', '7.5px').style('fill', model.endDate ? '#555' : '#fff')
-            .style('font-weight', '600').style('pointer-events', 'none')
-            .text(lbl);
+        svgEl.append('rect')
+          .attr('x', 0).attr('y', MARGIN_T + row.y)
+          .attr('width', LABEL_W).attr('height', CAT_H)
+          .attr('fill', cc).attr('opacity', 0.1);
+
+        // colored left edge bar
+        svgEl.append('rect')
+          .attr('x', 0).attr('y', MARGIN_T + row.y)
+          .attr('width', 3).attr('height', CAT_H)
+          .attr('fill', cc).attr('opacity', 0.9);
+
+        svgEl.append('text')
+          .attr('x', 10).attr('y', MARGIN_T + row.y + CAT_H / 2 + 3)
+          .style('font-size', '8px').style('font-weight', '600')
+          .style('fill', cc).style('font-style', 'italic')
+          .text(row.catName);
+
+      } else if (row.type === 'model') {
+        /* --- Individual Model Row ---- */
+        const isAlt = (altModel % 2 === 0);
+        altModel++;
+        const cc = row.catColor;
+
+        // Row background
+        timeG.append('rect')
+          .attr('x', 0).attr('y', row.y)
+          .attr('width', innerW).attr('height', MOD_H)
+          .attr('fill', isAlt ? '#f7fafb' : '#ffffff')
+          .attr('stroke', '#e8f0f7').attr('stroke-width', 0.5);
+
+        // Left label panel
+        svgEl.append('rect')
+          .attr('x', 0).attr('y', MARGIN_T + row.y)
+          .attr('width', LABEL_W).attr('height', MOD_H)
+          .attr('fill', isAlt ? '#f3f7f9' : '#f8fbfd');
+
+        // category color edge bar (thinner)
+        svgEl.append('rect')
+          .attr('x', 0).attr('y', MARGIN_T + row.y)
+          .attr('width', 3).attr('height', MOD_H)
+          .attr('fill', cc).attr('opacity', 0.5);
+
+        // Model name label (indented)
+        const shortName = row.data.name.length > 34 ? row.data.name.substring(0, 32) + '…' : row.data.name;
+        svgEl.append('text')
+          .attr('x', 18).attr('y', MARGIN_T + row.y + MOD_H / 2 + 3.5)
+          .style('font-size', '8.5px').style('fill', '#1a1a2e')
+          .text(shortName);
+
+        // Ended badge
+        if (isEnded(row.data)) {
+          svgEl.append('text')
+            .attr('x', LABEL_W - 6).attr('y', MARGIN_T + row.y + MOD_H / 2 + 3.5)
+            .attr('text-anchor', 'end')
+            .style('font-size', '7px').style('fill', '#aaa').style('font-style', 'italic')
+            .text('ended');
         }
 
-        bar.on('mouseover', (event) => showTooltip(event, model, row.svcName))
-           .on('mousemove', moveTooltip)
-           .on('mouseout', hideTooltip)
-           .on('click', () => { if (model.url) window.open(model.url, '_blank', 'noopener'); });
+        /* --- Timeline bar --- */
+        const model = row.data;
+        const barStart = new Date(model.startDate);
+        const barEnd   = model.endDate ? new Date(model.endDate) : TODAY;
+
+        if (barEnd >= TIME_START && barStart <= TIME_END) {
+          const x1 = xScale(Math.max(barStart, TIME_START));
+          const x2 = xScale(Math.min(barEnd, TIME_END));
+          const bW  = Math.max(x2 - x1, 3);
+          const bY  = row.y + 4;
+          const bH  = MOD_H - 8;
+
+          const bar = timeG.append('rect')
+            .attr('x', x1).attr('y', bY)
+            .attr('width', bW).attr('height', bH)
+            .attr('rx', 3)
+            .attr('fill', cc)
+            .attr('fill-opacity', isEnded(model) ? 0.45 : 0.80)
+            .attr('stroke', isEnded(model) ? '#aaa' : cc)
+            .attr('stroke-width', isEnded(model) ? 0.5 : 1)
+            .attr('stroke-dasharray', isEnded(model) ? '4,2' : 'none')
+            .style('cursor', 'pointer');
+
+          // Label inside bar if wide enough
+          if (bW > 60) {
+            const lbl = model.name.length > 22 ? model.name.substring(0, 20) + '…' : model.name;
+            timeG.append('text')
+              .attr('x', x1 + bW / 2).attr('y', bY + bH / 2 + 3.5)
+              .attr('text-anchor', 'middle')
+              .style('font-size', '7.5px').style('fill', isEnded(model) ? '#555' : '#fff')
+              .style('font-weight', '600').style('pointer-events', 'none')
+              .text(lbl);
+          }
+
+          bar.on('mouseover', (event) => showTooltip(event, model, row.svcName))
+             .on('mousemove', moveTooltip)
+             .on('mouseout', hideTooltip)
+             .on('click', () => { if (model.url) window.open(model.url, '_blank', 'noopener'); });
+        }
       }
-    }
-  });
+    });
 
-  /* --- Right border of label panel ----------------------- */
-  svgEl.append('line')
-    .attr('x1', LABEL_W).attr('x2', LABEL_W)
-    .attr('y1', 0).attr('y2', totalH)
-    .attr('stroke', '#c2d8e8').attr('stroke-width', 1.5);
+    /* --- Right border of label panel ----------------------- */
+    svgEl.append('line')
+      .attr('x1', LABEL_W).attr('x2', LABEL_W)
+      .attr('y1', 0).attr('y2', totalH)
+      .attr('stroke', '#c2d8e8').attr('stroke-width', 1.5);
 
-  /* --- Legend -------------------------------------------- */
-  const legendEl = document.createElement('div');
-  legendEl.className = 'legend';
-  legendEl.style.marginTop = '12px';
-  legendEl.style.flexWrap = 'wrap';
+  }
 
-  // Status indicators
-  [
-    { label: 'Active model', html: `<span style="display:inline-block;width:20px;height:10px;background:#2a9d8f;border-radius:2px;opacity:0.85;vertical-align:middle"></span>` },
-    { label: 'Ended model', html: `<span style="display:inline-block;width:20px;height:10px;background:#bbb;border:1px dashed #888;border-radius:2px;vertical-align:middle"></span>` },
-    { label: 'Today', html: `<span style="display:inline-block;width:2px;height:12px;background:#e63946;vertical-align:middle;margin-right:2px"></span>` }
-  ].forEach(meta => {
-    const item = document.createElement('div');
-    item.className = 'legend-item';
-    item.style.cursor = 'default';
-    item.innerHTML = meta.html + '&nbsp;' + meta.label;
-    legendEl.appendChild(item);
-  });
+  draw();
 
-  // Category colors
-  OFFICIAL_CATS.forEach(oc => {
-    const item = document.createElement('div');
-    item.className = 'legend-item';
-    item.style.cursor = 'default';
-    item.innerHTML = `<span class="legend-dot" style="background:${oc.color};border-radius:3px;width:14px;height:10px;display:inline-block;vertical-align:middle"></span>&nbsp;${oc.name}`;
-    legendEl.appendChild(item);
-  });
-
-  container.appendChild(legendEl);
 
   /* --- Program Eligibility Outline ----------------------- */
   renderReimbursementOutline(container, serviceTypes, cmmiModels, OFFICIAL_CATS, catColorMap);
 
   /* --- Responsive ---------------------------------------- */
-  const ro = new ResizeObserver(() => {
+  if (container.__reimbRO) container.__reimbRO.disconnect(); // one observer per container
+  const ro = container.__reimbRO = new ResizeObserver(() => {
     const nw = container.clientWidth;
     if (Math.abs(nw - totalW) > 20) initReimbursement(serviceTypes, cmmiModels);
   });
@@ -415,7 +450,7 @@ function renderReimbursementOutline(container, serviceTypes, cmmiModels, officia
   }
 
   function modelBadge(model) {
-    return model.endDate
+    return (model.endDate && new Date(model.endDate) < new Date(new Date().toISOString().slice(0, 10)))
       ? '<span class="ol-badge ol-ended">⬛ ENDED</span>'
       : '<span class="ol-badge ol-innovation">🟣 INNOVATION</span>';
   }
