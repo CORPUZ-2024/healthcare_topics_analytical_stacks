@@ -31,9 +31,40 @@ Content updated from the 2026-09-27 baseline. Every new or changed fact was chec
 | **5 — Special Topics** | Litigation status (Oct 29 ruling, Nov 5 four-state suit) and CMS's Nov 13 hold-harmless guidance. Coverage estimates unchanged |
 | **Site-wide** | "Data current as of" banner set to November 17, 2026 |
 
+**Throughline (as of 2026-11-17).** Taken together, the six shifts describe one movement: federal policy is pushing cost and risk downstream. It goes from the federal budget to states and enrollees (OBBBA work requirements and the lapsed enhanced premium tax credits), from Medicare to manufacturers (drug price negotiation), and from fee-for-service toward accountable hospitals and physicians (TEAM, now joined by the mandatory CJR-X and Ambulatory Specialty Model). It also goes from CMS to plans (V28 risk scores and the prior-authorization API mandate), and from a federal regulatory floor to voluntary and state AI governance. **Most recent development:** since late September the edges of that movement have been set less by new statute than by courts, agency discretion and deregulation. A federal court vacated part of the work-requirement rule (Oct 29), CMS offered states a six-month enforcement hold-harmless (Nov 13), ONC's HTI-5 removed the federal AI model-card requirement (Oct 26), and CMS finalized nationwide mandatory joint-replacement episodes from 2028 (CJR-X). The next scheduled marker is publication of the third-cycle negotiated drug prices, due by Nov 30, 2026. *This paragraph is an analytical synthesis across the shifts, not a claim drawn from any single source; each underlying fact is sourced in the changelog.*
+
 ---
 
-## What's Inside
+## Contents
+
+- [Five Tabs](#five-tabs)
+- [Repository Structure](#repository-structure)
+- [Tab 1 — Ontology Graph](#tab-1--ontology-graph)
+  - [Legislative Map](#legislative-map)
+  - [Payer & Company Map](#payer--company-map)
+  - [Top Shifts](#top-shifts)
+- [Tab 2 — Reimbursement Roadmap](#tab-2--reimbursement-roadmap)
+- [Tab 3 — Data Taxonomy](#tab-3--data-taxonomy)
+- [Tab 5 — Special Topics: Access & Cost under OBBBA](#tab-5--special-topics-access--cost-under-obbba)
+- [Content Refresh Workflow](#content-refresh-workflow)
+  - [What the workflow covers](#what-the-workflow-covers)
+  - [Design principle](#design-principle)
+  - [Cross-reference validation](#cross-reference-validation)
+  - [Inline data sync map](#inline-data-sync-map)
+- [Verification Standard](#verification-standard)
+  - [Model escalation](#model-escalation)
+  - [Where to find the audit trail](#where-to-find-the-audit-trail)
+- [Data Freshness](#data-freshness)
+- [Tab Schema Definitions](#tab-schema-definitions)
+  - [Ontology Node](#ontology-node)
+  - [Ontology Edge](#ontology-edge)
+  - [CMMI Model](#cmmi-model)
+  - [Service Type](#service-type)
+  - [Dataset](#dataset)
+  - [Company / Payer Node (additional optional fields, added 2026-09)](#company--payer-node-additional-optional-fields-added-2026-09)
+  - [Company / Payer Edge (additional optional fields, added 2026-09)](#company--payer-edge-additional-optional-fields-added-2026-09)
+- [Tech Stack](#tech-stack)
+- [Stakeholders](#stakeholders)
 
 ### Five Tabs
 
@@ -131,7 +162,7 @@ Six active shifts displayed as cards below the graphs, each with a trend rating,
 | 5 | TEAM Model — Mandatory Episode Accountability | Rising |
 | 6 | AI Governance Fragmentation — Federal Floor Contracts, Voluntary Regimes Expand | Rising |
 
-**Throughline (as of 2026-11-17).** Taken together, the six shifts describe one movement: federal policy is pushing cost and risk downstream. It goes from the federal budget to states and enrollees (OBBBA work requirements and the lapsed enhanced premium tax credits), from Medicare to manufacturers (drug price negotiation), and from fee-for-service toward accountable hospitals and physicians (TEAM, now joined by the mandatory CJR-X and Ambulatory Specialty Model). It also goes from CMS to plans (V28 risk scores and the prior-authorization API mandate), and from a federal regulatory floor to voluntary and state AI governance. **Most recent development:** since late September the edges of that movement have been set less by new statute than by courts, agency discretion and deregulation. A federal court vacated part of the work-requirement rule (Oct 29), CMS offered states a six-month enforcement hold-harmless (Nov 13), ONC's HTI-5 removed the federal AI model-card requirement (Oct 26), and CMS finalized nationwide mandatory joint-replacement episodes from 2028 (CJR-X). The next scheduled marker is publication of the third-cycle negotiated drug prices, due by Nov 30, 2026. *This paragraph is an analytical synthesis across the shifts, not a claim drawn from any single source; each underlying fact is sourced in the changelog.*
+> The throughline across these six shifts, and the most recent development, is summarized in [Latest Refresh — 2026-11-17](#latest-refresh--2026-11-17).
 
 > The #1 shift links directly to the new **Special Topics: OBBBA** tab for the full state-by-state breakdown. The MIPS Sunset shift was retired to make room (its content overlaps the Reimbursement Roadmap tab's QPP/MIPS coverage).
 
