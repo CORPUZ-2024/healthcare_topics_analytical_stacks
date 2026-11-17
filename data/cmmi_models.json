@@ -93,7 +93,7 @@
     "category": "Disease-Specific & Episode-Based Models",
     "startDate": "2016-01-01",
     "endDate": "2021-12-31",
-    "description": "Model tying a portion of home health agency payment to quality performance. Piloted in 9 states; a separate nationwide expansion was finalized in the CY2022 Home Health final rule, with performance measured from 2023. Agencies can earn up to +5% or face up to -5% payment adjustments based on quality scores. NOTE: this is the ORIGINAL nine-state model, which ended December 31, 2021. The nationwide \"expanded HHVBP\" operating since 2023 is a separate, permanent program — not this model."
+    "description": "Model tying a portion of home health agency payment to quality performance. Piloted in 9 states; a separate nationwide expansion began January 1, 2022 (a pre-implementation year), with performance measured from 2023. Agencies can earn up to +5% or face up to -5% payment adjustments based on quality scores. NOTE: this is the ORIGINAL nine-state model, which ended December 31, 2021. The nationwide \"expanded HHVBP\" operating since 2023 is a separate, permanent program — not this model."
   },
   {
     "id": "GUIDE",
@@ -133,7 +133,7 @@
     "category": "Disease-Specific & Episode-Based Models",
     "startDate": "2026-01-01",
     "endDate": "2030-12-31",
-    "description": "Mandatory episode-based payment model for five surgical procedures: lower extremity joint replacement, surgical hip femur fracture treatment, spinal fusion, coronary artery bypass graft, and major bowel procedure. Hospitals in selected geographic areas are required to participate (721 hospitals across 188 core-based statistical areas, revised down from the original 741-hospital list). 30-day post-discharge episode window — shorter than CJR/BPCI Advanced's 90-day window by design. Runs January 1, 2026 through December 31, 2030."
+    "description": "Mandatory episode-based payment model for five surgical procedures: lower extremity joint replacement, surgical hip femur fracture treatment, spinal fusion, coronary artery bypass graft, and major bowel procedure. Hospitals in selected geographic areas are required to participate (721 hospitals on CMS's August 18, 2026 participant list: 711 mandatory hospitals in the 188 selected core-based statistical areas plus 10 voluntary participants; the original 2024 list named 741). 30-day post-discharge episode window — shorter than CJR/BPCI Advanced's 90-day window by design. Runs January 1, 2026 through December 31, 2030."
   },
   {
     "id": "VBID",

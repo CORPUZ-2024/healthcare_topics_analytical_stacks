@@ -81,7 +81,7 @@
     "id": "ira_drug_prog",
     "name": "Drug Price Negotiation",
     "category": "program",
-    "description": "IRA Medicare Drug Price Negotiation Program. Cycle 1: 10 drugs, Jan 2026 prices, 38-79% discounts, ~8.8M Part D enrollees affected. Cycle 2: 15 drugs (incl. GLP-1s Ozempic/Wegovy) effective 2027. Cycle 3: 15 more selected Jan 2026 for 2028, including first Part B drugs and first renegotiations; negotiation period closed Nov 1, 2026, with prices due by Nov 30, 2026. Across all 40 drugs selected to date, KFF estimates $125B of the roughly $350B (36%) in 2024 Medicare Part B+D drug spending is represented."
+    "description": "IRA Medicare Drug Price Negotiation Program. Cycle 1: 10 drugs, Jan 2026 prices, 38-79% discounts, ~8.8M Part D enrollees affected. Cycle 2: 15 drugs (incl. GLP-1s Ozempic/Wegovy) effective 2027. Cycle 3: 15 more selected Jan 2026 for 2028, including first Part B drugs and the first renegotiation (Tradjenta); negotiation period closed Nov 1, 2026, with prices due by Nov 30, 2026. Across all 40 drugs selected to date, KFF estimates $125B of the roughly $350B (36%) in 2024 Medicare Part B+D drug spending is represented."
   },
   {
     "id": "esrd_prog",
@@ -626,7 +626,7 @@
     "id": "joint_commission",
     "name": "The Joint Commission",
     "category": "ai_gov",
-    "description": "Hospital accreditor that entered a strategic partnership with CHAI in June 2025, released joint Responsible Use of AI in Healthcare guidance with CHAI on September 17, 2025, and launched a voluntary Responsible Use of AI in Healthcare certification on June 1, 2026. The certification assesses an organization's AI governance, data management, monitoring and training — it does not certify individual AI products — and is open to organizations the Joint Commission does not accredit."
+    "description": "Hospital accreditor that entered a strategic partnership with CHAI in June 2025, released joint Responsible Use of AI in Healthcare guidance with CHAI on September 17, 2025, and launched a voluntary Responsible Use of AI in Healthcare certification on June 1, 2026. The certification assesses an organization's AI governance, data management, monitoring and training — it does not certify individual AI products."
   },
   {
     "id": "duke_ai_gov",

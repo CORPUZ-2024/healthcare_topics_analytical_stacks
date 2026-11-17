@@ -18,6 +18,21 @@ Or open `index.html` directly from the repo — no server required. All data is 
 
 ---
 
+## Latest Refresh — 2026-11-17
+
+Content updated from the 2026-09-27 baseline. Every new or changed fact was checked against a primary source (CMS, ONC, the courts, state attorneys general, the Joint Commission). Unchanged content was not re-audited. **For each change, its primary-source link and the judgement calls behind it, see the [2026-11-17 changelog](changelog/2026-11-17-content-refresh.md).**
+
+| Tab | What was updated |
+|-----|------------------|
+| **1 — Ontology** | Legislative Map: FY2027 IPPS and CY2027 PFS / OPPS / ESRD final-rule summaries; HTI-5 final rule on the ONC node; CJR, BPCI Advanced and PCF no longer described as ongoing. Payer & Company Map: ONC/ASTP, Joint Commission, IRA, OBBBA and LEAD nodes updated; ONC→Epic edge relabelled. Top Shifts: all six reviewed; #1, #2, #4 and #6 updated, and three factual errors corrected (TEAM hospital count, lead plaintiff, DHCS estimate ordering) |
+| **2 — Reimbursement Roadmap** | WISeR, ACCESS and the Ambulatory Specialty Model added; CJR-X finalized and now rendered; TEAM end date set; LEAD's official name corrected; 2027 fee-schedule notes added to six service types |
+| **3 — Data Taxonomy** | Two Commonly Conflated Concepts pairs added (21 total). Dataset catalog unchanged |
+| **4 — Analytical Stacks** | The page now displays the September 2026 statistical corrections, which had been saved to the JSON but never reached the rendered page |
+| **5 — Special Topics** | Litigation status (Oct 29 ruling, Nov 5 four-state suit) and CMS's Nov 13 hold-harmless guidance. Coverage estimates unchanged |
+| **Site-wide** | "Data current as of" banner set to November 17, 2026 |
+
+---
+
 ## What's Inside
 
 ### Five Tabs
@@ -114,7 +129,9 @@ Six active shifts displayed as cards below the graphs, each with a trend rating,
 | 3 | CMS-0057-F Prior Auth APIs — Jan 2027 Deadline | Critical |
 | 4 | MA Risk Adjustment Tightening (HCC V28 + RADV) | Critical |
 | 5 | TEAM Model — Mandatory Episode Accountability | Rising |
-| 6 | AI Governance Fragmentation — Federal Floor Contracts as Voluntary Regimes Expand | Rising |
+| 6 | AI Governance Fragmentation — Federal Floor Contracts, Voluntary Regimes Expand | Rising |
+
+**Throughline (as of 2026-11-17).** Taken together, the six shifts describe one movement: federal policy is pushing cost and risk downstream. It goes from the federal budget to states and enrollees (OBBBA work requirements and the lapsed enhanced premium tax credits), from Medicare to manufacturers (drug price negotiation), and from fee-for-service toward accountable hospitals and physicians (TEAM, now joined by the mandatory CJR-X and Ambulatory Specialty Model). It also goes from CMS to plans (V28 risk scores and the prior-authorization API mandate), and from a federal regulatory floor to voluntary and state AI governance. **Most recent development:** since late September the edges of that movement have been set less by new statute than by courts, agency discretion and deregulation. A federal court vacated part of the work-requirement rule (Oct 29), CMS offered states a six-month enforcement hold-harmless (Nov 13), ONC's HTI-5 removed the federal AI model-card requirement (Oct 26), and CMS finalized nationwide mandatory joint-replacement episodes from 2028 (CJR-X). The next scheduled marker is publication of the third-cycle negotiated drug prices, due by Nov 30, 2026. *This paragraph is an analytical synthesis across the shifts, not a claim drawn from any single source; each underlying fact is sourced in the changelog.*
 
 > The #1 shift links directly to the new **Special Topics: OBBBA** tab for the full state-by-state breakdown. The MIPS Sunset shift was retired to make room (its content overlaps the Reimbursement Roadmap tab's QPP/MIPS coverage).
 

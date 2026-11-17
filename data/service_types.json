@@ -1,7 +1,7 @@
 [
   {
     "name": "Inpatient Hospital",
-    "description": "Acute inpatient care paid under IPPS using DRGs. Subject to mandatory Hospital VBP, HRRP, and HAC reduction payment adjustments. FY2027 IPPS final rule (released July 31, 2026; effective Oct 1, 2026): 2.3% net update for hospitals meeting quality-reporting and EHR requirements.",
+    "description": "Acute inpatient care paid under IPPS using DRGs. Subject to mandatory Hospital VBP, HRRP, and HAC reduction payment adjustments. FY2027 IPPS final rule (CMS-1849-F, released July 31, 2026; effective Oct 1, 2026): 2.3% net update for hospitals meeting quality-reporting and EHR requirements.",
     "feeSchedule": "IPPS",
     "valueBasedModels": [
       "Hospital Value-Based Purchasing (VBP)",
@@ -22,7 +22,7 @@
   },
   {
     "name": "Outpatient Hospital",
-    "description": "Hospital outpatient and ASC services paid under OPPS/ASC fee schedule using Ambulatory Payment Classifications. CY2027 OPPS final rule (released Nov 4, 2026): 2.3% payment update; separately payable 340B-acquired drugs paid at ASP minus 28% (ASP minus 33.4% had been proposed); the 340B-remedy offset on non-drug services rises from 0.5% to 2% a year; site-neutral, PFS-equivalent payment extends to certain imaging without contrast at excepted off-campus departments; second year of the three-year inpatient-only list phase-out.",
+    "description": "Hospital outpatient and ASC services paid under OPPS/ASC fee schedule using Ambulatory Payment Classifications. CY2027 OPPS final rule (CMS-1850-F, released Nov 4, 2026): 2.3% payment update; separately payable 340B-acquired drugs paid at ASP minus 28% (ASP minus 33.4% had been proposed); the 340B-remedy offset on non-drug services rises from 0.5% to 2% a year; site-neutral, PFS-equivalent payment extends to certain imaging without contrast at excepted off-campus departments; second year of the three-year inpatient-only list phase-out.",
     "feeSchedule": "OPPS / ASC",
     "valueBasedModels": [
       "Ambulatory Surgical Center Quality Reporting"
@@ -89,7 +89,7 @@
   },
   {
     "name": "Home Health",
-    "description": "Skilled home health services paid under HH PPS (PDGM). Subject to the nationwide expanded HHVBP Model (performance measured from 2023). The CY2027 HH PPS final rule (published Nov 9, 2026) finalized a temporary behavior adjustment and recalibrated case-mix weights and LUPA thresholds.",
+    "description": "Skilled home health services paid under HH PPS (PDGM). Subject to the nationwide expanded HHVBP Model (performance measured from 2023). The CY2027 HH PPS final rule (CMS-1844-F, released Nov 4, 2026) estimates a 2.4% ($415M) aggregate increase — a 2.1% payment update plus 0.3% from the updated outlier fixed-dollar-loss amount — and separately finalized a temporary -3.0% adjustment to the 30-day base rate, alongside recalibrated case-mix weights and LUPA thresholds.",
     "feeSchedule": "HH PPS (PDGM)",
     "valueBasedModels": [
       "Home Health Value-Based Purchasing (HHVBP)"

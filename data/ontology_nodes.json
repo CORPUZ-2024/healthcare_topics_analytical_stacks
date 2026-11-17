@@ -527,11 +527,15 @@
     "category": "rule",
     "ptype": "Annual Final Rule",
     "enacted": null,
-    "description": "Annual CMS rulemaking updating IPPS payment rates, DRG weights, outlier thresholds, disproportionate share hospital (DSH) adjustments, quality reporting requirements (IQR), and value-based purchasing (VBP) program parameters for acute care hospitals. Published each August for the upcoming fiscal year. The FY2027 final rule (released July 31, 2026; effective Oct 1, 2026) set a 2.3% net update and finalized the mandatory, nationwide CJR-X joint replacement model from January 1, 2028.",
+    "description": "Annual CMS rulemaking updating IPPS payment rates, DRG weights, outlier thresholds, disproportionate share hospital (DSH) adjustments, quality reporting requirements (IQR), and value-based purchasing (VBP) program parameters for acute care hospitals. Published each August for the upcoming fiscal year. The FY2027 final rule (CMS-1849-F, released July 31, 2026; effective Oct 1, 2026) set a 2.3% net update and finalized the mandatory, nationwide CJR-X joint replacement model from January 1, 2028.",
     "links": [
       {
         "label": "CMS IPPS Rules",
         "url": "https://www.cms.gov/medicare/payment/prospective-payment-systems/inpatient-hospitals"
+      },
+      {
+        "label": "CMS FY2027 IPPS/LTCH final rule fact sheet",
+        "url": "https://www.cms.gov/newsroom/fact-sheets/fy-2027-hospital-inpatient-prospective-payment-system-long-term-care-hospital-prospective-payment"
       }
     ]
   },
@@ -541,11 +545,15 @@
     "category": "rule",
     "ptype": "Annual Final Rule",
     "enacted": null,
-    "description": "Annual CMS rulemaking updating OPPS payment rates for hospital outpatient departments, ambulatory payment classifications (APCs), ASC payment rates, quality reporting requirements (OQR), and price transparency policies. Published each November for the upcoming calendar year. The CY2027 final rule (CMS-1850-FC, released Nov 4, 2026) set a 2.3% update, paid 340B-acquired drugs at ASP minus 28%, and extended site-neutral payment to certain imaging without contrast at off-campus departments.",
+    "description": "Annual CMS rulemaking updating OPPS payment rates for hospital outpatient departments, ambulatory payment classifications (APCs), ASC payment rates, quality reporting requirements (OQR), and price transparency policies. Published each November for the upcoming calendar year. The CY2027 final rule (CMS-1850-F, released Nov 4, 2026) set a 2.3% update, paid 340B-acquired drugs at ASP minus 28%, and extended site-neutral payment to certain imaging without contrast at off-campus departments.",
     "links": [
       {
         "label": "CMS OPPS Rules",
         "url": "https://www.cms.gov/medicare/payment/prospective-payment-systems/hospital-outpatient"
+      },
+      {
+        "label": "CMS CY2027 OPPS/ASC final rule fact sheet",
+        "url": "https://www.cms.gov/newsroom/fact-sheets/calendar-year-2027-hospital-outpatient-prospective-payment-system-opps-ambulatory-surgical-center-0"
       }
     ]
   },

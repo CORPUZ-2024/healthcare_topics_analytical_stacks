@@ -1,64 +1,136 @@
 # 2026-11-17 — Content refresh (Tabs 1–5)
 
-**Verified under:** Claude Opus 5.5 (`claude-opus-5-5`). This is a refresh pass, not a full re-audit: every item **changed or added** here was checked against a named source, but unchanged content was not re-verified.
+**Verified under:** Claude Opus 5.5 (`claude-opus-5-5`). **Scope:** this is a refresh, not a full re-audit. Every fact **changed or added** in this pass was checked against the primary source linked in its row. Unchanged content was not re-verified.
 
-**Baseline:** previous refresh 2026-09-27. Window covered: late September – November 17, 2026.
+**Baseline:** previous refresh 2026-09-27. Window covered: late September to November 17, 2026.
 
-## Tab 1 — Ontology, Payer & Company Map, Top Shifts
+**How to read the tables.** *Primary source* is the issuing body's own document — agency fact sheet, Federal Register entry, court filing, statute, or the issuer's own guide — for quick manual verification. *Verification / judgement* says how the claim was checked and records any call made about wording, scope, or what to leave out. "Secondary" means a law-firm, trade-press or tracker summary used only where the primary document did not state the point, and is always flagged.
 
-| Change | Source |
+**Two passes.** Commit `478d4e3` was the first pass. A second pass the same day opened every primary source directly and found five problems in the first pass's own wording, which are corrected and listed in [Section 7](#7-corrections-to-this-refreshs-own-first-pass).
+
+---
+
+## 1. Tab 1 — Legislative Map (`data/ontology_nodes.json`, `data/ontology_edges.json`)
+
+| # | Change | Primary source | Verification / judgement |
+|---|---|---|---|
+| 1.1 | `IPPS_Rule`: added FY2027 final rule (CMS-1849-F, released July 31, 2026; effective Oct 1, 2026; 2.3% net update; CJR-X finalized from Jan 1, 2028); fact-sheet link added | [CMS FY2027 IPPS/LTCH fact sheet](https://www.cms.gov/newsroom/fact-sheets/fy-2027-hospital-inpatient-prospective-payment-system-long-term-care-hospital-prospective-payment) | Release date, 2.3% and CJR-X start read on the fact sheet. 2.3% applies to hospitals meeting quality-reporting and EHR requirements (stated as such) |
+| 1.2 | `OPPS_Rule`: added CY2027 final rule (CMS-1850-F, released Nov 4, 2026; 2.3% update; 340B drugs at ASP−28%; site-neutral imaging); fact-sheet link added | [CMS CY2027 OPPS/ASC fact sheet](https://www.cms.gov/newsroom/fact-sheets/calendar-year-2027-hospital-outpatient-prospective-payment-system-opps-ambulatory-surgical-center-0) | All figures read on the fact sheet. CMS does not use the words "site-neutral"; it applies "the Physician Fee Schedule equivalent payment rate" to imaging without contrast at excepted off-campus departments. "Site-neutral" is kept as the common term for that mechanism |
+| 1.3 | `PFS_Rule`: added CY2027 conversion factors ($32.9548 QP, −1.83%; $32.6286 non-QP, −2.31%) and the reason (OBBBA's one-year 2.5% CY2026 increase expiring); fact-sheet link added | [CMS CY2027 PFS fact sheet](https://www.cms.gov/newsroom/fact-sheets/calendar-year-cy-2027-medicare-physician-fee-schedule-final-rule) | CMS rounds to $32.95 / $32.63. The four-decimal values are from the rule as reproduced by Holland & Knight and match CMS's rounding |
+| 1.4 | `ESRD_Rule`: "Published each November" → "Published each fall"; added CY2027 final rule ($297.52 base rate, ~2.7% total payment change); link added | [CMS CY2027 ESRD PPS fact sheet (CMS-1846-F)](https://www.cms.gov/newsroom/fact-sheets/calendar-year-cy-2027-end-stage-renal-disease-esrd-prospective-payment-system-final-rule-cms-1846-f) | CMS issued it Oct 28, 2026, so "each November" was no longer accurate |
+| 1.5 | `ONC`: HTI-5 final rule (Oct 26, 2026) removed 14 certification criteria and the AI "model card" requirements; link added | [ONC HTI-5 removed/revised criteria table](https://healthit.gov/resources/hti-5-final-rule-removals-or-revisions-of-certification-criteria/) | The table lists the DSI criterion §170.315(b)(11) as **Revise**, not Remove, so the text says the requirements were removed, not the criterion |
+| 1.6 | `CJR` "(2016–)", `BPCI_ADV` "(2018–)", `PCF` "(2021–)" → closed date ranges with end dates; CJR now notes its CJR-X successor | Existing `endDate`s in `data/cmmi_models.json`; [CMS CJR-X model page](https://www.cms.gov/priorities/innovation/innovation-models/cjr-x) | Stale-as-current fix (Step 00 pattern). **Judgement:** corrected because the right answer was already recorded in the repo, so no new research was needed |
+| 1.7 | Edges `CMMI → CJR` and `CMMI → BPCI_ADV`: "administers" → "administered" | [CMS CJR-X page](https://www.cms.gov/priorities/innovation/innovation-models/cjr-x) (CJR ended); existing `endDate`s in `data/cmmi_models.json` | CLAUDE.md Step 1 tense rule for ended models |
+
+## 2. Tab 1 — Payer & Company Map (`data/company_nodes.json`, `data/company_edges.json`)
+
+| # | Change | Primary source | Verification / judgement |
+|---|---|---|---|
+| 2.1 | `onc_astp`: HTI-5 finalized; the HTI-1 requirement is now described in the past tense | [ONC HTI-5 table](https://healthit.gov/resources/hti-5-final-rule-removals-or-revisions-of-certification-criteria/) | The node had said "not finalized as of September 2026". "14 removed vs 34 proposed" and "information blocking not finalized" come from [AHA](https://www.aha.org/news/headline/2026-10-26-onc-finalizes-certain-deregulatory-actions-related-health-data-technology-interoperability) (secondary) and match the ONC table count of 14 "Remove" rows |
+| 2.2 | `joint_commission`: Responsible Use of AI in Health Care certification **launched June 1, 2026** (node had said "planning") | [Joint Commission RUAIH Review Process Guide, "Issued June 1, 2026"](https://digitalassets.jointcommission.org/api/public/content/7bd26620a3e54c0ead2138afa37fc167?v=5f349b78) | The guide states the certification "provides an assessment of an organization's commitment … through organizationwide governance". "Does not certify individual AI products" rests on that wording plus Fierce Healthcare (secondary). **Correction:** the September content had missed the June launch |
+| 2.3 | Edge `onc_astp → epic` relabelled so it no longer presents the removed HTI-1 mandate as current | [ONC HTI-5 removed/revised criteria table](https://healthit.gov/resources/hti-5-final-rule-removals-or-revisions-of-certification-criteria/) | Edge kept, because ONC still certifies Epic's EHR; only the label changed |
+| 2.4 | `ira_c`: Cycle 2 effective Jan 2027; Cycle 3 negotiations closed Nov 1, 2026, prices due by Nov 30, 2026 | [CMS Cycle 2 press release (Nov 25, 2025)](https://www.cms.gov/newsroom/press-releases/cms-delivers-savings-seniors-15-major-drugs-cancer-chronic-disease); [CMS third-cycle fact sheet](https://www.cms.gov/files/document/fact-sheet-medicare-drug-price-negotiation-third-cycle.pdf); [42 U.S.C. §1320f-4 (MFP publication deadline)](https://www.law.cornell.edu/uscode/text/42/1320f-4) | The fact sheet states "the negotiation period ends on November 1, 2026". The Nov 30 deadline is statutory |
+| 2.5 | `ira_drug_prog`: Cycle 3 timeline; "first renegotiations" → "the first renegotiation (Tradjenta)" | [CMS third-cycle fact sheet](https://www.cms.gov/files/document/fact-sheet-medicare-drug-price-negotiation-third-cycle.pdf) | The fact sheet names one drug selected for renegotiation (Tradjenta), so the plural was wrong |
+| 2.6 | `obbba_c`: appended Oct 29 ruling and Nov 13 hold-harmless status | [Order, *Massachusetts v. Oz*, No. 26-12962-RGS (D. Mass. Oct. 29, 2026)](https://beckers-cs-assets.s3.us-east-1.amazonaws.com/cs/lawsuits/massachusetts-v-oz-medicaid-work-requirements-memorandum-and-order-2026-10-29.pdf); [CMS SMD #26-006](https://www.medicaid.gov/Federal-Policy-Guidance/Downloads/smd26006.pdf) | Both documents were read in full |
+| 2.7 | `lead_prog`: 10-year voluntary term (Jan 1, 2027 – Dec 31, 2036); implementation-period ACO list dated Sept 21, 2026; final PY2027 roster not yet published | [CMS LEAD model page](https://www.cms.gov/priorities/innovation/innovation-models/lead); [CMS LEAD implementation-period participant list](https://www.cms.gov/priorities/innovation/files/lead-imp-participant-list.pdf) | The LEAD page's participant-count field reads "N/A". No participant number is published until CMS releases one |
+
+## 3. Tab 1 — Top Shifts (`data/top_shifts.json`)
+
+| # | Change | Primary source | Verification / judgement |
+|---|---|---|---|
+| 3.1 | `ts_obbba` catalyst: Oct 29 ruling — vacated the IFR's added functional-impairment test for "medically frail"; upheld the 12-month lookback and self-attestation limits; granted plaintiff states a 6-month stay of enforcement on frailty determinations | [Order, D. Mass. Oct. 29, 2026](https://beckers-cs-assets.s3.us-east-1.amazonaws.com/cs/lawsuits/massachusetts-v-oz-medicaid-work-requirements-memorandum-and-order-2026-10-29.pdf) | Read in full (16 pp.). The order lists 26 plaintiffs (25 states + DC), matching the repo's invariant. **Left out:** whether the vacatur applies nationwide. KFF says nationwide, other coverage says plaintiff states, and the order's relief section refers to "the States", so the page does not assert either |
+| 3.2 | `ts_obbba` catalyst: Nov 13 hold-harmless period through June 30, 2027 | [CMS SMD #26-006](https://www.medicaid.gov/Federal-Policy-Guidance/Downloads/smd26006.pdf) | Electing states "may suspend" denials and disenrollments and must still assess compliance; notice to CMS due Dec 11, 2026. See 7.1 for the first-pass wording error |
+| 3.3 | `ts_obbba` catalyst: Oregon-led four-state suit (filed Nov 5, 2026) | [Complaint, *Oregon v. Oz*, No. 6:26-cv-02435 (D. Or.)](https://www.doj.state.or.us/wp-content/uploads/2026/11/Oregon-v-Oz-complaint.pdf) | Count I is a Spending Clause / *NFIB* coercion claim. The suit seeks to bar CMS from withholding existing Medicaid funds |
+| 3.4 | `ts_obbba` catalyst: enhanced PTCs still unrenewed when 2027 open enrollment began Nov 1, 2026 | [HealthCare.gov open enrollment dates](https://www.healthcare.gov/quick-guide/dates-and-deadlines/) | **Judgement:** worded only as "still unrenewed". The status of the House-passed extension (H.R. 1834) came from secondary sources, so it was not published |
+| 3.5 | `ts_obbba` implication: **"CA-led coalition" → "Massachusetts-led coalition, CA a co-plaintiff"** | [Order, D. Mass. Oct. 29, 2026](https://beckers-cs-assets.s3.us-east-1.amazonaws.com/cs/lawsuits/massachusetts-v-oz-medicaid-work-requirements-memorandum-and-order-2026-10-29.pdf) (caption lists Massachusetts first) | Pre-existing error: the bullet contradicted its own catalyst |
+| 3.6 | `ts_obbba` implication: **lead with DHCS's ~1.1M central estimate**; 3.4M named as the higher-end scenario | [DHCS Tracking Federal Impact: Medi-Cal eligibility](https://www.dhcs.ca.gov/tracking-federal-impact-medi-cal-eligibility/) (the DHCS source Tab 5 already cites) | Pre-existing violation of the Step 00 conservative-figure rule. Wording now matches Tab 5's California case study; the figures themselves were verified in the September pass and were not re-opened here |
+| 3.7 | `ts1`: title → "Cycle 3 Prices Due Nov 30"; catalyst rewritten (Cycle 2 effective Jan 2027 incl. semaglutide; Cycle 3 includes first Part B drugs and first renegotiation) | [CMS third-cycle selection press release (Jan 27, 2026)](https://www.cms.gov/newsroom/press-releases/cms-announces-selection-drugs-third-cycle-medicare-drug-price-negotiation-program-including-first); [CMS Selected Drugs and Negotiated Prices](https://www.cms.gov/initiatives/medicare-prescription-drug-affordability/overview/medicare-drug-price-negotiation-program/selected-drugs-negotiated-prices) | The Cycle 2 press release does not name semaglutide. The CMS Selected Drugs page lists an MFP explanation file for "Ozempic; Rybelsus; Wegovy", which was read via a page summary rather than verbatim. **Removed:** "CMS-4215-P comment period closed Aug 17, 2026" — not re-verified, and superseded as the shift's news |
+| 3.8 | `ts4`: **741 → 721 hospitals**, now described as CMS's Aug 18, 2026 list (711 mandatory in the 188 selected CBSAs + 10 voluntary; original 2024 list named 741); CJR-X finalized; ASM implication added | [CMS TEAM participant list (xlsx)](https://www.cms.gov/team-model-participant-list); [CMS CJR-X page](https://www.cms.gov/priorities/innovation/innovation-models/cjr-x); [CMS ASM page](https://www.cms.gov/priorities/innovation/innovation-models/asm) | Workbook counted directly: 721 rows (711 Mandatory, 10 Voluntary), "as of August 18, 2026". Three of those rows show participation already ended in early 2026, and the mandatory hospitals currently sit in 179 distinct CBSAs. **Judgement:** "188" kept as the number of CBSAs CMS *selected*, not the number currently holding a participant. **Removed:** the sentence "Not the first mandatory CMMI model since CJR — ETC was also mandatory", to stay within the 2–4 sentence catalyst limit; the claim remains true |
+| 3.9 | `ts6`: HTI-5 finalized; Joint Commission certification launched; three implication bullets reworded from conditional ("may not survive HTI-5") to actual | [ONC HTI-5 table](https://healthit.gov/resources/hti-5-final-rule-removals-or-revisions-of-certification-criteria/); [Joint Commission RUAIH guide](https://digitalassets.jointcommission.org/api/public/content/7bd26620a3e54c0ead2138afa37fc167?v=5f349b78) | **Removed:** "CHAI 3,000+ members" and "22,000+ accredited organizations", which were not re-verified this pass |
+| 3.10 | `ts6` title shortened to "AI Governance Fragmentation — Federal Floor Contracts, Voluntary Regimes Expand" (79 characters) | n/a: repo documentation, no external factual claim | Pre-existing schema violation: the CLAUDE.md Step 3 limit is 80 characters and the old title was 81. Meaning unchanged; README Top Shifts table swept to match |
+
+`ts2` (CMS-0057-F) and `ts3` (HCC V28 + RADV) were reviewed and left unchanged. The [CMS-0057-F page](https://www.cms.gov/initiatives/burden-reduction/overview/interoperability/policies-regulations/cms-interoperability-prior-authorization-final-rule-cms-0057-f) (last modified Oct 8, 2026) still gives Jan 1, 2027 for the APIs with no delay notice. No Fifth Circuit ruling in the RADV appeal was found.
+
+## 4. Tab 2 — Reimbursement Roadmap (`data/cmmi_models.json`, `data/service_types.json`)
+
+| # | Change | Primary source | Verification / judgement |
+|---|---|---|---|
+| 4.1 | **Added WISeR** (2026-01-01 → 2031-12-31) to the Outpatient and Physician lanes | [CMS WISeR page](https://www.cms.gov/priorities/innovation/innovation-models/wiser) | States, dates, "voluntary" (for vendors) and non-applicability to MA were read verbatim. The category label (Disease-Specific & Episode-Based) came from a page summary |
+| 4.2 | **Added ACCESS** (start 2026-07-05, `endDate: null`) to the Physician and Behavioral Health lanes | [CMS ACCESS page](https://www.cms.gov/priorities/innovation/innovation-models/access) | **Judgement:** `endDate` left `null` rather than computing "2036-07-04" from "10 years", which would be manufactured precision. The description states the 10-year term. Category came from a page summary |
+| 4.3 | **Added Ambulatory Specialty Model** (2027-01-01 → 2031-12-31) to the Physician lane | [CMS ASM page](https://www.cms.gov/priorities/innovation/innovation-models/asm) | Mandatory status, dates, specialties and ±9%→±12% adjustments read on the CMS page. "CY2027 PFS refined measures without changing the start" is from Holland & Knight (secondary); the CMS PFS fact sheet does not mention ASM |
+| 4.4 | **TEAM** `endDate` null → **2030-12-31**; "188 metro areas" → CBSAs; hospital count reworded (see 3.8) | [CMS TEAM participant list](https://www.cms.gov/team-model-participant-list) | The workbook's participation end date is 12/31/2030 for 718 of 721 rows |
+| 4.5 | **CJR-X** description rewritten: mandatory nationwide from Jan 1, 2028 (proposed Oct 1, 2027); inpatient and outpatient LEJR; 90 days post-discharge; TEAM and Maryland hospitals excluded. **Added to six service-type lanes** (it was in the data but never rendered) | [CMS CJR-X page](https://www.cms.gov/priorities/innovation/innovation-models/cjr-x) | Exclusions and 90-day window read verbatim. The page also exempts hospitals not paid under both IPPS and OPPS. **Pre-existing error fixed:** the description said "beyond the original 34 metropolitan areas", but CJR began in 67 MSAs and 34 were mandatory after 2018, so the phrase was dropped |
+| 4.6 | **LEAD** name "ACO Long-Term Enhanced Accountable Care Organization Design (LEAD)" → **"Long-term Enhanced ACO Design (LEAD)"**, in both files | [CMS LEAD page](https://www.cms.gov/priorities/innovation/innovation-models/lead) | The old name doubled "ACO". Gate 1 confirms the service-type references still resolve |
+| 4.7 | **HHVBP**: "expanded nationally in 2022" → "a separate nationwide expansion began January 1, 2022 (a pre-implementation year), with performance measured from 2023" | [CMS Expanded HHVBP page](https://www.cms.gov/priorities/innovation/innovation-models/expanded-home-health-value-based-purchasing-model) | Aligns with the Step 00 conflation register (original vs expanded HHVBP) |
+| 4.8 | Fee-schedule notes added: Physician (CY2027 CFs), Outpatient (CMS-1850-F), Inpatient (CMS-1849-F), ESRD (CMS-1846-F) | [CMS PFS fact sheet](https://www.cms.gov/newsroom/fact-sheets/calendar-year-cy-2027-medicare-physician-fee-schedule-final-rule); [CMS OPPS fact sheet](https://www.cms.gov/newsroom/fact-sheets/calendar-year-2027-hospital-outpatient-prospective-payment-system-opps-ambulatory-surgical-center-0); [CMS IPPS fact sheet](https://www.cms.gov/newsroom/fact-sheets/fy-2027-hospital-inpatient-prospective-payment-system-long-term-care-hospital-prospective-payment); [CMS ESRD fact sheet](https://www.cms.gov/newsroom/fact-sheets/calendar-year-cy-2027-end-stage-renal-disease-esrd-prospective-payment-system-final-rule-cms-1846-f) | — |
+| 4.9 | Home Health: "nationally since 2022" corrected as in 4.7; CY2027 rule added — **2.4% ($415M) aggregate** (2.1% payment update + 0.3% outlier FDL) and, separately, a **temporary −3.0%** base-rate adjustment | [CMS CY2027 HH PPS fact sheet (CMS-1844-F)](https://www.cms.gov/newsroom/fact-sheets/calendar-year-cy-2027-home-health-prospective-payment-system-final-rule-cms-1844-f) | **Judgement:** both figures are stated as CMS states them. The fact sheet does not say whether the −3.0% is netted into the 2.4%, so the page does not combine them |
+
+**Judgement — model not added:** the [Cell and Gene Therapy Access Model](https://www.cms.gov/priorities/innovation/innovation-insight-cgt-access-model-builds-initial-success-new-therapies-be-added-following) expansion beyond sickle cell disease (announced Oct 27, 2026) is verified. It was not added because models render only through service-type lanes, and none of the 12 fits a Medicaid-only drug model. Adding a lane would change Tab 2's structure, so that is left for a decision.
+
+**Judgement — intentional exclusion, not an error:** HHVBP is in `cmmi_models.json` but in no service-type lane. This is deliberate: the 2026-09-25 audit removed it from Home Health's `innovationModels` because it was double-listed. The nationwide program belongs in `valueBasedModels`, and this record is the original 9-state model (ended 2021). The first version of this changelog listed it as a gate finding in error.
+
+## 5. Tab 3 — Data Taxonomy (static HTML, Section C)
+
+| # | Change | Primary source | Verification / judgement |
+|---|---|---|---|
+| 5.1 | Added pair "Medically-frail ruling vs hold-harmless period" | [Order, D. Mass.](https://beckers-cs-assets.s3.us-east-1.amazonaws.com/cs/lawsuits/massachusetts-v-oz-medicaid-work-requirements-memorandum-and-order-2026-10-29.pdf); [SMD #26-006](https://www.medicaid.gov/Federal-Policy-Guidance/Downloads/smd26006.pdf) | **Removed during drafting:** "the ruling applies regardless of state choice", because it asserts the unresolved scope question (see 3.1) |
+| 5.2 | Added pair "Requirement removed vs criterion removed (HTI-5)" | [ONC HTI-5 table](https://healthit.gov/resources/hti-5-final-rule-removals-or-revisions-of-certification-criteria/) | Written forward as subject reference, per Step 6d |
+| 5.3 | README pair count 19 → 21 | n/a: repo documentation, no external factual claim | — |
+
+Dataset catalog: no changes. No dataset releases or access-pathway changes were researched in this window, so the README "Datasets" freshness row stays at September 2026.
+
+## 6. Tab 4 — Analytical Stacks (inline mirror only)
+
+| # | Change | Primary source | Verification / judgement |
+|---|---|---|---|
+| 6.1 | `window.__ANALYTICAL_TASKS__` re-synced from `data/analytical_tasks.json`. The 2026-09-25 corrections had been saved to the JSON but never reached the inline copy the page renders, so the live site still showed the pre-audit text: "CI spanning roughly 7%–85%" for 2/5, Poisson for cost outcomes, "~2,000" V28 codes, and no constraining caveat | Wilson interval: [Wilson (1927), *JASA* 22:209](https://doi.org/10.1080/01621459.1927.10502953) (the DOI resolves to the publisher, which blocks automated reading; the interval was recomputed rather than read). V28: [CMS CY2024 Rate Announcement](https://www.cms.gov/files/document/2024-announcement-pdf.pdf) (the link resolves, but this pass could not extract its text) | The Wilson 95% interval for 2/5 was recomputed independently: 11.8%–76.9%, matching the corrected "~12%–77%". **Not re-verified:** the V28 code counts. Secondary sources disagree on removals (2,294 vs 2,297), and the repo's own figures are off by one arithmetically (9,797 − 2,294 + 268 = 7,771, not 7,770), so this is flagged for the next audit against the CMS Announcement |
+| 6.2 | CLAUDE.md Step 7 mirror table: added the `analytical_tasks.json` → `window.__ANALYTICAL_TASKS__` row | n/a: repo documentation, no external factual claim | The row's absence is the likely reason the September sync was missed |
+
+## 7. Corrections to this refresh's own first pass
+
+Found by the second-pass primary-source check. All are corrected and swept (`grep` returns nothing for the old strings).
+
+| # | First-pass text | Problem | Primary source |
+|---|---|---|---|
+| 7.1 | Hold-harmless period "during which … may not deny or disenroll anyone solely for noncompliance" (Top Shift #1, Tab 5) | **Direction inversion:** SMD #26-006 says electing states "*may* suspend" denials, a permission, not a prohibition | [SMD #26-006, p. 2](https://www.medicaid.gov/Federal-Policy-Guidance/Downloads/smd26006.pdf) |
+| 7.2 | OPPS rule cited as "CMS-1850-FC" | Wrong rule number; CMS gives CMS-1850-F | [CMS OPPS fact sheet](https://www.cms.gov/newsroom/fact-sheets/calendar-year-2027-hospital-outpatient-prospective-payment-system-opps-ambulatory-surgical-center-0) |
+| 7.3 | Oct 29 ruling summarized without the court's 6-month stay of enforcement | Omission of a granted remedy | [Order, pp. 15–16](https://beckers-cs-assets.s3.us-east-1.amazonaws.com/cs/lawsuits/massachusetts-v-oz-medicaid-work-requirements-memorandum-and-order-2026-10-29.pdf) |
+| 7.4 | Joint Commission certification "open to organizations the Joint Commission does not accredit" | Not stated in the Joint Commission's own guide (secondary only); removed | [RUAIH guide](https://digitalassets.jointcommission.org/api/public/content/7bd26620a3e54c0ead2138afa37fc167?v=5f349b78) |
+| 7.5 | HHVBP expansion "finalized in the CY2022 Home Health final rule" | Not stated on the CMS page; replaced with what the page says (began Jan 1, 2022, pre-implementation year) | [CMS Expanded HHVBP page](https://www.cms.gov/priorities/innovation/innovation-models/expanded-home-health-value-based-purchasing-model) |
+
+## 8. Tab 5 — Special Topics (trigger: litigation status change)
+
+| # | Change | Primary source | Verification / judgement |
+|---|---|---|---|
+| 8.1 | Litigants row: Oct 29 ruling (incl. 6-month stay), Nov 13 hold-harmless, Nov 5 four-state suit; links now point to the order, SMD and complaint instead of KFF | [Order, D. Mass. Oct. 29, 2026](https://beckers-cs-assets.s3.us-east-1.amazonaws.com/cs/lawsuits/massachusetts-v-oz-medicaid-work-requirements-memorandum-and-order-2026-10-29.pdf); [CMS SMD #26-006](https://www.medicaid.gov/Federal-Policy-Guidance/Downloads/smd26006.pdf); [Complaint, *Oregon v. Oz* (D. Or.)](https://www.doj.state.or.us/wp-content/uploads/2026/11/Oregon-v-Oz-complaint.pdf) | Superseded "motion to reconsider pending" text removed |
+| 8.2 | Quadrant tooltip, California case study, Limitations bullet, `LIT_ANALYSIS` any-state litigation copy | [Order, D. Mass. Oct. 29, 2026](https://beckers-cs-assets.s3.us-east-1.amazonaws.com/cs/lawsuits/massachusetts-v-oz-medicaid-work-requirements-memorandum-and-order-2026-10-29.pdf); [CMS SMD #26-006](https://www.medicaid.gov/Federal-Policy-Guidance/Downloads/smd26006.pdf) | Limitations bullet re-dated to Nov 17, 2026. It notes HHS had not announced an appeal as of [KFF's Nov 2 summary](https://www.kff.org/quick-insights/court-decision-eases-burden-of-proof-to-qualify-for-medical-frailty-exclusion-to-medicaid-work-requirements/) (secondary) |
+| 8.3 | July 29, 2026 PI-denial date re-confirmed | [PI order (Georgetown Litigation Tracker copy)](https://litigationtracker.law.georgetown.edu/wp-content/uploads/2026/06/Commonwealth-of-Massachusetts_2026.07.29_ORDER-ON-MOTION-FOR-PRELIMINARY-INJUNCTION.pdf) | Morgan Lewis gave July 31, which was not adopted |
+| 8.4 | `special-topics/bay-area-navigation.html`: litigation confirmation line; header now reads "Prepared September 2026 (litigation status updated November 17, 2026)" | [Order, D. Mass. Oct. 29, 2026](https://beckers-cs-assets.s3.us-east-1.amazonaws.com/cs/lawsuits/massachusetts-v-oz-medicaid-work-requirements-memorandum-and-order-2026-10-29.pdf) | — |
+
+Coverage estimates, state records and the 51 / 41 / 26 invariants are unchanged. **Not added:** a hold-harmless chip on the coverage/cost quadrant. It is a fit for the "separate catalyst" legend, but placing it means judging its cost/access position, which is left for a decision.
+
+## 9. Site-wide and documentation
+
+| # | Change | Note (no external factual claim; repo documentation) |
+|---|---|---|
+| 9.1 | `index.html` info bar: "Data current as of: August 2026" → "November 17, 2026" | It had not been updated in the September passes either |
+| 9.2 | README: "Latest Refresh" section listing what changed per tab; Top Shifts throughline paragraph; freshness table rows; CMMI model count 23 → 27 (it was already one short before this pass: 24 models were listed as 23) | The throughline paragraph is labelled on the page as analytical synthesis, not a sourced claim |
+| 9.3 | CLAUDE.md: Step 7 mirror-table row (see 6.2) | — |
+
+## 10. Left open (not published)
+
+| Item | Why |
 |---|---|
-| Ontology `IPPS_Rule`, `OPPS_Rule`, `PFS_Rule`, `ESRD_Rule`: added FY2027 / CY2027 final-rule summaries | CMS PFS fact sheet; CMS ESRD fact sheet (CMS-1846-F); Holland & Knight and HFMA summaries for OPPS (CMS-1850-FC) and IPPS |
-| Ontology `ONC`: HTI-5 final rule (Oct 26, 2026) | healthit.gov HTI-5 removals/revisions table; AHA; Hooper Lundy |
-| Ontology `CJR`, `BPCI_ADV`, `PCF`: open-ended "(2016–)" style dates replaced with end dates; `CMMI → CJR` and `CMMI → BPCI_ADV` edges changed to "administered" | Already-recorded `endDate`s in `cmmi_models.json` (stale-as-current fix) |
-| `onc_astp`, `joint_commission` nodes: HTI-5 finalized; Joint Commission Responsible Use of AI certification launched June 1, 2026 (node had still described it as planned) | healthit.gov; Joint Commission news release (June 1, 2026) |
-| `onc_astp → epic` edge label: no longer describes the removed HTI-1 model-card mandate as current | as above |
-| `ira_c`, `ira_drug_prog`: Cycle 2 effective Jan 2027; Cycle 3 negotiation period closed Nov 1, 2026, prices due by Nov 30, 2026 | CMS Nov 25, 2025 press release (Cycle 2); CMS third-cycle fact sheet |
-| `obbba_c`: Oct 29, 2026 ruling and Nov 13, 2026 hold-harmless guidance | KFF (Nov 2, 2026); Morgan Lewis (Nov 6, 2026); CMS SMD #26-006 |
-| `lead_prog`: 10-year voluntary term; implementation-period list (Sept 21, 2026); final PY2027 roster not yet published | CMS LEAD model page; CMS implementation-period participant list |
-| Top Shift `ts_obbba`: litigation status, hold-harmless period, four-state coercion suit (Nov 5, 2026) | as above; Minnesota AG release (Nov 6, 2026) |
-| Top Shift `ts_obbba` implications: **"CA-led coalition" corrected to Massachusetts-led** (contradicted the shift's own catalyst); **DHCS figure now leads with the 1.1M central estimate**, with 3.4M named as the high-end scenario (Step 00 conservative-figure rule) | DHCS figures as already published on Tab 5 |
-| Top Shift `ts1`: Cycle 3 status | CMS |
-| Top Shift `ts4`: **741 → 721 hospitals**, aligning with `team_prog` and `cmmi_models.json` (741 was the original 2024 list); CJR-X finalized; ASM implication added | `team_prog` sourcing; FY2027 IPPS final rule summaries; CMS ASM page |
-| Top Shift `ts6`: HTI-5 finalized; Joint Commission certification launched | as above |
+| Scope of the Oct 29 vacatur (nationwide vs plaintiff states) | Sources conflict; the order's relief text refers to "the States" |
+| HTI-5 calendar effective date for the DSI change | ONC says "effective date of final rule". A secondary source gave Dec 28, 2026, which was not adopted |
+| Cycle 3 negotiated prices | Due by Nov 30, 2026; not posted as of this pass |
+| OPPS 340B savings figure | Now resolvable: CMS states $4.35B (Medicare) + $1.1B (beneficiaries). Not added to the page; Holland & Knight's $4.65B was not used |
+| V28 removed-code count | See 6.1 |
+| PACE Innovation `endDate: null` | Not re-verified; it needs research on CMS's use of the PACE Innovation Act authority |
 
-## Tab 2 — Reimbursement Roadmap
+## 11. Validation gates (final state)
 
-- **New models:** WISeR (2026–2031), ACCESS (began July 5, 2026), Ambulatory Specialty Model (2027–2031). Source: CMS Innovation Center model pages. Category assignments follow the CMS pages.
-- **TEAM:** `endDate` set to 2030-12-31 (was `null`); "188 metro areas" corrected to 188 CBSAs.
-- **CJR-X:** description rewritten from the FY2027 IPPS final rule (start delayed from Oct 1, 2027 to Jan 1, 2028; TEAM participants and Maryland hospitals excluded). Now appears in service-type lanes, where before it was in the data but did not render.
-- **LEAD:** name corrected to CMS's "Long-term Enhanced ACO Design (LEAD)". The prior name read "ACO … Accountable Care Organization Design". Updated in both `cmmi_models.json` and `service_types.json`.
-- **HHVBP and Home Health:** the expanded nationwide model is now dated to its CY2022 rule with performance measured from 2023, per the Step 00 conflation register (the text had said "nationally since 2022").
-- **Service-type fee-schedule notes added:** CY2027 PFS conversion factors ($32.9548 QP / $32.6286 non-QP); CY2027 OPPS (2.3% update, 340B at ASP−28%, remedy offset 0.5%→2%, imaging site-neutral expansion); FY2027 IPPS (2.3%); CY2027 ESRD ($297.52 base rate, ~2.7%); CY2027 HH (behavior adjustment, recalibration).
-
-## Tab 3 — Data Taxonomy
-
-- Section C: two pairs added (21 total). They are "Medically-frail ruling vs hold-harmless period" and "Requirement removed vs criterion removed (HTI-5)".
-- Dataset catalog: no changes this pass. No new dataset releases or access changes were checked in this window.
-
-## Tab 4 — Analytical Stacks
-
-- **Unswept correction from the 2026-09-25 audit fixed.** That audit corrected `data/analytical_tasks.json`, but the inline `window.__ANALYTICAL_TASKS__` mirror the page renders from was never re-synced. The live page still showed the pre-audit text: Clopper-Pearson-like "7%–85%" bounds labelled as the CI for 2/5, Poisson for cost, the older V28 code counts, and the missing V28 constraining caveat. The mirror is now synced. The Wilson bound (11.8%–76.9% for 2/5) was independently recomputed.
-- `window.__ANALYTICAL_TASKS__` is not in CLAUDE.md's Step 7 mirror table, which is likely why the sync was missed.
-
-## Tab 5 — Special Topics (trigger: litigation status change)
-
-- Litigants row, quadrant tooltip, California case study, Limitations bullet, and `LIT_ANALYSIS` (any-state litigation copy) were updated for the Oct 29 ruling, the Nov 13 hold-harmless guidance and the Nov 5 four-state suit. The superseded "motion to reconsider pending" text was removed.
-- The July 29, 2026 preliminary-injunction denial date was re-confirmed against the order on the Georgetown Litigation Tracker. One law-firm summary gave July 31; that date was not adopted.
-- `special-topics/bay-area-navigation.html`: litigation confirmation line updated.
-- Coverage estimates, state records and invariants (51 / 41 / 26) are unchanged.
-
-## Excluded or left open (not published)
-
-- **Scope of the Oct 29 ruling** (nationwide vs plaintiff states): KFF says nationwide; other coverage says plaintiff states only. The order PDF could not be text-extracted, so the page does not state the scope.
-- **HTI-5 calendar effective date** for the DSI change: ONC states "effective date of final rule". A secondary source gave Dec 28, 2026, which was not adopted.
-- **Cycle 3 negotiated prices:** due by Nov 30, 2026. Not published as of this pass.
-- **HH PPS aggregate % change:** secondary sources conflict (2.1% market basket vs "net 2.4%"). Not published.
-- **OPPS 340B savings:** $4.35B (HFMA, citing CMS) vs $4.65B (Holland & Knight). Not published.
-- **Cell and Gene Therapy Access Model** expansion (Oct 27, 2026): verified, but the model is not added because no Tab 2 service type fits a Medicaid-only drug model.
-
-## Pre-existing gate findings, not changed
-
-- Gate 1: HHVBP, SIM and PACE Innovation are in `cmmi_models.json` but in no service-type lane, so they do not render.
-- Gate 2: `opioid_special` and `ed_special` have no edges.
-- Gate 3: `PACE` carries `endDate: null` and was not re-verified this pass.
+- **Gate 1:** no broken references. HHVBP is unrendered by design (see Section 4). SIM and PACE Innovation are unrendered because no lane fits, a pre-existing condition.
+- **Gate 2:** no broken edges and no reciprocal duplicates. `opioid_special` and `ed_special` have no edges, left deliberately per CLAUDE.md ("never add a vague edge purely to keep a node connected") and the 2026-09-25 changelog.
+- **Gate 3:** every past `endDate` model is described in the past tense, and `CMMI →` edges for ended models read "administered".
+- **Gate 4:** all nine `window.__XXX__` mirrors are data-identical to `data/*.json`.
